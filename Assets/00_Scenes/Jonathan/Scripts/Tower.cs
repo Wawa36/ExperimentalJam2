@@ -18,6 +18,10 @@ namespace Tower_Management
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
 
+        [Header("Debugging")]
+        [SerializeField] Material default_material;
+        [SerializeField] Material highlight_material;
+
         // stored growth data
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
@@ -53,6 +57,7 @@ namespace Tower_Management
                 {
                     Create_Building(Calculate_Kambium(c));
                     finished_buildings.Add(c);
+                    c.gameObject.GetComponent<MeshRenderer>().material = default_material;
                 }
             }
 
@@ -66,6 +71,9 @@ namespace Tower_Management
             {
                 var new_building = Instantiate(building_prefabs[Random.Range(0, building_prefabs.Count)], c.point + c.normal * 0.5f, Quaternion.identity);
                 new_building.GetComponent<IGrowingBlock>().Initialize(this);
+                new_building.transform.SetParent (transform);
+
+                new_building.gameObject.GetComponent<MeshRenderer>().material = highlight_material;
 
                 active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
             }
