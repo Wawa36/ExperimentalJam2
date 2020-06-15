@@ -15,9 +15,9 @@ public static class ProceduralKabiumGenerator
         kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y / 2), at_building.transform.up));
 
         Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y / 2;
-        turnAngle = Quaternion.Euler(0, angle, 0) * turnAngle;
+        turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
 
-        kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, at_building.transform.up));
+        kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle));
 
         return kambiumList.ToArray();
     }
