@@ -26,6 +26,8 @@ public static class ProceduralKabiumGenerator
             kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
         }
 
+       
+
         return kambiumList.ToArray();
     }
 
