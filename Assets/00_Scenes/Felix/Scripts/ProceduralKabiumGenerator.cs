@@ -14,14 +14,16 @@ public static class ProceduralKabiumGenerator
 
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
-        kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y / 2), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
-
-        if(Random.value > 0.75)
+        if (Random.value > 0.25)
         {
-            Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y / 2;
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
+        }
+        else
+        {
+            Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y;
             turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
 
-            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, at_building.transform.right, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
         }
 
         return kambiumList.ToArray();
