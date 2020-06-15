@@ -51,7 +51,31 @@ namespace Tower_Management
         public Transform Origin_From_Normal(Vector3 normal)
         {
             float dot = Vector3.Dot(Vector3.up, normal);
-            Transform origin = Mathf.Abs(dot) > origin_turn ? horizontal_origins[Random.Range(0, horizontal_origins.Count)] : vertical_origins[Random.Range(0, vertical_origins.Count)];
+            Transform origin;
+
+            if (Mathf.Abs(dot) < origin_turn)
+            {
+                if (horizontal_origins.Count > 0)
+                {
+                    origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
+                }
+                else
+                {
+                    origin = vertical_origins[Random.Range(0, vertical_origins.Count)];
+                }
+            }
+            else
+            {
+                if (vertical_origins.Count > 0)
+                {
+                    origin = vertical_origins[Random.Range(0, vertical_origins.Count)];
+                }
+                else
+                {
+                    origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
+                }
+            }
+            
             mesh.transform.SetParent(origin);
             return origin;
         }

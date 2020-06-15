@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 4534975579195051816}
   _main_collider: {fileID: 428485699748198160}
-  origin_turn: 0.449
+  origin_turn: 0.5
   horizontal_origins:
   - {fileID: 3964728135783447493}
   vertical_origins:
