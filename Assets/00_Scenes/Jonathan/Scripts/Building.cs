@@ -14,7 +14,7 @@ namespace Tower_Management
         public Tower Tower { get { return _tower; } }
 
         /// <summary>
-        /// Collider, used physics 
+        /// Collider for physics 
         /// </summary>
         public Collider Main_Collider { get { return _main_collider; } }
 

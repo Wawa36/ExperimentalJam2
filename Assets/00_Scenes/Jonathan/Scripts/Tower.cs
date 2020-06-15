@@ -38,7 +38,7 @@ namespace Tower_Management
             for (int i = 0; i < start_kambiums; i++)
             {
                 var c = new Cambium[1];
-                c[0] = new Cambium(transform.position);
+                c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
 
                 Create_Building(c);
             }
