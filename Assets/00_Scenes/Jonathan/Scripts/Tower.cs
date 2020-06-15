@@ -80,6 +80,7 @@ namespace Tower_Management
 
                 // rotate
                 var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
+                origin.transform.position = c.point;
                 origin.forward = c.normal;
 
                 // highlight color
