@@ -9,9 +9,12 @@ public class PlayerMovement : MonoBehaviour
     SphereArtifact orbScript;
     public bool carryingTheOrb;
     [SerializeField] GameObject orb;
+    [SerializeField] Transform cameraRigTransform;
 
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
+
+    [SerializeField] float throwForce;
     
 
     private void Start()
@@ -35,8 +38,8 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float YAxis = Input.GetAxis("Vertical");
 
-        rigid.MovePosition(transform.position + transform.forward * YAxis*Time.deltaTime*movespeed);
-        rigid.MoveRotation(Quaternion.AngleAxis(XAxis*Time.deltaTime*rotationSpeed, transform.up) * transform.rotation);
+        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed + transform.right * XAxis * Time.deltaTime * movespeed);
+       
 
     }
     /// <summary>
@@ -46,9 +49,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (carryingTheOrb && Input.GetMouseButtonDown(0))
         {
+
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
-            orbRigid.AddForce(transform.forward * 2000);
+            orbRigid.useGravity = true;
+            orbRigid.AddForce(cameraRigTransform.forward * 100 *throwForce);
+            orb.transform.parent = null;
 
         }
     }
@@ -59,9 +65,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && !carryingTheOrb)
         {
-            transform.position = orb.transform.position + Vector3.up;
+            transform.position =orb.transform.position + Vector3.up;
+            rigid.velocity = Vector3.zero;
+            
             orbScript.GetCollected();
         }
+    }
+    bool IsOnTheGround()
+    {
+        if (Physics.Raycast(transform.position, Vector3.down,2, 0))
+        {
+            return true;
+        }
+        else
+        return false;
+
     }
 
 }
