@@ -121,56 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &307414142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 307414144}
-  - component: {fileID: 307414143}
-  m_Layer: 0
-  m_Name: Tower 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &307414143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307414142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  building_prefabs:
-  - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
-  structure_prefabs: []
-  algorithm: 0
-  start_kambiums: 4
-  growth_speed: 1
-  delay: 0
---- !u!4 &307414144
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307414142}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.9313893, y: -5.2720227, z: -69.7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1066341372
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +360,6 @@ MonoBehaviour:
   _growth_speed_multiplier: 1
   _delay_multiplier: 1
   _enable_rotation: 1
-  active_towers: []
 --- !u!4 &1710640801
 Transform:
   m_ObjectHideFlags: 0
@@ -461,6 +410,8 @@ MonoBehaviour:
   start_kambiums: 4
   growth_speed: 1
   delay: 0
+  default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
+  highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
 --- !u!4 &2105351976
 Transform:
   m_ObjectHideFlags: 0

@@ -11,8 +11,9 @@ namespace Tower_Management
         [SerializeField] float _growth_speed_multiplier = 1;
         [SerializeField] float _delay_multiplier = 1;
         [SerializeField] bool _enable_rotation = true;
+        bool _is_paused;
 
-        [SerializeField] List<Tower> active_towers = new List<Tower>();
+        List<Tower> active_towers = new List<Tower>();
 
         public float Growth_Speed_Multiplier { get { return _growth_speed_multiplier; } }
 
@@ -20,11 +21,16 @@ namespace Tower_Management
 
         public bool Enable_Rotation { get { return _enable_rotation; } }
 
+        public bool Is_Paused { get { return _is_paused; } set { _is_paused = value; } }
+
         public void Add_Tower(Tower tower) { active_towers.Add(tower); }
 
         void Update()
         {
-            foreach (Tower c in active_towers) { c.Update_Growth(); }
+            if (!Is_Paused)
+            {
+                foreach (Tower c in active_towers) { c.Update_Growth(); }
+            }
         }
     }
 
@@ -35,6 +41,21 @@ namespace Tower_Management
         {
             base.OnInspectorGUI();
 
+            var script = target as Tower_Manager;
+
+            if (Application.isPlaying)
+            {
+                if (script.Is_Paused)
+                {
+                    if (GUILayout.Button("Resume"))
+                        script.Is_Paused = false;
+                }
+                else
+                {
+                    if (GUILayout.Button("Pause"))
+                        script.Is_Paused = true;
+                }
+            }
         }
     }
 }
