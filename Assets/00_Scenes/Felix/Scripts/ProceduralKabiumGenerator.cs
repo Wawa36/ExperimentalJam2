@@ -3,31 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tower_Management;
 
-public static class ProceduralKabiumGenerator 
+public class ProceduralKabiumGenerator 
 {
 
-    Kambium JonathansKabiumAlgo(Building at_building)
+    Tower.Kambium[] JonathansKabiumAlgo(Building at_building)
     {
+        List<Tower.Kambium> kambiumList = new List<Tower.Kambium>();
+
         // raycast to main collider
         var dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
         var ray = new Ray(at_building.transform.position + dir, -dir);
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-        return new Kambium(hit.point, hit.normal);
+        kambiumList.Add(new Tower.Kambium(hit.point, hit.normal));
+
+        return kambiumList.ToArray();
     }
 
 
-    public Kambium Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
+    public Tower.Kambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
     {
         if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
         {
-            JonathansKabiumAlgo(at_building);
+            return JonathansKabiumAlgo(at_building);
+        }
+        else //Default
+        {
+            return JonathansKabiumAlgo(at_building);
         }
     }
 }
 
 public enum KabiumAlgorithm
 {
-    JonathansAlgo;
+    JonathansAlgo,
+    Default
 }
