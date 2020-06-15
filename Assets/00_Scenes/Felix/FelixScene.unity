@@ -265,10 +265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
-  structure_prefabs: []
-  algorithm: 0
+  _structure_prefabs: []
+  algorithm: 1
   start_kambiums: 1
   growth_speed: 2
   delay: 1
@@ -455,10 +455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
-  structure_prefabs: []
-  algorithm: 0
+  _structure_prefabs: []
+  algorithm: 1
   start_kambiums: 1
   growth_speed: 2
   delay: 1
@@ -507,10 +507,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
-  structure_prefabs: []
-  algorithm: 0
+  _structure_prefabs: []
+  algorithm: 1
   start_kambiums: 1
   growth_speed: 2
   delay: 1
