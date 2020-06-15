@@ -242,14 +242,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -299,14 +299,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -471,14 +471,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -574,14 +574,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -725,14 +725,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -782,14 +782,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
   - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
-  structure_prefabs: []
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1
@@ -839,13 +839,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  building_prefabs:
+  _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: bcb5ce5405cdef646922a32ec590afc1, type: 3}
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
-  structure_prefabs: []
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
+  _structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
   growth_speed: 1

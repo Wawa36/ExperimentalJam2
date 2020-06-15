@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Win32.SafeHandles;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -72,12 +73,19 @@ namespace Tower_Management
         {
             foreach (var c in cambiums)
             {
-                var new_building = Instantiate(c.prefab, c.point + c.normal * 0.5f, Quaternion.identity);
+                // instantiate and initialize
+                var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
                 new_building.GetComponent<IGrowingBlock>().Initialize(this);
                 new_building.transform.SetParent (transform);
 
+                // rotate
+                var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
+                origin.forward = c.normal;
+
+                // highlight color
                 new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
 
+                // add to active blocks
                 active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
             }
         }

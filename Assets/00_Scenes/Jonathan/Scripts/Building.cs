@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System.ComponentModel;
+using System.Collections.Generic;
+using TMPro;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Tower_Management
 {
     public abstract class Building : MonoBehaviour, IGrowingBlock
     {
         private Tower _tower;
-        private Collider _main_collider;
+        
+        [Header("Building Parameter")]
+        [SerializeField] GameObject mesh;
+        [SerializeField] Collider _main_collider;
+        [SerializeField] [Range(0, 1)] float origin_turn;
+        [SerializeField] List<Transform> horizontal_origins;
+        [SerializeField] List<Transform> vertical_origins;
 
         /// <summary>
         /// Owning Tower of the Building
@@ -34,6 +43,17 @@ namespace Tower_Management
         protected void Deactivate()
         {
             _tower.Deactivate_Block(this);
+        }
+
+        /// <summary>
+        /// Devide weather the origin is on the horizontal or vertical side of the Building
+        /// </summary>
+        public Transform Origin_From_Normal(Vector3 normal)
+        {
+            float dot = Vector3.Dot(Vector3.up, normal);
+            Transform origin = Mathf.Abs(dot) > origin_turn ? horizontal_origins[Random.Range(0, horizontal_origins.Count)] : vertical_origins[Random.Range(0, vertical_origins.Count)];
+            mesh.transform.SetParent(origin);
+            return origin;
         }
     }
 }

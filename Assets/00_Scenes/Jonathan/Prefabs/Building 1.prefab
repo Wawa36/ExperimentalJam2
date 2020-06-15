@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d263947a377ad5b47b23ebbe972f17d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
+  _main_collider: {fileID: 0}
+  origin_turn: 0.449
+  horizontal_origins: []
+  vertical_origins: []
   timer: 0
 --- !u!65 &540122183325814417
 BoxCollider:
