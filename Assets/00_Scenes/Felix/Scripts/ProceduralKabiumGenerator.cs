@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tower_Management;
+using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
 {
@@ -32,7 +33,7 @@ public static class ProceduralKabiumGenerator
 
         // raycast to main collider
         var dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
-        var ray = new Ray(at_building.transform.position + dir * 100f, -dir);
+        var ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
