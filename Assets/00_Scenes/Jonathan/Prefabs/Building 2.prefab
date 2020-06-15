@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3528037053920991453}
   - component: {fileID: 4733086967023071905}
   m_Layer: 0
-  m_Name: Building 7
+  m_Name: Building 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d263947a377ad5b47b23ebbe972f17d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
+  mesh: {fileID: 4534975579195051816}
+  _main_collider: {fileID: 428485699748198160}
+  origin_turn: 0.5
+  horizontal_origins:
+  - {fileID: 3964728135783447493}
+  - {fileID: 7788429759042239574}
+  vertical_origins:
+  - {fileID: 803579957827564146}
 --- !u!1 &4534975579195051816
 GameObject:
   m_ObjectHideFlags: 0

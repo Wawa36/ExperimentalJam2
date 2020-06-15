@@ -30,7 +30,7 @@ namespace Tower_Management
         /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation
         /// </summary>
-        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponent<Collider>(); }
+        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponentInChildren<Collider>(); }
 
         /// <summary>
         /// Update Method called by owning Tower
