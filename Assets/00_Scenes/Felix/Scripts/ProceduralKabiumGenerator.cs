@@ -6,27 +6,27 @@ using Tower_Management;
 public static class ProceduralKabiumGenerator 
 {
     
-    static Tower.Cambium[] SimpleLSystemGrow(Building at_building)
+    static Tower.Cambium[] SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
         //rule F[+F]F[-F]F
 
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
-        kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y / 2), at_building.transform.up));
+        kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y / 2), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
 
         if(Random.value > 0.75)
         {
             Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y / 2;
             turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
 
-            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, at_building.transform.right));
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, at_building.transform.right, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
         }
 
         return kambiumList.ToArray();
     }
 
-    static Tower.Cambium[] JonathansKabiumAlgo(Building at_building)
+    static Tower.Cambium[] JonathansKabiumAlgo(Building at_building, Tower tower)
     {
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
@@ -36,7 +36,7 @@ public static class ProceduralKabiumGenerator
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal));
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
 
         return kambiumList.ToArray();
     }
@@ -45,11 +45,11 @@ public static class ProceduralKabiumGenerator
     {
         if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
-            return SimpleLSystemGrow(at_building);
+            return SimpleLSystemGrow(at_building, tower);
         }
         else //Default
         {
-            return JonathansKabiumAlgo(at_building);
+            return JonathansKabiumAlgo(at_building, tower);
         }
     }
 }
