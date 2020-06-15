@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tower_Management;
 
-public class ProceduralKabiumGenerator 
+public static class ProceduralKabiumGenerator 
 {
-
-    Tower.Kambium[] JonathansKabiumAlgo(Building at_building)
+    static Tower.Kambium[] JonathansKabiumAlgo(Building at_building)
     {
         List<Tower.Kambium> kambiumList = new List<Tower.Kambium>();
 
@@ -21,8 +20,7 @@ public class ProceduralKabiumGenerator
         return kambiumList.ToArray();
     }
 
-
-    public Tower.Kambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
+    static public Tower.Kambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
     {
         if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
         {
@@ -34,7 +32,6 @@ public class ProceduralKabiumGenerator
         }
     }
 }
-
 public enum KabiumAlgorithm
 {
     JonathansAlgo,
