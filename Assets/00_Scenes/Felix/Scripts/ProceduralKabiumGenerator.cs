@@ -5,6 +5,7 @@ using Tower_Management;
 
 public static class ProceduralKabiumGenerator 
 {
+    
     static Tower.Cambium[] SimpleLSystemGrow(Building at_building)
     {
         float angle = 45;
@@ -14,10 +15,13 @@ public static class ProceduralKabiumGenerator
 
         kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y / 2), at_building.transform.up));
 
-        Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y / 2;
-        turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
+        if(Random.value > 0.75)
+        {
+            Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y / 2;
+            turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
 
-        kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle));
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, at_building.transform.right));
+        }
 
         return kambiumList.ToArray();
     }
@@ -37,7 +41,7 @@ public static class ProceduralKabiumGenerator
         return kambiumList.ToArray();
     }
 
-    static public Tower.Cambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
+    static public Tower.Cambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
     {
         if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
