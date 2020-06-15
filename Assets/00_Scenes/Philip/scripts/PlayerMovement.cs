@@ -63,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Teleport()
     {
-        if (Input.GetMouseButtonDown(1) && !carryingTheOrb)
+        if (Input.GetMouseButtonDown(1) && !carryingTheOrb && IsOnTheGround())
         {
             transform.position =orb.transform.position + Vector3.up;
             rigid.velocity = Vector3.zero;
@@ -73,8 +73,9 @@ public class PlayerMovement : MonoBehaviour
     }
     bool IsOnTheGround()
     {
-        if (Physics.Raycast(transform.position, Vector3.down,2, 0))
+        if (Physics.Raycast(transform.position+Vector3.right*0.5f, Vector3.down,1.2f)|| Physics.Raycast(transform.position + Vector3.right * -0.5f, Vector3.down, 1.2f)|| Physics.Raycast(transform.position + Vector3.forward * 0.5f, Vector3.down, 1.2f)|| Physics.Raycast(transform.position + Vector3.forward * -0.5f, Vector3.down, 1.2f))
         {
+            
             return true;
         }
         else
