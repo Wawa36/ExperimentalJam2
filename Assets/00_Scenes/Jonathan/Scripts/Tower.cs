@@ -30,7 +30,10 @@ namespace Tower_Management
 
             for (int i = 0; i < start_kambiums; i++)
             {
-                Create_Building(new Kambium(transform.position));
+                var c = new Cambium[1];
+                c[0] = new Cambium(transform.position);
+
+                Create_Building(c);
             }
         }
 
