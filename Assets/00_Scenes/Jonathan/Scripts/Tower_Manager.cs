@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tower_Management
@@ -23,6 +25,16 @@ namespace Tower_Management
         void Update()
         {
             foreach (Tower c in active_towers) { c.Update_Growth(); }
+        }
+    }
+
+    [CustomEditor(typeof(Tower_Manager))]
+    public class Tower_Manager_Editor : Editor 
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
         }
     }
 }
