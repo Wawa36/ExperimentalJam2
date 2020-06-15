@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FirstBuilding : Building
 {
-    public float timer = 0;
+    float timer = 0;
 
     public override void On_Update_Growth(float speed)
     {

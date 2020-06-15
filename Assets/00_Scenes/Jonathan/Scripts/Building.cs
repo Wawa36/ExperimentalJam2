@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System.ComponentModel;
+using System.Collections.Generic;
+using TMPro;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace Tower_Management
 {
     public abstract class Building : MonoBehaviour, IGrowingBlock
     {
         private Tower _tower;
-        private Collider _main_collider;
+        
+        [Header("Building Parameter")]
+        [SerializeField] GameObject mesh;
+        [SerializeField] Collider _main_collider;
+        [SerializeField] [Range(0, 1)] float origin_turn;
+        [SerializeField] List<Transform> horizontal_origins;
+        [SerializeField] List<Transform> vertical_origins;
 
         /// <summary>
         /// Owning Tower of the Building
@@ -14,14 +23,14 @@ namespace Tower_Management
         public Tower Tower { get { return _tower; } }
 
         /// <summary>
-        /// Collider, used physics 
+        /// Collider for physics 
         /// </summary>
         public Collider Main_Collider { get { return _main_collider; } }
 
         /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation
         /// </summary>
-        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponent<Collider>(); }
+        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponentInChildren<Collider>(); }
 
         /// <summary>
         /// Update Method called by owning Tower
@@ -34,6 +43,41 @@ namespace Tower_Management
         protected void Deactivate()
         {
             _tower.Deactivate_Block(this);
+        }
+
+        /// <summary>
+        /// Devide weather the origin is on the horizontal or vertical side of the Building
+        /// </summary>
+        public Transform Origin_From_Normal(Vector3 normal)
+        {
+            float dot = Vector3.Dot(Vector3.up, normal);
+            Transform origin;
+
+            if (Mathf.Abs(dot) < origin_turn)
+            {
+                if (horizontal_origins.Count > 0)
+                {
+                    origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
+                }
+                else
+                {
+                    origin = vertical_origins[Random.Range(0, vertical_origins.Count)];
+                }
+            }
+            else
+            {
+                if (vertical_origins.Count > 0)
+                {
+                    origin = vertical_origins[Random.Range(0, vertical_origins.Count)];
+                }
+                else
+                {
+                    origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
+                }
+            }
+            
+            mesh.transform.SetParent(origin);
+            return origin;
         }
     }
 }

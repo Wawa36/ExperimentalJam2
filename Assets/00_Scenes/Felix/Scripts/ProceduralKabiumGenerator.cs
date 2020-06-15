@@ -2,41 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Tower_Management;
+using System.Runtime.InteropServices;
 
-public class ProceduralKabiumGenerator 
+public static class ProceduralKabiumGenerator 
 {
-
-    Tower.Kambium[] JonathansKabiumAlgo(Building at_building)
+    
+    static Tower.Cambium[] SimpleLSystemGrow(Building at_building, Tower tower)
     {
-        List<Tower.Kambium> kambiumList = new List<Tower.Kambium>();
+        float angle = 45;
+        //rule F[+F]F[-F]F
 
-        // raycast to main collider
-        var dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
-        var ray = new Ray(at_building.transform.position + dir, -dir);
-        var hit = new RaycastHit();
-        at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
-        kambiumList.Add(new Tower.Kambium(hit.point, hit.normal));
+        if (Random.value > 0.25)
+        {
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
+        }
+        else
+        {
+            Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y;
+            turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
+
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
+        }
+
+       
 
         return kambiumList.ToArray();
     }
 
-
-    public Tower.Kambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
+    static Tower.Cambium[] JonathansKabiumAlgo(Building at_building, Tower tower)
     {
-        if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        // raycast to main collider
+        var dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
+        var ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
+        var hit = new RaycastHit();
+        at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
+
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)]));
+
+        return kambiumList.ToArray();
+    }
+
+    static public Tower.Cambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
+    {
+        if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
-            return JonathansKabiumAlgo(at_building);
+            return SimpleLSystemGrow(at_building, tower);
         }
         else //Default
         {
-            return JonathansKabiumAlgo(at_building);
+            return JonathansKabiumAlgo(at_building, tower);
         }
     }
 }
-
 public enum KabiumAlgorithm
 {
+    SimpleLSystem,
     JonathansAlgo,
     Default
 }

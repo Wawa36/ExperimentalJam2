@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Microsoft.Win32.SafeHandles;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,14 +9,22 @@ namespace Tower_Management
     {
         // prefabs
         [Header("Prefabs")]
-        [SerializeField] List<GameObject> building_prefabs = new List<GameObject>();
-        [SerializeField] List<GameObject> structure_prefabs = new List<GameObject>();
+        [SerializeField] List<GameObject> _building_prefabs = new List<GameObject>();
+        [SerializeField] List<GameObject> _structure_prefabs = new List<GameObject>();
+
+        public List<GameObject> Building_Prefabs { get { return _building_prefabs; } }
+        public List<GameObject> Structure_Prefabs { get { return _structure_prefabs; } }
 
         // paremeter
         [Header("Growth Parameter")]
-        // enum field 
+        [SerializeField] KabiumAlgorithm algorithm;
+        [SerializeField] int start_kambiums;
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
+
+        [Header("Debugging")]
+        [SerializeField] Material default_material;
+        [SerializeField] Material highlight_material;
 
         // stored growth data
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
@@ -28,10 +36,13 @@ namespace Tower_Management
         {
             Tower_Manager.Instance.Add_Tower(this);
 
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
+            for (int i = 0; i < start_kambiums; i++)
+            {
+                var c = new Cambium[1];
+                c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
+
+                Create_Building(c);
+            }
         }
 
         public void Update_Growth()
@@ -50,6 +61,7 @@ namespace Tower_Management
                 {
                     Create_Building(Calculate_Kambium(c));
                     finished_buildings.Add(c);
+                    c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
                 }
             }
 
@@ -57,19 +69,30 @@ namespace Tower_Management
         }
 
         // growing management
-        private void Create_Building(Kambium at_kambium)
+        private void Create_Building(Cambium[] cambiums)
         {
-            var new_building = Instantiate(building_prefabs[Random.Range(0, building_prefabs.Count)], at_kambium.point + at_kambium.normal * 0.5f, Quaternion.identity);
-            new_building.GetComponent<IGrowingBlock>().Initialize(this);
+            foreach (var c in cambiums)
+            {
+                // instantiate and initialize
+                var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
+                new_building.GetComponent<IGrowingBlock>().Initialize(this);
+                new_building.transform.SetParent (transform);
 
-            active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+                // rotate
+                var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
+                origin.transform.position = c.point;
+                origin.forward = c.normal;
+
+                // highlight color
+                new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
+
+                // add to active blocks
+                active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+            }
         }
 
         private void Create_Structure(Vector3 at_point)
         {
-            var c = Instantiate(structure_prefabs[0], transform.position, transform.rotation);
-            c.GetComponent<IGrowingBlock>().Initialize(this);
-            active_blocks.Add(c.GetComponent<IGrowingBlock>());
         }
 
         // calcualte parameters 
@@ -95,26 +118,31 @@ namespace Tower_Management
         }
 
         // calculate Kambium
-        Kambium Calculate_Kambium(Building at_building)
+        Cambium[] Calculate_Kambium(Building at_building)
         {
-            // raycast to main collider
-            var dir = new Vector3(Random.Range(0, 2) == 0? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
-            var ray = new Ray(at_building.transform.position + dir, -dir);
-            var hit = new RaycastHit();
-            at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
-
-            return new Kambium(hit.point, hit.normal);
+            return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
 
-        public struct Kambium
+        public struct Cambium
         {
             public Vector3 point;
             public Vector3 normal;
+            public GameObject prefab;
 
-            public Kambium(Vector3 point, Vector3 normal)
+            // at building
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab)
             {
                 this.point = point;
                 this.normal = normal;
+                this.prefab = prefab;
+            }
+
+            // ass origin
+            public Cambium(Vector3 origin, GameObject prefab)
+            {
+                this.point = origin;
+                this.normal = Vector3.up;
+                this.prefab = prefab;
             }
         }
     }
