@@ -248,6 +248,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
@@ -304,6 +305,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
@@ -475,6 +477,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
@@ -577,6 +580,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
@@ -727,6 +731,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2
@@ -783,6 +788,7 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 4016a6d7d6dace840923c8d1a3ed10b2, type: 3}
   - {fileID: 1862284582436989240, guid: 5b9df8f0d4398b94cbf5d8cb180a051f, type: 3}
   - {fileID: 1862284582436989240, guid: acc1147cd9207e54e98b7da146235d27, type: 3}
+  - {fileID: 1862284582436989240, guid: 5ff1e3a21a1da9044bf985c3e0305a2f, type: 3}
   structure_prefabs: []
   algorithm: 1
   start_kambiums: 2

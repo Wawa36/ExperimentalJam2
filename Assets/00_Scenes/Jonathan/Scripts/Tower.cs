@@ -8,8 +8,11 @@ namespace Tower_Management
     {
         // prefabs
         [Header("Prefabs")]
-        [SerializeField] List<GameObject> building_prefabs = new List<GameObject>();
-        [SerializeField] List<GameObject> structure_prefabs = new List<GameObject>();
+        [SerializeField] List<GameObject> _building_prefabs = new List<GameObject>();
+        [SerializeField] List<GameObject> _structure_prefabs = new List<GameObject>();
+
+        public List<GameObject> Building_Prefabs { get { return _building_prefabs; } }
+        public List<GameObject> Structure_Prefabs { get { return _structure_prefabs; } }
 
         // paremeter
         [Header("Growth Parameter")]
@@ -69,7 +72,7 @@ namespace Tower_Management
         {
             foreach (var c in cambiums)
             {
-                var new_building = Instantiate(building_prefabs[Random.Range(0, building_prefabs.Count)], c.point + c.normal * 0.5f, Quaternion.identity);
+                var new_building = Instantiate(c.prefab, c.point + c.normal * 0.5f, Quaternion.identity);
                 new_building.GetComponent<IGrowingBlock>().Initialize(this);
                 new_building.transform.SetParent (transform);
 
@@ -81,9 +84,6 @@ namespace Tower_Management
 
         private void Create_Structure(Vector3 at_point)
         {
-            var c = Instantiate(structure_prefabs[0], transform.position, transform.rotation);
-            c.GetComponent<IGrowingBlock>().Initialize(this);
-            active_blocks.Add(c.GetComponent<IGrowingBlock>());
         }
 
         // calcualte parameters 
@@ -111,26 +111,29 @@ namespace Tower_Management
         // calculate Kambium
         Cambium[] Calculate_Kambium(Building at_building)
         {
-            return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building);
+            return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
 
         public struct Cambium
         {
             public Vector3 point;
             public Vector3 normal;
+            public GameObject prefab;
 
             // at building
-            public Cambium(Vector3 point, Vector3 normal)
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab)
             {
                 this.point = point;
                 this.normal = normal;
+                this.prefab = prefab;
             }
 
             // ass origin
-            public Cambium(Vector3 origin)
+            public Cambium(Vector3 origin, GameObject prefab)
             {
                 this.point = origin;
                 this.normal = Vector3.up;
+                this.prefab = prefab;
             }
         }
     }
