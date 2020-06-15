@@ -14,6 +14,7 @@ namespace Tower_Management
 
         // paremeter
         [Header("Growth Parameter")]
+        // enum field 
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
 
@@ -76,7 +77,7 @@ namespace Tower_Management
 
         float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
 
-        // public interface
+        // public interfaces
         public void Create_New_Building(Building at_building) 
         {
             Create_Building(Calculate_Kambium(at_building));
@@ -105,7 +106,7 @@ namespace Tower_Management
             return new Kambium(hit.point, hit.normal);
         }
 
-        struct Kambium
+        public struct Kambium
         {
             public Vector3 point;
             public Vector3 normal;
