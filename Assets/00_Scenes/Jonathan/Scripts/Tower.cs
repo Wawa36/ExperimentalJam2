@@ -13,7 +13,8 @@ namespace Tower_Management
 
         // paremeter
         [Header("Growth Parameter")]
-        // enum field 
+        [SerializeField] KabiumAlgorithm algorithm;
+        [SerializeField] int start_kambiums;
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
 
@@ -27,10 +28,10 @@ namespace Tower_Management
         {
             Tower_Manager.Instance.Add_Tower(this);
 
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
-            Create_Building(new Kambium());
+            for (int i = 0; i < start_kambiums; i++)
+            {
+                Create_Building(new Kambium(transform.position));
+            }
         }
 
         public void Update_Growth()
@@ -56,12 +57,15 @@ namespace Tower_Management
         }
 
         // growing management
-        private void Create_Building(Kambium at_kambium)
+        private void Create_Building(Cambium[] cambiums)
         {
-            var new_building = Instantiate(building_prefabs[Random.Range(0, building_prefabs.Count)], at_kambium.point + at_kambium.normal * 0.5f, Quaternion.identity);
-            new_building.GetComponent<IGrowingBlock>().Initialize(this);
+            foreach (var c in cambiums)
+            {
+                var new_building = Instantiate(building_prefabs[Random.Range(0, building_prefabs.Count)], c.point + c.normal * 0.5f, Quaternion.identity);
+                new_building.GetComponent<IGrowingBlock>().Initialize(this);
 
-            active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+                active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+            }
         }
 
         private void Create_Structure(Vector3 at_point)
@@ -94,21 +98,28 @@ namespace Tower_Management
         }
 
         // calculate Kambium
-        Kambium Calculate_Kambium(Building at_building)
+        Cambium[] Calculate_Kambium(Building at_building)
         {
-            var c = KabiumAlgorithm.JonathansAlgo;
-            return ProceduralKabiumGenerator.Calculate_Kambium(c, at_building)[0];
+            return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building);
         }
 
-        public struct Kambium
+        public struct Cambium
         {
             public Vector3 point;
             public Vector3 normal;
 
-            public Kambium(Vector3 point, Vector3 normal)
+            // at building
+            public Cambium(Vector3 point, Vector3 normal)
             {
                 this.point = point;
                 this.normal = normal;
+            }
+
+            // ass origin
+            public Cambium(Vector3 origin)
+            {
+                this.point = origin;
+                this.normal = Vector3.up;
             }
         }
     }

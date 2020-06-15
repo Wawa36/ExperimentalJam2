@@ -5,9 +5,9 @@ using Tower_Management;
 
 public static class ProceduralKabiumGenerator 
 {
-    static Tower.Kambium[] JonathansKabiumAlgo(Building at_building)
+    static Tower.Cambium[] JonathansKabiumAlgo(Building at_building)
     {
-        List<Tower.Kambium> kambiumList = new List<Tower.Kambium>();
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
         // raycast to main collider
         var dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 2) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
@@ -15,12 +15,12 @@ public static class ProceduralKabiumGenerator
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-        kambiumList.Add(new Tower.Kambium(hit.point, hit.normal));
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal));
 
         return kambiumList.ToArray();
     }
 
-    static public Tower.Kambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
+    static public Tower.Cambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building)
     {
         if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
         {
