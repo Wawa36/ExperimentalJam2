@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3528037053920991453}
   - component: {fileID: 4733086967023071905}
   m_Layer: 0
-  m_Name: Building 7
+  m_Name: Building 10
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
     steps: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
+  lerp_animation: 0
 --- !u!1 &4534975579195051816
 GameObject:
   m_ObjectHideFlags: 0

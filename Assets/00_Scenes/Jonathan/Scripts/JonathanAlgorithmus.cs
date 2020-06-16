@@ -27,7 +27,7 @@ static class JonathanAlgorithmus
             while (true)
             {
                 // raycast with random dir
-                dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 3) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
+                dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 5) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
                 ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
                 at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
@@ -35,7 +35,7 @@ static class JonathanAlgorithmus
                 // check distance to origin
                 Vector2 tower_2D = new Vector2(tower.transform.position.x, tower.transform.position.z);
                 Vector2 building_2D = new Vector2(at_building.Main_Collider.transform.position.x, at_building.Main_Collider.transform.position.z);
-                Debug.Log(Vector2.Distance(tower_2D, building_2D));
+                //Debug.Log(Vector2.Distance(tower_2D, building_2D));
 
                 if (Vector2.Distance(tower_2D, building_2D) > 5)
                 {

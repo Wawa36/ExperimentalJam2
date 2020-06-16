@@ -314,11 +314,12 @@ MonoBehaviour:
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 80634c377d23d1443b39d3f4422b79f7, type: 3}
   - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   _structure_prefabs: []
-  algorithm: 1
+  algorithm: 2
   _start_cambiums: 1
-  _growth_speed: 1
-  _delay: 0
+  _growth_speed: 2
+  _delay: 1
   _steps: 1
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
