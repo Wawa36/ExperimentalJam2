@@ -204,6 +204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
   _structure_prefabs: []
   algorithm: 0
   start_kambiums: 1
@@ -302,6 +304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
   _structure_prefabs: []
   algorithm: 0
   start_kambiums: 1
@@ -498,6 +502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
   _structure_prefabs: []
   algorithm: 0
   start_kambiums: 1
@@ -550,6 +556,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
   _structure_prefabs: []
   algorithm: 0
   start_kambiums: 1
@@ -706,7 +714,7 @@ GameObject:
   - component: {fileID: 1859449220}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
