@@ -17,11 +17,11 @@ namespace Tower_Management
         [SerializeField] List<Transform> horizontal_origins;
         [SerializeField] List<Transform> vertical_origins;
 
-
         [Header("Runtime Parameter")]
+        public int this_is_a_placeholder_dont_use_it;
         [SerializeField] Tower.Cambium _cambium;
         [SerializeField] Building _parent_building;
-        [SerializeField] List<Building> _child_building = new List<Building>();
+        [SerializeField] List<Building> _child_buildings = new List<Building>();
 
         /// <summary>
         /// Owning Tower of the Building
@@ -46,7 +46,7 @@ namespace Tower_Management
         /// <summary>
         /// The childs of the building
         /// </summary>
-        public Building[] Child_Building { get { return _child_building.ToArray(); }}
+        public Building[] Child_Building { get { return _child_buildings.ToArray(); }}
 
         /// <summary>
         /// Sets the parent of the building
@@ -56,7 +56,7 @@ namespace Tower_Management
         /// <summary>
         /// Adds a new child to the building
         /// </summary>
-        public void Add_Child_Building(Building child) { _child_building.Add(child); }
+        public void Add_Child_Building(Building child) { _child_buildings.Add(child); }
 
         /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation

@@ -99,9 +99,12 @@ namespace Tower_Management
             }
 
             // set childs
-            foreach (var c in created_buildings)
+            if (cambiums_a.active_building)
             {
-                cambiums_a.active_building.Add_Child_Building(c);
+                foreach (var c in created_buildings)
+                {
+                    cambiums_a.active_building.Add_Child_Building(c);
+                }
             }
         }
 
