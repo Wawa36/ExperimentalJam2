@@ -53,6 +53,15 @@ MonoBehaviour:
   - {fileID: 3964728135783447493}
   vertical_origins:
   - {fileID: 803579957827564146}
+  this_is_a_placeholder_dont_use_it: 0
+  _cambium:
+    point: {x: 0, y: 0, z: 0}
+    normal: {x: 0, y: 0, z: 0}
+    prefab: {fileID: 0}
+    steps: 0
+  _parent_building: {fileID: 0}
+  _child_buildings: []
+  lerp_animation: 0
 --- !u!1 &4534975579195051816
 GameObject:
   m_ObjectHideFlags: 0
