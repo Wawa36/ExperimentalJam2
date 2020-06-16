@@ -547,7 +547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1359042928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,9 +849,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _building_prefabs:
-  - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: 847c755adc55efd4dab42dc946384746, type: 3}
   _structure_prefabs: []
-  algorithm: 0
+  algorithm: 1
   _start_cambiums: 1
   _growth_speed: 0.3
   _delay: 0.5
