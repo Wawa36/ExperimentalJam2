@@ -79,7 +79,7 @@ namespace Tower_Management
                 var c = cambiums_a.cambiums[i];
 
                 // count steps
-                c.steps = c.steps > 0 ? c.steps-- : 0;
+                c.steps = c.steps > 0 ? --c.steps : 0;
 
                 // instantiate and initialize
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
@@ -146,6 +146,7 @@ namespace Tower_Management
             return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
 
+        [System.Serializable]
         public struct Cambium
         {
             public Vector3 point;
