@@ -25,7 +25,7 @@ static class JonathanAlgorithmus
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0 ? at_building.Cambium.steps - 1 : 0));
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0 ? at_building.Cambium.steps - 1 : Random.Range(0, tower.Steps)));
 
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
