@@ -263,7 +263,7 @@ PrefabInstance:
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -312,18 +312,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _building_prefabs:
-  - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
-  - {fileID: 1862284582436989240, guid: eb89d4e056eba8f419e5942409bab4b0, type: 3}
-  - {fileID: 1862284582436989240, guid: 847c755adc55efd4dab42dc946384746, type: 3}
-  - {fileID: 1862284582436989240, guid: 9b42d3d59703afa44bc15fe9dccd367b, type: 3}
+  - {fileID: 1862284582436989240, guid: 80634c377d23d1443b39d3f4422b79f7, type: 3}
   - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
-  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
   _structure_prefabs: []
   algorithm: 1
-  start_kambiums: 1
-  growth_speed: 1
-  delay: 2
-  steps: 0
+  _start_cambiums: 1
+  _growth_speed: 1
+  _delay: 0
+  _steps: 1
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
 --- !u!4 &1433500400
@@ -594,62 +590,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2105351974
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2105351976}
-  - component: {fileID: 2105351975}
-  m_Layer: 0
-  m_Name: Tower  1
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2105351975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105351974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _building_prefabs:
-  - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
-  - {fileID: 1862284582436989240, guid: eb89d4e056eba8f419e5942409bab4b0, type: 3}
-  - {fileID: 1862284582436989240, guid: 847c755adc55efd4dab42dc946384746, type: 3}
-  - {fileID: 1862284582436989240, guid: 9b42d3d59703afa44bc15fe9dccd367b, type: 3}
-  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
-  - {fileID: 1862284582436989240, guid: 5a870229444f07644b37f0c27897e93a, type: 3}
-  _structure_prefabs: []
-  algorithm: 0
-  start_kambiums: 1
-  growth_speed: 1
-  delay: 2
-  steps: 0
-  default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
-  highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
---- !u!4 &2105351976
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105351974}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

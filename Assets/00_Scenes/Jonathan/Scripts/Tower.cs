@@ -18,10 +18,10 @@ namespace Tower_Management
         // paremeter
         [Header("Growth Parameter")]
         [SerializeField] KabiumAlgorithm algorithm;
-        [SerializeField] int start_kambiums;
-        [SerializeField] float growth_speed;
-        [SerializeField] float delay;
-        [SerializeField] [Range(1, 10)] int steps;
+        [SerializeField] int _start_cambiums;
+        [SerializeField] float _growth_speed;
+        [SerializeField] float _delay;
+        [SerializeField] [Range(1, 10)] int _steps;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
@@ -37,7 +37,7 @@ namespace Tower_Management
         {
             Tower_Manager.Instance.Add_Tower(this);
 
-            for (int i = 0; i < start_kambiums; i++)
+            for (int i = 0; i < _start_cambiums; i++)
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
@@ -49,7 +49,7 @@ namespace Tower_Management
         public void Update_Growth()
         {
             // call growth updates on blocks
-            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Calculate_Growth_Speed()); }
+            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Growth_Speed); }
 
             // count delays
             List<Building> finished_buildings = new List<Building>();
@@ -58,7 +58,7 @@ namespace Tower_Management
             {
                 building_delays[c] += Time.deltaTime;
 
-                if (building_delays[c] >= Calculate_Delay())
+                if (building_delays[c] >= Delay)
                 {
                     Create_Building(Calculate_Cambiums(c));
                     finished_buildings.Add(c);
@@ -74,13 +74,17 @@ namespace Tower_Management
         {
             List<Building> created_buildings = new List<Building>();
 
-            // create buildings
-            foreach (var c in cambiums_a.cambiums)
+            for (int i = 0; i < cambiums_a.cambiums.Length; i++)
             {
+                var c = cambiums_a.cambiums[i];
+
+                // count steps
+                c.steps = c.steps > 0 ? --c.steps : 0;
+
                 // instantiate and initialize
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
                 new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
-                new_building.transform.SetParent (transform);
+                new_building.transform.SetParent(transform);
 
                 // rotate
                 var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
@@ -130,9 +134,11 @@ namespace Tower_Management
         }
 
         // calcualte parameters 
-        float Calculate_Growth_Speed() { return growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; }
+        public float Growth_Speed  { get  { return _growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; } }
 
-        float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
+        public float Delay { get { return _delay * Tower_Manager.Instance.Delay_Multiplier; } }
+
+        public int Steps { get { return _steps; } }
 
         // calculate Kambium
         Cambiums_At_Active Calculate_Cambiums(Building at_building)
@@ -140,6 +146,7 @@ namespace Tower_Management
             return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
 
+        [System.Serializable]
         public struct Cambium
         {
             public Vector3 point;
