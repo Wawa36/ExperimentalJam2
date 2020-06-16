@@ -59,23 +59,49 @@ public static class ProceduralKabiumGenerator
         }
         else //split in 4 if 0 steps
         {
-            
-            //back right
             Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(backRightPos, buildingTransform.up, tower.Building_Prefabs[3],  4 - 1)); //steps - 1
-
-            //back right
             Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(backLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
-
-            //back right
             Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(frontRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
-
-            //back right
             Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(frontLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
 
+            List<Vector3> positions = new List<Vector3>();
+            positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
+
+            bool hasStartedOne = false;
+
+            if (Random.value > 0.75) // 1 chance von 4 dass es weiter geht
+            {
+                //back right
+                kambiumList.Add(new Tower.Cambium(backRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                hasStartedOne = true;
+            }
+
+            if (Random.value > 0.75) // 1 chance von 4 dass es weiter geht
+            {
+                //back right
+                kambiumList.Add(new Tower.Cambium(backLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                hasStartedOne = true;
+            }
+
+            if (Random.value > 0.75) // 1 chance von 4 dass es weiter geht
+            {
+                //back right
+                kambiumList.Add(new Tower.Cambium(frontRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                hasStartedOne = true;
+            }
+
+            if (Random.value > 0.75) // 1 chance von 4 dass es weiter geht
+            {
+                //back right
+                kambiumList.Add(new Tower.Cambium(frontLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                hasStartedOne = true;
+            }
+
+            if(!hasStartedOne) //falls keiner gestarted wurden ist
+            {
+                kambiumList.Add(new Tower.Cambium(positions[Random.Range(0, positions.Count)], buildingTransform.up, tower.Building_Prefabs[3], 4));
+            }
+            
 
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }
