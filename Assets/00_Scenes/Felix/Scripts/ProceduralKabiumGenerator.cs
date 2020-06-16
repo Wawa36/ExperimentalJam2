@@ -6,6 +6,19 @@ using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
 { 
+    private static bool HasStillSteps(Building at_building)
+    {
+        if(at_building.Cambium.steps > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
     static Tower.Cambium[] SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
@@ -27,6 +40,18 @@ public static class ProceduralKabiumGenerator
 
         return kambiumList.ToArray();
     }
+    /*
+    static Tower.Cambium[] FelixKabiumAlgo(Building at_building, Tower tower)
+    {
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        if (HasStillSteps(at_building))
+        {
+            kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
+
+            return kambiumList.ToArray();
+        }
+    }*/
 
     static Tower.Cambium[] JonathansKabiumAlgo(Building at_building, Tower tower)
     {
