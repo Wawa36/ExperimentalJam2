@@ -27,7 +27,7 @@ public class SphereArtifact : MonoBehaviour
     public void GetCollected()
     {
         transform.parent = cameraTransform;
-        transform.localPosition=Vector3.forward;
+        transform.localPosition=new Vector3(1,-.3f,1);
         playerScript.carryingTheOrb = true;
         rigid.useGravity = false;
         rigid.isKinematic = true;
@@ -53,6 +53,7 @@ public class SphereArtifact : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         rigid.velocity = Vector3.zero;
+        transform.position = collision.GetContact(0).point;
         StartCoroutine(beeingStuck());
         rigid.useGravity = false;
         if (collision.gameObject.CompareTag("Ground"))
