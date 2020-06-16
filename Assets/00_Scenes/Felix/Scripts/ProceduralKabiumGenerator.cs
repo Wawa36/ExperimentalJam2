@@ -6,8 +6,6 @@ using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
 { 
-  
-
     static public Tower.Cambiums_At_Active Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
     {
         if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)

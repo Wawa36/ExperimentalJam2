@@ -110,4 +110,51 @@ public class ProceduralKabiumGeneratorFelix
 
     }
 
+
+    public static Tower.Cambiums_At_Active FrangipaniTree(Building at_building, Tower tower)
+    {
+        Transform buildingTransform = at_building.Main_Collider.transform;
+        Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+
+        List<Vector3> positions = new List<Vector3>();
+        positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
+
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        if (at_building.Parent_Building.Parent_Building.Parent_Building.Child_Building.Length > 1) //3 parents?
+        {
+            //when 3 buildings lang nichts gebrancht wurde, dann spalte
+
+            Vector3 firstRandomPos = positions[Random.Range(0, positions.Count)];
+            positions.Remove(firstRandomPos);
+            Vector3 secondRandomPos = positions[Random.Range(0, positions.Count)];
+            positions.Add(firstRandomPos);
+
+            kambiumList.Add(new Tower.Cambium(firstRandomPos,
+                                             buildingTransform.up,
+                                             tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                             at_building.Cambium.steps)); //same steps, the tower counts them down
+
+            kambiumList.Add(new Tower.Cambium(secondRandomPos,
+                                             buildingTransform.up,
+                                             tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                             at_building.Cambium.steps)); //same steps, the tower counts them down
+
+            return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+        }
+        else 
+        {
+            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
+                                            buildingTransform.up,
+                                            tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                            at_building.Cambium.steps)); //same steps, the tower counts them down
+
+            return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+        }
+
+    }
+
 }
