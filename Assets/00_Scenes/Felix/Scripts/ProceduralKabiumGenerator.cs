@@ -50,7 +50,7 @@ public static class ProceduralKabiumGenerator
 
         if (HasStillSteps(at_building))
         {
-            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y),
+            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
                                              buildingTransform.up,
                                              tower.Building_Prefabs[at_building.Cambium.steps - 1],
                                              at_building.Cambium.steps)); //same steps, the tower counts them down
@@ -61,19 +61,19 @@ public static class ProceduralKabiumGenerator
         {
             
             //back right
-            Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z) + (buildingTransform.right * buildingTransform.localScale.x) + (buildingTransform.up * buildingTransform.localScale.y);
+            Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
             kambiumList.Add(new Tower.Cambium(backRightPos, buildingTransform.up, tower.Building_Prefabs[3],  4 - 1)); //steps - 1
 
             //back right
-            Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z) - (buildingTransform.right * buildingTransform.localScale.x) + (buildingTransform.up * buildingTransform.localScale.y);
+            Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
             kambiumList.Add(new Tower.Cambium(backLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
 
             //back right
-            Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z) + (buildingTransform.right * buildingTransform.localScale.x) + (buildingTransform.up * buildingTransform.localScale.y);
+            Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
             kambiumList.Add(new Tower.Cambium(frontRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
 
             //back right
-            Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z) - (buildingTransform.right * buildingTransform.localScale.x) + (buildingTransform.up * buildingTransform.localScale.y);
+            Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
             kambiumList.Add(new Tower.Cambium(frontLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
 
 
