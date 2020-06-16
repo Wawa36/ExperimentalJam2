@@ -60,7 +60,7 @@ namespace Tower_Management
 
                 if (building_delays[c] >= Calculate_Delay())
                 {
-                    Create_Building(Calculate_Kambium(c));
+                    Create_Building(Calculate_Cambiums(c));
                     finished_buildings.Add(c);
                     c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
                 }
@@ -70,9 +70,9 @@ namespace Tower_Management
         }
 
         // growing management
-        private void Create_Building(Cambium[] cambiums)
+        private void Create_Building(Cambiums_At_Active cambiums_a)
         {
-            foreach (var c in cambiums)
+            foreach (var c in cambiums_a.cambiums)
             {
                 // instantiate and initialize
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
@@ -119,7 +119,7 @@ namespace Tower_Management
         float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
 
         // calculate Kambium
-        Cambium[] Calculate_Kambium(Building at_building)
+        Cambiums_At_Active Calculate_Cambiums(Building at_building)
         {
             return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
@@ -147,6 +147,18 @@ namespace Tower_Management
                 this.normal = Vector3.up;
                 this.prefab = prefab;
                 this.steps = 0;
+            }
+        }
+
+        public struct Cambiums_At_Active
+        {
+            public Building active_building;
+            public Cambium[] cambiums;
+
+            public Cambiums_At_Active(Building active_building, Cambium[] cambiums)
+            {
+                this.active_building = active_building;
+                this.cambiums = cambiums;
             }
         }
     }
