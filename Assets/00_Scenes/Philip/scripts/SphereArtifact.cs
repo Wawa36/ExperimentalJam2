@@ -32,39 +32,39 @@ public class SphereArtifact : MonoBehaviour
         rigid.isKinematic = true;
         StopAllCoroutines();
     }
-
+    /// <summary>
+    /// bindet den orb an den ort des auftreffens
+    /// </summary>
+    /// <returns></returns>
     IEnumerator beeingStuck()
     {
         while (true) 
         {
-
-
             rigid.velocity = Vector3.zero;
+            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance)
+            {
+                GetCollected();
+            }
             yield return new WaitForEndOfFrame();
         }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            GetCollected();
-        }
-        else if (collision.gameObject.CompareTag("Ground"))
+        rigid.velocity = Vector3.zero;
+        StartCoroutine(beeingStuck());
+        rigid.useGravity = false;
+        if (collision.gameObject.CompareTag("Ground"))
         {
             //hier kommt der fall hin das die Kugel den boden trifft
-            rigid.velocity = Vector3.zero;
-            StartCoroutine(beeingStuck());
-            rigid.useGravity = false;
+            
 
 
         }
         else if (collision.gameObject.CompareTag("Building"))
         {
             // hier kommt der fall hin das die Kugel ein Gebäude trifft
-            rigid.velocity = Vector3.zero;
-            StartCoroutine(beeingStuck());
-            rigid.useGravity = false;
+          
         }
     }
 

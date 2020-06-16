@@ -8,12 +8,15 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     public bool carryingTheOrb;
-    [SerializeField] GameObject orb;
+    int currentOrbIndex;
+    [SerializeField] List<GameObject> orbs;
+    [SerializeField] GameObject activeOrb;
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
 
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
+    [SerializeField] float jumpForce;
 
     [SerializeField] float throwForce;
     
@@ -21,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        orbRigid = orb.GetComponent<Rigidbody>();
-        orbScript = orb.GetComponent<SphereArtifact>();
+        orbRigid = activeOrb.GetComponent<Rigidbody>();
+        orbScript = activeOrb.GetComponent<SphereArtifact>();
         carryingTheOrb = true;
     }
     private void Update()
@@ -30,15 +33,21 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Throw();
         Teleport();
+        Jump();
         if (carryingTheOrb)
         {
             launchArc.lineRenderer.enabled = true;
             launchArc.DrawPath(cameraRigTransform.forward * throwForce);
+            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
+            {
+                SwapOrbs();
+            }
         }
         else
         {
             launchArc.lineRenderer.enabled = false;
         }
+        
     }
     /// <summary>
     /// wandelt den input in die bewegung des players um
@@ -63,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
+            activeOrb.GetComponent<SphereArtifact>().StopCoroutine("StayOnCamera");
             orbRigid.velocity= cameraRigTransform.forward  *throwForce;
-            orb.transform.parent = null;
-
+            activeOrb.transform.parent = null;
         }
     }
     /// <summary>
@@ -75,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && !carryingTheOrb && IsOnTheGround())
         {
-            transform.position =orb.transform.position + Vector3.up;
+            transform.position =activeOrb.transform.position + Vector3.up;
             rigid.velocity = Vector3.zero;
             
             orbScript.GetCollected();
@@ -93,4 +102,38 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    void SwapOrbs()
+    {
+        orbs[currentOrbIndex].SetActive(false);
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+           
+            currentOrbIndex += 1;
+            if (currentOrbIndex >= orbs.Count)
+            {
+                currentOrbIndex = 0;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            currentOrbIndex -= 1;
+            if (currentOrbIndex < 0)
+            {
+                currentOrbIndex = orbs.Count - 1;
+            }
+        }
+        orbs[currentOrbIndex].SetActive(true);
+        activeOrb = orbs[currentOrbIndex];
+        orbRigid = activeOrb.GetComponent<Rigidbody>();
+        orbScript = activeOrb.GetComponent<SphereArtifact>();
+
+    }
+
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && IsOnTheGround())
+        {
+            rigid.velocity+= Vector3.up * jumpForce;
+        }
+    }
 }
