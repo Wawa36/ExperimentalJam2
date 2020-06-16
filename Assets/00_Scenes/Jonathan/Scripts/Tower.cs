@@ -42,7 +42,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
 
-                Create_Building(c);
+                Create_Building(new Cambiums_At_Active(null, c));
             }
         }
 
@@ -112,7 +112,7 @@ namespace Tower_Management
         // public interfaces
         public void Create_New_Building(Building at_building) 
         {
-            Create_Building(Calculate_Kambium(at_building));
+            Create_Building(Calculate_Cambiums(at_building));
         }
 
         public void Deactivate_Block(IGrowingBlock block) 
