@@ -13,9 +13,12 @@ namespace Tower_Management
         [Header("Building Parameter")]
         [SerializeField] GameObject mesh;
         [SerializeField] Collider _main_collider;
+        Tower.Cambium _cambium;
+
         [SerializeField] [Range(0, 1)] float origin_turn;
         [SerializeField] List<Transform> horizontal_origins;
         [SerializeField] List<Transform> vertical_origins;
+
 
         /// <summary>
         /// Owning Tower of the Building
@@ -28,9 +31,19 @@ namespace Tower_Management
         public Collider Main_Collider { get { return _main_collider; } }
 
         /// <summary>
+        /// The cambium the building was created at
+        /// </summary>
+        public Tower.Cambium Cambium { get { return _cambium; } }
+
+        /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation
         /// </summary>
-        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponentInChildren<Collider>(); }
+        public void Initialize(Tower tower, Tower.Cambium cambium) 
+        {
+            _tower = tower; 
+            _main_collider = GetComponentInChildren<Collider>();
+            _cambium = cambium;
+        }
 
         /// <summary>
         /// Update Method called by owning Tower

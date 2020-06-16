@@ -21,6 +21,7 @@ namespace Tower_Management
         [SerializeField] int start_kambiums;
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
+        [SerializeField] [Range(1, 10)] int steps;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
@@ -75,7 +76,7 @@ namespace Tower_Management
             {
                 // instantiate and initialize
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
-                new_building.GetComponent<IGrowingBlock>().Initialize(this);
+                new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
                 new_building.transform.SetParent (transform);
 
                 // rotate
@@ -95,11 +96,6 @@ namespace Tower_Management
         {
         }
 
-        // calcualte parameters 
-        float Calculate_Growth_Speed() { return growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; }
-
-        float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
-
         // public interfaces
         public void Create_New_Building(Building at_building) 
         {
@@ -117,6 +113,11 @@ namespace Tower_Management
             inactive_blocks.Add(block);
         }
 
+        // calcualte parameters 
+        float Calculate_Growth_Speed() { return growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; }
+
+        float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
+
         // calculate Kambium
         Cambium[] Calculate_Kambium(Building at_building)
         {
@@ -128,28 +129,31 @@ namespace Tower_Management
             public Vector3 point;
             public Vector3 normal;
             public GameObject prefab;
+            public int steps;
 
             // at building
-            public Cambium(Vector3 point, Vector3 normal, GameObject prefab)
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps)
             {
                 this.point = point;
                 this.normal = normal;
                 this.prefab = prefab;
+                this.steps = steps;
             }
 
-            // ass origin
+            // as origin
             public Cambium(Vector3 origin, GameObject prefab)
             {
                 this.point = origin;
                 this.normal = Vector3.up;
                 this.prefab = prefab;
+                this.steps = 0;
             }
         }
     }
 
     public interface IGrowingBlock
     {
-        void Initialize(Tower tower);
+        void Initialize(Tower tower, Tower.Cambium cambium);
 
         void On_Update_Growth(float speed);
     }
