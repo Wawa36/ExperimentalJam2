@@ -134,7 +134,7 @@ namespace Tower_Management
 
         public float Delay { get { return _delay * Tower_Manager.Instance.Delay_Multiplier; } }
 
-        public int Steps { get { return Steps; } }
+        public int Steps { get { return _steps; } }
 
         // calculate Kambium
         Cambiums_At_Active Calculate_Cambiums(Building at_building)
