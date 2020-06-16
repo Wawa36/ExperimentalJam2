@@ -6,113 +6,38 @@ using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
 { 
-    private static bool HasStillSteps(Building at_building)
-    {
-        if(at_building.Cambium.steps > 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-
-    static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
-    {
-        float angle = 45;
-        //rule F[+F]F[-F]F
-
-        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
-
-        if (Random.value > 0.25)
-        {
-            kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
-        }
-        else
-        {
-            Vector3 turnAngle = at_building.transform.up * at_building.transform.localScale.y;
-            turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
-
-            kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
-        }
-
-        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-    }
-
-
-    static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
-    {
-        Transform buildingTransform = at_building.Main_Collider.transform;
-
-        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
-
-        if (HasStillSteps(at_building))
-        {
-            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
-                                             buildingTransform.up,
-                                             tower.Building_Prefabs[at_building.Cambium.steps - 1],
-                                             at_building.Cambium.steps)); //same steps, the tower counts them down
-
-            return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-        }
-        else //split in 4 if 0 steps
-        {
-            
-            //back right
-            Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(backRightPos, buildingTransform.up, tower.Building_Prefabs[3],  4 - 1)); //steps - 1
-
-            //back right
-            Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(backLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
-
-            //back right
-            Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(frontRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
-
-            //back right
-            Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-            kambiumList.Add(new Tower.Cambium(frontLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4 - 1)); //steps - 1
-
-
-            return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-        }
-
-
-    }
-
-
-    static Tower.Cambiums_At_Active JonathansKabiumAlgo(Building at_building, Tower tower)
-    {
-        return JonathanAlgorithmus.JonathansKabiumAlgo(at_building, tower);
-    }
-
     static public Tower.Cambiums_At_Active Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
     {
-        if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
+        if (KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
-            return SimpleLSystemGrow(at_building, tower);
+            return ProceduralKabiumGeneratorFelix.SimpleLSystemGrow(at_building, tower);
         }
-        else if(KabiumAlgorithm.BoababTree == kabiumAlgorithm)
+        else if (KabiumAlgorithm.BoababTree == kabiumAlgorithm)
         {
-            return BaobabTree(at_building, tower);
+            return ProceduralKabiumGeneratorFelix.BaobabTree(at_building, tower);
         }
-        else if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
+        else if (KabiumAlgorithm.FrangipaniTree == kabiumAlgorithm)
         {
-            return JonathansKabiumAlgo(at_building, tower);
+            return ProceduralKabiumGeneratorFelix.FrangipaniTree(at_building, tower);
         }
-        else //Default
+        else if (KabiumAlgorithm.RBunker == kabiumAlgorithm)
         {
-            return JonathansKabiumAlgo(at_building, tower);
+            return JonathanAlgorithmus.RBunker(at_building, tower);
         }
+        else if (KabiumAlgorithm.RBunkerBranches == kabiumAlgorithm)
+        {
+            return JonathanAlgorithmus.RBunkerBranch(at_building, tower);
+        }
+        else
+            return JonathanAlgorithmus.RBunker(at_building, tower);
     }
 }
 public enum KabiumAlgorithm
 {
     BoababTree,
+    FrangipaniTree,
     SimpleLSystem,
-    JonathansAlgo,
+    RBunker,
+    RBunkerBranches,
     Default
 }

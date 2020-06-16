@@ -81,9 +81,8 @@ namespace Tower_Management
                 // count steps
                 c.steps = c.steps > 0 ? --c.steps : 0;
 
-                // instantiate and initialize
+                // instantiate and parent building
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
-                new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
                 new_building.transform.SetParent(transform);
 
                 // rotate
@@ -100,6 +99,9 @@ namespace Tower_Management
 
                 // add to active blocks
                 active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+
+                // initialite building 
+                new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
             }
 
             // set childs
