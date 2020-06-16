@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SphereArtifact : MonoBehaviour
 {
+    [SerializeField] GameObject TowerPrefab;
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraTransform;
     [SerializeField] float collectingDistance;
@@ -57,14 +58,14 @@ public class SphereArtifact : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             //hier kommt der fall hin das die Kugel den boden trifft
-            
+            Instantiate(TowerPrefab,collision.GetContact(0).point,Quaternion.identity);
 
 
         }
         else if (collision.gameObject.CompareTag("Building"))
         {
             // hier kommt der fall hin das die Kugel ein Gebäude trifft
-          
+            Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
         }
     }
 

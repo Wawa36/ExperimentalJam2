@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool carryingTheOrb;
     int currentOrbIndex;
     [SerializeField] List<GameObject> orbs;
-    [SerializeField] GameObject activeOrb;
+    GameObject activeOrb;
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
 
@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        activeOrb = orbs[0];
         orbRigid = activeOrb.GetComponent<Rigidbody>();
         orbScript = activeOrb.GetComponent<SphereArtifact>();
         carryingTheOrb = true;
@@ -126,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
         activeOrb = orbs[currentOrbIndex];
         orbRigid = activeOrb.GetComponent<Rigidbody>();
         orbScript = activeOrb.GetComponent<SphereArtifact>();
+        launchArc = activeOrb.GetComponent<LaunchArc>();
 
     }
 
