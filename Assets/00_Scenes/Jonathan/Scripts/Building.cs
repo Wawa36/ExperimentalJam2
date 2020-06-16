@@ -46,7 +46,7 @@ namespace Tower_Management
         /// <summary>
         /// The childs of the building
         /// </summary>
-        public List<Building> Child_Building { get { return _child_building; }}
+        public Building[] Child_Building { get { return _child_building.ToArray(); }}
 
         /// <summary>
         /// Sets the parent of the building

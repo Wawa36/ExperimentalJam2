@@ -72,6 +72,9 @@ namespace Tower_Management
         // growing management
         private void Create_Building(Cambiums_At_Active cambiums_a)
         {
+            List<Building> created_buildings = new List<Building>();
+
+            // create buildings
             foreach (var c in cambiums_a.cambiums)
             {
                 // instantiate and initialize
@@ -84,11 +87,21 @@ namespace Tower_Management
                 origin.transform.position = c.point;
                 origin.forward = c.normal;
 
+                // link to parent
+                new_building.GetComponent<Building>().Set_Parent_Building(cambiums_a.active_building);
+                created_buildings.Add(new_building.GetComponent<Building>());
+
                 // highlight color
                 new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
 
                 // add to active blocks
                 active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+            }
+
+            // set childs
+            foreach (var c in created_buildings)
+            {
+                cambiums_a.active_building.Add_Child_Building(c);
             }
         }
 
