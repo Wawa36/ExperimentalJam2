@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152923204344402229}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.02699995, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 815907263}
@@ -234,12 +234,13 @@ MonoBehaviour:
   - {fileID: 815907258}
   - {fileID: 4052186782227101131}
   - {fileID: 4052186782834138164}
-  activeOrb: {fileID: 815907258}
   cameraRigTransform: {fileID: 152923204554566497}
   launchArc: {fileID: 815907264}
   movespeed: 20
   rotationSpeed: 50
-  throwForce: 20
+  jumpForce: 10
+  throwForceIncrease: 20
+  maxThrowingForce: 25
 --- !u!33 &152923204717291904
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -308,15 +309,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 152923204344402230}
     m_Modifications:
+    - target: {fileID: 4189201633741323709, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.19444275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
+      value: 0.9945672
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].value
+      value: 0.6972241
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
@@ -414,15 +435,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 152923204344402230}
     m_Modifications:
+    - target: {fileID: 4189201633741323709, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.19444275
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].time
+      value: 0.9945672
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323710, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[2].value
+      value: 0.6972241
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
@@ -520,6 +561,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 152923204344402230}
     m_Modifications:
+    - target: {fileID: 4189201633741323709, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323710, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
@@ -538,17 +584,17 @@ PrefabInstance:
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: maxPathTime
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.3
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
