@@ -9,16 +9,19 @@ namespace Tower_Management
     public abstract class Building : MonoBehaviour, IGrowingBlock
     {
         private Tower _tower;
-        
+
         [Header("Building Parameter")]
         [SerializeField] GameObject mesh;
         [SerializeField] Collider _main_collider;
-        Tower.Cambium _cambium;
-
         [SerializeField] [Range(0, 1)] float origin_turn;
         [SerializeField] List<Transform> horizontal_origins;
         [SerializeField] List<Transform> vertical_origins;
 
+
+        [Header("Runtime Parameter")]
+        [SerializeField] Tower.Cambium _cambium;
+        [SerializeField] Building _parent_building;
+        [SerializeField] List<Building> _child_building = new List<Building>();
 
         /// <summary>
         /// Owning Tower of the Building
@@ -34,6 +37,26 @@ namespace Tower_Management
         /// The cambium the building was created at
         /// </summary>
         public Tower.Cambium Cambium { get { return _cambium; } }
+
+        /// <summary>
+        /// The parent of building 
+        /// </summary>
+        public Building Parent_Building { get { return _parent_building; }}
+
+        /// <summary>
+        /// The childs of the building
+        /// </summary>
+        public List<Building> Child_Building { get { return _child_building; }}
+
+        /// <summary>
+        /// Sets the parent of the building
+        /// </summary>
+        public void Set_Parent_Building(Building parent) { _parent_building = parent; }
+
+        /// <summary>
+        /// Adds a new child to the building
+        /// </summary>
+        public void Add_Child_Building(Building child) { _child_building.Add(child); }
 
         /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation
