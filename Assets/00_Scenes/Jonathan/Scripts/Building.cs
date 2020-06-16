@@ -75,8 +75,9 @@ namespace Tower_Management
                     origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
                 }
             }
-            
+
             mesh.transform.SetParent(origin);
+
             return origin;
         }
     }
