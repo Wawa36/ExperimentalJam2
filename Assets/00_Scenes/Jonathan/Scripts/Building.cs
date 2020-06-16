@@ -9,13 +9,19 @@ namespace Tower_Management
     public abstract class Building : MonoBehaviour, IGrowingBlock
     {
         private Tower _tower;
-        
+
         [Header("Building Parameter")]
         [SerializeField] GameObject mesh;
         [SerializeField] Collider _main_collider;
         [SerializeField] [Range(0, 1)] float origin_turn;
         [SerializeField] List<Transform> horizontal_origins;
         [SerializeField] List<Transform> vertical_origins;
+
+        [Header("Runtime Parameter")]
+        public int this_is_a_placeholder_dont_use_it;
+        [SerializeField] Tower.Cambium _cambium;
+        [SerializeField] Building _parent_building;
+        [SerializeField] List<Building> _child_buildings = new List<Building>();
 
         /// <summary>
         /// Owning Tower of the Building
@@ -28,9 +34,39 @@ namespace Tower_Management
         public Collider Main_Collider { get { return _main_collider; } }
 
         /// <summary>
+        /// The cambium the building was created at
+        /// </summary>
+        public Tower.Cambium Cambium { get { return _cambium; } }
+
+        /// <summary>
+        /// The parent of building 
+        /// </summary>
+        public Building Parent_Building { get { return _parent_building; }}
+
+        /// <summary>
+        /// The childs of the building
+        /// </summary>
+        public Building[] Child_Building { get { return _child_buildings.ToArray(); }}
+
+        /// <summary>
+        /// Sets the parent of the building
+        /// </summary>
+        public void Set_Parent_Building(Building parent) { _parent_building = parent; }
+
+        /// <summary>
+        /// Adds a new child to the building
+        /// </summary>
+        public void Add_Child_Building(Building child) { _child_buildings.Add(child); }
+
+        /// <summary>
         /// Sets the owning Tower of the Building, called automatically on instantiation
         /// </summary>
-        public void Initialize(Tower tower) { _tower = tower; _main_collider = GetComponentInChildren<Collider>(); }
+        public void Initialize(Tower tower, Tower.Cambium cambium) 
+        {
+            _tower = tower; 
+            _main_collider = GetComponentInChildren<Collider>();
+            _cambium = cambium;
+        }
 
         /// <summary>
         /// Update Method called by owning Tower
@@ -75,8 +111,9 @@ namespace Tower_Management
                     origin = horizontal_origins[Random.Range(0, horizontal_origins.Count)];
                 }
             }
-            
+
             mesh.transform.SetParent(origin);
+
             return origin;
         }
     }

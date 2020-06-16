@@ -21,6 +21,7 @@ namespace Tower_Management
         [SerializeField] int start_kambiums;
         [SerializeField] float growth_speed;
         [SerializeField] float delay;
+        [SerializeField] [Range(1, 10)] int steps;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
@@ -41,7 +42,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
 
-                Create_Building(c);
+                Create_Building(new Cambiums_At_Active(null, c));
             }
         }
 
@@ -59,7 +60,7 @@ namespace Tower_Management
 
                 if (building_delays[c] >= Calculate_Delay())
                 {
-                    Create_Building(Calculate_Kambium(c));
+                    Create_Building(Calculate_Cambiums(c));
                     finished_buildings.Add(c);
                     c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
                 }
@@ -69,13 +70,16 @@ namespace Tower_Management
         }
 
         // growing management
-        private void Create_Building(Cambium[] cambiums)
+        private void Create_Building(Cambiums_At_Active cambiums_a)
         {
-            foreach (var c in cambiums)
+            List<Building> created_buildings = new List<Building>();
+
+            // create buildings
+            foreach (var c in cambiums_a.cambiums)
             {
                 // instantiate and initialize
                 var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
-                new_building.GetComponent<IGrowingBlock>().Initialize(this);
+                new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
                 new_building.transform.SetParent (transform);
 
                 // rotate
@@ -83,11 +87,24 @@ namespace Tower_Management
                 origin.transform.position = c.point;
                 origin.forward = c.normal;
 
+                // link to parent
+                new_building.GetComponent<Building>().Set_Parent_Building(cambiums_a.active_building);
+                created_buildings.Add(new_building.GetComponent<Building>());
+
                 // highlight color
                 new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
 
                 // add to active blocks
                 active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+            }
+
+            // set childs
+            if (cambiums_a.active_building)
+            {
+                foreach (var c in created_buildings)
+                {
+                    cambiums_a.active_building.Add_Child_Building(c);
+                }
             }
         }
 
@@ -95,15 +112,10 @@ namespace Tower_Management
         {
         }
 
-        // calcualte parameters 
-        float Calculate_Growth_Speed() { return growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; }
-
-        float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
-
         // public interfaces
         public void Create_New_Building(Building at_building) 
         {
-            Create_Building(Calculate_Kambium(at_building));
+            Create_Building(Calculate_Cambiums(at_building));
         }
 
         public void Deactivate_Block(IGrowingBlock block) 
@@ -117,8 +129,13 @@ namespace Tower_Management
             inactive_blocks.Add(block);
         }
 
+        // calcualte parameters 
+        float Calculate_Growth_Speed() { return growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; }
+
+        float Calculate_Delay() { return delay * Tower_Manager.Instance.Delay_Multiplier; }
+
         // calculate Kambium
-        Cambium[] Calculate_Kambium(Building at_building)
+        Cambiums_At_Active Calculate_Cambiums(Building at_building)
         {
             return ProceduralKabiumGenerator.Calculate_Kambium(algorithm, at_building, this);
         }
@@ -128,28 +145,43 @@ namespace Tower_Management
             public Vector3 point;
             public Vector3 normal;
             public GameObject prefab;
+            public int steps;
 
             // at building
-            public Cambium(Vector3 point, Vector3 normal, GameObject prefab)
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps)
             {
                 this.point = point;
                 this.normal = normal;
                 this.prefab = prefab;
+                this.steps = steps;
             }
 
-            // ass origin
+            // as origin
             public Cambium(Vector3 origin, GameObject prefab)
             {
                 this.point = origin;
                 this.normal = Vector3.up;
                 this.prefab = prefab;
+                this.steps = 0;
+            }
+        }
+
+        public struct Cambiums_At_Active
+        {
+            public Building active_building;
+            public Cambium[] cambiums;
+
+            public Cambiums_At_Active(Building active_building, Cambium[] cambiums)
+            {
+                this.active_building = active_building;
+                this.cambiums = cambiums;
             }
         }
     }
 
     public interface IGrowingBlock
     {
-        void Initialize(Tower tower);
+        void Initialize(Tower tower, Tower.Cambium cambium);
 
         void On_Update_Growth(float speed);
     }
