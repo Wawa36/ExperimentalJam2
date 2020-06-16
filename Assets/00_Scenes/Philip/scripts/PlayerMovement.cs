@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public bool carryingTheOrb;
     [SerializeField] GameObject orb;
     [SerializeField] Transform cameraRigTransform;
+    [SerializeField] LaunchArc launchArc;
 
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
@@ -29,6 +30,15 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Throw();
         Teleport();
+        if (carryingTheOrb)
+        {
+            launchArc.lineRenderer.enabled = true;
+            launchArc.DrawPath(cameraRigTransform.forward * throwForce);
+        }
+        else
+        {
+            launchArc.lineRenderer.enabled = false;
+        }
     }
     /// <summary>
     /// wandelt den input in die bewegung des players um
@@ -53,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
-            orbRigid.AddForce(cameraRigTransform.forward * 100 *throwForce);
+            orbRigid.velocity= cameraRigTransform.forward  *throwForce;
             orb.transform.parent = null;
 
         }
