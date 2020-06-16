@@ -50,9 +50,11 @@ public static class ProceduralKabiumGenerator
 
         if (HasStillSteps(at_building))
         {
+            
             kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
                                              buildingTransform.up,
-                                             tower.Building_Prefabs[at_building.Cambium.steps - 1],
+                                             //tower.Building_Prefabs[at_building.Cambium.steps - 1],
+                                             tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                              at_building.Cambium.steps)); //same steps, the tower counts them down
 
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());

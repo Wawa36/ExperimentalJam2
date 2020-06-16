@@ -562,14 +562,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: 79088d5e0df0189488fb6c2ce85bc505, type: 3}
-  - {fileID: 1862284582436989240, guid: 847c755adc55efd4dab42dc946384746, type: 3}
+  - {fileID: 1862284582436989240, guid: 544b2f4c3b5eb9c47bd894080c8827e0, type: 3}
   - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
   - {fileID: 1862284582436989240, guid: 74bdf70e0920be24aa4cd39c29cb8a9e, type: 3}
   _structure_prefabs: []
   algorithm: 0
   _start_cambiums: 1
-  _growth_speed: 2
-  _delay: 1
+  _growth_speed: 0.3
+  _delay: 0.5
   _steps: 0
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
