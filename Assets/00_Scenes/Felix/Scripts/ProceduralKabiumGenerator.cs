@@ -19,7 +19,7 @@ public static class ProceduralKabiumGenerator
     }
 
 
-    static Tower.Cambium[] SimpleLSystemGrow(Building at_building, Tower tower)
+    static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
         //rule F[+F]F[-F]F
@@ -36,9 +36,9 @@ public static class ProceduralKabiumGenerator
             turnAngle = Quaternion.Euler(angle, 0, 0) * turnAngle;
 
             kambiumList.Add(new Tower.Cambium(at_building.transform.position + turnAngle, turnAngle, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
-        }      
+        }
 
-        return kambiumList.ToArray();
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
     
     /*
@@ -55,7 +55,7 @@ public static class ProceduralKabiumGenerator
     }
     */
 
-    static Tower.Cambium[] JonathansKabiumAlgo(Building at_building, Tower tower)
+    static Tower.Cambiums_At_Active JonathansKabiumAlgo(Building at_building, Tower tower)
     {
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
@@ -77,10 +77,10 @@ public static class ProceduralKabiumGenerator
 
         kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0 ? at_building.Cambium.steps - 1 : 0));
 
-        return kambiumList.ToArray();
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
 
-    static public Tower.Cambium[] Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
+    static public Tower.Cambiums_At_Active Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
     {
         if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
