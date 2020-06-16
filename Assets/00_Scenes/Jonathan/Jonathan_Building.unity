@@ -318,8 +318,8 @@ MonoBehaviour:
   _structure_prefabs: []
   algorithm: 2
   _start_cambiums: 1
-  _growth_speed: 2
-  _delay: 1
+  _growth_speed: 0.1
+  _delay: 0.1
   _steps: 1
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
