@@ -5,7 +5,7 @@ using Tower_Management;
 
 static class JonathanAlgorithmus
 {
-    static Tower.Cambiums_At_Active JonathansKabiumAlgo(Building at_building, Tower tower)
+    public static Tower.Cambiums_At_Active JonathansKabiumAlgo(Building at_building, Tower tower)
     {
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
