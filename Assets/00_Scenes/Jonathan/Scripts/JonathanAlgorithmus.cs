@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Tower_Management;
 
-public class JonathanAlgorithmus : MonoBehaviour
+static class JonathanAlgorithmus
 {
-    // Start is called before the first frame update
-    Tower.Cambium[] JonathansKabiumAlgo(Building at_building, Tower tower)
+    static Tower.Cambiums_At_Active JonathansKabiumAlgo(Building at_building, Tower tower)
     {
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
@@ -26,8 +25,8 @@ public class JonathanAlgorithmus : MonoBehaviour
         var hit = new RaycastHit();
         at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0? at_building.Cambium.steps - 1 : 0));
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0 ? at_building.Cambium.steps - 1 : 0));
 
-        return kambiumList.ToArray();
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
 }
