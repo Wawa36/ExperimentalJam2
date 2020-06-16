@@ -5,8 +5,7 @@ using Tower_Management;
 using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
-{
-    
+{ 
     static Tower.Cambium[] SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
