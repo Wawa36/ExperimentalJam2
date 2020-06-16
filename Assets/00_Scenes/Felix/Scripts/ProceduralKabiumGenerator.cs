@@ -6,30 +6,35 @@ using System.Runtime.InteropServices;
 
 public static class ProceduralKabiumGenerator 
 { 
+  
+
     static public Tower.Cambiums_At_Active Calculate_Kambium(KabiumAlgorithm kabiumAlgorithm, Building at_building, Tower tower)
     {
-        if(KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
+        if (KabiumAlgorithm.SimpleLSystem == kabiumAlgorithm)
         {
             return ProceduralKabiumGeneratorFelix.SimpleLSystemGrow(at_building, tower);
         }
-        else if(KabiumAlgorithm.BoababTree == kabiumAlgorithm)
+        else if (KabiumAlgorithm.BoababTree == kabiumAlgorithm)
         {
             return ProceduralKabiumGeneratorFelix.BaobabTree(at_building, tower);
         }
-        else if(KabiumAlgorithm.JonathansAlgo == kabiumAlgorithm)
+        else if (KabiumAlgorithm.RBunker == kabiumAlgorithm)
         {
-            return JonathanAlgorithmus.JonathansKabiumAlgo(at_building, tower);
+            return JonathanAlgorithmus.RBunker(at_building, tower);
         }
-        else //Default
+        else if (KabiumAlgorithm.RBunkerBranches == kabiumAlgorithm)
         {
-            return JonathanAlgorithmus.JonathansKabiumAlgo(at_building, tower);
+            return JonathanAlgorithmus.RBunkerBranch(at_building, tower);
         }
+        else
+            return JonathanAlgorithmus.RBunker(at_building, tower);
     }
 }
 public enum KabiumAlgorithm
 {
     BoababTree,
     SimpleLSystem,
-    JonathansAlgo,
+    RBunker,
+    RBunkerBranches,
     Default
 }
