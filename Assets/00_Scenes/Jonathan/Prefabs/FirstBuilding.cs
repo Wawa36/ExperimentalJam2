@@ -11,10 +11,10 @@ public class FirstBuilding : Building
     {
         if (Main_Collider.transform.parent.localScale.z < 1)
         {
-            if (Main_Collider.transform.parent.localScale.z == 0)
-                Mesh.SetActive(false);
-            else if (!Mesh.activeSelf)
-                Mesh.SetActive(true);
+            //if (Main_Collider.transform.parent.localScale.z == 0)
+           //     Mesh.SetActive(false);
+          //  else if (!Mesh.activeSelf)
+          //      Mesh.SetActive(true);
 
             if (lerp_animation)
             {

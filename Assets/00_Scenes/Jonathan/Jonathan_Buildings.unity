@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b923e677b4cf1e4e88f52b197445f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _growth_speed_multiplier: 10
+  _growth_speed_multiplier: 1
   _delay_multiplier: 0
   _enable_rotation: 1
 --- !u!4 &731110977
@@ -505,9 +505,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
         type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
       propertyPath: _building_prefabs.Array.data[1]
       value: 
       objectReference: {fileID: 1862284582436989240, guid: 563f8b72c9237a348aad845785433e14,
         type: 3}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _steps
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[0].value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[0].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].time
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].tangentMode
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[0].inSlope
+      value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[0].outSlope
+      value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].inSlope
+      value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4809589625856764697, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
+      propertyPath: _growth_speed_over_lifetime.m_Curve.Array.data[1].outSlope
+      value: -0.99
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f82f05fd20a7576438b96b37990e6181, type: 3}

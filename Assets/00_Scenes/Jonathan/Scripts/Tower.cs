@@ -147,8 +147,8 @@ namespace Tower_Management
             {
                 float value;
 
-                if (building_generation < _growth_speed_over_lifetime.keys.Length)
-                    value = _growth_speed_over_lifetime[building_generation].value;
+                if (building_generation < _growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time)
+                    value = _growth_speed_over_lifetime.Evaluate(building_generation);
                 else
                     value = 0;
 
