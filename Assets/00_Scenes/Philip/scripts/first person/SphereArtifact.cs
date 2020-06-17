@@ -7,6 +7,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] GameObject TowerPrefab;
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraTransform;
+    [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
     PlayerMovement playerScript;
     Rigidbody rigid;
@@ -16,7 +17,9 @@ public class SphereArtifact : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible=false;
-            
+        Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(1 , 0,1));
+        targetPosition.position = cameraPosition;
+        transform.localPosition = Vector3.zero;
         playerScript = playerTransform.GetComponent<PlayerMovement>();
         rigid = GetComponent<Rigidbody>();
     }
@@ -27,8 +30,8 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
-        transform.parent = cameraTransform;
-        transform.localPosition=new Vector3(1,-.3f,1);
+        transform.parent = targetPosition;
+        transform.localPosition = Vector3.zero;
         playerScript.carryingTheOrb = true;
         rigid.useGravity = false;
         rigid.isKinematic = true;
