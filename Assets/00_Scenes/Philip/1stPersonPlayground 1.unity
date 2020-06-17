@@ -640,6 +640,7 @@ GameObject:
   - component: {fileID: 763585381}
   - component: {fileID: 763585380}
   - component: {fileID: 763585379}
+  - component: {fileID: 763585383}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Ground
@@ -722,6 +723,38 @@ Transform:
   m_Father: {fileID: 42935764}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &763585383
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763585378}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 5.982669, z: 10}
+  m_Center: {x: 0, y: -2.9913344, z: 0}
+--- !u!1 &995449268 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+    type: 3}
+  m_PrefabInstance: {fileID: 152923205298247641}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &995449269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995449268}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1, y: 2, z: 1.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1005045117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1657,6 +1690,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: jumpForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204717291916, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -1717,5 +1760,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 152923204717291919, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
