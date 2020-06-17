@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         float YAxis = Input.GetAxis("Vertical");
 
         rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed + transform.right * XAxis * Time.deltaTime * movespeed);
-       
+        
 
     }
     /// <summary>
