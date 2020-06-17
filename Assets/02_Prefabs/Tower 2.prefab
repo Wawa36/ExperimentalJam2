@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2441123088755889949}
   - component: {fileID: 2441123088755889948}
   m_Layer: 0
-  m_Name: Baobab Tower Other Forms
+  m_Name: Tower 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
   _structure_prefabs: []
   algorithm: 0
   _start_cambiums: 1
-  _growth_speed: 1
+  _growth_speed: 0.3
   _delay: 0.5
-  _steps: 0
+  _steps: 1
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
