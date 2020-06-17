@@ -76,18 +76,18 @@ public class PlayerMovement : MonoBehaviour
                 throwForce += Time.deltaTime * throwForceIncrease;
             }
             launchArc.lineRenderer.enabled = true;
-            launchArc.DrawPath(cameraRigTransform.forward * throwForce);
+            launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
         }
 
         if (carryingTheOrb && Input.GetMouseButtonUp(0))
         {
-            
+            launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
             activeOrb.GetComponent<SphereArtifact>().StopCoroutine("StayOnCamera");
-            orbRigid.velocity= cameraRigTransform.forward  *throwForce;
+            orbRigid.velocity= cameraRigTransform.forward  * throwForce + cameraRigTransform.up * throwForce / 4;
             activeOrb.transform.parent = null;
             throwForce = 0;
         }

@@ -65,6 +65,7 @@ public class SphereArtifact : MonoBehaviour
             transform.position = collision.GetContact(0).point;
             StartCoroutine(beeingStuck());
             rigid.useGravity = false;
+
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
