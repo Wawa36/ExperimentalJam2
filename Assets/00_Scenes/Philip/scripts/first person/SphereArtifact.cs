@@ -68,14 +68,14 @@ public class SphereArtifact : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
-                Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
+                Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity);
 
 
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 // hier kommt der fall hin das die Kugel ein Gebäude trifft
-                Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
+                Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity);
             }
         }
     }

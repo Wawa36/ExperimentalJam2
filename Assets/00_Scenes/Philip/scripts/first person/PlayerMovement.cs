@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        Move();
         Throw();
         Teleport();
         Jump();
@@ -49,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
           
         
     }
+    private void FixedUpdate()
+    {
+        Move();
+    }
     /// <summary>
     /// wandelt den input in die bewegung des players um
     /// </summary>
@@ -57,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float YAxis = Input.GetAxis("Vertical");
 
-        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed + transform.right * XAxis * Time.deltaTime * movespeed);
+        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed + transform.right * XAxis * Time.fixedDeltaTime * movespeed);
         
 
     }
