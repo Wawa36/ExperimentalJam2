@@ -234,7 +234,7 @@ MonoBehaviour:
   - {fileID: 815907258}
   - {fileID: 4052186782227101131}
   - {fileID: 4052186782834138164}
-  cameraRigTransform: {fileID: 152923204554566497}
+  cameraRigTransform: {fileID: 152923204344402230}
   launchArc: {fileID: 815907264}
   movespeed: 20
   rotationSpeed: 50
