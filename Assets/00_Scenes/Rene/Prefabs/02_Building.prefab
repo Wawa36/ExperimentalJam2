@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mesh: {fileID: 2663405433887114036}
   _main_collider: {fileID: 564055233977632877}
-  origin_turn: 0
+  origin_turn: 0.5
   horizontal_origins:
   - {fileID: 6781204215174954272}
   - {fileID: 5679854435029780996}
@@ -549,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 02_Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 3451118302482216456, guid: d3de5351f4f755a4fb58dd483460ef7e,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3de5351f4f755a4fb58dd483460ef7e, type: 3}

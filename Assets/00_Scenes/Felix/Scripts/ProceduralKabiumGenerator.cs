@@ -28,6 +28,10 @@ public static class ProceduralKabiumGenerator
         {
             return JonathanAlgorithmus.RBunkerBranch(at_building, tower);
         }
+        else if (KabiumAlgorithm.StairGrow == kabiumAlgorithm)
+        {
+            return JonathanAlgorithmus.StairGrow(at_building, tower);
+        }
         else
             return JonathanAlgorithmus.RBunker(at_building, tower);
     }
@@ -39,5 +43,6 @@ public enum KabiumAlgorithm
     SimpleLSystem,
     RBunker,
     RBunkerBranches,
+    StairGrow,
     Default
 }
