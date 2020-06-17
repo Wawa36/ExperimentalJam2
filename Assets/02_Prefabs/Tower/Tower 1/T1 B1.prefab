@@ -138,7 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d263947a377ad5b47b23ebbe972f17d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 1220529604175743910}
+  _mesh: {fileID: 1220529604175743910}
   _main_collider: {fileID: 7678615526546099816}
   origin_turn: 0.5
   horizontal_origins:

@@ -20,12 +20,14 @@ namespace Tower_Management
         [SerializeField] KabiumAlgorithm algorithm;
         [SerializeField] int _start_cambiums;
         [SerializeField] float _growth_speed;
+        [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
+        [SerializeField] int building_generation = 0;
 
         // stored growth data
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
@@ -42,6 +44,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = Steps;
+                c[0].normal = Vector3.up;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -102,6 +105,8 @@ namespace Tower_Management
 
                 // initialite building 
                 new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
+
+                building_generation++;
             }
 
             // set childs
@@ -136,7 +141,20 @@ namespace Tower_Management
         }
 
         // calcualte parameters 
-        public float Growth_Speed  { get  { return _growth_speed * Tower_Manager.Instance.Growth_Speed_Multiplier; } }
+        public float Growth_Speed 
+        { 
+            get 
+            {
+                float value;
+
+                if (building_generation < _growth_speed_over_lifetime.keys.Length)
+                    value = _growth_speed_over_lifetime[building_generation].value;
+                else
+                    value = 0;
+
+                return _growth_speed * value * Tower_Manager.Instance.Growth_Speed_Multiplier; 
+            } 
+        }
 
         public float Delay { get { return _delay * Tower_Manager.Instance.Delay_Multiplier; } }
 

@@ -143,9 +143,12 @@ static class JonathanAlgorithmus
 
     public static Tower.Cambiums_At_Active StairGrow(Building at_building, Tower tower) 
     {
+        bool is_first_spawn = false;
+
         if (!StairGrow_Steps_Cache.ContainsKey(tower))
         {
             StairGrow_Steps_Cache.Add(tower, tower.Steps);
+            is_first_spawn = true;
         }
 
         // cambiums
@@ -162,7 +165,10 @@ static class JonathanAlgorithmus
             // raycast with random dir
             if (at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1)
             {
-                dir = at_building.Main_Collider.transform.parent.right;
+                if (!is_first_spawn)
+                    dir = at_building.Main_Collider.transform.parent.right;
+                else
+                    dir = at_building.Main_Collider.transform.parent.up;
             }
             else
                 dir = at_building.Cambium.normal;
@@ -170,7 +176,7 @@ static class JonathanAlgorithmus
             ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
             at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
-            kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
+            kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y/2, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
         }
         // spawn plattform
         else
@@ -181,7 +187,7 @@ static class JonathanAlgorithmus
             at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
             // add cambium to list
-            StairGrow_Steps_Cache[tower] = Random.Range(0, tower.Steps);
+            StairGrow_Steps_Cache[tower] = Random.Range(tower.Steps / 2, tower.Steps);
             kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[1], StairGrow_Steps_Cache[tower]));
         }
 
