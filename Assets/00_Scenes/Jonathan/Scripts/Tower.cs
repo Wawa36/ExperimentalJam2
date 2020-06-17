@@ -75,46 +75,49 @@ namespace Tower_Management
         // growing management
         private void Create_Building(Cambiums_At_Active cambiums_a)
         {
-            List<Building> created_buildings = new List<Building>();
-
-            for (int i = 0; i < cambiums_a.cambiums.Length; i++)
+            if (Get_Current_Grow_Speed_Over_Lifetime() > 0)
             {
-                var c = cambiums_a.cambiums[i];
+                List<Building> created_buildings = new List<Building>();
 
-                // count steps
-                c.steps = c.steps > 0 ? --c.steps : 0;
-
-                // instantiate and parent building
-                var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
-                new_building.transform.SetParent(transform);
-
-                // rotate
-                var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
-                origin.transform.position = c.point;
-                origin.forward = c.normal;
-
-                // link to parent
-                new_building.GetComponent<Building>().Set_Parent_Building(cambiums_a.active_building);
-                created_buildings.Add(new_building.GetComponent<Building>());
-
-                // highlight color
-                new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
-
-                // add to active blocks
-                active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
-
-                // initialite building 
-                new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
-
-                building_generation++;
-            }
-
-            // set childs
-            if (cambiums_a.active_building)
-            {
-                foreach (var c in created_buildings)
+                for (int i = 0; i < cambiums_a.cambiums.Length; i++)
                 {
-                    cambiums_a.active_building.Add_Child_Building(c);
+                    var c = cambiums_a.cambiums[i];
+
+                    // count steps
+                    c.steps = c.steps > 0 ? --c.steps : 0;
+
+                    // instantiate and parent building
+                    var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
+                    new_building.transform.SetParent(transform);
+
+                    // rotate
+                    var origin = new_building.GetComponent<Building>().Origin_From_Normal(c.normal);
+                    origin.transform.position = c.point;
+                    origin.forward = c.normal;
+
+                    // link to parent
+                    new_building.GetComponent<Building>().Set_Parent_Building(cambiums_a.active_building);
+                    created_buildings.Add(new_building.GetComponent<Building>());
+
+                    // highlight color
+                    new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
+
+                    // add to active blocks
+                    active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
+
+                    // initialite building 
+                    new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
+
+                    building_generation++;
+                }
+
+                // set childs
+                if (cambiums_a.active_building)
+                {
+                    foreach (var c in created_buildings)
+                    {
+                        cambiums_a.active_building.Add_Child_Building(c);
+                    }
                 }
             }
         }
@@ -145,15 +148,22 @@ namespace Tower_Management
         { 
             get 
             {
-                float value;
-
-                if (building_generation < _growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time)
-                    value = _growth_speed_over_lifetime.Evaluate(building_generation);
-                else
-                    value = 0;
-
-                return _growth_speed * value * Tower_Manager.Instance.Growth_Speed_Multiplier; 
+                return _growth_speed * Get_Current_Grow_Speed_Over_Lifetime() * Tower_Manager.Instance.Growth_Speed_Multiplier; 
             } 
+        }
+
+        public float Get_Current_Grow_Speed_Over_Lifetime()
+        {
+            float value;
+
+            if (building_generation < _growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time)
+                value = _growth_speed_over_lifetime.Evaluate(building_generation);
+            else
+            {
+                value = 0;
+            }
+
+            return value;
         }
 
         public float Delay { get { return _delay * Tower_Manager.Instance.Delay_Multiplier; } }
@@ -203,6 +213,17 @@ namespace Tower_Management
                 this.active_building = active_building;
                 this.cambiums = cambiums;
             }
+        }
+
+        // controll inspector inputs
+        private void OnValidate()
+        {
+            var c = _growth_speed_over_lifetime.keys;
+
+            if (c[0].time != 0)
+                c[0].time = 0;
+
+            _growth_speed_over_lifetime.keys = c;
         }
     }
 
