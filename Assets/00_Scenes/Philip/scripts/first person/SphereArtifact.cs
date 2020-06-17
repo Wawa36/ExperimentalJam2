@@ -10,6 +10,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] float collectingDistance;
     PlayerMovement playerScript;
     Rigidbody rigid;
+    bool colided;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +32,7 @@ public class SphereArtifact : MonoBehaviour
         playerScript.carryingTheOrb = true;
         rigid.useGravity = false;
         rigid.isKinematic = true;
+        colided = false;
         StopAllCoroutines();
     }
     /// <summary>
@@ -52,21 +54,26 @@ public class SphereArtifact : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        rigid.velocity = Vector3.zero;
-        transform.position = collision.GetContact(0).point;
-        StartCoroutine(beeingStuck());
-        rigid.useGravity = false;
-        if (collision.gameObject.CompareTag("Ground"))
+        if (!colided)
         {
-            //hier kommt der fall hin das die Kugel den boden trifft
-            Instantiate(TowerPrefab,collision.GetContact(0).point,Quaternion.identity);
+
+            colided = true;
+            rigid.velocity = Vector3.zero;
+            transform.position = collision.GetContact(0).point;
+            StartCoroutine(beeingStuck());
+            rigid.useGravity = false;
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                //hier kommt der fall hin das die Kugel den boden trifft
+                Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
 
 
-        }
-        else if (collision.gameObject.CompareTag("Building"))
-        {
-            // hier kommt der fall hin das die Kugel ein Gebäude trifft
-            Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
+            }
+            else if (collision.gameObject.CompareTag("Building"))
+            {
+                // hier kommt der fall hin das die Kugel ein Gebäude trifft
+                Instantiate(TowerPrefab, collision.GetContact(0).point, Quaternion.identity);
+            }
         }
     }
 
