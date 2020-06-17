@@ -11,7 +11,7 @@ namespace Tower_Management
         private Tower _tower;
 
         [Header("Building Parameter")]
-        [SerializeField] GameObject mesh;
+        [SerializeField] GameObject _mesh;
         [SerializeField] Collider _main_collider;
         [SerializeField] [Range(0, 1)] float origin_turn;
         [SerializeField] List<Transform> horizontal_origins;
@@ -27,6 +27,11 @@ namespace Tower_Management
         /// Owning Tower of the Building
         /// </summary>
         public Tower Tower { get { return _tower; } }
+
+        /// <summary>
+        /// Mesh of the Building
+        /// </summary>
+        public GameObject Mesh { get { return _mesh; } }
 
         /// <summary>
         /// Collider for physics 
@@ -113,7 +118,7 @@ namespace Tower_Management
                 }
             }
 
-            mesh.transform.SetParent(origin);
+            _mesh.transform.SetParent(origin);
 
             return origin;
         }

@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class LaunchArc : MonoBehaviour
 {
     Rigidbody rigid;
     [SerializeField] float maxPathTime;
+    public MeshRenderer targetSphere;
     [HideInInspector] public LineRenderer lineRenderer;
-    
+    int rayCastResolution;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -16,18 +19,42 @@ public class LaunchArc : MonoBehaviour
 
     public void DrawPath(Vector3 Force)
     {
-        int resolution = 100;
+        targetSphere.enabled = true;
+        int resolution = 50;
         Vector3 previousDrawpoint = transform.position;
-        for(int i =0; i<resolution; i++)
+        Vector3 drawpoint;
+        rayCastResolution = 0;
+        Vector3 endVector=Vector3.zero;
+        lineRenderer.SetPosition(0,transform.position);
+        for (int i =1; i<resolution; i++)
         {
-            float simulationTime = i / (float)resolution * maxPathTime;
-            Vector3 displacement = Force * simulationTime + Physics.gravity * simulationTime * simulationTime / 2f;
-            Vector3 drawpoint = transform.position + displacement;
-            lineRenderer.SetPosition(i, drawpoint);
+            
+
+            if (endVector== Vector3.zero )
+            {
+                float simulationTime = i / (float)resolution * maxPathTime;
+                Vector3 displacement = Force * simulationTime + Physics.gravity * simulationTime * simulationTime / 2f;
+                drawpoint = transform.position + displacement;
+                RaycastHit hit;
+
+                if (rayCastResolution <= i)
+                {
+                    rayCastResolution += 1;
+                    if (Physics.Raycast(previousDrawpoint, drawpoint-previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint)))
+                    {
+                        endVector = hit.point;
+                        drawpoint = hit.point;
+                        targetSphere.transform.position = endVector;
+                    }
+                }
+            }
+            else
+            {
+                drawpoint = endVector;
+            }
             previousDrawpoint = drawpoint;
+            lineRenderer.SetPosition(i, drawpoint);
         }
-
-
     }
 
 }
