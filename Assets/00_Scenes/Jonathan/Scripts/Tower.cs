@@ -21,7 +21,7 @@ namespace Tower_Management
         [SerializeField] int _start_cambiums;
         [SerializeField] float _growth_speed;
         [SerializeField] float _delay;
-        [SerializeField] [Range(1, 10)] int _steps;
+        [SerializeField] [Range(1, 30)] int _steps;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
@@ -41,7 +41,7 @@ namespace Tower_Management
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
-
+                c[0].steps = Steps;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
