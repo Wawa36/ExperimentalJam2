@@ -11,6 +11,7 @@ public class Movement_thirdPerson : MonoBehaviour
     public bool carryingTheOrb;
     int currentOrbIndex;
     [SerializeField] List<GameObject> orbs;
+    [SerializeField] Transform cameraRigTransform;
     GameObject activeOrb;
 
     LaunchArc launchArc;
@@ -68,8 +69,8 @@ public class Movement_thirdPerson : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float YAxis = Input.GetAxis("Vertical");
 
-        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed );
-        transform.rotation= Quaternion.RotateTowards(transform.rotation,Quaternion.AngleAxis(90, Vector3.up)*transform.rotation,XAxis* rotationSpeed*Time.deltaTime);
+        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed +transform.right*XAxis*Time.deltaTime*movespeed*.9f);
+        rigid.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(cameraRigTransform.forward.x,0,cameraRigTransform.forward.z), Vector3.up), YAxis));
     }
     /// <summary>
     /// wirft den orb in richtung vector3.forward des Spielers

@@ -16,7 +16,7 @@ public class LaunchArc : MonoBehaviour
 
     public void DrawPath(Vector3 Force)
     {
-        int resolution = 30;
+        int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         for(int i =0; i<resolution; i++)
         {
