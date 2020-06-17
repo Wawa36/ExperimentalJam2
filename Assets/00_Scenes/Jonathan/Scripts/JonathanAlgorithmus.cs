@@ -137,4 +137,52 @@ static class JonathanAlgorithmus
 
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
+
+    // StairGrow
+
+    static Dictionary<Tower, int> stairs_per_tower = new Dictionary<Tower, int>();
+
+    public static Tower.Cambiums_At_Active StairGrow(Building at_building, Tower tower) 
+    {
+        // add tower to dic
+        if (!stairs_per_tower.ContainsKey(tower))
+            stairs_per_tower.Add(tower, 3);
+
+        // cambiums
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        // raycast to main collider
+        Vector3 dir;
+        Ray ray;
+        RaycastHit hit = new RaycastHit();
+
+        // spawn stairs
+        if (stairs_per_tower[tower] > 0)
+        {
+            stairs_per_tower[tower]--;
+
+            // raycast with random dir
+            dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
+            ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
+            at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
+
+            // add cambium to list
+            kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[0], 0));
+        }
+        // spawn plattform
+        else
+        {
+            stairs_per_tower[tower] = 3;
+
+            // raycast with random dir
+            dir = new Vector3(0, 1, 0).normalized;
+            ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
+            at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
+
+            // add cambium to list
+            kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[1], 0));
+        }
+
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+    }
 }
