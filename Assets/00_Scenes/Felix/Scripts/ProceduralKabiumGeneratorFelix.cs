@@ -19,7 +19,6 @@ public class ProceduralKabiumGeneratorFelix
 
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
 
-
     public static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
@@ -55,19 +54,23 @@ public class ProceduralKabiumGeneratorFelix
 
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
+
         if (towerAndBranches[tower] < 7)
         {
-
-
-
             if (HasStillSteps(at_building))
             {
-
-                kambiumList.Add(new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
+                Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingTransform.localScale.y / 2),
                                                  buildingTransform.up,
                                                  //tower.Building_Prefabs[at_building.Cambium.steps - 1],
                                                  tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
-                                                 at_building.Cambium.steps)); //same steps, the tower counts them down
+                                                 at_building.Cambium.steps);
+
+                /*
+                if (ProceduralKabiumGenerator.CheckBuildingPossible(newCambium, at_building))
+                    kambiumList.Add(newCambium); //same steps, the tower counts them down
+                else
+                    towerAndBranches[tower]--; //dieses Kabium hört auf
+                    */
 
                 return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
             }
