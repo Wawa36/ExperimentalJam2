@@ -802,6 +802,12 @@ PrefabInstance:
       objectReference: {fileID: 152923204344402230}
     - target: {fileID: 4189201633741323716, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
+      propertyPath: TowerPrefab
+      value: 
+      objectReference: {fileID: 2523835149660872280, guid: f42f7a0d1f5a0d941afb2babbd16e892,
+        type: 3}
+    - target: {fileID: 4189201633741323716, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 313825965}
@@ -1296,6 +1302,12 @@ PrefabInstance:
       propertyPath: collectingDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323716, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: TowerPrefab
+      value: 
+      objectReference: {fileID: 2441123088755889923, guid: 927e26e505f6ddc41ac71bd606620ddc,
+        type: 3}
     - target: {fileID: 4189201633741323716, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: targetPosition
@@ -1797,6 +1809,12 @@ PrefabInstance:
       propertyPath: collectingDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4189201633741323716, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
+        type: 3}
+      propertyPath: TowerPrefab
+      value: 
+      objectReference: {fileID: 4409143144725386998, guid: f82f05fd20a7576438b96b37990e6181,
+        type: 3}
     - target: {fileID: 4189201633741323716, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: targetPosition

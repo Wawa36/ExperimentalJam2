@@ -475,6 +475,62 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &908721551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 908721553}
+  - component: {fileID: 908721552}
+  m_Layer: 0
+  m_Name: Gebaude Tower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &908721552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908721551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _building_prefabs:
+  - {fileID: 1862284582436989240, guid: 49bc3c1857adda44e9e157e6fadbac50, type: 3}
+  - {fileID: 1862284582436989240, guid: 79088d5e0df0189488fb6c2ce85bc505, type: 3}
+  - {fileID: 1862284582436989240, guid: 74bdf70e0920be24aa4cd39c29cb8a9e, type: 3}
+  - {fileID: 1862284582436989240, guid: 3e2af9d8afd78ce4fbff51e2156b7fc7, type: 3}
+  _structure_prefabs: []
+  algorithm: 3
+  _start_cambiums: 1
+  _growth_speed: 0.1
+  _delay: 0.5
+  _steps: 0
+  default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
+  highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
+--- !u!4 &908721553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908721551}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.81, y: 0, z: -9.97}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1142276748
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1359042928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +624,7 @@ MonoBehaviour:
   _structure_prefabs: []
   algorithm: 0
   _start_cambiums: 1
-  _growth_speed: 0.3
+  _growth_speed: 1
   _delay: 0.5
   _steps: 0
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
@@ -581,7 +637,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359042927}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.81, y: 0, z: -9.97}
+  m_LocalPosition: {x: -9.86, y: 0, z: 5.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -835,7 +891,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1681923659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,4 +1021,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2078974104
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078974106}
+  - component: {fileID: 2078974105}
+  m_Layer: 0
+  m_Name: Gebaude Tower (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &2078974105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078974104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78556bb6d97af3c4c83b7d85a30efc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _building_prefabs:
+  - {fileID: 7929284784571364109, guid: 91fa11e335f538240be077c8f49b0fb3, type: 3}
+  - {fileID: 919132149155446097, guid: 9b461661d076eb54eb1f35e598f1af4c, type: 3}
+  _structure_prefabs: []
+  algorithm: 3
+  _start_cambiums: 1
+  _growth_speed: 0.1
+  _delay: 0.5
+  _steps: 0
+  default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
+  highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
+--- !u!4 &2078974106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078974104}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.29, y: 0, z: 11.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

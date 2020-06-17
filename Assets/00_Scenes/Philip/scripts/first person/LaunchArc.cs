@@ -25,7 +25,6 @@ public class LaunchArc : MonoBehaviour
             Vector3 drawpoint = transform.position + displacement;
             lineRenderer.SetPosition(i, drawpoint);
             previousDrawpoint = drawpoint;
-
         }
 
 
