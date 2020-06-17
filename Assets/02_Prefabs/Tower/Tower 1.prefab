@@ -45,12 +45,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: ada0d9dd5c0c5c4498471f01c14bccad, type: 3}
-  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: 563f8b72c9237a348aad845785433e14, type: 3}
   _structure_prefabs: []
   algorithm: 5
   _start_cambiums: 1
   _growth_speed: 0.1
+  _growth_speed_over_lifetime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 100
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 100
+      value: 0
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _delay: 0.1
   _steps: 30
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
+  building_generation: 0
