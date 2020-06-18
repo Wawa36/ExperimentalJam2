@@ -9,6 +9,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
+    [HideInInspector] public SphereCollider collider;
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
@@ -22,6 +23,7 @@ public class SphereArtifact : MonoBehaviour
         transform.localPosition = Vector3.zero;
         playerScript = playerTransform.GetComponent<PlayerMovement>();
         rigid = GetComponent<Rigidbody>();
+        collider = GetComponent<SphereCollider>();
     }
 
     /// <summary>
@@ -30,6 +32,7 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
+        collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
         playerScript.carryingTheOrb = true;
@@ -47,7 +50,20 @@ public class SphereArtifact : MonoBehaviour
         while (true) 
         {
             rigid.velocity = Vector3.zero;
-            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance)
+            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
+            {
+                GetCollected();
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator FlyToPlayer()
+    {
+        while (!playerScript.carryingTheOrb)
+        {
+            transform.position = Vector3.Lerp(transform.position, playerScript.transform.position, .2f);
+            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
                 GetCollected();
             }

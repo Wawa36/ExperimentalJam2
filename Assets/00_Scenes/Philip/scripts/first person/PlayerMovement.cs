@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     public bool carryingTheOrb;
+    [HideInInspector] public bool noaiming;
     int currentOrbIndex;
     
     [SerializeField] List<GameObject> orbs;
@@ -69,7 +70,11 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Throw()
     {
-        if(carryingTheOrb && Input.GetMouseButton(0))
+        if (noaiming && Input.GetMouseButtonDown(0))
+        {
+            noaiming = false;
+        }
+        if (!noaiming && carryingTheOrb && Input.GetMouseButton(0))
         {
             if (throwForce < maxThrowingForce)
             {
@@ -78,8 +83,7 @@ public class PlayerMovement : MonoBehaviour
             launchArc.lineRenderer.enabled = true;
             launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
         }
-
-        if (carryingTheOrb && Input.GetMouseButtonUp(0))
+        if (!noaiming && carryingTheOrb && Input.GetMouseButtonUp(0))
         {
             launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
@@ -91,6 +95,16 @@ public class PlayerMovement : MonoBehaviour
             activeOrb.transform.parent = null;
             throwForce = 0;
         }
+        
+        if (!carryingTheOrb&& Input.GetMouseButtonDown(0))
+        {
+
+            noaiming = true;
+            orbScript.collider.enabled = false;
+            orbRigid.useGravity = false;
+            orbScript.StartCoroutine(orbScript.FlyToPlayer());
+        }
+
     }
     /// <summary>
     /// teleportiert den Spieler zum Orb

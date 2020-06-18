@@ -44,13 +44,17 @@ public class LaunchArc : MonoBehaviour
                     {
                         endVector = hit.point;
                         drawpoint = hit.point;
-                        targetSphere.transform.position = endVector;
                     }
                 }
             }
             else
             {
                 drawpoint = endVector;
+
+            }
+            if (i == resolution - 1)
+            {
+                targetSphere.transform.position = drawpoint;
             }
             previousDrawpoint = drawpoint;
             lineRenderer.SetPosition(i, drawpoint);
