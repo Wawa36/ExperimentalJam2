@@ -628,12 +628,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643208837}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &731911641 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 5261024278616293085, guid: 2464224f60e7e5447bb13c380f3be112,
-    type: 3}
-  m_PrefabInstance: {fileID: 5261024279293668100}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &763585378
 GameObject:
   m_ObjectHideFlags: 0
@@ -1700,7 +1694,7 @@ PrefabInstance:
     - target: {fileID: 815907264, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: targetSphere
       value: 
-      objectReference: {fileID: 731911641}
+      objectReference: {fileID: 0}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -1765,81 +1759,12 @@ PrefabInstance:
         type: 3}
       propertyPath: targetSphere
       value: 
-      objectReference: {fileID: 731911641}
+      objectReference: {fileID: 0}
     - target: {fileID: 4052186782834138190, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: targetSphere
       value: 
-      objectReference: {fileID: 731911641}
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 995449269, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
---- !u!1001 &5261024279293668100
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5261024278616293084, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_Name
-      value: target sphere
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 23.339571
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2804503
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 22.433998
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5261024278616293087, guid: 2464224f60e7e5447bb13c380f3be112,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2464224f60e7e5447bb13c380f3be112, type: 3}
