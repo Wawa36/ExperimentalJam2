@@ -44,11 +44,13 @@ public class ProceduralKabiumGeneratorFelix
 
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
+        
         if(!towerAndBranches.ContainsKey(tower))
         {
             towerAndBranches.Add(tower, 1);
         }
-        Debug.Log(towerAndBranches[tower]);
+       // Debug.Log(towerAndBranches[tower]);
+        
 
         Transform buildingTransform = at_building.Main_Collider.transform;
 
@@ -64,6 +66,7 @@ public class ProceduralKabiumGeneratorFelix
                                                  //tower.Building_Prefabs[at_building.Cambium.steps - 1],
                                                  tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                                  at_building.Cambium.steps);
+                kambiumList.Add(newCambium);
 
                 /*
                 if (ProceduralKabiumGenerator.CheckBuildingPossible(newCambium, at_building))
