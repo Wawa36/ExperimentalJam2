@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace Tower_Management
@@ -161,6 +162,12 @@ namespace Tower_Management
             else
             {
                 value = 0;
+
+                foreach (var c in active_blocks.ToList())
+                {
+                    active_blocks.Remove(c);
+                    Destroy((c as Component).gameObject);
+                }
             }
 
             return value;
