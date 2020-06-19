@@ -63,9 +63,14 @@ static class JonathanAlgorithmus
 
     public static Tower.Cambiums_At_Active RBunkerBranch(Building at_building, Tower tower)
     {
+        bool is_first_spawn = false;
+
         // add tower to dic
         if (!branches_per_tower.ContainsKey(tower))
+        {
             branches_per_tower.Add(tower, 1);
+            is_first_spawn = true;
+        }
 
         // cambiums
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
@@ -87,7 +92,7 @@ static class JonathanAlgorithmus
             while (true)
             {
                 // raycast with random dir
-                dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 5) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
+                dir = new Vector3(Random.Range(0, 2) == 0 ? 1 : -1, Random.Range(0, 50) == 0 ? 1 : 0, Random.Range(0, 2) == 0 ? 1 : -1).normalized;
                 ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
                 at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
@@ -112,7 +117,12 @@ static class JonathanAlgorithmus
             }
         }
 
-        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], at_building.Cambium.steps > 0 ? at_building.Cambium.steps : Random.Range(0, tower.Steps)));
+        int steps = at_building.Cambium.steps > 0 ? at_building.Cambium.steps : Random.Range(0, tower.Steps);
+
+        if (is_first_spawn)
+            steps = 1;
+
+        kambiumList.Add(new Tower.Cambium(hit.point, hit.normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], steps));
 
         // delet random cambium
         if (Random.Range(0, 50) == 0 && branches_per_tower[tower] > 1)

@@ -22,6 +22,7 @@ namespace Tower_Management
         [SerializeField] Tower.Cambium _cambium;
         [SerializeField] Building _parent_building;
         [SerializeField] List<Building> _child_buildings = new List<Building>();
+        [SerializeField] Material mat_cache;
 
         /// <summary>
         /// Owning Tower of the Building
@@ -72,6 +73,7 @@ namespace Tower_Management
             _main_collider = GetComponentInChildren<Collider>();
             _cambium = cambium;
             Main_Collider.transform.parent.localScale = new Vector3(1, 1, 0);
+            mat_cache = Mesh.GetComponent<MeshRenderer>().material;
         }
 
         /// <summary>
