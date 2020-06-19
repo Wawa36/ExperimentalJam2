@@ -39,13 +39,13 @@ namespace Tower_Management
             switch (grow_speed.input)
             {
                 case input_values.OrbEnergy:
-                    return  Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return  Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
                 case input_values.PlayerSpeed:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
                 case input_values.ThrowDistance:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
                 case input_values.ThrowTime:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
                 default:
                     return default;
             }
@@ -56,13 +56,13 @@ namespace Tower_Management
             switch (split_chance.input)
             {
                 case input_values.OrbEnergy:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, split_chance.min, split_chance.max) * split_chance.multiplier;
                 case input_values.PlayerSpeed:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, split_chance.min, split_chance.max) * split_chance.multiplier;
                 case input_values.ThrowDistance:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, split_chance.min, split_chance.max) * split_chance.multiplier;
                 case input_values.ThrowTime:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, split_chance.min, split_chance.max) * split_chance.multiplier;
                 default:
                     return default;
             }
@@ -73,13 +73,13 @@ namespace Tower_Management
             switch (generation_amount.input)
             {
                 case input_values.OrbEnergy:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, generation_amount.min, generation_amount.max) * generation_amount.multiplier;
                 case input_values.PlayerSpeed:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, generation_amount.min, generation_amount.max) * generation_amount.multiplier;
                 case input_values.ThrowDistance:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, generation_amount.min, generation_amount.max) * generation_amount.multiplier;
                 case input_values.ThrowTime:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, generation_amount.min, generation_amount.max) * generation_amount.multiplier;
                 default:
                     return default;
             }
@@ -90,13 +90,13 @@ namespace Tower_Management
             switch (change_direction_chance.input)
             {
                 case input_values.OrbEnergy:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
                 case input_values.PlayerSpeed:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
                 case input_values.ThrowDistance:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.orb_energy, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
                 case input_values.ThrowTime:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max);
+                    return Map_Value(inputs.player_speed, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
                 default:
                     return default;
             }

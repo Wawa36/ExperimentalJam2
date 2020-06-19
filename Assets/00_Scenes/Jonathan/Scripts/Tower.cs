@@ -71,6 +71,7 @@ namespace Tower_Management
             // generations
             var c = _growth_speed_over_lifetime.keys;
             c[c.Length - 1].time = mapper.Generation_Amount;
+            print(mapper.Generation_Amount);
             _growth_speed_over_lifetime.keys = c;
         }
 

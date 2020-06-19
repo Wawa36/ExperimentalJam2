@@ -80,6 +80,13 @@ MonoBehaviour:
   _delay: 0.5
   _steps: 1
   chunk_size: 30
+  inputs:
+    player_dir: {x: 0, y: 0, z: 0}
+    orb_energy: 1
+    throw_dist: 1
+    throw_time: 1
+    player_speed: 50
+    ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   building_generation: 0
@@ -95,20 +102,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f981cd7f4ab9149b0ad2a58128836a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties:
-  - value: 0
+  grow_speed:
+    input: 0
     min: 0
     max: 1
-    multiplier: 1
-  - value: 1
+    multiplier: 2
+  split_chance:
+    input: 0
     min: 0
-    max: 1
-    multiplier: 1
-  - value: 2
+    max: 0
+    multiplier: 0
+  generation_amount:
+    input: 3
     min: 0
-    max: 1
-    multiplier: 1
-  - value: 3
+    max: 50
+    multiplier: 50
+  change_direction_chance:
+    input: 0
     min: 0
-    max: 1
-    multiplier: 1
+    max: 0
+    multiplier: 0
