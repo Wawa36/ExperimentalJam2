@@ -11,6 +11,7 @@ namespace Tower_Management
         [SerializeField] Property split_chance;
         [SerializeField] Property generation_amount;
         [SerializeField] Property change_direction_chance;
+        [SerializeField] Property width;
 
         Tower.Player_Inputs inputs;
 
@@ -29,6 +30,8 @@ namespace Tower_Management
         public int Generation_Amount { get { return Calculate_Generation_Amount(); } }
 
         public int Change_Direction_Chance { get { return Calculate_Change_Direction_Chance(); } }
+
+        public int Width { get { return Calculate_Width(); } }
 
         public string Ground_Tag { get { return inputs.ground_tag; } }
 
@@ -97,6 +100,23 @@ namespace Tower_Management
                     return Map_Value(inputs.orb_energy, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
                 case input_values.ThrowTime:
                     return Map_Value(inputs.player_speed, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier;
+                default:
+                    return default;
+            }
+        }
+
+        int Calculate_Width() 
+        {
+            switch (width.input)
+            {
+                case input_values.OrbEnergy:
+                    return Map_Value(inputs.orb_energy, width.min, width.max) * width.multiplier;
+                case input_values.PlayerSpeed:
+                    return Map_Value(inputs.player_speed, width.min, width.max) * width.multiplier;
+                case input_values.ThrowDistance:
+                    return Map_Value(inputs.orb_energy, width.min, width.max) * width.multiplier;
+                case input_values.ThrowTime:
+                    return Map_Value(inputs.player_speed, width.min, width.max) * width.multiplier;
                 default:
                     return default;
             }

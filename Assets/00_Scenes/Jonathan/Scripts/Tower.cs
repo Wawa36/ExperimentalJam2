@@ -67,11 +67,11 @@ namespace Tower_Management
         {
             // growth speed
             _growth_speed *= mapper.Grow_Speed;
+            print(mapper.Grow_Speed);
 
             // generations
             var c = _growth_speed_over_lifetime.keys;
             c[c.Length - 1].time = mapper.Generation_Amount;
-            print(mapper.Generation_Amount);
             _growth_speed_over_lifetime.keys = c;
         }
 
