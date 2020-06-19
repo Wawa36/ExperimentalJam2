@@ -312,6 +312,7 @@ namespace Tower_Management
         }
 
         // tower spawn parameter
+        [System.Serializable]
         public struct Player_Inputs
         {
             public Vector3 player_dir;
