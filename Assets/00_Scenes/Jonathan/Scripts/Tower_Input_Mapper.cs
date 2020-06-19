@@ -125,6 +125,7 @@ namespace Tower_Management
         // mapping 
         int Map_Value (float value, int min, int max) 
         {
+            print((int)Mathf.InverseLerp(min, max, value));
             return (int) Mathf.InverseLerp(min, max, value);
         }
 

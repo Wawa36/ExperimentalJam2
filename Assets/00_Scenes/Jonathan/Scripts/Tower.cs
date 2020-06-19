@@ -113,13 +113,16 @@ namespace Tower_Management
 
             foreach (var c in building_delays.Keys.ToList())
             {
-                building_delays[c] += Time.deltaTime;
-
-                if (building_delays[c] >= Delay)
+                if (c != null)
                 {
-                    Create_Building(Calculate_Cambiums(c));
-                    finished_buildings.Add(c);
-                    c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                    building_delays[c] += Time.deltaTime;
+
+                    if (building_delays[c] >= Delay)
+                    {
+                        Create_Building(Calculate_Cambiums(c));
+                        finished_buildings.Add(c);
+                        c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                    }
                 }
             }
 
@@ -129,7 +132,6 @@ namespace Tower_Management
             {
                 Merge_Chunk();
             }
-
         }
 
         private void Create_Building(Cambiums_At_Active cambiums_a)
