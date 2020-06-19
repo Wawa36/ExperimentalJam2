@@ -176,9 +176,13 @@ static class JonathanAlgorithmus
             if (at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1)
             {
                 if (!is_first_spawn)
+                {
                     dir = at_building.Main_Collider.transform.parent.right;
+                }
                 else
+                {
                     dir = at_building.Main_Collider.transform.parent.forward;
+                }
             }
             else
                 dir = at_building.Cambium.normal;
@@ -187,6 +191,17 @@ static class JonathanAlgorithmus
             at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
             kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y/2, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
+
+            // split
+            if (!is_first_spawn && at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1 && Random.Range(0, tower.Mapper.Split_Chance) == 0)
+            {
+                dir = -at_building.Main_Collider.transform.parent.right;
+
+                ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
+                at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
+
+                kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y / 2, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
+            }
         }
         // spawn plattform
         else

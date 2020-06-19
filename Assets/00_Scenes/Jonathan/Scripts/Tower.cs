@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Transactions;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,12 +68,26 @@ namespace Tower_Management
         {
             // growth speed
             _growth_speed *= mapper.Grow_Speed;
-            print(mapper.Grow_Speed);
 
             // generations
-            var c = _growth_speed_over_lifetime.keys;
-            c[c.Length - 1].time = mapper.Generation_Amount;
-            _growth_speed_over_lifetime.keys = c;
+            var keys = _growth_speed_over_lifetime.keys;
+
+            float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+            for (int i = 0; i < keys.Length; i++)
+            {
+                keys[i].time *= factor;
+            }
+
+            _growth_speed_over_lifetime.keys = keys;
+
+            for (int i = 0; i < _growth_speed_over_lifetime.keys.Length; i++)
+            {
+                keys[i].time *= factor;
+                //keys[i].inTangent = 1;
+                //keys[i].outTangent = 1;
+                AnimationUtility.SetKeyLeftTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+                AnimationUtility.SetKeyRightTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+            }
         }
 
         // growing management
