@@ -69,9 +69,11 @@ namespace Tower_Management
             // growth speed
             _growth_speed *= mapper.Grow_Speed;
 
+            print(mapper.Grow_Speed);
             // generations
             var keys = _growth_speed_over_lifetime.keys;
 
+            // remap keys
             float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
             for (int i = 0; i < keys.Length; i++)
             {
@@ -80,6 +82,7 @@ namespace Tower_Management
 
             _growth_speed_over_lifetime.keys = keys;
 
+            // change tangetns to linear
             for (int i = 0; i < _growth_speed_over_lifetime.keys.Length; i++)
             {
                 keys[i].time *= factor;
