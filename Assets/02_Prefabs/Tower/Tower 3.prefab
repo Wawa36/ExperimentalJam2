@@ -93,3 +93,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f981cd7f4ab9149b0ad2a58128836a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  properties:
+  - value: 0
+    min: 0
+    max: 1
+    multiplier: 1
+  - value: 1
+    min: 0
+    max: 1
+    multiplier: 1
+  - value: 2
+    min: 0
+    max: 1
+    multiplier: 1
+  - value: 3
+    min: 0
+    max: 1
+    multiplier: 1
