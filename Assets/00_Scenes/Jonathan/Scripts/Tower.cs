@@ -30,6 +30,7 @@ namespace Tower_Management
         [SerializeField] int chunk_size;
 
         [Header("Debugging")]
+        [SerializeField] Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int building_generation = 0;
@@ -46,7 +47,9 @@ namespace Tower_Management
         {
             // get mapper
             mapper = GetComponent<Tower_Input_Mapper>();
-            Initialize(new Player_Inputs(GameObject.FindGameObjectWithTag("Player").transform.forward, 1, 1, 1, 1, "lol"));
+
+            inputs.player_dir = GameObject.FindGameObjectWithTag("Player").transform.forward;
+            Initialize(inputs);
 
             // register tower
             Tower_Manager.Instance.Add_Tower(this);
