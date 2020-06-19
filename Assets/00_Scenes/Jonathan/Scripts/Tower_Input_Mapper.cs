@@ -44,7 +44,7 @@ namespace Tower_Management
 
         int Calculate_Generation_Amount()
         {
-            return default;
+            return 50;
         }
 
         int Calculate_Change_Direction_Chance() 

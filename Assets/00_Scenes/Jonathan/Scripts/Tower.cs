@@ -55,14 +55,20 @@ namespace Tower_Management
         public void Initialize(Player_Inputs inputs)
         {
             mapper.Initialize(inputs);
-            Assign_Growth_Parameter();
+            Assign_Input_To_Growth_Parameter();
             Spawn_First_Building();
         }
 
         // change growth parameter
-        public void Assign_Growth_Parameter() 
+        public void Assign_Input_To_Growth_Parameter() 
         {
+            // growth speed
             _growth_speed *= mapper.Grow_Speed;
+
+            // generations
+            var c = _growth_speed_over_lifetime.keys;
+            c[c.Length - 1].time = mapper.Generation_Amount;
+            _growth_speed_over_lifetime.keys = c;
         }
 
         // growing management
@@ -216,6 +222,8 @@ namespace Tower_Management
         void Merge_Chunk() 
         {
             CombineInstance[] combine = new CombineInstance[chunk_size];
+            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
+            new_chunk.transform.SetParent(transform);
 
             for (int i = 0; i < chunk_size; i++)
             {
@@ -225,9 +233,6 @@ namespace Tower_Management
                     combine[i].transform = block_as_building.Mesh.transform.localToWorldMatrix;
                 }
             }
-
-            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
-            new_chunk.transform.SetParent(transform);
 
             new_chunk.AddComponent<MeshFilter>();
             new_chunk.AddComponent<MeshRenderer>();
@@ -242,7 +247,7 @@ namespace Tower_Management
 
             foreach (var c in inactive_blocks.ToList())
             {
-                Destroy((c as Component).gameObject);
+                (c as Building).On_Merged();
                 inactive_blocks.RemoveAt(0);
             }
         }

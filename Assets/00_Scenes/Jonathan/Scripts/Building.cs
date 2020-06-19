@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using TMPro;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 
 namespace Tower_Management
 {
@@ -123,6 +124,15 @@ namespace Tower_Management
             _mesh.transform.SetParent(origin);
 
             return origin;
+        }
+
+        /// <summary>
+        /// Devide weather the origin is on the horizontal or vertical side of the Building
+        /// </summary>
+        public void On_Merged ()
+        {
+            Destroy(Mesh.GetComponent<MeshFilter> ());
+            Destroy(Mesh.GetComponent<MeshRenderer>());
         }
     }
 }
