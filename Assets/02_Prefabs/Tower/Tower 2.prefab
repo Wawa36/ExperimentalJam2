@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2441123088755889949}
   - component: {fileID: 2441123088755889948}
+  - component: {fileID: 9185885427241888973}
   m_Layer: 0
   m_Name: Tower 2
   m_TagString: Untagged
@@ -78,6 +79,19 @@ MonoBehaviour:
     m_RotationOrder: 4
   _delay: 0.5
   _steps: 1
+  chunk_size: 30
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   building_generation: 0
+--- !u!114 &9185885427241888973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441123088755889923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f981cd7f4ab9149b0ad2a58128836a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -29,7 +29,7 @@ namespace Tower_Management
 
         float Calculate_Grow_Speed()
         {
-            return default;
+            return 1;
         }
 
         Vector3 Calculate_Grow_Direction()

@@ -178,7 +178,7 @@ static class JonathanAlgorithmus
                 if (!is_first_spawn)
                     dir = at_building.Main_Collider.transform.parent.right;
                 else
-                    dir = at_building.Main_Collider.transform.parent.up;
+                    dir = at_building.Main_Collider.transform.parent.forward;
             }
             else
                 dir = at_building.Cambium.normal;

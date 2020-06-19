@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tower_Management
 {
@@ -26,6 +27,7 @@ namespace Tower_Management
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
+        [SerializeField] int chunk_size;
 
         [Header("Debugging")]
         [SerializeField] Material default_material;
@@ -36,6 +38,7 @@ namespace Tower_Management
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
+        List<GameObject> merged_blocks = new List<GameObject>();
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
         // register at manager
@@ -43,17 +46,34 @@ namespace Tower_Management
         {
             // get mapper
             mapper = GetComponent<Tower_Input_Mapper>();
+            Initialize(new Player_Inputs(GameObject.FindGameObjectWithTag("Player").transform.forward, 1, 1, 1, 1, "lol"));
 
             // register tower
             Tower_Manager.Instance.Add_Tower(this);
+        }
 
-            // spawn start buildings
+        public void Initialize(Player_Inputs inputs)
+        {
+            mapper.Initialize(inputs);
+            Assign_Growth_Parameter();
+            Spawn_First_Building();
+        }
+
+        // change growth parameter
+        public void Assign_Growth_Parameter() 
+        {
+            _growth_speed *= mapper.Grow_Speed;
+        }
+
+        // growing management
+        void Spawn_First_Building() 
+        {
             for (int i = 0; i < _start_cambiums; i++)
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = Steps;
-                c[0].normal = Vector3.up;
+                c[0].normal = mapper.Grow_Direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -79,15 +99,14 @@ namespace Tower_Management
             }
 
             foreach (var c in finished_buildings) { building_delays.Remove(c); }
+
+            if (inactive_blocks.Count >= chunk_size)
+            {
+                Merge_Chunk();
+            }
+
         }
 
-        // initialize with inputs
-        public void Initialize(Player_Inputs inputs)
-        {
-            mapper.Initialize(inputs);
-        }
-
-        // growing management
         private void Create_Building(Cambiums_At_Active cambiums_a)
         {
             if (Get_Current_Grow_Speed_Over_Lifetime() > 0)
@@ -192,6 +211,41 @@ namespace Tower_Management
         public int Steps { get { return _steps; } }
 
         public Tower_Input_Mapper Mapper { get { return mapper; } }
+
+        // merging
+        void Merge_Chunk() 
+        {
+            CombineInstance[] combine = new CombineInstance[chunk_size];
+
+            for (int i = 0; i < chunk_size; i++)
+            {
+                if (inactive_blocks[i] is Building block_as_building)
+                {
+                    combine[i].mesh = block_as_building.Mesh.GetComponent<MeshFilter>().sharedMesh;
+                    combine[i].transform = block_as_building.Mesh.transform.localToWorldMatrix;
+                }
+            }
+
+            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
+            new_chunk.transform.SetParent(transform);
+
+            new_chunk.AddComponent<MeshFilter>();
+            new_chunk.AddComponent<MeshRenderer>();
+            new_chunk.GetComponent<MeshRenderer>().material = default_material;
+
+            new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
+            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+
+            new_chunk.AddComponent<MeshCollider>().sharedMesh = new_chunk.GetComponent<MeshFilter>().sharedMesh;
+
+            merged_blocks.Add(new_chunk);
+
+            foreach (var c in inactive_blocks.ToList())
+            {
+                Destroy((c as Component).gameObject);
+                inactive_blocks.RemoveAt(0);
+            }
+        }
 
         // calculate Kambium
         Cambiums_At_Active Calculate_Cambiums(Building at_building)
