@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4809589625856764678}
   - component: {fileID: 4809589625856764697}
+  - component: {fileID: -146394698909480920}
   m_Layer: 0
   m_Name: Tower 1
   m_TagString: Untagged
@@ -49,25 +50,43 @@ MonoBehaviour:
   _structure_prefabs: []
   algorithm: 5
   _start_cambiums: 1
-  _growth_speed: 0.1
+  _growth_speed: 2
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 100
+      value: 1
       inSlope: -1
-      outSlope: -1
-      tangentMode: 34
+      outSlope: 0
+      tangentMode: 65
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 5
+      value: 1
+      inSlope: -0
+      outSlope: -0.044999998
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: 0.1
+      inSlope: -0.044999998
+      outSlope: -0.0013333333
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 100
       value: 0
-      inSlope: -1
+      inSlope: -0.0013333333
       outSlope: -1
-      tangentMode: 34
+      tangentMode: 5
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0
@@ -75,7 +94,52 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _delay: 0.1
-  _steps: 30
+  _steps: 15
+  chunk_size: 100
+  inputs:
+    player_dir: {x: 0, y: 0, z: 0}
+    orb_energy: 100
+    throw_dist: 1
+    throw_time: 1
+    player_speed: 1
+    ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   building_generation: 0
+--- !u!114 &-146394698909480920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4809589625856764696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65f981cd7f4ab9149b0ad2a58128836a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grow_speed:
+    input: 0
+    min: 0
+    max: 100
+    multiplier: 2
+  split_chance:
+    input: 0
+    min: 0
+    max: 1
+    multiplier: 2
+  generation_amount:
+    input: 3
+    min: 0
+    max: 1
+    multiplier: 500
+  change_direction_chance:
+    input: 0
+    min: 0
+    max: 1
+    multiplier: 5
+  width:
+    input: 0
+    min: 0
+    max: 0
+    multiplier: 0

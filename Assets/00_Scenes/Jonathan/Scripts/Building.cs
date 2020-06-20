@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using TMPro;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Security.Cryptography;
 
 namespace Tower_Management
 {
@@ -22,6 +23,7 @@ namespace Tower_Management
         [SerializeField] Tower.Cambium _cambium;
         [SerializeField] Building _parent_building;
         [SerializeField] List<Building> _child_buildings = new List<Building>();
+        [SerializeField] Material mat_cache;
 
         /// <summary>
         /// Owning Tower of the Building
@@ -72,6 +74,7 @@ namespace Tower_Management
             _main_collider = GetComponentInChildren<Collider>();
             _cambium = cambium;
             Main_Collider.transform.parent.localScale = new Vector3(1, 1, 0);
+            mat_cache = Mesh.GetComponent<MeshRenderer>().material;
         }
 
         /// <summary>
@@ -121,6 +124,15 @@ namespace Tower_Management
             _mesh.transform.SetParent(origin);
 
             return origin;
+        }
+
+        /// <summary>
+        /// Devide weather the origin is on the horizontal or vertical side of the Building
+        /// </summary>
+        public void On_Merged ()
+        {
+            Destroy(Mesh.GetComponent<MeshFilter> ());
+            Destroy(Mesh.GetComponent<MeshRenderer>());
         }
     }
 }

@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Transactions;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Tower_Management
 {
+    [RequireComponent(typeof(Tower_Input_Mapper))]
     public class Tower : MonoBehaviour
     {
         // prefabs
@@ -24,28 +28,79 @@ namespace Tower_Management
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
+        [SerializeField] int chunk_size;
 
         [Header("Debugging")]
+        [SerializeField] Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int building_generation = 0;
 
         // stored growth data
+        Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
+        List<GameObject> merged_blocks = new List<GameObject>();
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
         // register at manager
         private void Awake()
         {
-            Tower_Manager.Instance.Add_Tower(this);
+            // get mapper
+            mapper = GetComponent<Tower_Input_Mapper>();
 
+            inputs.player_dir = GameObject.FindGameObjectWithTag("Player").transform.forward;
+            Initialize(inputs);
+
+            // register tower
+            Tower_Manager.Instance.Add_Tower(this);
+        }
+
+        public void Initialize(Player_Inputs inputs)
+        {
+            mapper.Initialize(inputs);
+            Assign_Input_To_Growth_Parameter();
+            Spawn_First_Building();
+        }
+
+        // change growth parameter
+        public void Assign_Input_To_Growth_Parameter() 
+        {
+            // growth speed
+            _growth_speed *= mapper.Grow_Speed;
+
+            // generations
+            var keys = _growth_speed_over_lifetime.keys;
+
+            // remap keys
+            float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+            for (int i = 0; i < keys.Length; i++)
+            {
+                keys[i].time *= factor;
+            }
+
+            _growth_speed_over_lifetime.keys = keys;
+
+            // change tangetns to linear
+            for (int i = 0; i < _growth_speed_over_lifetime.keys.Length; i++)
+            {
+                keys[i].time *= factor;
+                //keys[i].inTangent = 1;
+                //keys[i].outTangent = 1;
+                AnimationUtility.SetKeyLeftTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+                AnimationUtility.SetKeyRightTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+            }
+        }
+
+        // growing management
+        void Spawn_First_Building() 
+        {
             for (int i = 0; i < _start_cambiums; i++)
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = Steps;
-                c[0].normal = Vector3.up;
+                c[0].normal = mapper.Grow_Direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -60,20 +115,27 @@ namespace Tower_Management
 
             foreach (var c in building_delays.Keys.ToList())
             {
-                building_delays[c] += Time.deltaTime;
-
-                if (building_delays[c] >= Delay)
+                if (c != null)
                 {
-                    Create_Building(Calculate_Cambiums(c));
-                    finished_buildings.Add(c);
-                    c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                    building_delays[c] += Time.deltaTime;
+
+                    if (building_delays[c] >= Delay)
+                    {
+                        Create_Building(Calculate_Cambiums(c));
+                        finished_buildings.Add(c);
+                        c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                    }
                 }
             }
 
             foreach (var c in finished_buildings) { building_delays.Remove(c); }
+
+            if (inactive_blocks.Count >= chunk_size)
+            {
+                Merge_Chunk();
+            }
         }
 
-        // growing management
         private void Create_Building(Cambiums_At_Active cambiums_a)
         {
             if (Get_Current_Grow_Speed_Over_Lifetime() > 0)
@@ -144,7 +206,7 @@ namespace Tower_Management
             inactive_blocks.Add(block);
         }
 
-        // calcualte parameters 
+        // parameters & properties
         public float Growth_Speed 
         { 
             get 
@@ -176,6 +238,42 @@ namespace Tower_Management
         public float Delay { get { return _delay * Tower_Manager.Instance.Delay_Multiplier; } }
 
         public int Steps { get { return _steps; } }
+
+        public Tower_Input_Mapper Mapper { get { return mapper; } }
+
+        // merging
+        void Merge_Chunk() 
+        {
+            CombineInstance[] combine = new CombineInstance[chunk_size];
+            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
+            new_chunk.transform.SetParent(transform);
+
+            for (int i = 0; i < chunk_size; i++)
+            {
+                if (inactive_blocks[i] is Building block_as_building)
+                {
+                    combine[i].mesh = block_as_building.Mesh.GetComponent<MeshFilter>().sharedMesh;
+                    combine[i].transform = block_as_building.Mesh.transform.localToWorldMatrix;
+                }
+            }
+
+            new_chunk.AddComponent<MeshFilter>();
+            new_chunk.AddComponent<MeshRenderer>();
+            new_chunk.GetComponent<MeshRenderer>().material = default_material;
+
+            new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
+            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+
+            new_chunk.AddComponent<MeshCollider>().sharedMesh = new_chunk.GetComponent<MeshFilter>().sharedMesh;
+
+            merged_blocks.Add(new_chunk);
+
+            foreach (var c in inactive_blocks.ToList())
+            {
+                (c as Building).On_Merged();
+                inactive_blocks.RemoveAt(0);
+            }
+        }
 
         // calculate Kambium
         Cambiums_At_Active Calculate_Cambiums(Building at_building)
@@ -222,7 +320,7 @@ namespace Tower_Management
             }
         }
 
-        // controll inspector inputs
+        // control inspector inputs
         private void OnValidate()
         {
             var c = _growth_speed_over_lifetime.keys;
@@ -231,6 +329,28 @@ namespace Tower_Management
                 c[0].time = 0;
 
             _growth_speed_over_lifetime.keys = c;
+        }
+
+        // tower spawn parameter
+        [System.Serializable]
+        public struct Player_Inputs
+        {
+            public Vector3 player_dir;
+            public float orb_energy;
+            public float throw_dist;
+            public float throw_time;
+            public float player_speed;
+            public string ground_tag;
+
+            public Player_Inputs(Vector3 player_dir, float orb_energy, float throw_dist, float throw_time, float player_speed, string ground_tag)
+            {
+                this.player_dir = player_dir;
+                this.orb_energy = orb_energy;
+                this.throw_dist = throw_dist;
+                this.throw_time = throw_time;
+                this.player_speed = player_speed;
+                this.ground_tag = ground_tag;
+            }
         }
     }
 
