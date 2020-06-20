@@ -19,13 +19,14 @@ public class ProceduralKabiumGeneratorFelix
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
+    static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambium = new Dictionary<Tower, List<Tower.Cambium>>();
 
     public static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
     {
         float angle = 45;
 
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
-
+       
         if (Random.value > 0.25)
         {
             kambiumList.Add(new Tower.Cambium(at_building.transform.position + (at_building.transform.up * at_building.transform.localScale.y), at_building.transform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
@@ -144,21 +145,48 @@ public class ProceduralKabiumGeneratorFelix
 
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
-
+        //Branches
         if (!towerAndBranches.ContainsKey(tower))
         {
             towerAndBranches.Add(tower, 1);
         }
+        int maxBranches = Mathf.Clamp(tower.Mapper.Split_Chance, 1, 10); //between 1 and 10
 
-        int maxCambiums = 7 * Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
-        Debug.Log(tower.Mapper.Width);
+        //Neighbours
+        if (!towerAndNeighbours.ContainsKey(tower))
+        {
+            towerAndNeighbours.Add(tower, 1);
+        }
+        int maxNeighbours = Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
+
+        //Cambiums
+        if (!towerAndLatestMainCambium.ContainsKey(tower))
+        {
+            List<Tower.Cambium> mainCambiums = new List<Tower.Cambium>();
+            mainCambiums.Add(at_building.Cambium);
+            towerAndLatestMainCambium.Add(tower, mainCambiums);
+        }
+
 
         Transform buildingTransform = at_building.Main_Collider.transform;
-
+        BoxCollider buildingCollider = at_building.Main_Collider.GetComponent<BoxCollider>();
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
+        //Check if Cambium from Building is a main Cambium, else don't work with it
+        if(at_building.Cambium.Equals(towerAndLatestMainCambium[tower]))
+        {
+            //Create the next Main Cambium (over the last one)
 
-        if (towerAndBranches[tower] < maxCambiums)
+
+            //create the neighbours around
+        }
+
+      
+
+
+        //todo
+
+        if (towerAndBranches[tower] < maxBranches)
         {
             if (HasStillSteps(at_building))
             {

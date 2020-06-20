@@ -81,7 +81,7 @@ MonoBehaviour:
   _steps: 9
   chunk_size: 30
   inputs:
-    player_dir: {x: 0, y: 0, z: 0}
+    player_dir: {x: 0, y: 1, z: 0}
     orb_energy: 1
     throw_dist: 1
     throw_time: 1
