@@ -31,7 +31,7 @@ namespace Tower_Management
         [SerializeField] int chunk_size;
 
         [Header("Debugging")]
-        [SerializeField] Player_Inputs inputs;
+        public Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int building_generation = 0;
