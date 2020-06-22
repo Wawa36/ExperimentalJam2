@@ -78,11 +78,11 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Throw()
     {
-        if (notAiming && Input.GetMouseButtonDown(0))
+        if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
         }
-        if (!notAiming && carryingTheOrb && Input.GetMouseButton(0))
+        if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
             if (throwForce < maxThrowingForce)
             {
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
             launchArc.lineRenderer.enabled = true;
             launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
         }
-        if (!notAiming && carryingTheOrb && Input.GetMouseButtonUp(0))
+        if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
             lookDirection = transform.forward;
             launchArc.targetSphere.enabled = false;
@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             activeOrb.transform.parent = null;
         }
         
-        if (!carryingTheOrb&& Input.GetMouseButtonDown(0))
+        if (!carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
 
             notAiming = true;
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     {
         
 
-        if (Input.GetMouseButtonDown(1) && !carryingTheOrb && controller.isGrounded)
+        if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
             
             controller.Move(activeOrb.transform.position + Vector3.up-transform.position);
@@ -170,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&&controller.isGrounded)
+        if (Input.GetButtonDown("Jump") &&controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
