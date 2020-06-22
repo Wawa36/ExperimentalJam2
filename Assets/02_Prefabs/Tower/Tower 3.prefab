@@ -45,45 +45,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _building_prefabs:
-  - {fileID: 1862284582436989240, guid: 80634c377d23d1443b39d3f4422b79f7, type: 3}
-  - {fileID: 1862284582436989240, guid: ff915aeaf171777418f2e2b88bb9fdb2, type: 3}
+  - {fileID: 1862284582436989240, guid: b92e42922f45763479df5e75e1460ffd, type: 3}
   _structure_prefabs: []
-  algorithm: 4
-  _start_cambiums: 2
-  _growth_speed: 0.1
+  algorithm: 6
+  _start_cambiums: 1
+  _growth_speed: 2
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0
+      inSlope: -1
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 65
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5
+      value: 1
+      inSlope: -0
+      outSlope: -0.044999998
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25
+      value: 0.1
+      inSlope: -0.044999998
+      outSlope: -0.0013333333
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 100
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      value: 0
+      inSlope: -0.0013333333
+      outSlope: -1
+      tangentMode: 5
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _delay: 0.1
-  _steps: 5
-  chunk_size: 30
+  _steps: 15
+  chunk_size: 100
   inputs:
     player_dir: {x: 0, y: 0, z: 0}
-    orb_energy: 1
+    orb_energy: 100
     throw_dist: 1
     throw_time: 1
-    player_speed: 50
+    player_speed: 1
     ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
@@ -113,9 +130,14 @@ MonoBehaviour:
   generation_amount:
     input: 3
     min: 0
-    max: 50
-    multiplier: 50
+    max: 1
+    multiplier: 500
   change_direction_chance:
+    input: 0
+    min: 0
+    max: 0
+    multiplier: 0
+  width:
     input: 0
     min: 0
     max: 0

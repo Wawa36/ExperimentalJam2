@@ -218,4 +218,20 @@ static class JonathanAlgorithmus
 
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
+
+    // StreetGrow
+    public static Tower.Cambiums_At_Active StreetGrow(Building at_building, Tower tower)
+    {
+        // cambiums
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        var directions = at_building.GetComponent<Street_Part>().Directions;
+
+        foreach (var c in directions)
+        {
+            kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
+        }
+
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+    }
 }

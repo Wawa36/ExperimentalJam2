@@ -31,7 +31,7 @@ namespace Tower_Management
         [SerializeField] int chunk_size;
 
         [Header("Debugging")]
-        [SerializeField] Player_Inputs inputs;
+        public Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int building_generation = 0;
@@ -49,15 +49,13 @@ namespace Tower_Management
             // get mapper
             mapper = GetComponent<Tower_Input_Mapper>();
 
-            inputs.player_dir = GameObject.FindGameObjectWithTag("Player").transform.forward;
-            Initialize(inputs);
-
             // register tower
             Tower_Manager.Instance.Add_Tower(this);
         }
 
         public void Initialize(Player_Inputs inputs)
         {
+            this.inputs = inputs;
             mapper.Initialize(inputs);
             Assign_Input_To_Growth_Parameter();
             Spawn_First_Building();
@@ -247,6 +245,7 @@ namespace Tower_Management
             CombineInstance[] combine = new CombineInstance[chunk_size];
             GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
             new_chunk.transform.SetParent(transform);
+            new_chunk.tag = "Building";
 
             for (int i = 0; i < chunk_size; i++)
             {

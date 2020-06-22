@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     public bool carryingTheOrb;
-    [HideInInspector] public bool noaiming;
+    [HideInInspector] public bool notAiming;
     int currentOrbIndex;
     
     [SerializeField] List<GameObject> orbs;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float throwForceIncrease;
     [SerializeField] float maxThrowingForce;
     
-    float throwForce=0;
+    [HideInInspector] public float throwForce=0;
     
 
     private void Start()
@@ -70,11 +70,11 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Throw()
     {
-        if (noaiming && Input.GetMouseButtonDown(0))
+        if (notAiming && Input.GetMouseButtonDown(0))
         {
-            noaiming = false;
+            notAiming = false;
         }
-        if (!noaiming && carryingTheOrb && Input.GetMouseButton(0))
+        if (!notAiming && carryingTheOrb && Input.GetMouseButton(0))
         {
             if (throwForce < maxThrowingForce)
             {
@@ -83,23 +83,22 @@ public class PlayerMovement : MonoBehaviour
             launchArc.lineRenderer.enabled = true;
             launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
         }
-        if (!noaiming && carryingTheOrb && Input.GetMouseButtonUp(0))
+        if (!notAiming && carryingTheOrb && Input.GetMouseButtonUp(0))
         {
             launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
-            activeOrb.GetComponent<SphereArtifact>().StopCoroutine("StayOnCamera");
+            StartCoroutine(orbScript.FlyTime());
             orbRigid.velocity= cameraRigTransform.forward  * throwForce + cameraRigTransform.up * throwForce / 4;
             activeOrb.transform.parent = null;
-            throwForce = 0;
         }
         
         if (!carryingTheOrb&& Input.GetMouseButtonDown(0))
         {
 
-            noaiming = true;
+            notAiming = true;
             orbScript.collider.enabled = false;
             orbRigid.useGravity = false;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
