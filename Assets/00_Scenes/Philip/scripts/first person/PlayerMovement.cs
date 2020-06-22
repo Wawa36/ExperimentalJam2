@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     public Vector3 velocity;
+    [HideInInspector] public Vector3 lookDirection;
 
     public bool carryingTheOrb;
     
@@ -54,16 +55,10 @@ public class PlayerMovement : MonoBehaviour
                 SwapOrbs();
             }
         }
-       
-          
-        
     }
     private void LateUpdate()
     {
         Throw ();
-    }
-    private void FixedUpdate()
-    {
     }
     /// <summary>
     /// wandelt den input in die bewegung des players um
@@ -98,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!notAiming && carryingTheOrb && Input.GetMouseButtonUp(0))
         {
+            lookDirection = transform.forward;
             launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
