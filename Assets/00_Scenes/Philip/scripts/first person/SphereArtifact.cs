@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tower_Management;
 using UnityEngine;
 
 public class SphereArtifact : MonoBehaviour
@@ -13,6 +14,7 @@ public class SphereArtifact : MonoBehaviour
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
+        playerScript.throwForce = 0;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
@@ -47,6 +50,7 @@ public class SphereArtifact : MonoBehaviour
     /// <returns></returns>
     IEnumerator beeingStuck()
     {
+        StopCoroutine(FlyTime());
         while (true) 
         {
             rigid.velocity = Vector3.zero;
@@ -56,6 +60,16 @@ public class SphereArtifact : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+    }
+    public IEnumerator FlyTime()
+    {
+
+        while (true)
+        {
+            timer += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
     }
 
     public IEnumerator FlyToPlayer()
@@ -85,9 +99,24 @@ public class SphereArtifact : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
-                Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity);
-
-
+                GameObject tower = Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity);
+                Tower towerscript = tower.GetComponent<Tower>();
+                RaycastHit hit;
+                Physics.Raycast(playerTransform.position, Vector3.down, out hit, 2);
+                towerscript.inputs.throw_time = timer;
+                towerscript.inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
+                towerscript.inputs.player_dir = Camera.main.transform.forward;
+                towerscript.inputs.player_speed = Vector3.Distance(Vector3.zero , playerScript.GetComponent<Rigidbody>().velocity);
+                if (hit.collider != null)
+                {
+                    towerscript.inputs.ground_tag = hit.collider.tag;
+                }
+                else
+                {
+                    towerscript.inputs.ground_tag = null;
+                }
+                towerscript.inputs.orb_energy = playerScript.throwForce;
+                
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
