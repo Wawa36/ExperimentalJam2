@@ -28,6 +28,7 @@ namespace Tower_Management
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
+        [SerializeField] bool start_steps_zero = false;
         [SerializeField] int chunk_size;
 
         [Header("Debugging")]
@@ -98,7 +99,7 @@ namespace Tower_Management
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
-                c[0].steps = 0; // IS THIS OK?
+                c[0].steps = start_steps_zero? 0 : Steps;
                 c[0].normal = mapper.Grow_Direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
