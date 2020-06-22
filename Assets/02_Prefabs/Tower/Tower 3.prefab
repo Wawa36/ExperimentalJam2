@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 2078555037905766402, guid: ef6335b36e5e8734b9b55722e950fadf, type: 3}
-  - {fileID: 2078555037905766402, guid: 69386ded5c9067b41b5ec6ed1907ad16, type: 3}
-  - {fileID: 2078555037905766402, guid: 69386ded5c9067b41b5ec6ed1907ad16, type: 3}
+  - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
+  - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
   - {fileID: 6359800076859177636, guid: a4974e8647d0ae34cb6a01e7f108dcb3, type: 3}
   _structure_prefabs: []
   algorithm: 6
@@ -97,6 +97,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _delay: 0.1
   _steps: 15
+  start_steps_zero: 0
   chunk_size: 100
   inputs:
     player_dir: {x: 0, y: 0, z: 0}
@@ -107,7 +108,7 @@ MonoBehaviour:
     ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
-  building_generation: 0
+  _building_generation: 0
 --- !u!114 &5432221830833054648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,25 +124,30 @@ MonoBehaviour:
   grow_speed:
     input: 0
     min: -30
-    max: 25
+    max: 30
     multiplier: 3
+    invert: 0
   split_chance:
     input: 0
     min: 0
     max: 25
     multiplier: 7
+    invert: 0
   generation_amount:
     input: 3
     min: -30
     max: 30
     multiplier: 200
+    invert: 0
   change_direction_chance:
     input: 0
     min: 0
     max: 25
     multiplier: 3
+    invert: 0
   width:
     input: 0
     min: 0
     max: 0
     multiplier: 0
+    invert: 0

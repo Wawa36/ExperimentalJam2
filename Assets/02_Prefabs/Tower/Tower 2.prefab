@@ -80,7 +80,7 @@ MonoBehaviour:
   _delay: 0.5
   _steps: 3
   start_steps_zero: 1
-  chunk_size: 30
+  chunk_size: 100
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
     orb_energy: 0
