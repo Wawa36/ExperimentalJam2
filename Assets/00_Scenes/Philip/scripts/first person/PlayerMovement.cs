@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Gravity();
-        Throw();
+       // Throw();
         
         Jump();
 
@@ -57,6 +57,10 @@ public class PlayerMovement : MonoBehaviour
        
           
         
+    }
+    private void LateUpdate()
+    {
+        Throw ();
     }
     private void FixedUpdate()
     {
