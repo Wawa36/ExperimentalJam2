@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         orbScript = activeOrb.GetComponent<SphereArtifact>();
         carryingTheOrb = true;
     }
+
     private void Update()
     {
         Gravity();
@@ -128,6 +129,7 @@ public class PlayerMovement : MonoBehaviour
             orbScript.GetCollected();
         }
     }
+
     bool IsOnTheGround()
     {
         if (Physics.CheckBox(transform.position -transform.up,new Vector3(.5f,.2f,.5f),transform.rotation, mask,0))
