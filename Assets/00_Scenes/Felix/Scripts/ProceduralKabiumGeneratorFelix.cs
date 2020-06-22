@@ -19,7 +19,7 @@ public class ProceduralKabiumGeneratorFelix
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
-    static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambium = new Dictionary<Tower, List<Tower.Cambium>>();
+    static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambiums = new Dictionary<Tower, List<Tower.Cambium>>();
 
     public static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
     {
@@ -143,6 +143,7 @@ public class ProceduralKabiumGeneratorFelix
     */
     #endregion
 
+    private static List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
         //Branches
@@ -160,32 +161,93 @@ public class ProceduralKabiumGeneratorFelix
         int maxNeighbours = Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
 
         //Cambiums
-        if (!towerAndLatestMainCambium.ContainsKey(tower))
+        if (!towerAndLatestMainCambiums.ContainsKey(tower))
         {
             List<Tower.Cambium> mainCambiums = new List<Tower.Cambium>();
             mainCambiums.Add(at_building.Cambium);
-            towerAndLatestMainCambium.Add(tower, mainCambiums);
+            towerAndLatestMainCambiums.Add(tower, mainCambiums);
         }
 
 
         Transform buildingTransform = at_building.Main_Collider.transform;
         BoxCollider buildingCollider = at_building.Main_Collider.GetComponent<BoxCollider>();
-        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+        kambiumList.Clear();
 
         //Check if Cambium from Building is a main Cambium, else don't work with it
-        if(at_building.Cambium.Equals(towerAndLatestMainCambium[tower]))
+        foreach(Tower.Cambium mainCambium in towerAndLatestMainCambiums[tower])
         {
-            //Create the next Main Cambium (over the last one)
+            if(mainCambium.Equals(at_building.Cambium))
+            {
+                //Create the next Main Cambium (over the last one)
+                Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingCollider.size.y / 2),
+                                                 Quaternion.Euler(0, Random.Range(0,4) * 90,0) * buildingTransform.up, //random um 90 grad gedreht
+                                                 tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                                 at_building.Cambium.steps);
+                kambiumList.Add(newCambium);
+
+                towerAndLatestMainCambiums[tower].Remove(mainCambium);
+                towerAndLatestMainCambiums[tower].Add(newCambium);
 
 
-            //create the neighbours around
+
+                //create the neighbours around
+                List<Building> newNeighbourBuildings = new List<Building>();
+
+                for(int i = 0; i < maxNeighbours; i++)
+                {
+
+                    Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2);
+                    Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2);
+                    Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2);
+                    Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2);
+
+                    List<Vector3> positions = new List<Vector3>();
+                    positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
+
+                    //3 chance sur 4 
+                    //make it 1 round, 2 rounds, 3 rounds
+                    if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+                    {
+                        //back right
+                        kambiumList.Add(new Tower.Cambium(backRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+                    }
+
+                    if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+                    {
+                        //back right
+                        kambiumList.Add(new Tower.Cambium(backLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+                    }
+
+                    if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+                    {
+                        //back right
+                        kambiumList.Add(new Tower.Cambium(frontRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+                    }
+
+                    if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+                    {
+                        //back right
+                        kambiumList.Add(new Tower.Cambium(frontLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+                    }
+
+                }
+
+
+                return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+            }
+
         }
 
-      
+        //if no main cambium existing
+        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
 
 
         //todo
-
+        /*
         if (towerAndBranches[tower] < maxBranches)
         {
             if (HasStillSteps(at_building))
@@ -263,7 +325,62 @@ public class ProceduralKabiumGeneratorFelix
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }
 
+        */
 
+    }
+
+    private static void NeighboursRecursion(Building at_building, int maxNeighbours, int iterationStep, Tower tower)
+    {
+        Transform buildingTransform = at_building.Main_Collider.transform;
+        BoxCollider buildingCollider = at_building.Main_Collider.GetComponent<BoxCollider>();
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2);
+        Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2);
+        Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2);
+        Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2);
+
+
+        //3 chance sur 4 
+        //make it 1 round, 2 rounds, 3 rounds
+        if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+        {
+            //back right
+            kambiumList.Add(new Tower.Cambium(backRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+            //NeighboursRecursion();
+        }
+
+        if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+        {
+            //back right
+            kambiumList.Add(new Tower.Cambium(backLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+        }
+
+        if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+        {
+            //back right
+            kambiumList.Add(new Tower.Cambium(frontRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+        }
+
+        if (Random.value > 0.25) // 3 chance von 4 dass es weiter geht
+        {
+            //back right
+            kambiumList.Add(new Tower.Cambium(frontLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
+
+        }
+
+        iterationStep++;
+
+        if (iterationStep >= maxNeighbours)
+        {
+
+        }
+        else
+        {
+           // NeighboursRecursion(at_building, maxNeighbours, iterationStep);
+        }
 
     }
 
