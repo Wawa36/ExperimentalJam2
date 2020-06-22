@@ -42,9 +42,112 @@ public class ProceduralKabiumGeneratorFelix
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
 
+
+    #region newBaobabTree
+
+
+    public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
+    {
+
+        if (!towerAndBranches.ContainsKey(tower))
+        {
+            towerAndBranches.Add(tower, 1);
+        }
+
+        int maxNeighbours = Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
+
+        Transform buildingTransform = at_building.Main_Collider.transform;
+        BoxCollider buildingCollider = at_building.Main_Collider.GetComponent<BoxCollider>();
+        List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
+
+        float widthSplitChance = maxNeighbours * 0.25f;
+
+        if (towerAndBranches[tower] < maxNeighbours * 7)
+        {
+            if (HasStillSteps(at_building))
+            {
+                Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (buildingTransform.up * buildingCollider.size.y / 2),
+                                                 buildingTransform.up,
+                                                 //tower.Building_Prefabs[at_building.Cambium.steps - 1],
+                                                 tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                                 at_building.Cambium.steps);
+                kambiumList.Add(newCambium);
+
+                return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+            }
+            else //split in 4 if 0 steps
+            {
+                int countNewCambiums = 0;
+
+                Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2) + (buildingTransform.up * buildingCollider.size.y / 2);
+                Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2) + (buildingTransform.up * buildingCollider.size.y / 2);
+                Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) + (buildingTransform.right * buildingCollider.size.x / 2) + (buildingTransform.up * buildingCollider.size.y / 2);
+                Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingCollider.size.z / 2) - (buildingTransform.right * buildingCollider.size.x / 2) + (buildingTransform.up * buildingCollider.size.y / 2);
+
+                List<Vector3> positions = new List<Vector3>();
+                positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
+
+                bool hasStartedOne = false;
+
+                if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                {
+                    //back right
+                    kambiumList.Add(new Tower.Cambium(backRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                    hasStartedOne = true;
+                    countNewCambiums++;
+                }
+
+                if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                {
+                    //back right
+                    kambiumList.Add(new Tower.Cambium(backLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                    hasStartedOne = true;
+                    countNewCambiums++;
+                }
+
+                if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                {
+                    //back right
+                    kambiumList.Add(new Tower.Cambium(frontRightPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                    hasStartedOne = true;
+                    countNewCambiums++;
+                }
+
+                if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                {
+                    //back right
+                    kambiumList.Add(new Tower.Cambium(frontLeftPos, buildingTransform.up, tower.Building_Prefabs[3], 4));
+                    hasStartedOne = true;
+                    countNewCambiums++;
+                }
+
+                if (!hasStartedOne) //falls keiner gestarted wurden ist
+                {
+                    kambiumList.Add(new Tower.Cambium(positions[Random.Range(0, positions.Count)], buildingTransform.up, tower.Building_Prefabs[3], 4));
+                    countNewCambiums++;
+                }
+
+
+                towerAndBranches[tower] += countNewCambiums - 1; //eins ist sowieso
+
+                return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+            }
+        }
+        else
+        {
+            towerAndBranches[tower]--; //dieses Kabium hört auf
+            return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+        }
+
+
+
+    }
+
+    #endregion
+
     #region oldBaobabTree
 
-    /* old version
+    /*
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
         
@@ -143,6 +246,8 @@ public class ProceduralKabiumGeneratorFelix
     */
     #endregion
 
+    #region Ansatz1NewBaobabTree
+    /*
     private static List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
@@ -247,7 +352,7 @@ public class ProceduralKabiumGeneratorFelix
 
 
         //todo
-        /*
+        
         if (towerAndBranches[tower] < maxBranches)
         {
             if (HasStillSteps(at_building))
@@ -325,9 +430,10 @@ public class ProceduralKabiumGeneratorFelix
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }
 
-        */
+        
 
     }
+*/
 
     private static void NeighboursRecursion(Building at_building, int maxNeighbours, int iterationStep, Tower tower)
     {
@@ -383,6 +489,7 @@ public class ProceduralKabiumGeneratorFelix
         }
 
     }
+    #endregion
 
     public static Tower.Cambiums_At_Active FrangipaniTree(Building at_building, Tower tower)
     {
