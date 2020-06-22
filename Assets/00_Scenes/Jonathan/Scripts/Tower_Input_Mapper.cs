@@ -42,13 +42,13 @@ namespace Tower_Management
             switch (grow_speed.input)
             {
                 case input_values.OrbEnergy:
-                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
+                    return Map_Value(inputs.orb_energy, grow_speed.min, grow_speed.max, grow_speed.invert) * grow_speed.multiplier;
                 case input_values.PlayerSpeed:
-                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
+                    return Map_Value(inputs.player_speed, grow_speed.min, grow_speed.max, grow_speed.invert) * grow_speed.multiplier;
                 case input_values.ThrowDistance:
-                    return Map_Value(inputs.throw_dist, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
+                    return Map_Value(inputs.throw_dist, grow_speed.min, grow_speed.max, grow_speed.invert) * grow_speed.multiplier;
                 case input_values.ThrowTime:
-                    return Map_Value(inputs.throw_time, grow_speed.min, grow_speed.max) * grow_speed.multiplier;
+                    return Map_Value(inputs.throw_time, grow_speed.min, grow_speed.max, grow_speed.invert) * grow_speed.multiplier;
                 default:
                     return default;
             }
@@ -59,13 +59,13 @@ namespace Tower_Management
             switch (split_chance.input)
             {
                 case input_values.OrbEnergy:
-                    return (int) (Map_Value(inputs.orb_energy, split_chance.min, split_chance.max) * split_chance.multiplier);
+                    return (int) (Map_Value(inputs.orb_energy, split_chance.min, split_chance.max, split_chance.invert) * split_chance.multiplier);
                 case input_values.PlayerSpeed:
-                    return (int) (Map_Value(inputs.player_speed, split_chance.min, split_chance.max) * split_chance.multiplier);
+                    return (int) (Map_Value(inputs.player_speed, split_chance.min, split_chance.max, split_chance.invert) * split_chance.multiplier);
                 case input_values.ThrowDistance:
-                    return (int) (Map_Value(inputs.throw_dist, split_chance.min, split_chance.max) * split_chance.multiplier);
+                    return (int) (Map_Value(inputs.throw_dist, split_chance.min, split_chance.max, split_chance.invert) * split_chance.multiplier);
                 case input_values.ThrowTime:
-                    return (int) (Map_Value(inputs.throw_time, split_chance.min, split_chance.max) * split_chance.multiplier);
+                    return (int) (Map_Value(inputs.throw_time, split_chance.min, split_chance.max, split_chance.invert) * split_chance.multiplier);
                 default:
                     return default;
             }
@@ -76,13 +76,13 @@ namespace Tower_Management
             switch (generation_amount.input)
             {
                 case input_values.OrbEnergy:
-                    return (int) (Map_Value(inputs.orb_energy, generation_amount.min, generation_amount.max) * generation_amount.multiplier);
+                    return (int) (Map_Value(inputs.orb_energy, generation_amount.min, generation_amount.max, generation_amount.invert) * generation_amount.multiplier);
                 case input_values.PlayerSpeed:
-                    return (int) (Map_Value(inputs.player_speed, generation_amount.min, generation_amount.max) * generation_amount.multiplier);
+                    return (int) (Map_Value(inputs.player_speed, generation_amount.min, generation_amount.max, generation_amount.invert) * generation_amount.multiplier);
                 case input_values.ThrowDistance:
-                    return (int) (Map_Value(inputs.throw_dist, generation_amount.min, generation_amount.max) * generation_amount.multiplier);
+                    return (int) (Map_Value(inputs.throw_dist, generation_amount.min, generation_amount.max, generation_amount.invert) * generation_amount.multiplier);
                 case input_values.ThrowTime:
-                    return (int) (Map_Value(inputs.throw_time, generation_amount.min, generation_amount.max) * generation_amount.multiplier);
+                    return (int) (Map_Value(inputs.throw_time, generation_amount.min, generation_amount.max, generation_amount.invert) * generation_amount.multiplier);
                 default:
                     return default;
             }
@@ -93,13 +93,13 @@ namespace Tower_Management
             switch (change_direction_chance.input)
             {
                 case input_values.OrbEnergy:
-                    return (int) (Map_Value(inputs.orb_energy, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier);
+                    return (int) (Map_Value(inputs.orb_energy, change_direction_chance.min, change_direction_chance.max, change_direction_chance.invert) * change_direction_chance.multiplier);
                 case input_values.PlayerSpeed:
-                    return (int) (Map_Value(inputs.player_speed, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier);
+                    return (int) (Map_Value(inputs.player_speed, change_direction_chance.min, change_direction_chance.max, change_direction_chance.invert) * change_direction_chance.multiplier);
                 case input_values.ThrowDistance:
-                    return (int)(Map_Value(inputs.throw_dist, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier);
+                    return (int)(Map_Value(inputs.throw_dist, change_direction_chance.min, change_direction_chance.max, change_direction_chance.invert) * change_direction_chance.multiplier);
                 case input_values.ThrowTime:
-                    return (int) (Map_Value(inputs.throw_time, change_direction_chance.min, change_direction_chance.max) * change_direction_chance.multiplier);
+                    return (int) (Map_Value(inputs.throw_time, change_direction_chance.min, change_direction_chance.max, change_direction_chance.invert) * change_direction_chance.multiplier);
                 default:
                     return default;
             }
@@ -110,22 +110,22 @@ namespace Tower_Management
             switch (width.input)
             {
                 case input_values.OrbEnergy:
-                    return (int) (Map_Value(inputs.orb_energy, width.min, width.max) * width.multiplier);
+                    return (int) (Map_Value(inputs.orb_energy, width.min, width.max, width.invert) * width.multiplier);
                 case input_values.PlayerSpeed:
-                    return (int) (Map_Value(inputs.player_speed, width.min, width.max) * width.multiplier);
+                    return (int) (Map_Value(inputs.player_speed, width.min, width.max, width.invert) * width.multiplier);
                 case input_values.ThrowDistance:
-                    return (int) (Map_Value(inputs.throw_dist, width.min, width.max) * width.multiplier);
+                    return (int) (Map_Value(inputs.throw_dist, width.min, width.max, width.invert) * width.multiplier);
                 case input_values.ThrowTime:
-                    return (int)(Map_Value(inputs.throw_time, width.min, width.max) * width.multiplier);
+                    return (int)(Map_Value(inputs.throw_time, width.min, width.max, width.invert) * width.multiplier);
                 default:
                     return default;
             }
         }
 
         // mapping 
-        float Map_Value (float value, float min, float max) 
+        float Map_Value (float value, float min, float max, bool invert) 
         {
-            return Mathf.InverseLerp(min, max, value);
+            return invert? 1 - Mathf.InverseLerp(min, max, value) :  Mathf.InverseLerp(min, max, value);
         }
 
         enum input_values {OrbEnergy, ThrowDistance, ThrowTime, PlayerSpeed };
@@ -137,6 +137,7 @@ namespace Tower_Management
             public float min;
             public float max;
             public int multiplier;
+            public bool invert;
         }
     }
 }

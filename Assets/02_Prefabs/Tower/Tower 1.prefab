@@ -97,6 +97,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _delay: 0.1
   _steps: 15
+  start_steps_zero: 0
   chunk_size: 100
   inputs:
     player_dir: {x: 0, y: 0, z: 0}
@@ -107,7 +108,7 @@ MonoBehaviour:
     ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
-  building_generation: 0
+  _building_generation: 0
 --- !u!114 &-146394698909480920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,10 +122,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grow_speed:
-    input: 1
+    input: 0
     min: 0
-    max: 20
-    multiplier: 10
+    max: 25
+    multiplier: 4
   split_chance:
     input: 0
     min: 0
@@ -133,7 +134,7 @@ MonoBehaviour:
   generation_amount:
     input: 3
     min: -30
-    max: 30
+    max: 50
     multiplier: 500
   change_direction_chance:
     input: 0
