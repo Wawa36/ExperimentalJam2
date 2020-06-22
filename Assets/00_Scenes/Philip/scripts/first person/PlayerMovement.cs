@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController controller;
+    [HideInInspector] public CharacterController controller;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     [HideInInspector] public Vector3 velocity;
@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
+
+            throwForce = 0;
         }
         if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {

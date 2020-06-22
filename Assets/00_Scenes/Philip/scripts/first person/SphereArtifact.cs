@@ -34,7 +34,6 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
-        playerScript.throwForce = 0;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
@@ -100,14 +99,16 @@ public class SphereArtifact : MonoBehaviour
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
                calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity));
-                
+               
+
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 // hier kommt der fall hin das die Kugel ein Gebäude trifft
                calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity));
-                
+
             }
+            
         }
     }
 
