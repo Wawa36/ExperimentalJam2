@@ -49,15 +49,13 @@ namespace Tower_Management
             // get mapper
             mapper = GetComponent<Tower_Input_Mapper>();
 
-            inputs.player_dir = GameObject.FindGameObjectWithTag("Player").transform.forward;
-            Initialize(inputs);
-
             // register tower
             Tower_Manager.Instance.Add_Tower(this);
         }
 
         public void Initialize(Player_Inputs inputs)
         {
+            this.inputs = inputs;
             mapper.Initialize(inputs);
             Assign_Input_To_Growth_Parameter();
             Spawn_First_Building();
