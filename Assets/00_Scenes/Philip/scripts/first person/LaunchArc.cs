@@ -20,7 +20,7 @@ public class LaunchArc : MonoBehaviour
     public void DrawPath(Vector3 Force)
     {
         targetSphere.enabled = true;
-        int resolution = 50;
+        int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         Vector3 drawpoint;
         rayCastResolution = 0;
