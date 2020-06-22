@@ -50,7 +50,7 @@ namespace Tower_Management
             mapper = GetComponent<Tower_Input_Mapper>();
 
             inputs.player_dir = GameObject.FindGameObjectWithTag("Player").transform.forward;
-            Initialize(inputs);
+            //Initialize(inputs);
 
             // register tower
             Tower_Manager.Instance.Add_Tower(this);
