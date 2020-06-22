@@ -27,6 +27,7 @@ public class ProceduralKabiumGeneratorFelix
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
+    static Dictionary<Tower, int> towerTurnNumber = new Dictionary<Tower, int>();
     static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambiums = new Dictionary<Tower, List<Tower.Cambium>>();
 
     public static Tower.Cambiums_At_Active SimpleLSystemGrow(Building at_building, Tower tower)
@@ -62,6 +63,12 @@ public class ProceduralKabiumGeneratorFelix
             towerAndBranches.Add(tower, 1);
         }
 
+
+        if (!towerTurnNumber.ContainsKey(tower))
+        {
+            towerTurnNumber.Add(tower, 1);
+        }
+
         int maxNeighbours = Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
 
         Transform buildingTransform = at_building.Main_Collider.transform;
@@ -72,9 +79,6 @@ public class ProceduralKabiumGeneratorFelix
 
         if (towerAndBranches[tower] < maxNeighbours * 7)
         {
-            
-
-
 
             if (HasStillSteps(at_building))
             {
@@ -100,7 +104,7 @@ public class ProceduralKabiumGeneratorFelix
                 positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
 
 
-                if (Random.Range(0, tower.Mapper.Split_Chance) != 0) 
+                if (Random.Range(0, tower.Mapper.Split_Chance + 1) != 0) 
                 {
                     bool hasStartedOne = false;
 
@@ -150,23 +154,22 @@ public class ProceduralKabiumGeneratorFelix
                 {
 
                     Debug.Log("split chance " + tower.Mapper.Split_Chance);
-                    if (Random.Range(0, tower.Mapper.Split_Chance) == 0) //the higher the chance the more difficult
-                    {
-                        Debug.Log("I did split");
-                        //create two that are more away
-                        Vector3 firstPos = positions[Random.Range(0, positions.Count)];
-                        positions.Remove(firstPos);
-                        Vector3 secondPos = positions[Random.Range(0, positions.Count)];
-                        positions.Add(firstPos);
 
-                        kambiumList.Add(new Tower.Cambium(firstPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 10, 10, 0)));
-                        countNewCambiums++;
+                    Debug.Log("I did split");
+                    //create two that are more away
+                    Vector3 firstPos = positions[Random.Range(0, positions.Count)];
+                    positions.Remove(firstPos);
+                    Vector3 secondPos = positions[Random.Range(0, positions.Count)];
+                    positions.Add(firstPos);
 
-                        kambiumList.Add(new Tower.Cambium(secondPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 10, 10, 0)));
-                        countNewCambiums++;
+                    kambiumList.Add(new Tower.Cambium(firstPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 5, 6, 2)));
+                    countNewCambiums++;
 
-                    }
-                    Debug.Log("split chance invert? " + (int)Remap(tower.Mapper.Split_Chance, 0, 10, 10, 0));
+                    kambiumList.Add(new Tower.Cambium(secondPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 5, 6, 2)));
+                    countNewCambiums++;
+
+                    
+                    Debug.Log("split chance invert? " + (int)Remap(tower.Mapper.Split_Chance, 0, 5, 5, 0));
                 }
                   
 
