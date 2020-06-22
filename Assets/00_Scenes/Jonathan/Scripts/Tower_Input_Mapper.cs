@@ -73,7 +73,6 @@ namespace Tower_Management
 
         int Calculate_Generation_Amount()
         {
-            print(Map_Value(inputs.player_speed, generation_amount.min, generation_amount.max));
             switch (generation_amount.input)
             {
                 case input_values.OrbEnergy:

@@ -225,11 +225,29 @@ static class JonathanAlgorithmus
         // cambiums
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
+        // get directions
         var directions = at_building.GetComponent<Street_Part>().Directions;
 
         foreach (var c in directions)
         {
-            kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], 0));
+            // go straigt (index 0)
+            if (Random.Range(-20, tower.Mapper.Change_Direction_Chance) < 0)
+            {
+                kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[0], 0));
+            }
+            // turn (index 1/2)
+            else if (Random.Range(-20, tower.Mapper.Split_Chance) < 0)
+            {
+                if (Random.Range(0, 2) == 0)
+                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[1], 0));
+                else
+                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[2], 0));
+            }
+            // split (index 3)
+            else
+            {
+                kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[3], 0));
+            }
         }
 
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());

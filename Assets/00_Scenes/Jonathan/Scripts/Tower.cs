@@ -122,7 +122,7 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                        c.Mesh.GetComponent<MeshRenderer>().sharedMaterial = default_material;
                     }
                 }
             }
