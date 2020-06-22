@@ -106,8 +106,8 @@ public class SphereArtifact : MonoBehaviour
                 Physics.Raycast(playerTransform.position, Vector3.down, out hit, 2);
                 inputs.throw_time = timer;
                 inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
-                inputs.player_dir = Camera.main.transform.forward;
-                inputs.player_speed = Vector3.Distance(Vector3.zero , playerScript.GetComponent<Rigidbody>().velocity);
+                inputs.player_dir = playerTransform.forward;
+                inputs.player_speed = Vector3.Magnitude(playerScript.GetComponent<Rigidbody>().velocity);
                 if (hit.collider != null)
                 {
                     inputs.ground_tag = hit.collider.tag;
