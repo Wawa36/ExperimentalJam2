@@ -72,6 +72,7 @@ namespace Tower_Management
 
             // remap keys
             float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+
             for (int i = 0; i < keys.Length; i++)
             {
                 keys[i].time *= factor;
