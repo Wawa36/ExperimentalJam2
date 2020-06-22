@@ -99,54 +99,37 @@ public class SphereArtifact : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
-                GameObject tower = Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity);
-                Tower.Player_Inputs inputs;
-                Tower towerscript = tower.GetComponent<Tower>();
-                RaycastHit hit;
-                Physics.Raycast(playerTransform.position, Vector3.down, out hit, 2);
-                inputs.throw_time = timer;
-                inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
-                inputs.player_dir = playerScript.lookDirection;
-
-                inputs.player_speed = Vector3.Magnitude(playerScript.velocity);
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity));
                 
-                if (hit.collider != null)
-                {
-                    inputs.ground_tag = hit.collider.tag;
-                }
-                else
-                {
-                    inputs.ground_tag = null;
-                }
-                inputs.orb_energy = playerScript.throwForce;
-                towerscript.Initialize(inputs);
-
-
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 // hier kommt der fall hin das die Kugel ein Gebäude trifft
-                GameObject tower = Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity);
-                Tower.Player_Inputs inputs;
-                Tower towerscript = tower.GetComponent<Tower>();
-                RaycastHit hit;
-                Physics.Raycast(playerTransform.position, Vector3.down, out hit, 2);
-                inputs.throw_time = timer;
-                inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
-                inputs.player_dir = playerScript.lookDirection;
-                inputs.player_speed = Vector3.Magnitude(playerScript.velocity);
-                if (hit.collider != null)
-                {
-                    inputs.ground_tag = hit.collider.tag;
-                }
-                else
-                {
-                    inputs.ground_tag = null;
-                }
-                inputs.orb_energy = playerScript.throwForce;
-                towerscript.Initialize(inputs);
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity));
+                
             }
         }
     }
 
+    void calculateAlleParameter(GameObject tower)
+    {
+        Tower.Player_Inputs inputs;
+        Tower towerscript = tower.GetComponent<Tower>();
+        RaycastHit hit;
+        Physics.Raycast(playerTransform.position, Vector3.down, out hit, 2);
+        inputs.throw_time = timer;
+        inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
+        inputs.player_dir = playerScript.lookDirection;
+        inputs.player_speed = Vector3.Magnitude(playerScript.velocity);
+        if (hit.collider != null)
+        {
+            inputs.ground_tag = hit.collider.tag;
+        }
+        else
+        {
+            inputs.ground_tag = null;
+        }
+        inputs.orb_energy = playerScript.throwForce;
+        towerscript.Initialize(inputs);
+    }
 }

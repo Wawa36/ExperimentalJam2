@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
     {
         orbs[currentOrbIndex].SetActive(false);
         launchArc.lineRenderer.enabled = false;
-        if (Input.GetButton("Fire3"))
+        if (Input.GetButtonDown("Fire3"))
         {
            
             currentOrbIndex += 1;
@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
                 currentOrbIndex = 0;
             }
         }
-        if (Input.GetButton("Fire4"))
+        if (Input.GetButtonDown("Fire4"))
         {
             currentOrbIndex -= 1;
             if (currentOrbIndex < 0)
