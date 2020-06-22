@@ -66,8 +66,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 85.57252
-      value: 1.0318958
+      time: 118.60865
+      value: 3.9899645
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -78,12 +78,12 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _delay: 0.5
-  _steps: 9
+  _steps: 3
   chunk_size: 30
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
-    orb_energy: 1
-    throw_dist: 1
+    orb_energy: 0
+    throw_dist: 3
     throw_time: 1
     player_speed: 50
     ground_tag: none
@@ -108,15 +108,15 @@ MonoBehaviour:
     max: 1
     multiplier: 1
   split_chance:
-    input: 0
+    input: 2
     min: 0
-    max: 1
-    multiplier: 1
+    max: 4
+    multiplier: 8
   generation_amount:
     input: 0
     min: 0
     max: 20
-    multiplier: 50
+    multiplier: 200
   change_direction_chance:
     input: 0
     min: 0
@@ -125,5 +125,5 @@ MonoBehaviour:
   width:
     input: 1
     min: 0
-    max: 1
+    max: 4
     multiplier: 4
