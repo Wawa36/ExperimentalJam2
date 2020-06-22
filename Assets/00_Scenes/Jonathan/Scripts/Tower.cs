@@ -35,7 +35,7 @@ namespace Tower_Management
         public Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
-        [SerializeField] int building_generation = 0;
+        [SerializeField] int _building_generation = 0;
 
         // stored growth data
         Tower_Input_Mapper mapper;
@@ -171,7 +171,7 @@ namespace Tower_Management
                     // initialite building 
                     new_building.GetComponent<IGrowingBlock>().Initialize(this, c);
 
-                    building_generation++;
+                    _building_generation++;
                 }
 
                 // set childs
@@ -219,8 +219,8 @@ namespace Tower_Management
         {
             float value;
 
-            if (building_generation < _growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time)
-                value = _growth_speed_over_lifetime.Evaluate(building_generation);
+            if (_building_generation < _growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time)
+                value = _growth_speed_over_lifetime.Evaluate(_building_generation);
             else
             {
                 value = 0;
@@ -240,6 +240,8 @@ namespace Tower_Management
         public int Steps { get { return _steps; } }
 
         public Tower_Input_Mapper Mapper { get { return mapper; } }
+
+        public int Building_Generation { get { return _building_generation; } }
 
         // merging
         void Merge_Chunk() 
