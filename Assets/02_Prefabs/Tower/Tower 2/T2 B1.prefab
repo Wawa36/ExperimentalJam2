@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 1220529604175743910}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.75, y: 0.75, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 3528037053920991453}
   m_RootOrder: 0
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220529604175743910}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4815125350317431889, guid: 1982a7a48ff80ee41a016254def87d4b, type: 3}
 --- !u!23 &4384086239372847346
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.0735149}
+  m_Center: {x: 0, y: 0, z: -0.036757313}
 --- !u!1 &1862284582436989240
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
     steps: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
+  mat_cache: {fileID: 0}
   lerp_animation: 0
 --- !u!1 &6206747845283139264
 GameObject:
@@ -179,7 +180,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6206747845283139264}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.75, y: 0.5, z: -0}
+  m_LocalPosition: {x: 1.25, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3528037053920991453}
@@ -209,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8875062337594278665}
   m_LocalRotation: {x: -0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: -0.75, y: -0.75, z: -0}
+  m_LocalPosition: {x: -0.75, y: -1.25, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3528037053920991453}
