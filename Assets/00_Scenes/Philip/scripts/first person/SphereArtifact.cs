@@ -14,7 +14,7 @@ public class SphereArtifact : MonoBehaviour
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
-    float timer;
+    public float timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,7 +50,7 @@ public class SphereArtifact : MonoBehaviour
     /// <returns></returns>
     IEnumerator beeingStuck()
     {
-        StopCoroutine(FlyTime());
+        StopCoroutine("Flytime");
         while (true) 
         {
             rigid.velocity = Vector3.zero;

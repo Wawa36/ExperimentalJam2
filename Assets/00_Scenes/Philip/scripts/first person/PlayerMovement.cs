@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
-    public Vector3 velocity;
+    [HideInInspector] public Vector3 velocity;
+    [SerializeField] float velocityMagnitude;
     [HideInInspector] public Vector3 lookDirection;
 
     public bool carryingTheOrb;
@@ -48,13 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         Move();
         Teleport();
-        if (carryingTheOrb)
-        {
-            if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
-            {
-                SwapOrbs();
-            }
-        }
+        SwapOrbs();
     }
     private void LateUpdate()
     {
@@ -99,7 +94,8 @@ public class PlayerMovement : MonoBehaviour
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
-            StartCoroutine(orbScript.FlyTime());
+            orbScript.timer = 0;
+            orbScript.StartCoroutine(orbScript.FlyTime());
             orbRigid.velocity= cameraRigTransform.forward  * throwForce + cameraRigTransform.up * throwForce / 4;
             activeOrb.transform.parent = null;
         }
@@ -141,30 +137,40 @@ public class PlayerMovement : MonoBehaviour
 
     void SwapOrbs()
     {
-        orbs[currentOrbIndex].SetActive(false);
-        launchArc.lineRenderer.enabled = false;
-        if (Input.GetButtonDown("Fire3"))
+        if (carryingTheOrb)
         {
-           
-            currentOrbIndex += 1;
-            if (currentOrbIndex >= orbs.Count)
+            if (Input.GetButtonDown("Fire3"))
             {
-                currentOrbIndex = 0;
+                orbs[currentOrbIndex].SetActive(false);
+                launchArc.lineRenderer.enabled = false;
+
+                currentOrbIndex += 1;
+                if (currentOrbIndex >= orbs.Count)
+                {
+                    currentOrbIndex = 0;
+                }
+                orbs[currentOrbIndex].SetActive(true);
+                activeOrb = orbs[currentOrbIndex];
+                orbRigid = activeOrb.GetComponent<Rigidbody>();
+                orbScript = activeOrb.GetComponent<SphereArtifact>();
+                launchArc = activeOrb.GetComponent<LaunchArc>();
+            }
+            if (Input.GetButtonDown("Fire4"))
+            {
+                orbs[currentOrbIndex].SetActive(false);
+                launchArc.lineRenderer.enabled = false;
+                currentOrbIndex -= 1;
+                if (currentOrbIndex < 0)
+                {
+                    currentOrbIndex = orbs.Count - 1;
+                }
+                orbs[currentOrbIndex].SetActive(true);
+                activeOrb = orbs[currentOrbIndex];
+                orbRigid = activeOrb.GetComponent<Rigidbody>();
+                orbScript = activeOrb.GetComponent<SphereArtifact>();
+                launchArc = activeOrb.GetComponent<LaunchArc>();
             }
         }
-        if (Input.GetButtonDown("Fire4"))
-        {
-            currentOrbIndex -= 1;
-            if (currentOrbIndex < 0)
-            {
-                currentOrbIndex = orbs.Count - 1;
-            }
-        }
-        orbs[currentOrbIndex].SetActive(true);
-        activeOrb = orbs[currentOrbIndex];
-        orbRigid = activeOrb.GetComponent<Rigidbody>();
-        orbScript = activeOrb.GetComponent<SphereArtifact>();
-        launchArc = activeOrb.GetComponent<LaunchArc>();
 
     }
 
@@ -187,5 +193,6 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
+        velocityMagnitude = controller.velocity.magnitude;
     }
 }
