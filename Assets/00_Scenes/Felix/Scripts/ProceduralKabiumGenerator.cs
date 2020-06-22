@@ -79,6 +79,10 @@ public static class ProceduralKabiumGenerator
         {
             return JonathanAlgorithmus.StairGrow(at_building, tower);
         }
+        else if (KabiumAlgorithm.StreetGrow == kabiumAlgorithm)
+        {
+            return JonathanAlgorithmus.StreetGrow(at_building, tower);
+        }
         else
             return JonathanAlgorithmus.RBunker(at_building, tower);
     }
@@ -91,5 +95,6 @@ public enum KabiumAlgorithm
     RBunker,
     RBunkerBranches,
     StairGrow,
+    StreetGrow,
     Default
 }
