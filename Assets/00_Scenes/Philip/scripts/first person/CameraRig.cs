@@ -12,7 +12,7 @@ public class CameraRig : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] float turnSpeed;
     [SerializeField] float upDownTurnSpeed;
-    
+    float xRotation;
 
     #endregion
 
@@ -30,13 +30,14 @@ public class CameraRig : MonoBehaviour
     /// </summary>
     void FirstPersonRig()
     {
-        float MouseAxisX = Input.GetAxis("Mouse X");
-        float MouseAxisY = Input.GetAxis("Mouse Y");
+        float MouseAxisX = Input.GetAxis("Mouse X")*turnSpeed*Time.deltaTime;
+        float MouseAxisY = Input.GetAxis("Mouse Y")*upDownTurnSpeed*Time.deltaTime;
 
-        Quaternion targetRotationHorizontal = Quaternion.AngleAxis(MouseAxisX * turnSpeed * Time.deltaTime, playerTransform.up);
-        Quaternion targetRotationVertical = Quaternion.AngleAxis(MouseAxisY * -upDownTurnSpeed * Time.deltaTime, transform.right);
-        playerTransform.rotation = targetRotationHorizontal * playerTransform.rotation;
-        transform.rotation = targetRotationVertical * transform.rotation;
+        xRotation -= MouseAxisY;
+        xRotation = Mathf.Clamp(xRotation, -76, 90);
+
+        playerTransform.Rotate(playerTransform.up*MouseAxisX);
+        transform.localRotation = Quaternion.Euler(xRotation,0,0);
     }
 
 }

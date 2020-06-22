@@ -195,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 152923204717291918}
   turnSpeed: 400
-  upDownTurnSpeed: 100
+  upDownTurnSpeed: 150
 --- !u!1 &152923204717291917
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +732,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3842f31a261b0254b80b339dc1a8aa56, type: 3}
