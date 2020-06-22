@@ -121,7 +121,7 @@ MonoBehaviour:
   grow_speed:
     input: 3
     min: 0
-    max: 100
+    max: 1
     multiplier: 2
   split_chance:
     input: 0
