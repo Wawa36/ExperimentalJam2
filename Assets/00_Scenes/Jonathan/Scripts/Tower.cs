@@ -72,6 +72,7 @@ namespace Tower_Management
 
             // remap keys
             float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+
             for (int i = 0; i < keys.Length; i++)
             {
                 keys[i].time *= factor;
@@ -121,7 +122,7 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.gameObject.GetComponentInChildren<MeshRenderer>().material = default_material;
+                        c.Mesh.GetComponent<MeshRenderer>().sharedMaterial = default_material;
                     }
                 }
             }

@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody rigid;
+    CharacterController controller;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
+    public Vector3 velocity;
+    [HideInInspector] public Vector3 lookDirection;
+
     public bool carryingTheOrb;
+    
     [HideInInspector] public bool notAiming;
     int currentOrbIndex;
     
@@ -16,18 +20,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
 
+    [SerializeField] float gravity;
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
-    [SerializeField] float jumpForce;
+    [SerializeField] float jumpHeight;
     [SerializeField] float throwForceIncrease;
     [SerializeField] float maxThrowingForce;
-    
+    [SerializeField] LayerMask mask;
+
     [HideInInspector] public float throwForce=0;
     
 
     private void Start()
     {
-        rigid = GetComponent<Rigidbody>();
+        controller = GetComponent<CharacterController>();
         activeOrb = orbs[0];
         orbRigid = activeOrb.GetComponent<Rigidbody>();
         orbScript = activeOrb.GetComponent<SphereArtifact>();
@@ -35,9 +41,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        Throw();
-        Teleport();
+        Gravity();
+       // Throw();
+        
         Jump();
+
+        Move();
+        Teleport();
         if (carryingTheOrb)
         {
             if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
@@ -45,35 +55,34 @@ public class PlayerMovement : MonoBehaviour
                 SwapOrbs();
             }
         }
-       
-          
-        
     }
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        Move();
+        Throw ();
     }
     /// <summary>
     /// wandelt den input in die bewegung des players um
     /// </summary>
     void Move()
     {
-        float XAxis = Input.GetAxis("Horizontal");
-        float YAxis = Input.GetAxis("Vertical");
+        float XAxis = Input.GetAxis("Horizontal")*movespeed*Time.deltaTime;
+        float YAxis = Input.GetAxis("Vertical")*movespeed*Time.deltaTime;
 
-        rigid.velocity = transform.TransformDirection( new Vector3(XAxis * Time.fixedDeltaTime * movespeed, rigid.velocity.y, YAxis * Time.fixedDeltaTime * movespeed));
+        velocity.x = XAxis;
+        velocity.z = YAxis;
         
+        controller.Move(transform.right * velocity.x + transform.forward * velocity.z + Vector3.up* velocity.y* Time.deltaTime);
     }
     /// <summary>
     /// wirft den orb in richtung vector3.forward des Spielers
     /// </summary>
     void Throw()
     {
-        if (notAiming && Input.GetMouseButtonDown(0))
+        if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
         }
-        if (!notAiming && carryingTheOrb && Input.GetMouseButton(0))
+        if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
             if (throwForce < maxThrowingForce)
             {
@@ -82,8 +91,9 @@ public class PlayerMovement : MonoBehaviour
             launchArc.lineRenderer.enabled = true;
             launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
         }
-        if (!notAiming && carryingTheOrb && Input.GetMouseButtonUp(0))
+        if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
+            lookDirection = transform.forward;
             launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
@@ -94,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             activeOrb.transform.parent = null;
         }
         
-        if (!carryingTheOrb&& Input.GetMouseButtonDown(0))
+        if (!carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
 
             notAiming = true;
@@ -109,19 +119,19 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Teleport()
     {
-        if (Input.GetMouseButtonDown(1) && !carryingTheOrb && IsOnTheGround())
+        
+
+        if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            transform.position =activeOrb.transform.position + Vector3.up;
-            rigid.velocity = Vector3.zero;
             
+            controller.Move(activeOrb.transform.position + Vector3.up-transform.position);
             orbScript.GetCollected();
         }
     }
     bool IsOnTheGround()
     {
-        if (Physics.Raycast(transform.position+Vector3.right*0.5f, Vector3.down,1.2f)|| Physics.Raycast(transform.position + Vector3.right * -0.5f, Vector3.down, 1.2f)|| Physics.Raycast(transform.position + Vector3.forward * 0.5f, Vector3.down, 1.2f)|| Physics.Raycast(transform.position + Vector3.forward * -0.5f, Vector3.down, 1.2f))
+        if (Physics.CheckBox(transform.position -transform.up,new Vector3(.5f,.2f,.5f),transform.rotation, mask,0))
         {
-            
             return true;
         }
         else
@@ -133,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
     {
         orbs[currentOrbIndex].SetActive(false);
         launchArc.lineRenderer.enabled = false;
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetButton("Fire3"))
         {
            
             currentOrbIndex += 1;
@@ -142,7 +152,7 @@ public class PlayerMovement : MonoBehaviour
                 currentOrbIndex = 0;
             }
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButton("Fire4"))
         {
             currentOrbIndex -= 1;
             if (currentOrbIndex < 0)
@@ -160,9 +170,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsOnTheGround())
+        if (Input.GetButtonDown("Jump") &&controller.isGrounded)
         {
-            rigid.velocity+= Vector3.up * jumpForce;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
+    }
+
+    void Gravity()
+    {
+       
+            velocity.y += gravity * Time.deltaTime;
+        
+        if(IsOnTheGround()&& velocity.y<0)
+        {
+            velocity.y = -2f;
+           
+        }
+
     }
 }

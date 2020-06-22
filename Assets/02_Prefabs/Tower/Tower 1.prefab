@@ -47,6 +47,8 @@ MonoBehaviour:
   _building_prefabs:
   - {fileID: 1862284582436989240, guid: ada0d9dd5c0c5c4498471f01c14bccad, type: 3}
   - {fileID: 1862284582436989240, guid: 563f8b72c9237a348aad845785433e14, type: 3}
+  - {fileID: 1862284582436989240, guid: 563f8b72c9237a348aad845785433e14, type: 3}
+  - {fileID: 1862284582436989240, guid: 563f8b72c9237a348aad845785433e14, type: 3}
   _structure_prefabs: []
   algorithm: 5
   _start_cambiums: 1
@@ -130,8 +132,8 @@ MonoBehaviour:
     multiplier: 2
   generation_amount:
     input: 3
-    min: 0
-    max: 1
+    min: -30
+    max: 30
     multiplier: 500
   change_direction_chance:
     input: 0

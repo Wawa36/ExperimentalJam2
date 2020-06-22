@@ -128,15 +128,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 152923204344402217, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
+    - target: {fileID: 735142247, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: m_StepOffset
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
-      propertyPath: movespeed
-      value: 2000
+      propertyPath: gravity
+      value: -39.24
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}

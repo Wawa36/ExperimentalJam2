@@ -45,15 +45,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _building_prefabs:
-  - {fileID: 1862284582436989240, guid: b92e42922f45763479df5e75e1460ffd, type: 3}
-  - {fileID: 1862284582436989240, guid: 2da3a51cc58eecd48ab540d10157a1a5, type: 3}
-  - {fileID: 1862284582436989240, guid: b92e42922f45763479df5e75e1460ffd, type: 3}
-  - {fileID: 1862284582436989240, guid: b92e42922f45763479df5e75e1460ffd, type: 3}
-  - {fileID: 1862284582436989240, guid: b92e42922f45763479df5e75e1460ffd, type: 3}
+  - {fileID: 2078555037905766402, guid: ef6335b36e5e8734b9b55722e950fadf, type: 3}
+  - {fileID: 2078555037905766402, guid: 69386ded5c9067b41b5ec6ed1907ad16, type: 3}
+  - {fileID: 2078555037905766402, guid: 69386ded5c9067b41b5ec6ed1907ad16, type: 3}
+  - {fileID: 6359800076859177636, guid: a4974e8647d0ae34cb6a01e7f108dcb3, type: 3}
   _structure_prefabs: []
   algorithm: 6
   _start_cambiums: 1
-  _growth_speed: 2
+  _growth_speed: 0.5
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
@@ -123,24 +122,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grow_speed:
     input: 0
-    min: 0
-    max: 1
-    multiplier: 1
+    min: -30
+    max: 25
+    multiplier: 3
   split_chance:
     input: 0
     min: 0
-    max: 0
-    multiplier: 0
+    max: 25
+    multiplier: 7
   generation_amount:
     input: 3
-    min: 0
-    max: 1
-    multiplier: 500
+    min: -30
+    max: 30
+    multiplier: 200
   change_direction_chance:
     input: 0
     min: 0
-    max: 0
-    multiplier: 0
+    max: 25
+    multiplier: 3
   width:
     input: 0
     min: 0

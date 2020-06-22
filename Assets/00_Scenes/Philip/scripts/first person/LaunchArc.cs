@@ -20,7 +20,7 @@ public class LaunchArc : MonoBehaviour
     public void DrawPath(Vector3 Force)
     {
         targetSphere.enabled = true;
-        int resolution = 50;
+        int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         Vector3 drawpoint;
         rayCastResolution = 0;
@@ -40,7 +40,7 @@ public class LaunchArc : MonoBehaviour
                 if (rayCastResolution <= i)
                 {
                     rayCastResolution += 1;
-                    if (Physics.Raycast(previousDrawpoint, drawpoint-previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint)))
+                    if (Physics.Raycast(previousDrawpoint, drawpoint-previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint),LayerMask.GetMask("Default")))
                     {
                         endVector = hit.point;
                         drawpoint = hit.point;
