@@ -91,7 +91,7 @@ public class ProceduralKabiumGeneratorFelix
 
                 return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
             }
-            else //split in 4 if 0 steps
+            else //split or grow larger
             {
                 int countNewCambiums = 0;
 
@@ -104,9 +104,10 @@ public class ProceduralKabiumGeneratorFelix
                 positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
 
 
-                if (Random.Range(0, tower.Mapper.Split_Chance + 1) != 0) 
+                if (Random.Range(0, tower.Mapper.Split_Chance + 5) != 0) 
                 {
                     bool hasStartedOne = false;
+                    
 
                     if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
                     {
@@ -162,10 +163,10 @@ public class ProceduralKabiumGeneratorFelix
                     Vector3 secondPos = positions[Random.Range(0, positions.Count)];
                     positions.Add(firstPos);
 
-                    kambiumList.Add(new Tower.Cambium(firstPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 5, 6, 2)));
+                    kambiumList.Add(new Tower.Cambium(firstPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], maxNeighbours * 2 + 2));
                     countNewCambiums++;
 
-                    kambiumList.Add(new Tower.Cambium(secondPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], (int)Remap(tower.Mapper.Split_Chance, 0, 5, 6, 2)));
+                    kambiumList.Add(new Tower.Cambium(secondPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], maxNeighbours * 2 + 2));
                     countNewCambiums++;
 
                     
