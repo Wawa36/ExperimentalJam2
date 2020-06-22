@@ -140,7 +140,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -262,17 +262,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carryingTheOrb: 0
+  notAiming: 0
   orbs:
   - {fileID: 815907258}
   - {fileID: 4052186782227101131}
   - {fileID: 4052186782834138164}
   cameraRigTransform: {fileID: 152923204344402230}
   launchArc: {fileID: 815907264}
-  movespeed: 20
+  movespeed: 2000
   rotationSpeed: 50
   jumpForce: 25
   throwForceIncrease: 20
   maxThrowingForce: 25
+  throwForce: 0
 --- !u!33 &152923204717291904
 MeshFilter:
   m_ObjectHideFlags: 0

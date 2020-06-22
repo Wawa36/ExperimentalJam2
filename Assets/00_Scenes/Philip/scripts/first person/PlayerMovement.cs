@@ -61,9 +61,8 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal");
         float YAxis = Input.GetAxis("Vertical");
 
-        rigid.MovePosition(transform.position + transform.forward * YAxis * Time.deltaTime * movespeed + transform.right * XAxis * Time.fixedDeltaTime * movespeed);
+        rigid.velocity = transform.TransformDirection( new Vector3(XAxis * Time.fixedDeltaTime * movespeed, rigid.velocity.y, YAxis * Time.fixedDeltaTime * movespeed));
         
-
     }
     /// <summary>
     /// wirft den orb in richtung vector3.forward des Spielers
