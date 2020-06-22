@@ -107,7 +107,7 @@ public class SphereArtifact : MonoBehaviour
                 inputs.throw_time = timer;
                 inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
                 inputs.player_dir = Camera.main.transform.forward;
-                inputs.player_speed = Vector3.Distance(Vector3.zero , playerScript.GetComponent<Rigidbody>().velocity);
+                inputs.player_speed = Vector3.Magnitude(playerScript.GetComponent<Rigidbody>().velocity);
                 if (hit.collider != null)
                 {
                     inputs.ground_tag = hit.collider.tag;
