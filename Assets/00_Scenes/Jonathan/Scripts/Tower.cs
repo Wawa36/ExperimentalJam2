@@ -247,6 +247,7 @@ namespace Tower_Management
             CombineInstance[] combine = new CombineInstance[chunk_size];
             GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
             new_chunk.transform.SetParent(transform);
+            new_chunk.tag = "Building";
 
             for (int i = 0; i < chunk_size; i++)
             {
