@@ -10,7 +10,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
-    [HideInInspector] public SphereCollider collider;
+    [HideInInspector] public new SphereCollider collider;
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
@@ -76,7 +76,7 @@ public class SphereArtifact : MonoBehaviour
     {
         while (!playerScript.carryingTheOrb)
         {
-            transform.position = Vector3.Lerp(transform.position, playerScript.transform.position, .2f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, .4f);
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
                 GetCollected();

@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
 
             notAiming = true;
             orbScript.collider.enabled = false;
+            orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
         }

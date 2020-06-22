@@ -90,7 +90,7 @@ MonoBehaviour:
     ground_tag: none
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
-  building_generation: 0
+  _building_generation: 0
 --- !u!114 &9185885427241888973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,9 +120,9 @@ MonoBehaviour:
     multiplier: 600
   change_direction_chance:
     input: 0
-    min: 0
-    max: 1
-    multiplier: 1
+    min: -2
+    max: 25
+    multiplier: 15
   width:
     input: 1
     min: 0
