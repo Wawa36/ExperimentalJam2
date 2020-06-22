@@ -98,7 +98,7 @@ namespace Tower_Management
             {
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
-                c[0].steps = Steps;
+                c[0].steps = 0; // IS THIS OK?
                 c[0].normal = mapper.Grow_Direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
