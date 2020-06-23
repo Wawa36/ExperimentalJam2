@@ -42,7 +42,7 @@ namespace Tower_Management
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
-        List<GameObject> merged_blocks = new List<GameObject>();
+        GameObject merged_block;
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
         // register at manager
@@ -101,7 +101,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = start_steps_zero? 0 : Steps;
-                c[0].normal = override_start_direction.magnitude == 0? mapper.Player_Direction : override_start_direction;
+                c[0].normal = override_start_direction.magnitude == 0? Calculate_Grow_Direction(mapper.Player_Direction, mapper.Normal_Direction) : override_start_direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -124,7 +124,9 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.Renderer.sharedMaterial = default_material;
+
+                        if (c.Renderer)
+                            c.Renderer.sharedMaterial = default_material;
                     }
                 }
             }
@@ -246,20 +248,45 @@ namespace Tower_Management
 
         public int Building_Generation { get { return _building_generation; } }
 
-        Vector3 Calculate_Grow_Direciton(Vector3 player_dir, Vector3 normal_dir) 
+        Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {
+            if (Vector3.Dot(player_dir, normal_dir) >= 0)
+            {
+                return player_dir;
+            }
+            else
+            {
+                return -player_dir;
+            }
+
             return default;
         }
 
         // merging
-        void Merge_Chunk(bool merge_all = false) 
+        void Merge_Chunk(bool merge_all = false)
         {
-            CombineInstance[] combine = new CombineInstance[chunk_size];
-            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
-            new_chunk.transform.SetParent(transform);
-            new_chunk.tag = "Building";
-            new_chunk.isStatic = true;
+            CombineInstance[] combine;
 
+            if (!merged_block)
+            {
+                merged_block = new GameObject("Chunk");
+                merged_block.transform.SetParent(transform);
+                merged_block.tag = "Building";
+                merged_block.isStatic = true;
+                merged_block.AddComponent<MeshFilter>();
+                merged_block.AddComponent<MeshRenderer>();
+                merged_block.GetComponent<MeshRenderer>().material = default_material;
+
+                combine = new CombineInstance[chunk_size];
+            }
+            else
+            {
+               combine  = new CombineInstance[chunk_size + 1];
+               combine[chunk_size].mesh = merged_block.GetComponent<MeshFilter>().sharedMesh;
+               combine[chunk_size].transform = merged_block.transform.localToWorldMatrix;
+            }
+
+            // assign new meshes
             if (!merge_all)
             {
                 for (int i = 0; i < chunk_size; i++)
@@ -283,16 +310,8 @@ namespace Tower_Management
                 }
             }
 
-            new_chunk.AddComponent<MeshFilter>();
-            new_chunk.AddComponent<MeshRenderer>();
-            new_chunk.GetComponent<MeshRenderer>().material = default_material;
-
-            new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
-            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
-
-            new_chunk.AddComponent<MeshCollider>().sharedMesh = new_chunk.GetComponent<MeshFilter>().sharedMesh;
-
-            merged_blocks.Add(new_chunk);
+            merged_block.GetComponent<MeshFilter>().mesh = new Mesh();
+            merged_block.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
 
             foreach (var c in inactive_blocks.ToList())
             {
