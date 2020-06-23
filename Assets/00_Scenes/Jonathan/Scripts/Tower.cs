@@ -123,7 +123,7 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.Mesh.GetComponent<MeshRenderer>().sharedMaterial = default_material;
+                        c.Renderer.sharedMaterial = default_material;
                     }
                 }
             }
@@ -163,7 +163,7 @@ namespace Tower_Management
                     created_buildings.Add(new_building.GetComponent<Building>());
 
                     // highlight color
-                    new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
+                    new_building.GetComponent<Building> ().Renderer.material = highlight_material;
 
                     // add to active blocks
                     active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
@@ -255,8 +255,8 @@ namespace Tower_Management
             {
                 if (inactive_blocks[i] is Building block_as_building)
                 {
-                    combine[i].mesh = block_as_building.Mesh.GetComponent<MeshFilter>().sharedMesh;
-                    combine[i].transform = block_as_building.Mesh.transform.localToWorldMatrix;
+                    combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                    combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
                 }
             }
 

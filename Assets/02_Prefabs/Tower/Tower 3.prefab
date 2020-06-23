@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _building_prefabs:
   - {fileID: 2078555037905766402, guid: ef6335b36e5e8734b9b55722e950fadf, type: 3}
-  - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
-  - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
+  - {fileID: 2078555037905766402, guid: 87dbecf85e6ee4c4ab2bd8402c3945f3, type: 3}
+  - {fileID: 2078555037905766402, guid: 87dbecf85e6ee4c4ab2bd8402c3945f3, type: 3}
   - {fileID: 6359800076859177636, guid: a4974e8647d0ae34cb6a01e7f108dcb3, type: 3}
   _structure_prefabs: []
   algorithm: 6

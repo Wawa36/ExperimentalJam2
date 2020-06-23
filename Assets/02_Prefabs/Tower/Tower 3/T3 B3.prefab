@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 2114723021021704567}
+  _renderer: {fileID: 457675091257938082}
   _main_collider: {fileID: 5212342747050496910}
   origin_turn: 0.5
   horizontal_origins:
@@ -260,6 +261,12 @@ GameObject:
 --- !u!4 &1590564304210799565 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cae688ab6a2659c4a9830fa83a46ebf6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1267878416441134118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &457675091257938082 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: cae688ab6a2659c4a9830fa83a46ebf6,
     type: 3}
   m_PrefabInstance: {fileID: 1267878416441134118}
   m_PrefabAsset: {fileID: 0}
