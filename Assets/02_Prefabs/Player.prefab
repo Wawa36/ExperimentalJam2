@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: {x: 0, y: 0, z: 0}
+  velocityMagnitude: 0
   lookDirection: {x: 0, y: 0, z: 0}
   carryingTheOrb: 0
   notAiming: 0
@@ -339,7 +340,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323709, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323710, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
@@ -671,6 +672,11 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 313825965}
+    - target: {fileID: 4189201633741323716, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: collectingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323717, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: m_Name
@@ -700,7 +706,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323709, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323710, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
@@ -1032,6 +1038,11 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 313825965}
+    - target: {fileID: 4189201633741323716, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: collectingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323717, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: m_Name
@@ -1061,7 +1072,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323709, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323710, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
@@ -1393,6 +1404,11 @@ PrefabInstance:
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 313825965}
+    - target: {fileID: 4189201633741323716, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
+        type: 3}
+      propertyPath: collectingDistance
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323717, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_Name
