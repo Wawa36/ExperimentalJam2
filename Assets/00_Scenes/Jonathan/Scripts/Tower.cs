@@ -230,6 +230,8 @@ namespace Tower_Management
                     active_blocks.Remove(c);
                     Destroy((c as Component).gameObject);
                 }
+
+                Merge_Chunk(true);
             }
 
             return value;
@@ -244,19 +246,34 @@ namespace Tower_Management
         public int Building_Generation { get { return _building_generation; } }
 
         // merging
-        void Merge_Chunk() 
+        void Merge_Chunk(bool merge_all = false) 
         {
             CombineInstance[] combine = new CombineInstance[chunk_size];
             GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
             new_chunk.transform.SetParent(transform);
             new_chunk.tag = "Building";
+            new_chunk.isStatic = true;
 
-            for (int i = 0; i < chunk_size; i++)
+            if (!merge_all)
             {
-                if (inactive_blocks[i] is Building block_as_building)
+                for (int i = 0; i < chunk_size; i++)
                 {
-                    combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
-                    combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    if (inactive_blocks[i] is Building block_as_building)
+                    {
+                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < inactive_blocks.Count; i++)
+                {
+                    if (inactive_blocks[i] is Building block_as_building)
+                    {
+                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    }
                 }
             }
 
@@ -339,15 +356,17 @@ namespace Tower_Management
         public struct Player_Inputs
         {
             public Vector3 player_dir;
+            public Vector3 hit_normal;
             public float orb_energy;
             public float throw_dist;
             public float throw_time;
             public float player_speed;
             public string ground_tag;
 
-            public Player_Inputs(Vector3 player_dir, float orb_energy, float throw_dist, float throw_time, float player_speed, string ground_tag)
+            public Player_Inputs(Vector3 player_dir, Vector3 hit_normal, float orb_energy, float throw_dist, float throw_time, float player_speed, string ground_tag)
             {
                 this.player_dir = player_dir;
+                this.hit_normal = hit_normal;
                 this.orb_energy = orb_energy;
                 this.throw_dist = throw_dist;
                 this.throw_time = throw_time;
