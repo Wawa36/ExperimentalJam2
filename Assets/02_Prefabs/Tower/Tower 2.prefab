@@ -53,6 +53,7 @@ MonoBehaviour:
   algorithm: 0
   _start_cambiums: 1
   _growth_speed: 0.1
+  override_start_direction: {x: 0, y: 1, z: 0}
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
@@ -83,6 +84,7 @@ MonoBehaviour:
   chunk_size: 100
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
+    hit_normal: {x: 0, y: 0, z: 0}
     orb_energy: 0
     throw_dist: 3
     throw_time: 1
