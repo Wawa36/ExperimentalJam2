@@ -42,7 +42,7 @@ namespace Tower_Management
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
-        GameObject merged_block;
+        List<GameObject> merged_blocks = new List<GameObject>();
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
         // register at manager
@@ -234,7 +234,7 @@ namespace Tower_Management
                     Destroy((c as Component).gameObject);
                 }
 
-                Merge_Chunk(true);
+               Merge_Chunk(true);
             }
 
             return value;
@@ -265,53 +265,33 @@ namespace Tower_Management
         // merging
         void Merge_Chunk(bool merge_all = false)
         {
-            CombineInstance[] combine;
+            List<CombineInstance> combine = new List<CombineInstance>();
 
-            if (!merged_block)
-            {
-                merged_block = new GameObject("Chunk");
-                merged_block.transform.SetParent(transform);
-                merged_block.tag = "Building";
-                merged_block.isStatic = true;
-                merged_block.AddComponent<MeshFilter>();
-                merged_block.AddComponent<MeshRenderer>();
-                merged_block.GetComponent<MeshRenderer>().material = default_material;
+            // create new chunk
+            var new_chunk = new GameObject("Chunk #" + (merged_blocks.Count));
+            new_chunk.transform.SetParent(transform);
+            new_chunk.tag = "Building";
+            new_chunk.isStatic = true;
+            new_chunk.AddComponent<MeshFilter>();
+            new_chunk.AddComponent<MeshRenderer>();
+            new_chunk.GetComponent<MeshRenderer>().material = default_material;
 
-                combine = new CombineInstance[chunk_size];
-            }
-            else
+            // add building meshes
+            for (int i = 0; i < (merge_all ? inactive_blocks.Count : chunk_size); i++)
             {
-               combine  = new CombineInstance[chunk_size + 1];
-               combine[chunk_size].mesh = merged_block.GetComponent<MeshFilter>().sharedMesh;
-               combine[chunk_size].transform = merged_block.transform.localToWorldMatrix;
-            }
-
-            // assign new meshes
-            if (!merge_all)
-            {
-                for (int i = 0; i < chunk_size; i++)
+                if (inactive_blocks[i] is Building block_as_building)
                 {
-                    if (inactive_blocks[i] is Building block_as_building)
-                    {
-                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
-                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; i < inactive_blocks.Count; i++)
-                {
-                    if (inactive_blocks[i] is Building block_as_building)
-                    {
-                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
-                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
-                    }
+                    var instance = new CombineInstance();
+                    instance.mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                    instance.transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    combine.Add(instance);
                 }
             }
 
-            merged_block.GetComponent<MeshFilter>().mesh = new Mesh();
-            merged_block.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
+            // combine
+            new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
+            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
+            merged_blocks.Add(new_chunk);
 
             foreach (var c in inactive_blocks.ToList())
             {
