@@ -144,7 +144,7 @@ MonoBehaviour:
     min: 0
     max: 45
     multiplier: 20
-    invert: 1
+    invert: 0
   width:
     input: 0
     min: 0

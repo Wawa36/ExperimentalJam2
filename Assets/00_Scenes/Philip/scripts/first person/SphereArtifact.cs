@@ -88,7 +88,7 @@ public class SphereArtifact : MonoBehaviour
     {
         if (!colided)
         {
-
+            
             colided = true;
             rigid.velocity = Vector3.zero;
             transform.position = collision.GetContact(0).point;
