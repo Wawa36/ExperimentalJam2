@@ -99,7 +99,7 @@ MonoBehaviour:
   _delay: 0.1
   _steps: 15
   start_steps_zero: 0
-  chunk_size: 1000
+  chunk_size: 50
   inputs:
     player_dir: {x: 0, y: 0, z: 0}
     hit_normal: {x: 0, y: 0, z: 0}
@@ -136,9 +136,9 @@ MonoBehaviour:
     multiplier: 35
     invert: 1
   generation_amount:
-    input: 2
-    min: -1
-    max: 4
+    input: 0
+    min: 0
+    max: 25
     multiplier: 500
     invert: 0
   change_direction_chance:
