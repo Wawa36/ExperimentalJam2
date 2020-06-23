@@ -99,7 +99,7 @@ public class ProceduralKabiumGeneratorFelix
         int splitAfterGenerations;
         if (tower.Mapper.Split_Chance == 0)
         {
-            splitAfterGenerations = int.MaxValue;
+            splitAfterGenerations = int.MaxValue; //keine Spaltung
         }
         else
         {
@@ -186,26 +186,27 @@ public class ProceduralKabiumGeneratorFelix
             }
             else
             {
-                if (towerAndCambiumAmount[tower] <= maxCambiums)
+               
+                if (HasStillSteps(at_building)) //fullfill steps
                 {
-                    if (HasStillSteps(at_building)) //fullfill steps
-                    {
-                        Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
-                                                         //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
-                                                         at_building.Cambium.normal,
-                                                         tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
-                                                         at_building.Cambium.steps,
-                                                         at_building.Cambium.branch_ID);
-                        kambiumList.Add(newCambium);
+                    Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
+                                                        //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
+                                                        at_building.Cambium.normal,
+                                                        tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                                        at_building.Cambium.steps,
+                                                        at_building.Cambium.branch_ID);
+                    kambiumList.Add(newCambium);
 
-                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-                    }
-                    else //grow larger
+                    return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+                }
+                else //grow larger
+                {
+                    if (towerAndCambiumAmount[tower] < maxCambiums)
                     {
                         int countNewCambiums = 0;
 
                         bool hasStartedOne = false;
-                         
+
                         if (Random.value > 0.25) //ADDED 23.06.2020 first go up, so if klein, obwol steps geht er nicht so weit aus einander
                         {
                             //back right
@@ -252,19 +253,29 @@ public class ProceduralKabiumGeneratorFelix
                             countNewCambiums++;
                         }
 
-
-
+                        //---
+                        //zu viele gemacht? wieder löschen
+                        int numberOfDeletions = 0;
+                        while(kambiumList.Count > maxCambiums - towerAndCambiumAmount[tower])
+                        {
+                            kambiumList.RemoveAt(kambiumList.Count - 1);
+                            numberOfDeletions++;
+                        }
+                        //---
 
                         towerAndCambiumAmount[tower] += countNewCambiums;
 
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
+                    else //STOP because to many cambiums
+                    {
+                        towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
+                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+                    }
+
+                    
                 }
-                else //STOP because to many cambiums
-                {
-                    towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
-                    return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-                }
+
             }
         }
         else //STOP because has to die
