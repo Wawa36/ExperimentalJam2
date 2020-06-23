@@ -79,7 +79,7 @@ namespace Tower_Management
             _tower = tower; 
             _main_collider = GetComponentInChildren<Collider>();
             _cambium = cambium;
-            Main_Collider.transform.parent.localScale = new Vector3(1, 1, 0);
+            Main_Collider.transform.parent.localScale = new Vector3(1, 1, 0.01f);
             mat_cache = Renderer.material;
         }
 

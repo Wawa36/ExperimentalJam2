@@ -101,7 +101,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = start_steps_zero? 0 : Steps;
-                c[0].normal = override_start_direction.magnitude == 0? mapper.Player_Direction : override_start_direction;
+                c[0].normal = override_start_direction.magnitude == 0? Calculate_Grow_Direction(mapper.Player_Direction, mapper.Normal_Direction) : override_start_direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -124,7 +124,9 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.Renderer.sharedMaterial = default_material;
+
+                        if (c.Renderer)
+                            c.Renderer.sharedMaterial = default_material;
                     }
                 }
             }
@@ -232,7 +234,7 @@ namespace Tower_Management
                     Destroy((c as Component).gameObject);
                 }
 
-                Merge_Chunk(true);
+               Merge_Chunk(true);
             }
 
             return value;
@@ -246,52 +248,48 @@ namespace Tower_Management
 
         public int Building_Generation { get { return _building_generation; } }
 
-        Vector3 Calculate_Grow_Direciton(Vector3 player_dir, Vector3 normal_dir) 
+        Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {
-            return default;
-        }
-
-        // merging
-        void Merge_Chunk(bool merge_all = false) 
-        {
-            CombineInstance[] combine = new CombineInstance[chunk_size];
-            GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
-            new_chunk.transform.SetParent(transform);
-            new_chunk.tag = "Building";
-            new_chunk.isStatic = true;
-
-            if (!merge_all)
+            if (Vector3.Dot(player_dir, normal_dir) >= 0)
             {
-                for (int i = 0; i < chunk_size; i++)
-                {
-                    if (inactive_blocks[i] is Building block_as_building)
-                    {
-                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
-                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
-                    }
-                }
+                return player_dir;
             }
             else
             {
-                for (int i = 0; i < inactive_blocks.Count; i++)
-                {
-                    if (inactive_blocks[i] is Building block_as_building)
-                    {
-                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
-                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
-                    }
-                }
+                return -player_dir;
             }
 
+        }
+
+        // merging
+        void Merge_Chunk(bool merge_all = false)
+        {
+            List<CombineInstance> combine = new List<CombineInstance>();
+
+            // create new chunk
+            var new_chunk = new GameObject("Chunk #" + (merged_blocks.Count));
+            new_chunk.transform.SetParent(transform);
+            new_chunk.tag = "Building";
+            new_chunk.isStatic = true;
             new_chunk.AddComponent<MeshFilter>();
             new_chunk.AddComponent<MeshRenderer>();
             new_chunk.GetComponent<MeshRenderer>().material = default_material;
 
+            // add building meshes
+            for (int i = 0; i < (merge_all ? inactive_blocks.Count : chunk_size); i++)
+            {
+                if (inactive_blocks[i] is Building block_as_building)
+                {
+                    var instance = new CombineInstance();
+                    instance.mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                    instance.transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    combine.Add(instance);
+                }
+            }
+
+            // combine
             new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
-            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
-
-            new_chunk.AddComponent<MeshCollider>().sharedMesh = new_chunk.GetComponent<MeshFilter>().sharedMesh;
-
+            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
             merged_blocks.Add(new_chunk);
 
             foreach (var c in inactive_blocks.ToList())
