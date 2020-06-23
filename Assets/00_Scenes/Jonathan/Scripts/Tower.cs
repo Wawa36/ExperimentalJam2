@@ -314,14 +314,16 @@ namespace Tower_Management
             public Vector3 normal;
             public GameObject prefab;
             public int steps;
+            public int branch_ID;
 
             // at building
-            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps)
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps, int branch_ID = 0)
             {
                 this.point = point;
                 this.normal = normal;
                 this.prefab = prefab;
                 this.steps = steps;
+                this.branch_ID = branch_ID;
             }
 
             // as origin
@@ -331,6 +333,7 @@ namespace Tower_Management
                 this.normal = Vector3.up;
                 this.prefab = prefab;
                 this.steps = 0;
+                this.branch_ID = 0;
             }
         }
 
