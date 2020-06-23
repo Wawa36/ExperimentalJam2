@@ -127,17 +127,17 @@ MonoBehaviour:
     input: 0
     min: -10
     max: 25
-    multiplier: 10
+    multiplier: 20
     invert: 0
   split_chance:
     input: 1
     min: 0
     max: 80
-    multiplier: 35
+    multiplier: 50
     invert: 1
   generation_amount:
     input: 1
-    min: -30
+    min: -10
     max: 80
     multiplier: 500
     invert: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     input: 0
     min: 0
     max: 25
-    multiplier: 20
+    multiplier: 1000
     invert: 0
   width:
     input: 0

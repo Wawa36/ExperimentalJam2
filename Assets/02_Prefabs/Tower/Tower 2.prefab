@@ -121,17 +121,17 @@ MonoBehaviour:
     input: 2
     min: -1
     max: 4
-    multiplier: 600
-    invert: 1
+    multiplier: 300
+    invert: 0
   change_direction_chance:
     input: 1
     min: 0
-    max: 80
-    multiplier: 15
+    max: 0
+    multiplier: 0
     invert: 0
   width:
     input: 2
     min: 0
     max: 4
     multiplier: 40
-    invert: 0
+    invert: 1
