@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mesh: {fileID: 1220529604175743910}
+  _renderer: {fileID: 4384086239372847346}
   _main_collider: {fileID: 7678615526546099816}
   origin_turn: 0.5
   horizontal_origins:
