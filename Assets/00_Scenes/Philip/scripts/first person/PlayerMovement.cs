@@ -119,11 +119,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     void Teleport()
     {
-        
-
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            
+            throwForce = 0;
             controller.Move(activeOrb.transform.position + Vector3.up-transform.position);
             orbScript.GetCollected();
         }
