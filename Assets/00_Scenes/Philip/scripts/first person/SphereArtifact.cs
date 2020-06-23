@@ -98,21 +98,21 @@ public class SphereArtifact : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity));
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity),collision.contacts[0].normal);
                
 
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 // hier kommt der fall hin das die Kugel ein Gebäude trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity));
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity),collision.contacts[0].normal);
 
             }
             
         }
     }
 
-    void calculateAlleParameter(GameObject tower)
+    void calculateAlleParameter(GameObject tower,Vector3 normal)
     {
         Tower.Player_Inputs inputs;
         Tower towerscript = tower.GetComponent<Tower>();
@@ -122,6 +122,7 @@ public class SphereArtifact : MonoBehaviour
         inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
         inputs.player_dir = playerScript.lookDirection;
         inputs.player_speed = Vector3.Magnitude(playerScript.velocity);
+        inputs.hit_normal = normal;
         if (hit.collider != null)
         {
             inputs.ground_tag = hit.collider.tag;
