@@ -93,11 +93,19 @@ public class ProceduralKabiumGeneratorFelix
 
         //Set Params ---------------------------------------------------------------
 
-        int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 40); //between 1 and 40 ?
+        int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 100); //between 1 and 40 ?
         int maxCambiums = maxCambiumsPerBranch * towerAndBranches[tower];
 
-        int splitAfterGenerations = 30;//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
-        
+        int splitAfterGenerations;
+        if (tower.Mapper.Split_Chance == 0)
+        {
+            splitAfterGenerations = int.MaxValue;
+        }
+        else
+        {
+            splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 10, 30);//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
+        }
+
 
         //Prepare other Variables ------------------------------------------------
 
@@ -116,9 +124,10 @@ public class ProceduralKabiumGeneratorFelix
         //DEBUG -----------------------------------------------------------------
         Debug.Log("---------------------------------------- new cambium ---------------------------");
         Debug.Log("max cambiums "+ maxCambiums);
-        Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
-        Debug.Log("nbr of branches " + towerAndBranches[tower]);
-        Debug.Log("ID? " + at_building.Cambium.branch_ID);
+        Debug.Log("max cambiums per B "+ maxCambiumsPerBranch);
+        //Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
+        //Debug.Log("nbr of branches " + towerAndBranches[tower]);
+       // Debug.Log("ID? " + at_building.Cambium.branch_ID);
 
 
 
@@ -196,6 +205,14 @@ public class ProceduralKabiumGeneratorFelix
                         int countNewCambiums = 0;
 
                         bool hasStartedOne = false;
+                         
+                        if (Random.value > 0.25) //ADDED 23.06.2020 first go up, so if klein, obwol steps geht er nicht so weit aus einander
+                        {
+                            //back right
+                            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2), buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
 
                         if (Random.value > 0.25)
                         {
@@ -234,6 +251,8 @@ public class ProceduralKabiumGeneratorFelix
                             kambiumList.Add(new Tower.Cambium(positions[Random.Range(0, positions.Count)], buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
                             countNewCambiums++;
                         }
+
+
 
 
                         towerAndCambiumAmount[tower] += countNewCambiums;
