@@ -25,6 +25,7 @@ namespace Tower_Management
         [SerializeField] KabiumAlgorithm algorithm;
         [SerializeField] int _start_cambiums;
         [SerializeField] float _growth_speed;
+        [SerializeField] Vector3 override_start_direction;
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
@@ -100,7 +101,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = start_steps_zero? 0 : Steps;
-                c[0].normal = mapper.Grow_Direction;
+                c[0].normal = override_start_direction.magnitude == 0? mapper.Player_Direction : override_start_direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -123,7 +124,7 @@ namespace Tower_Management
                     {
                         Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
-                        c.Mesh.GetComponent<MeshRenderer>().sharedMaterial = default_material;
+                        c.Renderer.sharedMaterial = default_material;
                     }
                 }
             }
@@ -163,7 +164,7 @@ namespace Tower_Management
                     created_buildings.Add(new_building.GetComponent<Building>());
 
                     // highlight color
-                    new_building.gameObject.GetComponentInChildren<MeshRenderer>().material = highlight_material;
+                    new_building.GetComponent<Building> ().Renderer.material = highlight_material;
 
                     // add to active blocks
                     active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
@@ -230,6 +231,8 @@ namespace Tower_Management
                     active_blocks.Remove(c);
                     Destroy((c as Component).gameObject);
                 }
+
+                Merge_Chunk(true);
             }
 
             return value;
@@ -243,20 +246,40 @@ namespace Tower_Management
 
         public int Building_Generation { get { return _building_generation; } }
 
+        Vector3 Calculate_Grow_Direciton(Vector3 player_dir, Vector3 normal_dir) 
+        {
+            return default;
+        }
+
         // merging
-        void Merge_Chunk() 
+        void Merge_Chunk(bool merge_all = false) 
         {
             CombineInstance[] combine = new CombineInstance[chunk_size];
             GameObject new_chunk = new GameObject("Chunk #" + (merged_blocks.Count + 1).ToString());
             new_chunk.transform.SetParent(transform);
             new_chunk.tag = "Building";
+            new_chunk.isStatic = true;
 
-            for (int i = 0; i < chunk_size; i++)
+            if (!merge_all)
             {
-                if (inactive_blocks[i] is Building block_as_building)
+                for (int i = 0; i < chunk_size; i++)
                 {
-                    combine[i].mesh = block_as_building.Mesh.GetComponent<MeshFilter>().sharedMesh;
-                    combine[i].transform = block_as_building.Mesh.transform.localToWorldMatrix;
+                    if (inactive_blocks[i] is Building block_as_building)
+                    {
+                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < inactive_blocks.Count; i++)
+                {
+                    if (inactive_blocks[i] is Building block_as_building)
+                    {
+                        combine[i].mesh = block_as_building.Renderer.GetComponent<MeshFilter>().sharedMesh;
+                        combine[i].transform = block_as_building.Renderer.transform.localToWorldMatrix;
+                    }
                 }
             }
 
@@ -291,14 +314,16 @@ namespace Tower_Management
             public Vector3 normal;
             public GameObject prefab;
             public int steps;
+            public int branch_ID;
 
             // at building
-            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps)
+            public Cambium(Vector3 point, Vector3 normal, GameObject prefab, int steps, int branch_ID = 0)
             {
                 this.point = point;
                 this.normal = normal;
                 this.prefab = prefab;
                 this.steps = steps;
+                this.branch_ID = branch_ID;
             }
 
             // as origin
@@ -308,6 +333,7 @@ namespace Tower_Management
                 this.normal = Vector3.up;
                 this.prefab = prefab;
                 this.steps = 0;
+                this.branch_ID = 0;
             }
         }
 
@@ -339,15 +365,17 @@ namespace Tower_Management
         public struct Player_Inputs
         {
             public Vector3 player_dir;
+            public Vector3 hit_normal;
             public float orb_energy;
             public float throw_dist;
             public float throw_time;
             public float player_speed;
             public string ground_tag;
 
-            public Player_Inputs(Vector3 player_dir, float orb_energy, float throw_dist, float throw_time, float player_speed, string ground_tag)
+            public Player_Inputs(Vector3 player_dir, Vector3 hit_normal, float orb_energy, float throw_dist, float throw_time, float player_speed, string ground_tag)
             {
                 this.player_dir = player_dir;
+                this.hit_normal = hit_normal;
                 this.orb_energy = orb_energy;
                 this.throw_dist = throw_dist;
                 this.throw_time = throw_time;

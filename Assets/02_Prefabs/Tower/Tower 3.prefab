@@ -47,7 +47,7 @@ MonoBehaviour:
   _building_prefabs:
   - {fileID: 2078555037905766402, guid: ef6335b36e5e8734b9b55722e950fadf, type: 3}
   - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
-  - {fileID: 2078555037905766402, guid: 151f6d9fadc8452498ca0de6b6c44f5a, type: 3}
+  - {fileID: 2078555037905766402, guid: 3d6310f2404c395488207ddc23beaab0, type: 3}
   - {fileID: 6359800076859177636, guid: a4974e8647d0ae34cb6a01e7f108dcb3, type: 3}
   _structure_prefabs: []
   algorithm: 6
@@ -125,25 +125,25 @@ MonoBehaviour:
     input: 0
     min: -30
     max: 30
-    multiplier: 3
+    multiplier: 6
     invert: 0
   split_chance:
     input: 0
     min: 0
     max: 25
-    multiplier: 7
+    multiplier: 1
     invert: 0
   generation_amount:
-    input: 3
+    input: 0
     min: -30
-    max: 30
-    multiplier: 200
+    max: 25
+    multiplier: 300
     invert: 0
   change_direction_chance:
     input: 0
     min: 0
     max: 25
-    multiplier: 3
+    multiplier: 15
     invert: 0
   width:
     input: 0

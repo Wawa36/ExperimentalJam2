@@ -23,7 +23,9 @@ namespace Tower_Management
         // properties 
         public float Grow_Speed { get { return Calculate_Grow_Speed(); } }
 
-        public Vector3 Grow_Direction { get { return inputs.player_dir; } }
+        public Vector3 Player_Direction { get { return inputs.player_dir; } }
+
+        public Vector3 Normal_Direction { get { return inputs.hit_normal; } }
 
         public int Split_Chance { get { return Calculate_Split_Chance(); } }
 

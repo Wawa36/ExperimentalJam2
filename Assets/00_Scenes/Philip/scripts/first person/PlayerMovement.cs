@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    CharacterController controller;
+    [HideInInspector] public CharacterController controller;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     [HideInInspector] public Vector3 velocity;
@@ -77,6 +77,8 @@ public class PlayerMovement : MonoBehaviour
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
+
+            throwForce = 0;
         }
         if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
@@ -106,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
 
             notAiming = true;
             orbScript.collider.enabled = false;
+            orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
         }
@@ -120,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            
+            throwForce = 0;
             controller.Move(activeOrb.transform.position + Vector3.up-transform.position);
             orbScript.GetCollected();
         }

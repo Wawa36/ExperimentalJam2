@@ -13,6 +13,7 @@ namespace Tower_Management
 
         [Header("Building Parameter")]
         [SerializeField] GameObject _mesh;
+        [SerializeField] MeshRenderer _renderer;
         [SerializeField] Collider _main_collider;
         [SerializeField] [Range(0, 1)] float origin_turn;
         [SerializeField] List<Transform> horizontal_origins;
@@ -34,6 +35,11 @@ namespace Tower_Management
         /// Mesh of the Building
         /// </summary>
         public GameObject Mesh { get { return _mesh; } }
+
+        /// <summary>
+        /// Renderer of the Mesh
+        /// </summary>
+        public MeshRenderer Renderer { get { return _renderer; } }
 
         /// <summary>
         /// Collider for physics 
@@ -74,7 +80,7 @@ namespace Tower_Management
             _main_collider = GetComponentInChildren<Collider>();
             _cambium = cambium;
             Main_Collider.transform.parent.localScale = new Vector3(1, 1, 0);
-            mat_cache = Mesh.GetComponent<MeshRenderer>().material;
+            mat_cache = Renderer.material;
         }
 
         /// <summary>
@@ -121,7 +127,7 @@ namespace Tower_Management
                 }
             }
 
-            _mesh.transform.SetParent(origin);
+            Mesh.transform.SetParent(origin);
 
             return origin;
         }
@@ -131,8 +137,8 @@ namespace Tower_Management
         /// </summary>
         public void On_Merged ()
         {
-            Destroy(Mesh.GetComponent<MeshFilter> ());
-            Destroy(Mesh.GetComponent<MeshRenderer>());
+            Destroy(Renderer.GetComponent<MeshFilter> ());
+            Destroy(Renderer);
         }
     }
 }

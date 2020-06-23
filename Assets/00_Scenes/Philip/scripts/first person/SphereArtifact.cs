@@ -10,7 +10,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
-    [HideInInspector] public SphereCollider collider;
+    [HideInInspector] public new SphereCollider collider;
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
@@ -34,7 +34,6 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
-        playerScript.throwForce = 0;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
@@ -76,7 +75,7 @@ public class SphereArtifact : MonoBehaviour
     {
         while (!playerScript.carryingTheOrb)
         {
-            transform.position = Vector3.Lerp(transform.position, playerScript.transform.position, .2f);
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, .4f);
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
                 GetCollected();
@@ -89,7 +88,7 @@ public class SphereArtifact : MonoBehaviour
     {
         if (!colided)
         {
-
+            
             colided = true;
             rigid.velocity = Vector3.zero;
             transform.position = collision.GetContact(0).point;
@@ -99,19 +98,21 @@ public class SphereArtifact : MonoBehaviour
             if (collision.gameObject.CompareTag("Ground"))
             {
                 //hier kommt der fall hin das die Kugel den boden trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity));
-                
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity),collision.contacts[0].normal);
+               
+
             }
             else if (collision.gameObject.CompareTag("Building"))
             {
                 // hier kommt der fall hin das die Kugel ein Gebäude trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity));
-                
+               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity),collision.contacts[0].normal);
+
             }
+            
         }
     }
 
-    void calculateAlleParameter(GameObject tower)
+    void calculateAlleParameter(GameObject tower,Vector3 normal)
     {
         Tower.Player_Inputs inputs;
         Tower towerscript = tower.GetComponent<Tower>();
@@ -121,6 +122,7 @@ public class SphereArtifact : MonoBehaviour
         inputs.throw_dist = Vector3.Distance(transform.position, playerTransform.position);
         inputs.player_dir = playerScript.lookDirection;
         inputs.player_speed = Vector3.Magnitude(playerScript.velocity);
+        inputs.hit_normal = normal;
         if (hit.collider != null)
         {
             inputs.ground_tag = hit.collider.tag;
