@@ -259,7 +259,6 @@ namespace Tower_Management
                 return -player_dir;
             }
 
-            return default;
         }
 
         // merging
