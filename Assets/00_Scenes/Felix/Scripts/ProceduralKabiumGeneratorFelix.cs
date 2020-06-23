@@ -27,6 +27,8 @@ public class ProceduralKabiumGeneratorFelix
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
+    static Dictionary<Tower, int> towerAndCambiumAmount = new Dictionary<Tower, int>();
+    static int dyingGeneration = 0;
     static Dictionary<Tower, int> towerTurnNumber = new Dictionary<Tower, int>();
     static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambiums = new Dictionary<Tower, List<Tower.Cambium>>();
 
