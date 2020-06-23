@@ -25,6 +25,7 @@ namespace Tower_Management
         [SerializeField] KabiumAlgorithm algorithm;
         [SerializeField] int _start_cambiums;
         [SerializeField] float _growth_speed;
+        [SerializeField] Vector3 override_start_direction;
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
@@ -100,7 +101,7 @@ namespace Tower_Management
                 var c = new Cambium[1];
                 c[0] = new Cambium(transform.position, Building_Prefabs[0]); // index 0 is always the first spawned building
                 c[0].steps = start_steps_zero? 0 : Steps;
-                c[0].normal = mapper.Grow_Direction;
+                c[0].normal = override_start_direction.magnitude == 0? mapper.Player_Direction : override_start_direction;
                 Create_Building(new Cambiums_At_Active(null, c));
             }
         }
@@ -244,6 +245,11 @@ namespace Tower_Management
         public Tower_Input_Mapper Mapper { get { return mapper; } }
 
         public int Building_Generation { get { return _building_generation; } }
+
+        Vector3 Calculate_Grow_Direciton(Vector3 player_dir, Vector3 normal_dir) 
+        {
+            return default;
+        }
 
         // merging
         void Merge_Chunk(bool merge_all = false) 
