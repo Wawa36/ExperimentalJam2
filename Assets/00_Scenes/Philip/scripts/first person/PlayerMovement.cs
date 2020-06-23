@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float throwForceIncrease;
-    [SerializeField] float maxThrowingForce;
+    public float maxThrowingForce;
     [SerializeField] LayerMask mask;
 
     [HideInInspector] public float throwForce=0;
@@ -77,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
+            orbScript.StartCoroutine(orbScript.changeColor());
 
             throwForce = 0;
         }
@@ -85,9 +86,10 @@ public class PlayerMovement : MonoBehaviour
             if (throwForce < maxThrowingForce)
             {
                 throwForce += Time.deltaTime * throwForceIncrease;
+                
             }
             launchArc.lineRenderer.enabled = true;
-            launchArc.DrawPath(cameraRigTransform.forward * throwForce + cameraRigTransform.up * throwForce/4);
+            launchArc.DrawPath(cameraRigTransform.forward * maxThrowingForce + cameraRigTransform.up * maxThrowingForce/4);
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
@@ -99,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
             orbRigid.useGravity = true;
             orbScript.timer = 0;
             orbScript.StartCoroutine(orbScript.FlyTime());
-            orbRigid.velocity= cameraRigTransform.forward  * throwForce + cameraRigTransform.up * throwForce / 4;
+            orbRigid.velocity= cameraRigTransform.forward  * maxThrowingForce + cameraRigTransform.up * maxThrowingForce / 4;
             activeOrb.transform.parent = null;
         }
         

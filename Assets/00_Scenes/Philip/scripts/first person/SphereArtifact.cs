@@ -10,11 +10,17 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
+
+    [SerializeField] Color color1;
+    [SerializeField] Color color2;
+
     [HideInInspector] public new SphereCollider collider;
     PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
     public float timer;
+    Material material;
+    MeshRenderer meshR;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +32,19 @@ public class SphereArtifact : MonoBehaviour
         playerScript = playerTransform.GetComponent<PlayerMovement>();
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
+        meshR = GetComponent<MeshRenderer>();
+       
+    }
+
+    public IEnumerator changeColor()
+    {
+        while(true)
+        {
+            meshR.material.color = Color.Lerp(color1, color2, playerScript.throwForce / playerScript.maxThrowingForce);
+
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 
     /// <summary>
@@ -34,6 +53,7 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
+        meshR.material.color = color1;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
