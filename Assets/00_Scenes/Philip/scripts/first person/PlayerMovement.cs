@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            
+            throwForce = 0;
             controller.Move(activeOrb.transform.position + Vector3.up-transform.position);
             orbScript.GetCollected();
         }
