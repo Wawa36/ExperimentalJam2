@@ -26,9 +26,6 @@ public class ProceduralKabiumGeneratorFelix
 
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
-    static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
-    static Dictionary<Tower, int> towerAndCambiumAmount = new Dictionary<Tower, int>();
-    static int dyingGeneration = 0;
     static Dictionary<Tower, int> towerTurnNumber = new Dictionary<Tower, int>();
     static Dictionary<Tower, List<Tower.Cambium>> towerAndLatestMainCambiums = new Dictionary<Tower, List<Tower.Cambium>>();
 
@@ -55,8 +52,11 @@ public class ProceduralKabiumGeneratorFelix
 
 
     #region newBaobabTree
+    static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
+    static Dictionary<Tower, int> towerAndCambiumAmount = new Dictionary<Tower, int>();
+    static Dictionary<Tower, Dictionary<int, int>> towerAndBranchDyingGeneration = new Dictionary<Tower, Dictionary<int, int>>();
 
-    private static int CambiumGenerations(Building at_building, int generations)
+    private static int CambiumGenerations(Building at_building, int generations = 0)
     {
         if(at_building.Parent_Building == null)
         {
@@ -64,151 +64,196 @@ public class ProceduralKabiumGeneratorFelix
         }
         else
         {
-            generations += 1;
-            return CambiumGenerations(at_building.Parent_Building, generations);
+            return CambiumGenerations(at_building.Parent_Building, generations + 1);
         }
     }
 
     static Dictionary<Tower, int> numberOfNos = new Dictionary<Tower, int>();
     public static Tower.Cambiums_At_Active BaobabTree(Building at_building, Tower tower)
     {
+        // Init Towers Dictionarres ------------------------------------------------
 
         if (!towerAndBranches.ContainsKey(tower))
         {
             towerAndBranches.Add(tower, 1);
         }
 
-        if (!towerTurnNumber.ContainsKey(tower))
+        if (!towerAndCambiumAmount.ContainsKey(tower))
         {
-            towerTurnNumber.Add(tower, 1);
+            towerAndCambiumAmount.Add(tower, 1);
         }
 
-        if (!numberOfNos.ContainsKey(tower))
+        if (!towerAndBranchDyingGeneration.ContainsKey(tower))
         {
-            numberOfNos.Add(tower, 0);
+            Dictionary<int, int> branchDyingGeneration = new Dictionary<int, int>();
+            branchDyingGeneration.Add(0,-1); 
+            towerAndBranchDyingGeneration.Add(tower, branchDyingGeneration);
         }
 
-        int maxNeighbours = Mathf.Clamp(tower.Mapper.Width, 1, 4); //between 1 and 4
+
+        //Set Params ---------------------------------------------------------------
+
+        int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 40); //between 1 and 40 ?
+        int maxCambiums = maxCambiumsPerBranch * towerAndBranches[tower];
+
+        int splitAfterGenerations = 30;//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
+        
+
+        //Prepare other Variables ------------------------------------------------
 
         Transform buildingTransform = at_building.Main_Collider.transform;
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
-        float widthSplitChance = maxNeighbours * 0.25f;
+        Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
+        Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
 
-        int maxCambiums = maxNeighbours * 7;
+        List<Vector3> positions = new List<Vector3>();
+        positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
 
 
-        if (towerAndBranches[tower] < maxCambiums)
+        //DEBUG -----------------------------------------------------------------
+        Debug.Log("---------------------------------------- new cambium ---------------------------");
+        Debug.Log("max cambiums "+ maxCambiums);
+        Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
+        Debug.Log("nbr of branches " + towerAndBranches[tower]);
+        Debug.Log("ID? " + at_building.Cambium.branch_ID);
+
+
+
+        //Algorithm --------------------------------------------------------------
+
+        Dictionary<int, int> thisTowersBranchGenerations = towerAndBranchDyingGeneration[tower];
+        int cambiumGeneration = CambiumGenerations(at_building);
+
+        if (cambiumGeneration != thisTowersBranchGenerations[at_building.Cambium.branch_ID])
         {
-            //if(CambiumGenerations(at_building, 0) % tower.Mapper.Split_Chance == 0)
-
-
-            if (HasStillSteps(at_building))
+            if (cambiumGeneration % splitAfterGenerations == 0 && cambiumGeneration != 0) // Do Split
             {
-                Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
-                                                 //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
-                                                 at_building.Cambium.normal,
-                                                 tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
-                                                 at_building.Cambium.steps);
-                kambiumList.Add(newCambium);
+                int newBranchID = towerAndBranches[tower]; //das was drin steht erhöt
+                if (Random.value > 0.5) //L - R
+                {
+                    kambiumList.Add(new Tower.Cambium(positions[0] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]),
+                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]),
+                                    tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                    5,
+                                    at_building.Cambium.branch_ID)); //behalt den selben ID
+
+                    kambiumList.Add(new Tower.Cambium(positions[3] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]),
+                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]),
+                                    tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                    5,
+                                    newBranchID)); //neuer ID
+
+                }
+                else //B - F
+                {
+                    kambiumList.Add(new Tower.Cambium(positions[1] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]),
+                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]),
+                                    tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                    5,
+                                    at_building.Cambium.branch_ID)); //behalt den selben ID
+
+                    kambiumList.Add(new Tower.Cambium(positions[2] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]),
+                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]),
+                                    tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                    5,
+                                    newBranchID)); //neuer ID
+                }
+
+                //Die generation überschreiben, set die generation for this branch
+                thisTowersBranchGenerations[at_building.Cambium.branch_ID] = cambiumGeneration;
+                towerAndBranchDyingGeneration[tower] = thisTowersBranchGenerations; //write back
+
+                //Neue Branch
+                towerAndCambiumAmount[tower]++;
+                towerAndBranches[tower]++;
+
+                Dictionary<int, int> newBranchDyingGeneration = new Dictionary<int, int>();
+                towerAndBranchDyingGeneration[tower].Add(newBranchID, 0);
 
                 return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
             }
-            else //split or grow larger
+            else
             {
-                int countNewCambiums = 0;
-
-                Vector3 backRightPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-                Vector3 backLeftPos = buildingTransform.position + (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-                Vector3 frontRightPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) + (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-                Vector3 frontLeftPos = buildingTransform.position - (buildingTransform.forward * buildingTransform.localScale.z / 2) - (buildingTransform.right * buildingTransform.localScale.x / 2) + (buildingTransform.up * buildingTransform.localScale.y / 2);
-
-                List<Vector3> positions = new List<Vector3>();
-                positions.Add(backRightPos); positions.Add(backLeftPos); positions.Add(frontRightPos); positions.Add(frontLeftPos);
-
-
-                if (Random.Range(0, tower.Mapper.Split_Chance + 5) != 0) 
+                if (towerAndCambiumAmount[tower] <= maxCambiums)
                 {
-                    bool hasStartedOne = false;
-                    
-
-                    if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                    if (HasStillSteps(at_building)) //fullfill steps
                     {
-                        //back right
-                        kambiumList.Add(new Tower.Cambium(backRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
-                        hasStartedOne = true;
-                        countNewCambiums++;
-                        Debug.Log("Bright");
+                        Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
+                                                         //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
+                                                         at_building.Cambium.normal,
+                                                         tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                                         at_building.Cambium.steps,
+                                                         at_building.Cambium.branch_ID);
+                        kambiumList.Add(newCambium);
+
+                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
-
-                    if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
+                    else //grow larger
                     {
-                        //back left
-                        kambiumList.Add(new Tower.Cambium(backLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
-                        hasStartedOne = true;
-                        countNewCambiums++;
-                        Debug.Log("Bleft");
-                    }
+                        int countNewCambiums = 0;
 
-                    if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
-                    {
-                        //front right
-                        kambiumList.Add(new Tower.Cambium(frontRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
-                        hasStartedOne = true;
-                        countNewCambiums++;
-                        Debug.Log("Fright");
-                    }
+                        bool hasStartedOne = false;
 
-                    if (Random.value < widthSplitChance) // 1 chance von 4 dass es weiter geht
-                    {
-                        //front left
-                        kambiumList.Add(new Tower.Cambium(frontLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
-                        hasStartedOne = true;
-                        countNewCambiums++;
-                        Debug.Log("Fleft");
-                    }
+                        if (Random.value > 0.25)
+                        {
+                            //back right
+                            kambiumList.Add(new Tower.Cambium(backRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
 
-                    if (!hasStartedOne) //falls keiner gestarted wurden ist
-                    {
-                        kambiumList.Add(new Tower.Cambium(positions[Random.Range(0, positions.Count)], buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps));
-                        countNewCambiums++;
+                        if (Random.value > 0.25)
+                        {
+                            //back left
+                            kambiumList.Add(new Tower.Cambium(backLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
+
+                        if (Random.value > 0.25)
+                        {
+                            //front right
+                            kambiumList.Add(new Tower.Cambium(frontRightPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
+
+                        if (Random.value > 0.25)
+                        {
+                            //front left
+                            kambiumList.Add(new Tower.Cambium(frontLeftPos, Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
+
+                        if (!hasStartedOne) //falls keiner gestarted wurden ist
+                        {
+                            kambiumList.Add(new Tower.Cambium(positions[Random.Range(0, positions.Count)], buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            countNewCambiums++;
+                        }
+
+
+                        towerAndCambiumAmount[tower] += countNewCambiums;
+
+                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
                 }
-                else //or split
+                else //STOP because to many cambiums
                 {
-
-                    //create two that are more away
-                    Vector3 firstPos = positions[Random.Range(0, positions.Count)];
-                    positions.Remove(firstPos);
-                    Vector3 secondPos = positions[Random.Range(0, positions.Count)];
-                    positions.Add(firstPos);
-
-                    kambiumList.Add(new Tower.Cambium(firstPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - firstPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], maxNeighbours * 2 + 2));
-                    countNewCambiums++;
-
-                    kambiumList.Add(new Tower.Cambium(secondPos + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - secondPos), tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], maxNeighbours * 2 + 2));
-                    countNewCambiums++;
-
-                    numberOfNos[tower] = maxCambiums - 1;
-
-
+                    towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
+                    return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                 }
-                  
-
-
-
-                towerAndBranches[tower] += countNewCambiums - 1; //eins ist sowieso
-
-                return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
             }
         }
-        else
+        else //STOP because has to die
         {
-            towerAndBranches[tower]--; //dieses Kabium hört auf
+           Debug.Log("I die " + at_building.Cambium.branch_ID + " and I'm from this gen " + thisTowersBranchGenerations[at_building.Cambium.branch_ID]);
+            towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }
-
-
 
     }
 

@@ -53,6 +53,7 @@ MonoBehaviour:
   algorithm: 0
   _start_cambiums: 1
   _growth_speed: 0.1
+  override_start_direction: {x: 0, y: 1, z: 0}
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
@@ -80,9 +81,10 @@ MonoBehaviour:
   _delay: 0.5
   _steps: 3
   start_steps_zero: 1
-  chunk_size: 100
+  chunk_size: 50
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
+    hit_normal: {x: 0, y: 0, z: 0}
     orb_energy: 0
     throw_dist: 3
     throw_time: 1
@@ -105,20 +107,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grow_speed:
     input: 3
-    min: -10
-    max: 45
-    multiplier: 3
+    min: -30
+    max: 30
+    multiplier: 10
     invert: 0
   split_chance:
-    input: 0
+    input: 2
     min: 0
     max: 25
     multiplier: 30
     invert: 1
   generation_amount:
-    input: 3
-    min: -10
-    max: 45
+    input: 0
+    min: 0
+    max: 25
     multiplier: 600
     invert: 0
   change_direction_chance:
@@ -130,6 +132,6 @@ MonoBehaviour:
   width:
     input: 1
     min: 0
-    max: 80
-    multiplier: 4
+    max: 40
+    multiplier: 40
     invert: 0
