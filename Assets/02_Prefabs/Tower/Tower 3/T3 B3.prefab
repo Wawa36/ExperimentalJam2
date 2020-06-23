@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 4949428209136423835}
   - component: {fileID: 4567334597329265163}
   m_Layer: 0
-  m_Name: T3 B6
+  m_Name: T3 B3
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,6 +72,7 @@ MonoBehaviour:
     normal: {x: 0, y: 0, z: 0}
     prefab: {fileID: 0}
     steps: 0
+    branch_ID: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
   mat_cache: {fileID: 0}
@@ -217,6 +218,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mesh
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ee972f5abbdd1b14ea9bdb0dc0acd7fa,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee972f5abbdd1b14ea9bdb0dc0acd7fa, type: 3}
