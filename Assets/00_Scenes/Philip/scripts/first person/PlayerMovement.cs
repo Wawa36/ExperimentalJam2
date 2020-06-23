@@ -25,11 +25,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float jumpHeight;
-    [SerializeField] float throwForceIncrease;
-    public float maxThrowingForce;
+    [SerializeField] float orbEnergyIncrease;
+    public float throwingForce;
     [SerializeField] LayerMask mask;
 
-    [HideInInspector] public float throwForce=0;
+    [HideInInspector] public float orbEnergy=0;
     
 
     private void Start()
@@ -66,8 +66,11 @@ public class PlayerMovement : MonoBehaviour
 
         velocity.x = XAxis;
         velocity.z = YAxis;
-        
+
+        Vector3 previousPosition = transform.position;
         controller.Move(transform.right * velocity.x + transform.forward * velocity.z + Vector3.up* velocity.y* Time.deltaTime);
+        velocity = (transform.position - previousPosition) / Time.deltaTime;
+
     }
     /// <summary>
     /// wirft den orb in richtung vector3.forward des Spielers
@@ -79,17 +82,17 @@ public class PlayerMovement : MonoBehaviour
             notAiming = false;
             orbScript.StartCoroutine(orbScript.changeColor());
 
-            throwForce = 0;
+            orbEnergy = 0;
         }
         if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
-            if (throwForce < maxThrowingForce)
+            if (orbEnergy < throwingForce)
             {
-                throwForce += Time.deltaTime * throwForceIncrease;
+                orbEnergy += Time.deltaTime * orbEnergyIncrease;
                 
             }
             launchArc.lineRenderer.enabled = true;
-            launchArc.DrawPath(cameraRigTransform.forward * maxThrowingForce + cameraRigTransform.up * maxThrowingForce/4);
+            launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce/4);
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
@@ -101,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
             orbRigid.useGravity = true;
             orbScript.timer = 0;
             orbScript.StartCoroutine(orbScript.FlyTime());
-            orbRigid.velocity= cameraRigTransform.forward  * maxThrowingForce + cameraRigTransform.up * maxThrowingForce / 4;
+            orbRigid.velocity= cameraRigTransform.forward  * throwingForce + cameraRigTransform.up * throwingForce / 4;
             activeOrb.transform.parent = null;
         }
         
@@ -123,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            throwForce = 0;
+            orbEnergy = 0;
             controller.Move(activeOrb.transform.position + Vector3.up*3-transform.position);
             orbScript.GetCollected();
         }

@@ -40,7 +40,7 @@ public class SphereArtifact : MonoBehaviour
     {
         while(true)
         {
-            meshR.material.color = Color.Lerp(color1, color2, playerScript.throwForce / playerScript.maxThrowingForce);
+            meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
 
 
             yield return new WaitForEndOfFrame();
@@ -151,7 +151,7 @@ public class SphereArtifact : MonoBehaviour
         {
             inputs.ground_tag = null;
         }
-        inputs.orb_energy = playerScript.throwForce;
+        inputs.orb_energy = playerScript.orbEnergy;
         towerscript.Initialize(inputs);
     }
 }
