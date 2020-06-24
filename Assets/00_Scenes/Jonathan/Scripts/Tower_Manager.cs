@@ -25,7 +25,7 @@ namespace Tower_Management
 
         public void Add_Tower(Tower tower) { active_towers.Add(tower); }
 
-        void Update()
+        void LateUpdate()
         {
             if (!Is_Paused)
             {

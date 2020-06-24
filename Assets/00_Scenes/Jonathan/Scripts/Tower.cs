@@ -294,6 +294,7 @@ namespace Tower_Management
 
             // combine
             new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
+            new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
             merged_blocks.Add(new_chunk);
 
