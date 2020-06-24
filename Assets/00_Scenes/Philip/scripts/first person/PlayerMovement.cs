@@ -120,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
             orbRigid.useGravity = true;
             orbScript.timer = 0;
             orbScript.StartCoroutine(orbScript.FlyTime());
+            orbScript.trail.enabled = true;
             orbRigid.velocity= cameraRigTransform.forward  * throwingForce + cameraRigTransform.up * throwingForce / 4;
             activeOrb.transform.parent = null;
         }
