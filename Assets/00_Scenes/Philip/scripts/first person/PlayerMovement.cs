@@ -104,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
 
                 }
 
+                
                 orbScript.changeColor();
                 launchArc.lineRenderer.enabled = true;
                 launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);

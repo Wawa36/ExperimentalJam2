@@ -16,11 +16,26 @@ public class SphereArtifact : MonoBehaviour
 
     [HideInInspector] public new SphereCollider collider;
     [SerializeField] PlayerMovement playerScript;
+    [SerializeField] MeshRenderer meshR;
+
+    [Header("Particles")]
+    public ParticleSystem fire;
+    public ParticleSystem glow;
+    public ParticleSystem zoom;
+    public ParticleSystem Circle;
+
+    int fireCount;
+    int glowCount;
+    int zoomCount=10;
+    int CircleCount=1;
+
+    float particleTimer;
+
     Rigidbody rigid;
     bool colided;
     public float timer;
     Material material;
-    [SerializeField] MeshRenderer meshR;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +48,24 @@ public class SphereArtifact : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
     }
+
+    private void Update()
+    {
+        particleTimer += Time.deltaTime;
+        if (particleTimer >= .1f)
+        {
+            fireCount = Mathf.RoundToInt(Mathf.Lerp(1, 8, playerScript.orbEnergy / playerScript.throwingForce));
+            glowCount = Mathf.RoundToInt(Mathf.Lerp(0, 8, playerScript.orbEnergy / playerScript.throwingForce));
+            ParticleEmission(fire, fireCount);
+            ParticleEmission(glow, glowCount);
+            if (playerScript.orbEnergy >= 25)
+            {
+                ParticleEmission(zoom, zoomCount);
+                //ParticleEmission(Circle, CircleCount);
+            }
+            particleTimer = 0;
+        }
+    }
     private void OnEnable()
     {
 
@@ -41,7 +74,16 @@ public class SphereArtifact : MonoBehaviour
 
     public void changeColor()
     {
-            meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+        meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+        
+
+
+    }
+
+    void ParticleEmission(ParticleSystem target, int emissionCount)
+    {
+
+        target.Emit(emissionCount);
 
     }
 

@@ -7,6 +7,7 @@ public class LaunchArc : MonoBehaviour
 {
     Rigidbody rigid;
     [SerializeField] float maxPathTime;
+    [SerializeField] LayerMask mask;
     public MeshRenderer targetSphere;
     [HideInInspector] public LineRenderer lineRenderer;
     int rayCastResolution;
@@ -40,7 +41,7 @@ public class LaunchArc : MonoBehaviour
                 if (rayCastResolution <= i)
                 {
                     rayCastResolution += 1;
-                    if (Physics.Raycast(previousDrawpoint, drawpoint-previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint),LayerMask.GetMask("Default")))
+                    if (Physics.Raycast(previousDrawpoint, drawpoint-previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint),mask))
                     {
                         endVector = hit.point;
                         drawpoint = hit.point;
