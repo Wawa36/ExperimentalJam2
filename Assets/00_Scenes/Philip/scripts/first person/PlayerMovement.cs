@@ -85,19 +85,29 @@ public class PlayerMovement : MonoBehaviour
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
-            orbScript.StartCoroutine(orbScript.changeColor());
+            
 
             orbEnergy = 0;
         }
         if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
-            if (orbEnergy < throwingForce)
+            if (Input.GetButton("Fire2"))
             {
-                orbEnergy += Time.deltaTime * orbEnergyIncrease;
-                
+                orbScript.GetCollected();
             }
-            launchArc.lineRenderer.enabled = true;
-            launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce/4);
+
+            else
+            {
+                if (orbEnergy < throwingForce)
+                {
+                    orbEnergy += Time.deltaTime * orbEnergyIncrease;
+
+                }
+
+                orbScript.changeColor();
+                launchArc.lineRenderer.enabled = true;
+                launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
+            }
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
@@ -132,7 +142,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
             orbEnergy = 0;
-            controller.Move(activeOrb.transform.position + Vector3.up*3-transform.position);
+            controller.enabled = false;
+            transform.position= activeOrb.transform.position + Vector3.up*3;
+            controller.enabled = true;
             orbScript.GetCollected();
         }
     }
@@ -167,6 +179,7 @@ public class PlayerMovement : MonoBehaviour
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
+                orbScript.changeColor();
             }
             if (Input.GetButtonDown("Fire4"))
             {
@@ -182,6 +195,7 @@ public class PlayerMovement : MonoBehaviour
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
+                
             }
         }
 

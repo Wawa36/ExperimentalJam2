@@ -15,12 +15,12 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Color color2;
 
     [HideInInspector] public new SphereCollider collider;
-    PlayerMovement playerScript;
+    [SerializeField] PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
     public float timer;
     Material material;
-    MeshRenderer meshR;
+    [SerializeField] MeshRenderer meshR;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,19 +32,17 @@ public class SphereArtifact : MonoBehaviour
         playerScript = playerTransform.GetComponent<PlayerMovement>();
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
-        meshR = GetComponent<MeshRenderer>();
-       
+    }
+    private void OnEnable()
+    {
+
+        changeColor();
     }
 
-    public IEnumerator changeColor()
+    public void changeColor()
     {
-        while(true)
-        {
             meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
 
-
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     /// <summary>
