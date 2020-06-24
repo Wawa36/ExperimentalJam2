@@ -64,12 +64,17 @@ public class PlayerMovement : MonoBehaviour
         float XAxis = Input.GetAxis("Horizontal")*movespeed*Time.deltaTime;
         float YAxis = Input.GetAxis("Vertical")*movespeed*Time.deltaTime;
 
+
         velocity.x = XAxis;
         velocity.z = YAxis;
-
         Vector3 previousPosition = transform.position;
         controller.Move(transform.right * velocity.x + transform.forward * velocity.z + Vector3.up* velocity.y* Time.deltaTime);
-        velocity = (transform.position - previousPosition) / Time.deltaTime;
+        if( Mathf.Approximately(transform.position.y, previousPosition.y))
+        {
+            velocity.y = (transform.position.y - previousPosition.y) / Time.deltaTime;
+        }
+        
+        
 
     }
     /// <summary>
@@ -186,15 +191,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") &&controller.isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
+            velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
     }
 
     void Gravity()
     {
-       
-            velocity.y += gravity * Time.deltaTime;
+
+
+        velocity.y += gravity * Time.deltaTime;
         
+
         if(IsOnTheGround()&& velocity.y<0)
         {
             velocity.y = -2f;
