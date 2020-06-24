@@ -35,16 +35,19 @@ namespace Tower_Management
         [SerializeField] int chunk_size;
 
         [Header("Debugging")]
-        public Player_Inputs inputs;
+        [SerializeField] Player_Inputs inputs;
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int _building_generation = 0;
+        [SerializeField] bool finished_growing;
 
         // stored growth data
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
-        List<GameObject> merged_blocks = new List<GameObject>();
+        [SerializeField] List<GameObject> merged_blocks = new List<GameObject>();
+        [SerializeField] List<GameObject> deep_merged_blocks = new List<GameObject>();
+
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
         // register at manager
@@ -237,7 +240,11 @@ namespace Tower_Management
                     Destroy((c as Component).gameObject);
                 }
 
-               Merge_Chunk(true);
+                if (!finished_growing)
+                {
+                    Merge_Chunk(true);
+                    finished_growing = true;
+                }
             }
 
             return value;
@@ -294,7 +301,7 @@ namespace Tower_Management
 
             // combine
             new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
-            new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+            new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt16;
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
             merged_blocks.Add(new_chunk);
 
@@ -302,6 +309,45 @@ namespace Tower_Management
             {
                 (c as Building).On_Merged();
                 inactive_blocks.RemoveAt(0);
+            }
+
+            // do a deep merge
+            if (merged_blocks.Count >= 10 || merge_all)
+                Deep_Merge();
+        }
+
+        void Deep_Merge() 
+        {
+            List<CombineInstance> combine = new List<CombineInstance>();
+
+            // create new chunk
+            var new_chunk = new GameObject("Deep Chunk #" + (deep_merged_blocks.Count));
+            new_chunk.transform.SetParent(transform);
+            new_chunk.tag = "Building";
+            new_chunk.isStatic = true;
+            new_chunk.AddComponent<MeshFilter>();
+            new_chunk.AddComponent<MeshRenderer>();
+            new_chunk.GetComponent<MeshRenderer>().material = default_material;
+
+            // add building meshes
+            for (int i = 0; i < merged_blocks.Count; i++)
+            {
+                var instance = new CombineInstance();
+                instance.mesh = merged_blocks[i].GetComponent<MeshFilter>().sharedMesh;
+                instance.transform = merged_blocks[i].GetComponent<MeshRenderer>().transform.localToWorldMatrix;
+                combine.Add(instance);
+            }
+
+            // combine
+            new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
+            new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+            new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
+            deep_merged_blocks.Add(new_chunk);
+
+            foreach (var c in merged_blocks.ToList())
+            {
+                Destroy(c);
+                merged_blocks.RemoveAt(0);
             }
         }
 
