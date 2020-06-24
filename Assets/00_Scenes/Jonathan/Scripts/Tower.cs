@@ -1,11 +1,7 @@
-﻿using Microsoft.Win32.SafeHandles;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Transactions;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Tower_Management
 {
@@ -33,6 +29,7 @@ namespace Tower_Management
         [SerializeField] bool decrement_steps = true;
         [SerializeField] bool start_steps_zero = false;
         [SerializeField] int chunk_size;
+        [SerializeField] int deep_chunk_size = 10;
 
         [Header("Debugging")]
         [SerializeField] Player_Inputs inputs;
@@ -45,8 +42,8 @@ namespace Tower_Management
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
-        [SerializeField] List<GameObject> merged_blocks = new List<GameObject>();
-        [SerializeField] List<GameObject> deep_merged_blocks = new List<GameObject>();
+        [SerializeField] List<GameObject> merged_chunks = new List<GameObject>();
+        [SerializeField] List<GameObject> deep_merged_chunk = new List<GameObject>();
 
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
@@ -87,14 +84,14 @@ namespace Tower_Management
 
             _growth_speed_over_lifetime.keys = keys;
 
-            // change tangetns to linear
+            // change tangents to linear
             for (int i = 0; i < _growth_speed_over_lifetime.keys.Length; i++)
             {
                 keys[i].time *= factor;
-                //keys[i].inTangent = 1;
-                //keys[i].outTangent = 1;
-                AnimationUtility.SetKeyLeftTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
-                AnimationUtility.SetKeyRightTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+                keys[i].tangentMode = 2; 
+   
+                //AnimationUtility.SetKeyLeftTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
+                //AnimationUtility.SetKeyRightTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
             }
         }
 
@@ -279,7 +276,7 @@ namespace Tower_Management
             List<CombineInstance> combine = new List<CombineInstance>();
 
             // create new chunk
-            var new_chunk = new GameObject("Chunk #" + (merged_blocks.Count));
+            var new_chunk = new GameObject("Chunk #" + (merged_chunks.Count));
             new_chunk.transform.SetParent(transform);
             new_chunk.tag = "Building";
             new_chunk.isStatic = true;
@@ -303,7 +300,7 @@ namespace Tower_Management
             new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
             new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt16;
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
-            merged_blocks.Add(new_chunk);
+            merged_chunks.Add(new_chunk);
 
             foreach (var c in inactive_blocks.ToList())
             {
@@ -312,7 +309,7 @@ namespace Tower_Management
             }
 
             // do a deep merge
-            if (merged_blocks.Count >= 10 || merge_all)
+            if (merged_chunks.Count >= deep_chunk_size || merge_all)
                 Deep_Merge();
         }
 
@@ -321,7 +318,7 @@ namespace Tower_Management
             List<CombineInstance> combine = new List<CombineInstance>();
 
             // create new chunk
-            var new_chunk = new GameObject("Deep Chunk #" + (deep_merged_blocks.Count));
+            var new_chunk = new GameObject("Deep Chunk #" + (deep_merged_chunk.Count));
             new_chunk.transform.SetParent(transform);
             new_chunk.tag = "Building";
             new_chunk.isStatic = true;
@@ -330,11 +327,11 @@ namespace Tower_Management
             new_chunk.GetComponent<MeshRenderer>().material = default_material;
 
             // add building meshes
-            for (int i = 0; i < merged_blocks.Count; i++)
+            for (int i = 0; i < merged_chunks.Count; i++)
             {
                 var instance = new CombineInstance();
-                instance.mesh = merged_blocks[i].GetComponent<MeshFilter>().sharedMesh;
-                instance.transform = merged_blocks[i].GetComponent<MeshRenderer>().transform.localToWorldMatrix;
+                instance.mesh = merged_chunks[i].GetComponent<MeshFilter>().sharedMesh;
+                instance.transform = merged_chunks[i].GetComponent<MeshRenderer>().transform.localToWorldMatrix;
                 combine.Add(instance);
             }
 
@@ -342,12 +339,12 @@ namespace Tower_Management
             new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
             new_chunk.GetComponent<MeshFilter>().mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
-            deep_merged_blocks.Add(new_chunk);
+            deep_merged_chunk.Add(new_chunk);
 
-            foreach (var c in merged_blocks.ToList())
+            foreach (var c in merged_chunks.ToList())
             {
                 Destroy(c);
-                merged_blocks.RemoveAt(0);
+                merged_chunks.RemoveAt(0);
             }
         }
 
