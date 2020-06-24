@@ -64,7 +64,15 @@ public class ProceduralKabiumGeneratorFelix
         }
         else
         {
-            return CambiumGenerations(at_building.Parent_Building, generations + 1);
+            if(at_building.Parent_Building.Cambium.normal != Vector3.up)
+            {
+                return CambiumGenerations(at_building.Parent_Building, generations); //don't add if it is not going up, but to the side
+            }
+            else
+            {
+                return CambiumGenerations(at_building.Parent_Building, generations + 1);
+            }
+
         }
     }
 
@@ -98,15 +106,16 @@ public class ProceduralKabiumGeneratorFelix
 
 
         int splitAfterGenerations;
-        if (tower.Mapper.Split_Chance == 0)
+        /*if (tower.Mapper.Split_Chance == 0)
         {
             splitAfterGenerations = int.MaxValue; //keine Spaltung
         }
         else
         {
             splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 5, 30);//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
-        }
-        Debug.Log("splitAfterGenerations "+ splitAfterGenerations);
+        }*/
+
+        splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 2, 30); // kann nicht 0 sein
 
         //Prepare other Variables ------------------------------------------------
 
@@ -123,14 +132,15 @@ public class ProceduralKabiumGeneratorFelix
 
 
         //DEBUG -----------------------------------------------------------------
-        Debug.Log("---------------------------------------- new cambium ---------------------------");
-        Debug.Log("max cambiums "+ maxCambiums);
-        Debug.Log("max cambiums per B "+ maxCambiumsPerBranch);
-        Debug.Log("cambium A "+ towerAndCambiumAmount[tower]);
+        //Debug.Log("---------------------------------------- new cambium ---------------------------");
+        //Debug.Log("max cambiums "+ maxCambiums);
+        //Debug.Log("max cambiums per B "+ maxCambiumsPerBranch);
+        //Debug.Log("cambium A "+ towerAndCambiumAmount[tower]);
         //Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
         //Debug.Log("nbr of branches " + towerAndBranches[tower]);
-       // Debug.Log("ID? " + at_building.Cambium.branch_ID);
-
+        //Debug.Log("ID? " + at_building.Cambium.branch_ID);
+        //Debug.Log("cambium normal "+at_building.Cambium.normal);
+        //Debug.Log("splitAfterGenerations " + splitAfterGenerations);
 
 
         //Algorithm --------------------------------------------------------------
@@ -265,15 +275,12 @@ public class ProceduralKabiumGeneratorFelix
                         }
                         //---
 
-                        Debug.Log("kambiumList "+ kambiumList.Count);
-
                         towerAndCambiumAmount[tower] += countNewCambiums - numberOfDeletions - 1; //eins ist immer
 
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
                     else //STOP because to many cambiums
                     {
-                        Debug.Log("to many cambiums");
                         towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
@@ -285,7 +292,7 @@ public class ProceduralKabiumGeneratorFelix
         }
         else //STOP because has to die
         {
-           Debug.Log("I die " + at_building.Cambium.branch_ID + " and I'm from this gen " + thisTowersBranchGenerations[at_building.Cambium.branch_ID]);
+            //Debug.Log("I die " + at_building.Cambium.branch_ID + " and I'm from this gen " + thisTowersBranchGenerations[at_building.Cambium.branch_ID]);
             towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }
