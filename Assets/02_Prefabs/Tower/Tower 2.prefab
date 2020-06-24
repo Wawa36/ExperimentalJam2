@@ -86,6 +86,7 @@ MonoBehaviour:
   decrement_steps: 1
   start_steps_zero: 1
   chunk_size: 50
+  deep_chunk_size: 10
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
     hit_normal: {x: 0, y: 0, z: 0}
@@ -97,6 +98,9 @@ MonoBehaviour:
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   _building_generation: 0
+  finished_growing: 0
+  merged_chunks: []
+  deep_merged_chunk: []
 --- !u!114 &9185885427241888973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,9 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grow_speed:
     input: 0
-    min: -1
+    min: -5
     max: 25
-    multiplier: 6
+    multiplier: 4
     invert: 0
   split_chance:
     input: 0
@@ -125,7 +129,7 @@ MonoBehaviour:
     input: 2
     min: -1
     max: 4
-    multiplier: 300
+    multiplier: 25
     invert: 0
   change_direction_chance:
     input: 1
@@ -138,4 +142,4 @@ MonoBehaviour:
     min: 0.2
     max: 4
     multiplier: 80
-    invert: 0
+    invert: 1
