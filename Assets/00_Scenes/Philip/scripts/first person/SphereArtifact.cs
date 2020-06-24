@@ -16,11 +16,24 @@ public class SphereArtifact : MonoBehaviour
 
     [HideInInspector] public new SphereCollider collider;
     [SerializeField] PlayerMovement playerScript;
+    [SerializeField] MeshRenderer meshR;
+
+    [Header("Particles")]
+    public ParticleSystem fire;
+    public ParticleSystem glow;
+    public ParticleSystem zoom;
+    public ParticleSystem Circle;
+
+    int fireCount;
+    int glowCount;
+    int zoomCount;
+    int CircleCount;
+
     Rigidbody rigid;
     bool colided;
     public float timer;
     Material material;
-    [SerializeField] MeshRenderer meshR;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +46,14 @@ public class SphereArtifact : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
     }
+
+    private void Update()
+    {
+        ParticleEmission(fire, fireCount);
+        ParticleEmission(glow, glowCount);
+        ParticleEmission(zoom, zoomCount);
+        ParticleEmission(Circle, CircleCount);
+    }
     private void OnEnable()
     {
 
@@ -41,7 +62,17 @@ public class SphereArtifact : MonoBehaviour
 
     public void changeColor()
     {
-            meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+        meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+        fireCount= Mathf.RoundToInt(Mathf.Lerp(3, 10, playerScript.orbEnergy / playerScript.throwingForce));
+        glowCount = Mathf.RoundToInt(Mathf.Lerp(0, 10, playerScript.orbEnergy / playerScript.throwingForce));
+
+
+    }
+
+    void ParticleEmission(ParticleSystem target, int emissionCount)
+    {
+
+        target.Emit(emissionCount);
 
     }
 
