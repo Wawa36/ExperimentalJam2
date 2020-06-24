@@ -79,7 +79,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _delay: 0.5
-  _steps: 4
+  _steps: 3
   start_steps_zero: 1
   chunk_size: 50
   inputs:
@@ -131,7 +131,7 @@ MonoBehaviour:
     invert: 0
   width:
     input: 2
-    min: 0
+    min: 0.2
     max: 4
-    multiplier: 40
+    multiplier: 80
     invert: 0

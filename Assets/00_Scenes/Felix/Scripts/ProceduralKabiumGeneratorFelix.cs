@@ -96,6 +96,7 @@ public class ProceduralKabiumGeneratorFelix
         int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 100); //between 1 and 40 ?
         int maxCambiums = maxCambiumsPerBranch * towerAndBranches[tower];
 
+
         int splitAfterGenerations;
         if (tower.Mapper.Split_Chance == 0)
         {
@@ -103,9 +104,9 @@ public class ProceduralKabiumGeneratorFelix
         }
         else
         {
-            splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 10, 30);//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
+            splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 5, 30);//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
         }
-
+        Debug.Log("splitAfterGenerations "+ splitAfterGenerations);
 
         //Prepare other Variables ------------------------------------------------
 
@@ -125,6 +126,7 @@ public class ProceduralKabiumGeneratorFelix
         Debug.Log("---------------------------------------- new cambium ---------------------------");
         Debug.Log("max cambiums "+ maxCambiums);
         Debug.Log("max cambiums per B "+ maxCambiumsPerBranch);
+        Debug.Log("cambium A "+ towerAndCambiumAmount[tower]);
         //Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
         //Debug.Log("nbr of branches " + towerAndBranches[tower]);
        // Debug.Log("ID? " + at_building.Cambium.branch_ID);
@@ -201,7 +203,7 @@ public class ProceduralKabiumGeneratorFelix
                 }
                 else //grow larger
                 {
-                    if (towerAndCambiumAmount[tower] < maxCambiums)
+                    if (towerAndCambiumAmount[tower] <= maxCambiums)
                     {
                         int countNewCambiums = 0;
 
@@ -256,19 +258,22 @@ public class ProceduralKabiumGeneratorFelix
                         //---
                         //zu viele gemacht? wieder löschen
                         int numberOfDeletions = 0;
-                        while(kambiumList.Count > maxCambiums - towerAndCambiumAmount[tower])
+                        while(kambiumList.Count > maxCambiums + 1 - towerAndCambiumAmount[tower])
                         {
                             kambiumList.RemoveAt(kambiumList.Count - 1);
                             numberOfDeletions++;
                         }
                         //---
 
-                        towerAndCambiumAmount[tower] += countNewCambiums;
+                        Debug.Log("kambiumList "+ kambiumList.Count);
+
+                        towerAndCambiumAmount[tower] += countNewCambiums - numberOfDeletions - 1; //eins ist immer
 
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
                     else //STOP because to many cambiums
                     {
+                        Debug.Log("to many cambiums");
                         towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
