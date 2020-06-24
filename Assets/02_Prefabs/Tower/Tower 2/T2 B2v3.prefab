@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3528037053920991453}
   - component: {fileID: 4733086967023071905}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: T2 B2v3
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -60,6 +60,7 @@ MonoBehaviour:
     normal: {x: 0, y: 0, z: 0}
     prefab: {fileID: 0}
     steps: 0
+    branch_ID: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
   mat_cache: {fileID: 0}
@@ -76,7 +77,7 @@ GameObject:
   - component: {fileID: 6041794696860651869}
   - component: {fileID: 8283843986666605469}
   - component: {fileID: 428485699748198160}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Mesh
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -166,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3964728135783447493}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: H Origin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 803579957827564146}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: V Origin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

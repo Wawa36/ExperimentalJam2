@@ -58,7 +58,7 @@ static class JonathanAlgorithmus
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
 
-    // RBunker Branch
+    // RBunkerBranch : branches per tower
     static Dictionary<Tower, int> branches_per_tower = new Dictionary<Tower, int>();
 
     public static Tower.Cambiums_At_Active RBunkerBranch(Building at_building, Tower tower)
@@ -148,18 +148,21 @@ static class JonathanAlgorithmus
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
     }
 
-    // StairGrow
+    // StairGrow : cache for steps
     static Dictionary<Tower, int> StairGrow_Steps_Cache = new Dictionary<Tower, int>();
 
     public static Tower.Cambiums_At_Active StairGrow(Building at_building, Tower tower) 
     {
         bool is_first_spawn = false;
+        bool is_at_plattform = false;
 
         if (!StairGrow_Steps_Cache.ContainsKey(tower))
         {
             StairGrow_Steps_Cache.Add(tower, tower.Steps);
             is_first_spawn = true;
         }
+        else
+            is_at_plattform = at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1;
 
         // cambiums
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
@@ -173,12 +176,22 @@ static class JonathanAlgorithmus
         if (at_building.Cambium.steps > 0)
         {
             // raycast with random dir
-            if (at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1)
+            if (is_at_plattform)
             {
                 if (!is_first_spawn)
                 {
-                    dir = at_building.Main_Collider.transform.parent.right;
+                    // keep dir
+                    if (Random.Range(-20, tower.Mapper.Change_Direction_Chance) < 0)
+                    {
+                        dir = at_building.Main_Collider.transform.parent.forward;                 
+                    }
+                    // change dir
+                    else
+                    {
+                        dir = at_building.Main_Collider.transform.parent.right;
+                    }
                 }
+                // first building is always forward
                 else
                 {
                     dir = at_building.Main_Collider.transform.parent.forward;
@@ -187,13 +200,14 @@ static class JonathanAlgorithmus
             else
                 dir = at_building.Cambium.normal;
 
+            // raycast 
             ray = new Ray(at_building.Main_Collider.transform.position + dir * 100f, -dir);
             at_building.Main_Collider.Raycast(ray, out hit, Mathf.Infinity);
 
             kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y/2, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
 
             // split
-            if (!is_first_spawn && at_building.Cambium.steps == StairGrow_Steps_Cache[tower] - 1 && Random.Range(0, tower.Mapper.Split_Chance) == 0)
+            if (!is_first_spawn && is_at_plattform && Random.Range(-10, tower.Mapper.Split_Chance) > 0)
             {
                 dir = -at_building.Main_Collider.transform.parent.right;
 
@@ -225,31 +239,72 @@ static class JonathanAlgorithmus
         // cambiums
         List<Tower.Cambium> kambiumList = new List<Tower.Cambium>();
 
-        // get directions
         var directions = at_building.GetComponent<Street_Part>().Directions;
+
+        // get steps
+        var steps = at_building.Cambium.steps;
 
         foreach (var c in directions)
         {
-            // go straigt (index 0)
-            if (Random.Range(-20, tower.Mapper.Change_Direction_Chance) < 0)
+            if (Check_Direction(c.position, c.forward, tower.Layer, 4f))
             {
-                kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[0], 0));
-            }
-            // turn (index 1/2)
-            else if (Random.Range(-20, tower.Mapper.Split_Chance) < 0)
-            {
-                if (Random.Range(0, 2) == 0)
-                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[1], 0));
+                // go straigt (index 0)
+                if (Random.Range(-20, tower.Mapper.Change_Direction_Chance) < 0)
+                {
+                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[0], steps));
+                }
+                // turn (index 1/2)
+                else if (Random.Range(-20, tower.Mapper.Split_Chance) < 0)
+                {
+                    bool go_right;
+
+                    // choose direction
+                    if (steps > 2)
+                    {
+                        go_right = false;
+                    }
+                    else if (steps < -2)
+                    {
+                        go_right = true;
+                    }
+                    else
+                    {
+                        go_right = Random.Range(0, 2) == 0 ? true : false;
+                    }
+
+                    // add cambium
+                    if (go_right)
+                    {
+                        steps++;
+                        kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[1], steps)); // right
+                    }
+                    else
+                    {
+                        steps--;
+                        kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[2], steps)); // left
+                    }
+                }
+                // split (index 3)
                 else
-                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[2], 0));
-            }
-            // split (index 3)
-            else
-            {
-                kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[3], 0));
+                {
+                    kambiumList.Add(new Tower.Cambium(c.position, c.forward, tower.Building_Prefabs[3], 0));
+                }
             }
         }
 
         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+    }
+
+    static bool Check_Direction(Vector3 point, Vector3 direction, LayerMask layer, float length) 
+    {
+        var ray = new Ray(point, direction);
+        var hit = new RaycastHit();
+
+        bool is_free = !Physics.Raycast(ray, out hit, length, layer, QueryTriggerInteraction.Ignore);
+
+        if (hit.collider)
+            Debug.Log(hit.collider.name);
+
+        return is_free;
     }
 }

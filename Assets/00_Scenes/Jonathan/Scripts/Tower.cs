@@ -23,12 +23,14 @@ namespace Tower_Management
         // paremeter
         [Header("Growth Parameter")]
         [SerializeField] KabiumAlgorithm algorithm;
+        [SerializeField] LayerMask _layer;
         [SerializeField] int _start_cambiums;
         [SerializeField] float _growth_speed;
         [SerializeField] Vector3 override_start_direction;
         [SerializeField] AnimationCurve _growth_speed_over_lifetime = AnimationCurve.Linear(0, 1, 1 , 1);
         [SerializeField] float _delay;
         [SerializeField] [Range(1, 30)] int _steps;
+        [SerializeField] bool decrement_steps = true;
         [SerializeField] bool start_steps_zero = false;
         [SerializeField] int chunk_size;
 
@@ -73,7 +75,7 @@ namespace Tower_Management
             var keys = _growth_speed_over_lifetime.keys;
 
             // remap keys
-            float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+            float factor = mapper.Generation_Amount * mapper.Width / keys[keys.Length - 1].time;
 
             for (int i = 0; i < keys.Length; i++)
             {
@@ -150,7 +152,8 @@ namespace Tower_Management
                     var c = cambiums_a.cambiums[i];
 
                     // count steps
-                    c.steps = c.steps > 0 ? --c.steps : 0;
+                    if (decrement_steps)
+                        c.steps = c.steps > 0 ? --c.steps : 0;
 
                     // instantiate and parent building
                     var new_building = Instantiate(c.prefab, c.point, Quaternion.identity);
@@ -247,6 +250,8 @@ namespace Tower_Management
         public Tower_Input_Mapper Mapper { get { return mapper; } }
 
         public int Building_Generation { get { return _building_generation; } }
+
+        public LayerMask Layer { get { return _layer; } }
 
         Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {

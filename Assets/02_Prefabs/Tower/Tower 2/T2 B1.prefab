@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8249840992547165246}
   - component: {fileID: 4384086239372847346}
   - component: {fileID: 7678615526546099816}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 'Mesh '
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3528037053920991453}
   - component: {fileID: 4733086967023071905}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: T2 B1
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -153,6 +153,7 @@ MonoBehaviour:
     normal: {x: 0, y: 0, z: 0}
     prefab: {fileID: 0}
     steps: 0
+    branch_ID: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
   mat_cache: {fileID: 0}
@@ -166,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3964728135783447493}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: H Origin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8253712133654583209}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: V Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
