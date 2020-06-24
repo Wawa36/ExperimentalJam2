@@ -64,7 +64,15 @@ public class ProceduralKabiumGeneratorFelix
         }
         else
         {
-            return CambiumGenerations(at_building.Parent_Building, generations + 1);
+            if(at_building.Parent_Building.Cambium.normal != Vector3.up)
+            {
+                return CambiumGenerations(at_building.Parent_Building, generations); //don't add if it is not going up, but to the side
+            }
+            else
+            {
+                return CambiumGenerations(at_building.Parent_Building, generations + 1);
+            }
+
         }
     }
 
@@ -93,11 +101,21 @@ public class ProceduralKabiumGeneratorFelix
 
         //Set Params ---------------------------------------------------------------
 
-        int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 40); //between 1 and 40 ?
+        int maxCambiumsPerBranch = Mathf.Clamp(tower.Mapper.Width, 1, 100); //between 1 and 40 ?
         int maxCambiums = maxCambiumsPerBranch * towerAndBranches[tower];
 
-        int splitAfterGenerations = 30;//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
-        
+
+        int splitAfterGenerations;
+        /*if (tower.Mapper.Split_Chance == 0)
+        {
+            splitAfterGenerations = int.MaxValue; //keine Spaltung
+        }
+        else
+        {
+            splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 5, 30);//tower.Mapper.Split_Chance; // wie genaue werden die werte noch verarbeitet?
+        }*/
+
+        splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 2, 1000); // kann nicht 0 sein
 
         //Prepare other Variables ------------------------------------------------
 
@@ -114,12 +132,15 @@ public class ProceduralKabiumGeneratorFelix
 
 
         //DEBUG -----------------------------------------------------------------
-        Debug.Log("---------------------------------------- new cambium ---------------------------");
-        Debug.Log("max cambiums "+ maxCambiums);
-        Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
-        Debug.Log("nbr of branches " + towerAndBranches[tower]);
-        Debug.Log("ID? " + at_building.Cambium.branch_ID);
-
+        //Debug.Log("---------------------------------------- new cambium ---------------------------");
+        //Debug.Log("max cambiums "+ maxCambiums);
+        //Debug.Log("max cambiums per B "+ maxCambiumsPerBranch);
+        //Debug.Log("cambium A "+ towerAndCambiumAmount[tower]);
+        //Debug.Log("nbr of cambiums " + towerAndCambiumAmount[tower]);
+        //Debug.Log("nbr of branches " + towerAndBranches[tower]);
+        //Debug.Log("ID? " + at_building.Cambium.branch_ID);
+        //Debug.Log("cambium normal "+at_building.Cambium.normal);
+        //Debug.Log("splitAfterGenerations " + splitAfterGenerations);
 
 
         //Algorithm --------------------------------------------------------------
@@ -177,25 +198,34 @@ public class ProceduralKabiumGeneratorFelix
             }
             else
             {
-                if (towerAndCambiumAmount[tower] <= maxCambiums)
+               
+                if (HasStillSteps(at_building)) //fullfill steps
                 {
-                    if (HasStillSteps(at_building)) //fullfill steps
-                    {
-                        Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
-                                                         //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
-                                                         at_building.Cambium.normal,
-                                                         tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
-                                                         at_building.Cambium.steps,
-                                                         at_building.Cambium.branch_ID);
-                        kambiumList.Add(newCambium);
+                    Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
+                                                        //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
+                                                        at_building.Cambium.normal,
+                                                        tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
+                                                        at_building.Cambium.steps,
+                                                        at_building.Cambium.branch_ID);
+                    kambiumList.Add(newCambium);
 
-                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-                    }
-                    else //grow larger
+                    return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+                }
+                else //grow larger
+                {
+                    if (towerAndCambiumAmount[tower] <= maxCambiums)
                     {
                         int countNewCambiums = 0;
 
                         bool hasStartedOne = false;
+
+                        if (Random.value > 0.25) //ADDED 23.06.2020 first go up, so if klein, obwol steps geht er nicht so weit aus einander
+                        {
+                            //back right
+                            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2), buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                            hasStartedOne = true;
+                            countNewCambiums++;
+                        }
 
                         if (Random.value > 0.25)
                         {
@@ -235,22 +265,34 @@ public class ProceduralKabiumGeneratorFelix
                             countNewCambiums++;
                         }
 
+                        //---
+                        //zu viele gemacht? wieder löschen
+                        int numberOfDeletions = 0;
+                        while(kambiumList.Count > maxCambiums + 1 - towerAndCambiumAmount[tower])
+                        {
+                            kambiumList.RemoveAt(kambiumList.Count - 1);
+                            numberOfDeletions++;
+                        }
+                        //---
 
-                        towerAndCambiumAmount[tower] += countNewCambiums;
+                        towerAndCambiumAmount[tower] += countNewCambiums - numberOfDeletions - 1; //eins ist immer
 
                         return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                     }
+                    else //STOP because to many cambiums
+                    {
+                        towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
+                        return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
+                    }
+
+                    
                 }
-                else //STOP because to many cambiums
-                {
-                    towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
-                    return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
-                }
+
             }
         }
         else //STOP because has to die
         {
-           Debug.Log("I die " + at_building.Cambium.branch_ID + " and I'm from this gen " + thisTowersBranchGenerations[at_building.Cambium.branch_ID]);
+            //Debug.Log("I die " + at_building.Cambium.branch_ID + " and I'm from this gen " + thisTowersBranchGenerations[at_building.Cambium.branch_ID]);
             towerAndCambiumAmount[tower]--; //dieses Kabium hört auf
             return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
         }

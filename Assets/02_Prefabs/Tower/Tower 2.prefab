@@ -55,14 +55,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   _start_cambiums: 1
-  _growth_speed: 0.1
+  _growth_speed: 1
   override_start_direction: {x: 0, y: 1, z: 0}
   _growth_speed_over_lifetime:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 9.840854
+      value: 0.99395335
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 118.60865
-      value: 3.9899645
+      time: 113.15998
+      value: 0.36150074
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -110,32 +110,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grow_speed:
-    input: 3
-    min: -30
-    max: 30
-    multiplier: 10
+    input: 0
+    min: -1
+    max: 25
+    multiplier: 6
     invert: 0
   split_chance:
-    input: 2
-    min: 0
+    input: 0
+    min: -5
     max: 25
     multiplier: 30
     invert: 1
   generation_amount:
-    input: 0
-    min: 0
-    max: 25
-    multiplier: 600
+    input: 2
+    min: -1
+    max: 4
+    multiplier: 300
     invert: 0
   change_direction_chance:
     input: 1
     min: 0
-    max: 80
-    multiplier: 15
+    max: 0
+    multiplier: 0
     invert: 0
   width:
-    input: 1
-    min: 0
-    max: 40
-    multiplier: 40
+    input: 2
+    min: 0.2
+    max: 4
+    multiplier: 80
     invert: 0
