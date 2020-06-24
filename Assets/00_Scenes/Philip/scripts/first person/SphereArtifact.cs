@@ -15,12 +15,12 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Color color2;
 
     [HideInInspector] public new SphereCollider collider;
-    PlayerMovement playerScript;
+    [SerializeField] PlayerMovement playerScript;
     Rigidbody rigid;
     bool colided;
     public float timer;
     Material material;
-    MeshRenderer meshR;
+    [SerializeField] MeshRenderer meshR;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,19 +32,17 @@ public class SphereArtifact : MonoBehaviour
         playerScript = playerTransform.GetComponent<PlayerMovement>();
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
-        meshR = GetComponent<MeshRenderer>();
-       
+    }
+    private void OnEnable()
+    {
+
+        changeColor();
     }
 
-    public IEnumerator changeColor()
+    public void changeColor()
     {
-        while(true)
-        {
             meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
 
-
-            yield return new WaitForEndOfFrame();
-        }
     }
 
     /// <summary>
@@ -72,6 +70,7 @@ public class SphereArtifact : MonoBehaviour
         StopCoroutine("Flytime");
         while (true) 
         {
+            
             rigid.velocity = Vector3.zero;
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
@@ -152,6 +151,7 @@ public class SphereArtifact : MonoBehaviour
             inputs.ground_tag = null;
         }
         inputs.orb_energy = playerScript.orbEnergy;
+        playerScript.orbEnergy = 0;
         towerscript.Initialize(inputs);
     }
 }
