@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3888489103243573735}
   - component: {fileID: 4949428209136423835}
   - component: {fileID: 4567334597329265163}
-  m_Layer: 0
-  m_Name: T3 B4
+  m_Layer: 12
+  m_Name: T3 B1
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,6 +59,7 @@ MonoBehaviour:
     normal: {x: 0, y: 0, z: 0}
     prefab: {fileID: 0}
     steps: 0
+    branch_ID: 0
   _parent_building: {fileID: 0}
   _child_buildings: []
   mat_cache: {fileID: 0}
@@ -99,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6266870494499116830}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: H Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7572420862773828972}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Street Dir 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,6 +223,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ca4f28f01680c7f42804f47c119f0fd4,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca4f28f01680c7f42804f47c119f0fd4, type: 3}

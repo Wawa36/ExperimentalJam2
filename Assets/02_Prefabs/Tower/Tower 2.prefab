@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2441123088755889949}
   - component: {fileID: 2441123088755889948}
   - component: {fileID: 9185885427241888973}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,6 +51,9 @@ MonoBehaviour:
   - {fileID: 1862284582436989240, guid: 74bdf70e0920be24aa4cd39c29cb8a9e, type: 3}
   _structure_prefabs: []
   algorithm: 0
+  _layer:
+    serializedVersion: 2
+    m_Bits: 2048
   _start_cambiums: 1
   _growth_speed: 0.1
   override_start_direction: {x: 0, y: 1, z: 0}
@@ -80,6 +83,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _delay: 0.5
   _steps: 3
+  decrement_steps: 1
   start_steps_zero: 1
   chunk_size: 50
   inputs:

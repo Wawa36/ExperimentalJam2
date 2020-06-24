@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8249840992547165246}
   - component: {fileID: 4384086239372847346}
   - component: {fileID: 7678615526546099816}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: 'Mesh '
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3528037053920991453}
   - component: {fileID: 4733086967023071905}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: T1 B1
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3964728135783447493}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: H Origin 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3632741093102137454}
   - component: {fileID: 4303776878189852649}
   - component: {fileID: 303463494073469772}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Colliders
   m_TagString: Building
   m_Icon: {fileID: 0}
