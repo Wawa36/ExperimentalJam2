@@ -23,6 +23,7 @@ public class SphereArtifact : MonoBehaviour
     public ParticleSystem glow;
     public ParticleSystem zoom;
     public ParticleSystem Circle;
+    public TrailRenderer trail;
 
     int fireCount;
     int glowCount;
@@ -93,6 +94,7 @@ public class SphereArtifact : MonoBehaviour
     /// </summary>
     public void GetCollected()
     {
+        trail.enabled = false;
         meshR.material.color = color1;
         collider.enabled = true;
         transform.parent = targetPosition;
