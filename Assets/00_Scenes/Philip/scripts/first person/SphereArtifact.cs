@@ -70,6 +70,7 @@ public class SphereArtifact : MonoBehaviour
         StopCoroutine("Flytime");
         while (true) 
         {
+            
             rigid.velocity = Vector3.zero;
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
@@ -150,6 +151,7 @@ public class SphereArtifact : MonoBehaviour
             inputs.ground_tag = null;
         }
         inputs.orb_energy = playerScript.orbEnergy;
+        playerScript.orbEnergy = 0;
         towerscript.Initialize(inputs);
     }
 }
