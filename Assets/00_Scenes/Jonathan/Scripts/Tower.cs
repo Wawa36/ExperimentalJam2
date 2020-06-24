@@ -75,7 +75,7 @@ namespace Tower_Management
             var keys = _growth_speed_over_lifetime.keys;
 
             // remap keys
-            float factor = mapper.Generation_Amount / keys[keys.Length - 1].time;
+            float factor = mapper.Generation_Amount * mapper.Width / keys[keys.Length - 1].time;
 
             for (int i = 0; i < keys.Length; i++)
             {
@@ -252,6 +252,7 @@ namespace Tower_Management
         public int Building_Generation { get { return _building_generation; } }
 
         public LayerMask Layer { get { return _layer; } }
+
         Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {
             if (Vector3.Dot(player_dir, normal_dir) >= 0)
