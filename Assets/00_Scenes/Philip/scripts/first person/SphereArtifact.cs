@@ -26,8 +26,10 @@ public class SphereArtifact : MonoBehaviour
 
     int fireCount;
     int glowCount;
-    int zoomCount;
-    int CircleCount;
+    int zoomCount=10;
+    int CircleCount=1;
+
+    float particleTimer;
 
     Rigidbody rigid;
     bool colided;
@@ -49,10 +51,20 @@ public class SphereArtifact : MonoBehaviour
 
     private void Update()
     {
-        ParticleEmission(fire, fireCount);
-        ParticleEmission(glow, glowCount);
-        ParticleEmission(zoom, zoomCount);
-        ParticleEmission(Circle, CircleCount);
+        particleTimer += Time.deltaTime;
+        if (particleTimer >= .1f)
+        {
+            fireCount = Mathf.RoundToInt(Mathf.Lerp(1, 8, playerScript.orbEnergy / playerScript.throwingForce));
+            glowCount = Mathf.RoundToInt(Mathf.Lerp(0, 8, playerScript.orbEnergy / playerScript.throwingForce));
+            ParticleEmission(fire, fireCount);
+            ParticleEmission(glow, glowCount);
+            if (playerScript.orbEnergy >= 25)
+            {
+                ParticleEmission(zoom, zoomCount);
+                //ParticleEmission(Circle, CircleCount);
+            }
+            particleTimer = 0;
+        }
     }
     private void OnEnable()
     {
@@ -63,8 +75,7 @@ public class SphereArtifact : MonoBehaviour
     public void changeColor()
     {
         meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
-        fireCount= Mathf.RoundToInt(Mathf.Lerp(3, 10, playerScript.orbEnergy / playerScript.throwingForce));
-        glowCount = Mathf.RoundToInt(Mathf.Lerp(0, 10, playerScript.orbEnergy / playerScript.throwingForce));
+        
 
 
     }
