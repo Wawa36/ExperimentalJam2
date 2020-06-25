@@ -53,7 +53,7 @@ MonoBehaviour:
   algorithm: 6
   _layer:
     serializedVersion: 2
-    m_Bits: 7168
+    m_Bits: 23552
   _start_cambiums: 1
   _growth_speed: 0.5
   override_start_direction: {x: 0, y: 0, z: 0}
