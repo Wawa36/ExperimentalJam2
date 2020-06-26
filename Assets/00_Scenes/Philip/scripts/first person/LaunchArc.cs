@@ -6,6 +6,8 @@ public class LaunchArc : MonoBehaviour
     [SerializeField] PlayerMovement playerScript;
     [SerializeField] Color color1;
     [SerializeField] Color color2;
+    [SerializeField] Transform squareTransform;
+    [SerializeField] Transform zylinderTransform;
 
     [SerializeField] float maxPathTime;
     [SerializeField] LayerMask mask;
@@ -92,6 +94,14 @@ public class LaunchArc : MonoBehaviour
         pyramidRenderer.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
     }
 
+
+    void ChangeTargetDirection(Vector3 Center, Vector3 direction, Vector3 normal, Vector3 up)
+    {
+        squareTransform.position = Center;
+        squareTransform.rotation = Quaternion.LookRotation(normal, up);
+        zylinderTransform.position = Center;
+        zylinderTransform.rotation = Quaternion.LookRotation(direction,up);
+    }
 
     void CreatePyramid(LineRenderer line,Vector3 scareCenter,Vector3 direction,Vector3 normal,float radius,float height)
     {

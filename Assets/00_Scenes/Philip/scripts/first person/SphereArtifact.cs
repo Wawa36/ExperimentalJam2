@@ -115,7 +115,7 @@ public class SphereArtifact : MonoBehaviour
             rigid.velocity = Vector3.zero;
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
-                GetCollected();
+//GetCollected();
             }
             yield return new WaitForEndOfFrame();
         }
@@ -136,8 +136,8 @@ public class SphereArtifact : MonoBehaviour
         while (!playerScript.carryingTheOrb)
         {
             playerScript.orbEnergy = 0;
-            transform.position = Vector3.Lerp(transform.position, targetPosition.position, .4f);
-            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 16*Time.deltaTime);
+            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*3)
             {
                 
                 GetCollected();
@@ -156,21 +156,8 @@ public class SphereArtifact : MonoBehaviour
             transform.position = collision.GetContact(0).point;
             StartCoroutine(beeingStuck());
             rigid.useGravity = false;
-
-            if (collision.gameObject.CompareTag("Ground"))
-            {
-                //hier kommt der fall hin das die Kugel den boden trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity),collision.contacts[0].normal);
-               
-
-            }
-            else if (collision.gameObject.CompareTag("Building"))
-            {
-                // hier kommt der fall hin das die Kugel ein Gebäude trifft
-               calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up * .1f, Quaternion.identity),collision.contacts[0].normal);
-
-            }
-            
+            //hier kommt der fall hin das die Kugel den boden trifft
+            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity),collision.contacts[0].normal);
         }
     }
 
