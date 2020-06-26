@@ -73,7 +73,7 @@ public class Detail_Spawner : MonoBehaviour
         for (int i = 0; i < spawned_details.Count; i++)
         {
             var instance = new CombineInstance();
-            instance.mesh = spawned_details[i].GetComponent<MeshFilter>().sharedMesh;
+            instance.mesh = spawned_details[i].GetComponent<MeshFilter>().mesh;
             instance.transform = spawned_details[i].transform.localToWorldMatrix;
             combine.Add(instance);
 
