@@ -74,12 +74,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
         velocity.x = XAxis;
         velocity.z = YAxis;
         Vector3 previousPosition = transform.position;
-        controller.Move(transform.right * velocity.x + transform.forward * velocity.z + Vector3.up* velocity.y* Time.deltaTime);
-        if( Mathf.Approximately(transform.position.y, previousPosition.y))
+        if (controller.enabled == true)
         {
-            velocity.y = (transform.position.y - previousPosition.y) / Time.deltaTime;
+            controller.Move(transform.right * velocity.x + transform.forward * velocity.z + Vector3.up * velocity.y * Time.deltaTime);
+            if (Mathf.Approximately(transform.position.y, previousPosition.y))
+            {
+                velocity.y = (transform.position.y - previousPosition.y) / Time.deltaTime;
+            }
         }
-        
         
 
     }
@@ -143,7 +145,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             activeOrb.transform.parent = null;
         }
         
-        if (orbEnergy!=0 && !carryingTheOrb&& Input.GetButtonDown("Fire1"))
+        if (!notAiming&& !carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
             orbScript.trail.time = 1;
             notAiming = true;
