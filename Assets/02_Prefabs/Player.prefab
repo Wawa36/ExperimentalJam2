@@ -62,7 +62,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 152923204717291918}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1783267490
 MonoBehaviour:
@@ -244,7 +244,7 @@ Transform:
   m_Children:
   - {fileID: 152923204344402230}
   m_Father: {fileID: 152923204717291918}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &152923204554566510
 MonoBehaviour:
@@ -292,7 +292,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1783267489}
   - {fileID: 152923204554566497}
   - {fileID: 2159766802134245297}
   m_Father: {fileID: 0}
@@ -585,6 +584,12 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 469351284}
   m_PrefabAsset: {fileID: 0}
+--- !u!96 &4869263159736564088 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 4869263159334519308, guid: 88dd941ba4684c842aec7a8d6495d9a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 469351284}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &642020154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -592,55 +597,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 815907263}
     m_Modifications:
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[1].value
-      value: 0.097221375
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867536816488, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime2
-      value: 65535
-      objectReference: {fileID: 0}
     - target: {fileID: 8466524259344291070, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
         type: 3}
       propertyPath: m_Name
       value: Orb_00_Particle
-      objectReference: {fileID: 0}
-    - target: {fileID: 8466524259344291070, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8466524259344291071, guid: 9a7e0c6434dc4ff4da63a7e9a01ba662,
         type: 3}
@@ -2280,6 +2240,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
+--- !u!23 &815907261 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4189201633741323714, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4189201634536127615}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &815907264 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
