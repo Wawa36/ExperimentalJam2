@@ -121,6 +121,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
+
+            orbScript.colided = false;
             orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
             orbScript.trail.time = 4;
