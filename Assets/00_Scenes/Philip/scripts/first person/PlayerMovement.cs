@@ -15,7 +15,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     GameObject activeOrb;
-    int currentOrbIndex;
+    [HideInInspector] public int currentOrbIndex;
     #endregion
 
     #region serializable Variables
@@ -105,7 +105,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
                 launchArc.lineRenderer.enabled = false;
-                launchArc.pyramidRenderer.enabled = false;
+                launchArc.target.SetActive(false);
                 orbEnergy = 0;
             }
 
@@ -124,6 +124,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 }
 
                 launchArc.lineRenderer.enabled = true;
+                launchArc.target.SetActive(true);
                 launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
@@ -134,8 +135,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
             orbScript.trail.time = 4;
-            launchArc.pyramidRenderer.enabled = false;
             launchArc.lineRenderer.enabled = false;
+            launchArc.target.SetActive(false);
             carryingTheOrb = false;
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;

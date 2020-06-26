@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tower_Management;
+using UnityEngine;
 
 public class LaunchArc : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class LaunchArc : MonoBehaviour
     [SerializeField] float maxPathTime;
     [SerializeField] LayerMask mask;
     [HideInInspector] public LineRenderer lineRenderer;
-    public LineRenderer pyramidRenderer;
+    public GameObject target;
     int rayCastResolution;
 
     private void Start()
@@ -24,7 +25,6 @@ public class LaunchArc : MonoBehaviour
     }
     public void DrawPath(Vector3 Force)
     {
-        pyramidRenderer.enabled = true;
         int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         Vector3 drawpoint;
@@ -62,8 +62,7 @@ public class LaunchArc : MonoBehaviour
             }
             if (i == resolution - 1)
             {
-                pyramidRenderer.transform.position = drawpoint;
-                CreatePyramid(pyramidRenderer, endVector, endNormal,endNormal, .1f, .5f);
+                ChangeTarget(endVector, Tower.Calculate_Grow_Direction(playerScript.transform.forward, endNormal), endNormal, Vector3.up);
             }
             previousDrawpoint = drawpoint;
             lineRenderer.SetPosition(i, drawpoint);
@@ -91,38 +90,26 @@ public class LaunchArc : MonoBehaviour
         lineRenderer.colorGradient = gradient;
         //lineRenderer.colorGradient.colorKeys[0].color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
         //lineRenderer.colorGradient.colorKeys[1].color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
-        pyramidRenderer.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
     }
 
 
-    void ChangeTargetDirection(Vector3 Center, Vector3 direction, Vector3 normal, Vector3 up)
+    void ChangeTarget(Vector3 Center, Vector3 direction, Vector3 normal, Vector3 up)
     {
-        squareTransform.position = Center;
+        if (playerScript.currentOrbIndex == 0)
+        {
+            direction += Vector3.up*.75f;
+            direction = direction.normalized;
+        }
+        else if (playerScript.currentOrbIndex == 1)
+        {
+            direction = Vector3.up;
+
+        }
+
+        target.transform.position = Center;
         squareTransform.rotation = Quaternion.LookRotation(normal, up);
-        zylinderTransform.position = Center;
         zylinderTransform.rotation = Quaternion.LookRotation(direction,up);
     }
 
-    void CreatePyramid(LineRenderer line,Vector3 scareCenter,Vector3 direction,Vector3 normal,float radius,float height)
-    {
-        if (normal == Vector3.zero)
-        {
-            normal = transform.forward;
-        }
-        line.transform.position = scareCenter;
-        
-        line.transform.rotation = Quaternion.LookRotation(normal);
-        
-        Vector3 corner1 = scareCenter  + line.transform.right * -radius + line.transform.up * -radius;
-        Vector3 corner2 = scareCenter  + line.transform.right * -radius + line.transform.up *  radius;
-        Vector3 corner3 = scareCenter  + line.transform.right *  radius + line.transform.up *  radius;
-        Vector3 corner4= scareCenter   + line.transform.right *  radius + line.transform.up * -radius;
-        Vector3 cornerTop =scareCenter + direction*height;
-         
-        Vector3[] cornerOrder = new Vector3[10] { corner1, corner2, corner3, corner4, cornerTop, corner1, corner4, corner3, cornerTop, corner2 };
-        line.positionCount = 10;
-        line.SetPositions(cornerOrder);
-        
-    }
 
 }
