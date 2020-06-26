@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -43725,6 +43725,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 925906927}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &930129720 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 930129720, guid: f7b73b4265ede494ab52fdff5b0ef68e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1262522593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &932181940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67003,6 +67009,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: teleportAnim
+      value: 
+      objectReference: {fileID: 930129720}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
