@@ -1,36 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerMovement : MonoBehaviour
 {
+    #region nonSerializable Variables
     [HideInInspector] public CharacterController controller;
+    [HideInInspector] public Vector3 velocity;
+    [HideInInspector] public Vector3 lookDirection;
+    [HideInInspector] public float orbEnergy=0;
+    [HideInInspector] public bool carryingTheOrb;
+    [HideInInspector] public bool notAiming;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
-    [HideInInspector] public Vector3 velocity;
-    [SerializeField] float velocityMagnitude;
-    [HideInInspector] public Vector3 lookDirection;
-
-    public bool carryingTheOrb;
-    
-    [HideInInspector] public bool notAiming;
-    int currentOrbIndex;
-    
-    [SerializeField] List<GameObject> orbs;
     GameObject activeOrb;
+    int currentOrbIndex;
+    #endregion
+
+    #region serializable Variables
+    [Header("References")]
+    [SerializeField] List<GameObject> orbs;
+    [SerializeField] LayerMask mask;
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
 
+
+    [Header("Movement Parameter")]
     [SerializeField] float gravity;
     [SerializeField] float movespeed;
     [SerializeField] float rotationSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float orbEnergyIncrease;
     public float throwingForce;
-    [SerializeField] LayerMask mask;
+    #endregion
 
-    [HideInInspector] public float orbEnergy=0;
-    
+
 
     private void Start()
     {
@@ -235,6 +240,5 @@ public class PlayerMovement : MonoBehaviour
            
         }
 
-        velocityMagnitude = controller.velocity.magnitude;
     }
 }
