@@ -49,8 +49,6 @@ MonoBehaviour:
   _mesh: {fileID: 2428599989596810275}
   _renderer: {fileID: 4230255139576925686}
   _main_collider: {fileID: 7369495604017519959}
-  _sub_colliders:
-  - {fileID: 7477120725521600170}
   origin_turn: 0.5
   horizontal_origins:
   - {fileID: 6266870494499116830}
@@ -168,7 +166,7 @@ GameObject:
   - component: {fileID: 467317491044280121}
   m_Layer: 15
   m_Name: Sub Colliders
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

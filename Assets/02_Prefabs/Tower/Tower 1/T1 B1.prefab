@@ -199,7 +199,8 @@ GameObject:
   - component: {fileID: 3632741093102137454}
   - component: {fileID: 4303776878189852649}
   - component: {fileID: 303463494073469772}
-  m_Layer: 10
+  - component: {fileID: 5673513796668608536}
+  m_Layer: 15
   m_Name: Colliders
   m_TagString: Building
   m_Icon: {fileID: 0}
@@ -231,8 +232,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.85483766, y: 1.8652053, z: 0.24955839}
-  m_Center: {x: -0.0014052689, y: 1.0833204, z: -1.4259257}
+  m_Size: {x: 0.95, y: 0.8, z: 0.31}
+  m_Center: {x: -0.0014052689, y: 0.9, z: -1.324}
 --- !u!65 &303463494073469772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -244,5 +245,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.85483766, y: 1.8652053, z: 0.24955839}
-  m_Center: {x: -0.0014052689, y: 1.0833204, z: 1.425926}
+  m_Size: {x: 0.95, y: 0.8, z: 0.31}
+  m_Center: {x: -0.0014052689, y: 0.9, z: 1.324}
+--- !u!65 &5673513796668608536
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6850028548714262577}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
