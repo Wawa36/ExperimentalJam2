@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Building
+  - Details Tracker
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Tower 2
   - Tower 3
   - Ground
-  - 
-  - 
+  - Tower Obstacles
+  - Tower Sub Colliders
   - 
   - 
   - 

@@ -42,7 +42,7 @@ namespace Tower_Management
         public MeshRenderer Renderer { get { return _renderer; } }
 
         /// <summary>
-        /// Collider for physics 
+        /// Collider for growth algorithms 
         /// </summary>
         public Collider Main_Collider { get { return _main_collider; } }
 

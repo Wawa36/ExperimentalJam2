@@ -89,9 +89,6 @@ namespace Tower_Management
             {
                 keys[i].time *= factor;
                 keys[i].tangentMode = 2; 
-   
-                //AnimationUtility.SetKeyLeftTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
-                //AnimationUtility.SetKeyRightTangentMode(_growth_speed_over_lifetime, i, AnimationUtility.TangentMode.Linear);
             }
         }
 
@@ -135,10 +132,15 @@ namespace Tower_Management
 
             foreach (var c in finished_buildings) { building_delays.Remove(c); }
 
+            // merge chunks
             if (inactive_blocks.Count >= chunk_size)
             {
                 Merge_Chunk();
             }
+
+            // finish
+            if (active_blocks.Count == 0 && building_delays.Count == 0)
+                Finish_Building_Growth();
         }
 
         private void Create_Building(Cambiums_At_Active cambiums_a)
@@ -195,11 +197,22 @@ namespace Tower_Management
         {
         }
 
-        // public interfaces
-        public void Create_New_Building(Building at_building) 
+        private void Finish_Building_Growth() 
         {
-            Create_Building(Calculate_Cambiums(at_building));
+            foreach (var c in active_blocks.ToList())
+            {
+                active_blocks.Remove(c);
+                Destroy((c as Component).gameObject);
+            }
+
+            if (!finished_growing)
+            {
+                Merge_Chunk(true);
+                finished_growing = true;
+            }
         }
+
+        // public interfaces
 
         public void Deactivate_Block(IGrowingBlock block) 
         {
@@ -231,17 +244,7 @@ namespace Tower_Management
             {
                 value = 0;
 
-                foreach (var c in active_blocks.ToList())
-                {
-                    active_blocks.Remove(c);
-                    Destroy((c as Component).gameObject);
-                }
-
-                if (!finished_growing)
-                {
-                    Merge_Chunk(true);
-                    finished_growing = true;
-                }
+                Finish_Building_Growth();
             }
 
             return value;
@@ -302,6 +305,7 @@ namespace Tower_Management
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
             merged_chunks.Add(new_chunk);
 
+            // delet blocks
             foreach (var c in inactive_blocks.ToList())
             {
                 (c as Building).On_Merged();
