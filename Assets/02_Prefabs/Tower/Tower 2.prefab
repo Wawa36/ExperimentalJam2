@@ -128,8 +128,8 @@ MonoBehaviour:
   generation_amount:
     input: 2
     min: -1
-    max: 4
-    multiplier: 25
+    max: 5
+    multiplier: 10
     invert: 0
   change_direction_chance:
     input: 1
@@ -141,5 +141,5 @@ MonoBehaviour:
     input: 2
     min: 0.2
     max: 4
-    multiplier: 80
+    multiplier: 40
     invert: 1

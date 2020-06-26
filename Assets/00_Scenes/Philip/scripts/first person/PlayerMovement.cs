@@ -93,7 +93,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetButton("Fire2"))
             {
+                notAiming = true;
+                orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
+                launchArc.lineRenderer.enabled = false;
+                launchArc.targetSphere.enabled = false;
+                orbEnergy = 0;
             }
 
             else
@@ -101,18 +106,24 @@ public class PlayerMovement : MonoBehaviour
                 if (orbEnergy < throwingForce)
                 {
                     orbEnergy += Time.deltaTime * orbEnergyIncrease;
+                    //Orb -lädt auf sound 
 
                 }
+                else
+                {
+                    orbScript.circle.gameObject.SetActive(true);
+                    //Orb voll aufgeladen sound
+                }
 
-                
-                orbScript.changeColor();
                 launchArc.lineRenderer.enabled = true;
                 launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
+            orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
+            orbScript.trail.time = 4;
             launchArc.targetSphere.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
@@ -120,14 +131,13 @@ public class PlayerMovement : MonoBehaviour
             orbRigid.useGravity = true;
             orbScript.timer = 0;
             orbScript.StartCoroutine(orbScript.FlyTime());
-            orbScript.trail.enabled = true;
             orbRigid.velocity= cameraRigTransform.forward  * throwingForce + cameraRigTransform.up * throwingForce / 4;
             activeOrb.transform.parent = null;
         }
         
         if (!carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
-
+            orbScript.trail.time = 1;
             notAiming = true;
             orbScript.collider.enabled = false;
             orbRigid.velocity = Vector3.zero;
@@ -181,7 +191,6 @@ public class PlayerMovement : MonoBehaviour
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
-                orbScript.changeColor();
             }
             if (Input.GetButtonDown("Fire4"))
             {

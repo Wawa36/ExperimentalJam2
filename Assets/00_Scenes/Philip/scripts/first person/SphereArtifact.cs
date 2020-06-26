@@ -11,23 +11,19 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform targetPosition;
     [SerializeField] float collectingDistance;
 
-    [SerializeField] Color color1;
-    [SerializeField] Color color2;
 
     [HideInInspector] public new SphereCollider collider;
     [SerializeField] PlayerMovement playerScript;
     [SerializeField] MeshRenderer meshR;
 
     [Header("Particles")]
-    public ParticleSystem fire;
-    public ParticleSystem glow;
+    
     public ParticleSystem zoom;
-    public ParticleSystem Circle;
+    public ParticleSystem circle;
     public TrailRenderer trail;
 
-    int fireCount;
-    int glowCount;
-    int zoomCount=10;
+    
+    int zoomCount=15;
     int CircleCount=1;
 
     float particleTimer;
@@ -52,50 +48,50 @@ public class SphereArtifact : MonoBehaviour
 
     private void Update()
     {
+        ManageParticles();
+    }
+
+    /// <summary>
+    /// kümmert sich um das scaling der Particles
+    /// </summary>
+    private void ManageParticles()
+    {
         particleTimer += Time.deltaTime;
-        if (particleTimer >= .1f)
+        if (particleTimer >= .2f)
         {
-            fireCount = Mathf.RoundToInt(Mathf.Lerp(1, 8, playerScript.orbEnergy / playerScript.throwingForce));
-            glowCount = Mathf.RoundToInt(Mathf.Lerp(0, 8, playerScript.orbEnergy / playerScript.throwingForce));
-            ParticleEmission(fire, fireCount);
-            ParticleEmission(glow, glowCount);
+
+            
+            zoomCount = Mathf.RoundToInt(Mathf.Lerp(.25f, 8, playerScript.orbEnergy / playerScript.throwingForce) * 4);
+
+            if (playerScript.orbEnergy != 0)
+            {
+
+               
+                ParticleEmission(zoom, zoomCount);
+               
+            }
             if (playerScript.orbEnergy >= 25)
             {
-                ParticleEmission(zoom, zoomCount);
-                //ParticleEmission(Circle, CircleCount);
+                
+                //ParticleEmission(circle, CircleCount);
             }
             particleTimer = 0;
         }
     }
-    private void OnEnable()
-    {
 
-        changeColor();
-    }
-
-    public void changeColor()
-    {
-        meshR.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
-        
-
-
-    }
 
     void ParticleEmission(ParticleSystem target, int emissionCount)
     {
-
         target.Emit(emissionCount);
 
     }
-
     /// <summary>
     /// wird aufgerufen wenn die Kugel eingesammelt werden soll
     /// 
     /// </summary>
     public void GetCollected()
     {
-        trail.enabled = false;
-        meshR.material.color = color1;
+        trail.time = 0;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
@@ -111,6 +107,8 @@ public class SphereArtifact : MonoBehaviour
     /// <returns></returns>
     IEnumerator beeingStuck()
     {
+        //sound aufschlag vom Orb;
+        trail.time = 0;
         StopCoroutine("Flytime");
         while (true) 
         {
@@ -138,9 +136,11 @@ public class SphereArtifact : MonoBehaviour
     {
         while (!playerScript.carryingTheOrb)
         {
+            playerScript.orbEnergy = 0;
             transform.position = Vector3.Lerp(transform.position, targetPosition.position, .4f);
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
+                
                 GetCollected();
             }
             yield return new WaitForEndOfFrame();
