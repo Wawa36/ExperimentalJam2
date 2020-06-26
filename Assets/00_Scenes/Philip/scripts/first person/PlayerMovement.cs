@@ -102,7 +102,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
                 launchArc.lineRenderer.enabled = false;
-                launchArc.targetSphere.enabled = false;
+                launchArc.pyramidRenderer.enabled = false;
                 orbEnergy = 0;
             }
 
@@ -131,7 +131,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
             orbScript.trail.time = 4;
-            launchArc.targetSphere.enabled = false;
+            launchArc.pyramidRenderer.enabled = false;
             launchArc.lineRenderer.enabled = false;
             carryingTheOrb = false;
             orbRigid.isKinematic = false;

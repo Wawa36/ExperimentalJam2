@@ -9,23 +9,24 @@ public class LaunchArc : MonoBehaviour
 
     [SerializeField] float maxPathTime;
     [SerializeField] LayerMask mask;
-    public MeshRenderer targetSphere;
     [HideInInspector] public LineRenderer lineRenderer;
+    public LineRenderer pyramidRenderer;
     int rayCastResolution;
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
-        
-    }
 
+
+    }
     public void DrawPath(Vector3 Force)
     {
-        targetSphere.enabled = true;
+        pyramidRenderer.enabled = true;
         int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         Vector3 drawpoint;
+        Vector3 endNormal=Vector3.zero;
         rayCastResolution = 0;
         Vector3 endVector=Vector3.zero;
         lineRenderer.SetPosition(0,transform.position);
@@ -49,6 +50,7 @@ public class LaunchArc : MonoBehaviour
                         
                         endVector = hit.point;
                         drawpoint = hit.point;
+                        endNormal = hit.normal;
                     }
                 }
             }
@@ -59,7 +61,8 @@ public class LaunchArc : MonoBehaviour
             }
             if (i == resolution - 1)
             {
-                targetSphere.transform.position = drawpoint;
+                pyramidRenderer.transform.position = drawpoint;
+                CreatePyramid(pyramidRenderer, endVector, endNormal,endNormal, .1f, .5f);
             }
             previousDrawpoint = drawpoint;
             lineRenderer.SetPosition(i, drawpoint);
@@ -87,7 +90,23 @@ public class LaunchArc : MonoBehaviour
         lineRenderer.colorGradient = gradient;
         //lineRenderer.colorGradient.colorKeys[0].color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
         //lineRenderer.colorGradient.colorKeys[1].color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
-        targetSphere.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+        pyramidRenderer.material.color = Color.Lerp(color1, color2, playerScript.orbEnergy / playerScript.throwingForce);
+    }
+
+
+    void CreatePyramid(LineRenderer line,Vector3 scareCenter,Vector3 direction,Vector3 normal,float radius,float height)
+    {
+        line.transform.position = scareCenter;
+        line.transform.rotation = Quaternion.LookRotation(normal);
+        Vector3 corner1 = scareCenter  + line.transform.right * -radius + line.transform.up * -radius;
+        Vector3 corner2 = scareCenter  + line.transform.right * -radius + line.transform.up *  radius;
+        Vector3 corner3 = scareCenter  + line.transform.right *  radius + line.transform.up *  radius;
+        Vector3 corner4= scareCenter   + line.transform.right *  radius + line.transform.up * -radius;
+        Vector3 cornerTop =scareCenter + direction*height;
+        Vector3[] cornerOrder = new Vector3[10] { corner1, corner2, corner3, corner4, cornerTop, corner1, corner4, corner3, cornerTop, corner2 };
+        line.positionCount = 10;
+        line.SetPositions(cornerOrder);
+        
     }
 
 }
