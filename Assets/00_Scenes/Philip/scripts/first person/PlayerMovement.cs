@@ -143,7 +143,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             activeOrb.transform.parent = null;
         }
         
-        if (!carryingTheOrb&& Input.GetButtonDown("Fire1"))
+        if (orbEnergy!=0 && !carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
             orbScript.trail.time = 1;
             notAiming = true;
@@ -161,19 +161,20 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            StartCoroutine(Teleporting(transform.position, orbScript.transform.position + Vector3.up * 3));
+            StartCoroutine(Teleporting(transform.position));
         }
     }
-    IEnumerator Teleporting(Vector3 startPosition,Vector3 destination)
+    IEnumerator Teleporting(Vector3 startPosition)
     {
         orbEnergy = 0;
         controller.enabled = false;
-        teleportAnim.SetTrigger(0);
-        for(float f=0;f<1;f+=Time.deltaTime) 
+        teleportAnim.SetTrigger("teleport");
+        for (float f=0;f<=.5;f+=Time.deltaTime) 
         {
-            transform.position += Vector3.Lerp(startPosition, destination, 1 * Time.deltaTime);
+            transform.position = Vector3.Lerp(startPosition, orbScript.transform.position + Vector3.up , 2*f);
             yield return new WaitForEndOfFrame();
         }
+        transform.position = orbScript.transform.position + Vector3.up ;
         controller.enabled = true;
         orbScript.GetCollected();
     }
