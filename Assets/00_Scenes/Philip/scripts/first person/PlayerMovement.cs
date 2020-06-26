@@ -24,6 +24,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] LayerMask mask;
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
+    [SerializeField] Animator teleportAnim;
 
 
     [Header("Movement Parameter")]
@@ -160,12 +161,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
-            orbEnergy = 0;
-            controller.enabled = false;
-            transform.position= activeOrb.transform.position + Vector3.up*3;
-            controller.enabled = true;
-            orbScript.GetCollected();
+            StartCoroutine(Teleporting(transform.position, orbScript.transform.position + Vector3.up * 3));
         }
+    }
+    IEnumerator Teleporting(Vector3 startPosition,Vector3 destination)
+    {
+        orbEnergy = 0;
+        controller.enabled = false;
+        teleportAnim.SetTrigger(0);
+        for(float f=0;f<1;f+=Time.deltaTime) 
+        {
+            transform.position += Vector3.Lerp(startPosition, destination, 1 * Time.deltaTime);
+            yield return new WaitForEndOfFrame();
+        }
+        controller.enabled = true;
+        orbScript.GetCollected();
     }
 
     bool IsOnTheGround()
