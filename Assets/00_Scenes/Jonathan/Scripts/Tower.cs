@@ -253,7 +253,7 @@ namespace Tower_Management
 
         public LayerMask Layer { get { return _layer; } }
 
-        Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
+        public static Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {
             if (Vector3.Dot(player_dir, normal_dir) >= 0)
             {
