@@ -11,7 +11,8 @@ namespace Tower_Management.Details
         [SerializeField] Detail_Prefab[] prefabs;
         [SerializeField] float spawn_rate;
         [SerializeField] float distance;
-        [SerializeField] int chunk_size;
+        [SerializeField] [Range(5, 100)]int chunk_rate;
+        [SerializeField] [Range(1000, 1000000)] int max_chunk_vert_size;
         [SerializeField] Material chunk_material;
 
         [Header("Debugging")]
@@ -64,7 +65,7 @@ namespace Tower_Management.Details
         {
             growing_details.Add(Instantiate(prefab, point, Quaternion.FromToRotation(Vector3.up, normal), tracker));
 
-            if (spawned_details.Count >= chunk_size)
+            if (spawned_details.Count >= chunk_rate)
                 Merge();
         }
 
@@ -112,7 +113,7 @@ namespace Tower_Management.Details
                 var filter = merged_chunks[merged_chunks.Count - 1].GetComponent<MeshFilter>();
 
                 // add to last chunk
-                if (filter.mesh.vertexCount + new_vertice_count <= 2000000000)
+                if (filter.mesh.vertexCount + new_vertice_count <= max_chunk_vert_size)
                 {
                     var instance = new CombineInstance();
                     instance.mesh = filter.mesh;
@@ -158,6 +159,7 @@ namespace Tower_Management.Details
 
         public void Detail_Finished_Growing(Detail detail) 
         {
+            growing_details.Remove(detail.gameObject);
             spawned_details.Add(detail);
         }
 
