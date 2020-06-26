@@ -121,12 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!198 &2492295 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 5327440752737672438, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-    type: 3}
-  m_PrefabInstance: {fileID: 139991642}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &139991642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,50 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 815907264, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: mask.m_Bits
-      value: 40960
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267489, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[0].mask.m_Bits
-      value: 57344
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[1].prefab
+      propertyPath: chunk_material
       value: 
-      objectReference: {fileID: 1000018434095272682, guid: d8496cdb34772a7408f084f30e890941,
-        type: 3}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[1].mask.m_Bits
-      value: 57344
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[2].prefab
-      value: 
-      objectReference: {fileID: 776332553222457681, guid: 5aee3513dbf7f7e4eb168135c97f174b,
-        type: 3}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[2].mask.m_Bits
-      value: 57344
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: prefabs.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 511482272838669818, guid: e828fd95902f10a4fb70ec9d89a9898a,
-        type: 3}
-    - target: {fileID: 152923204554566497, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2100000, guid: 8d974f20ea5078d48bf2f4d9b9ee85ab, type: 2}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -237,96 +191,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime1
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime2
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.m_NumColorKeys
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577343867104545362, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key2.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2159766802134245297, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4052186782227101105, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: mask.m_Bits
-      value: 40960
-      objectReference: {fileID: 0}
-    - target: {fileID: 4052186782227101130, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: circle
-      value: 
-      objectReference: {fileID: 2492295}
-    - target: {fileID: 4052186782834138165, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: circle
-      value: 
-      objectReference: {fileID: 1795802437}
-    - target: {fileID: 4052186782834138190, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: mask.m_Bits
-      value: 40960
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919485366991895265, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
@@ -870,12 +734,6 @@ MonoBehaviour:
   spawned_details: []
   merged_chunks: []
   tracker: {fileID: 0}
---- !u!198 &1795802437 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4000976898681472913, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-    type: 3}
-  m_PrefabInstance: {fileID: 139991642}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887997505867888384
 PrefabInstance:
   m_ObjectHideFlags: 0
