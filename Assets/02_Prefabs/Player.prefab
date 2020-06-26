@@ -2064,7 +2064,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: mask.m_Bits
-      value: 40960
+      value: 49152
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
@@ -2305,6 +2305,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 152923204717291918}
     m_Modifications:
+    - target: {fileID: 201975278542583475, guid: 3842f31a261b0254b80b339dc1a8aa56,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 813221341723035785, guid: 3842f31a261b0254b80b339dc1a8aa56,
         type: 3}
       propertyPath: m_Name
