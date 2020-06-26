@@ -108,7 +108,7 @@ namespace Tower_Management
         public void Update_Growth()
         {
             // call growth updates on blocks
-            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Growth_Speed); }
+            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Growth_Speed == 0 ? 0.1f : Growth_Speed); }
 
             // count delays
             List<Building> finished_buildings = new List<Building>();
@@ -139,7 +139,7 @@ namespace Tower_Management
             }
 
             // finish
-            if (active_blocks.Count == 0 && building_delays.Count == 0)
+            if (active_blocks.Count == 0 && building_delays.Count == 0 && Growth_Speed == 0)
                 Finish_Building_Growth();
         }
 
@@ -199,12 +199,7 @@ namespace Tower_Management
 
         private void Finish_Building_Growth() 
         {
-            foreach (var c in active_blocks.ToList())
-            {
-                active_blocks.Remove(c);
-                Destroy((c as Component).gameObject);
-            }
-
+      
             if (!finished_growing)
             {
                 Merge_Chunk(true);
@@ -243,8 +238,6 @@ namespace Tower_Management
             else
             {
                 value = 0;
-
-                Finish_Building_Growth();
             }
 
             return value;
@@ -260,7 +253,7 @@ namespace Tower_Management
 
         public LayerMask Layer { get { return _layer; } }
 
-        Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
+        public static Vector3 Calculate_Grow_Direction(Vector3 player_dir, Vector3 normal_dir) 
         {
             if (Vector3.Dot(player_dir, normal_dir) >= 0)
             {
