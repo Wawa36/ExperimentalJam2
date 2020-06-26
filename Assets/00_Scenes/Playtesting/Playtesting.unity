@@ -132,6 +132,21 @@ PrefabInstance:
       propertyPath: chunk_material
       value: 
       objectReference: {fileID: 2100000, guid: 8d974f20ea5078d48bf2f4d9b9ee85ab, type: 2}
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: prefabs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 4396286275594596690, guid: 3c69a8ec169cdc74f8ec681e903a2819,
+        type: 3}
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: prefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 4396286275594596690, guid: 347bec81b7c57804b94886b40e4a96fa,
+        type: 3}
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: prefabs.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 4396286275594596690, guid: 436c1667db3a33347a7985d748cd3522,
+        type: 3}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -175,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -669,7 +684,7 @@ PrefabInstance:
     - target: {fileID: 5761651040315048434, guid: d80349e98e67f044481382e163b27beb,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5761651040315048434, guid: d80349e98e67f044481382e163b27beb,
         type: 3}
@@ -742,6 +757,7 @@ MonoBehaviour:
   chunk_size: 5
   chunk_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   draw_ray: 1
+  growing_details: []
   spawned_details: []
   merged_chunks: []
   tracker: {fileID: 0}
