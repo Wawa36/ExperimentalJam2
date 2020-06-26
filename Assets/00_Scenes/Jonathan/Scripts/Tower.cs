@@ -213,10 +213,6 @@ namespace Tower_Management
         }
 
         // public interfaces
-        public void Create_New_Building(Building at_building) 
-        {
-            Create_Building(Calculate_Cambiums(at_building));
-        }
 
         public void Deactivate_Block(IGrowingBlock block) 
         {
@@ -309,6 +305,7 @@ namespace Tower_Management
             new_chunk.GetComponent<MeshFilter>().mesh.CombineMeshes(combine.ToArray());
             merged_chunks.Add(new_chunk);
 
+            // delet blocks
             foreach (var c in inactive_blocks.ToList())
             {
                 (c as Building).On_Merged();

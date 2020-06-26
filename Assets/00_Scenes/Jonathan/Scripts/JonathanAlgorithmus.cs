@@ -208,7 +208,7 @@ static class JonathanAlgorithmus
                 kambiumList.Add(new Tower.Cambium(hit.point + new Vector3(0, at_building.Main_Collider.bounds.size.y/2, 0), hit.normal, tower.Building_Prefabs[0], at_building.Cambium.steps));
 
             // split
-            if (!is_first_spawn && is_at_plattform && Random.Range(-10, tower.Mapper.Split_Chance) > 0)
+            if (!is_first_spawn && is_at_plattform && Random.Range(-20, tower.Mapper.Split_Chance) >= 0)
             {
                 dir = -at_building.Main_Collider.transform.parent.right;
 
@@ -306,9 +306,6 @@ static class JonathanAlgorithmus
         var hit = new RaycastHit();
 
         bool is_free = !Physics.Raycast(ray, out hit, distance, layer, QueryTriggerInteraction.Ignore);
-
-        if (hit.collider)
-            Debug.Log(hit.collider.name);
 
         return is_free;
     }
