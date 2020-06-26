@@ -29,9 +29,8 @@ public class LaunchArc : MonoBehaviour
         Vector3 endNormal=Vector3.zero;
         rayCastResolution = 0;
         Vector3 endVector=Vector3.zero;
-        lineRenderer.SetPosition(0,transform.position);
        //ColorChange();
-        for (int i =1; i<resolution; i++)
+        for (int i =0; i<resolution; i++)
         {
             
 
@@ -96,13 +95,20 @@ public class LaunchArc : MonoBehaviour
 
     void CreatePyramid(LineRenderer line,Vector3 scareCenter,Vector3 direction,Vector3 normal,float radius,float height)
     {
+        if (normal == Vector3.zero)
+        {
+            normal = transform.forward;
+        }
         line.transform.position = scareCenter;
+        
         line.transform.rotation = Quaternion.LookRotation(normal);
+        
         Vector3 corner1 = scareCenter  + line.transform.right * -radius + line.transform.up * -radius;
         Vector3 corner2 = scareCenter  + line.transform.right * -radius + line.transform.up *  radius;
         Vector3 corner3 = scareCenter  + line.transform.right *  radius + line.transform.up *  radius;
         Vector3 corner4= scareCenter   + line.transform.right *  radius + line.transform.up * -radius;
         Vector3 cornerTop =scareCenter + direction*height;
+         
         Vector3[] cornerOrder = new Vector3[10] { corner1, corner2, corner3, corner4, cornerTop, corner1, corner4, corner3, cornerTop, corner2 };
         line.positionCount = 10;
         line.SetPositions(cornerOrder);
