@@ -29,7 +29,7 @@ public class SphereArtifact : MonoBehaviour
     float particleTimer;
 
     Rigidbody rigid;
-    bool colided;
+    [HideInInspector] public bool colided;
     public float timer;
     Material material;
     
@@ -98,7 +98,6 @@ public class SphereArtifact : MonoBehaviour
         playerScript.carryingTheOrb = true;
         rigid.useGravity = false;
         rigid.isKinematic = true;
-        colided = false;
         StopAllCoroutines();
     }
     /// <summary>
