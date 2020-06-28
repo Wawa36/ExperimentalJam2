@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 1716439495632070975}
   - component: {fileID: 1621530862218539088}
   m_Layer: 15
-  m_Name: More colliders (6)
+  m_Name: Sub colliders (6)
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
