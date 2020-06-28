@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using Settings;
+using System.Collections;
 using System.Collections.Generic;
-using Tower_Management;
 using UnityEngine;
 
 namespace Tower_Management.Details
