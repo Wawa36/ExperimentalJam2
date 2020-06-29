@@ -163,64 +163,47 @@ public class ProceduralKabiumGeneratorFelix
             if (cambiumGeneration % splitAfterGenerations == 0 && cambiumGeneration != 0) // Do Split
             {
                 int newBranchID = towerAndBranches[tower]; //das was drin steht erhöt
-                int numberOfCambiums = 0;
                 if (Random.value > 0.5) //L - R
                 {
                     Vector3 point1 = positions[0] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]);
                     Vector3 normal1 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]);
-                    if (Check_Direction(point1, normal1, tower.Layer, buildingTransform.localScale.z)) //x or z?
-                    {
-                        kambiumList.Add(new Tower.Cambium(point1,
+                    kambiumList.Add(new Tower.Cambium(point1,
                                     normal1,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
 
-                        numberOfCambiums++;
-
-                    }
 
                     Vector3 point2 = positions[3] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]);
                     Vector3 normal2 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]);
-                    if (Check_Direction(point2, normal2, tower.Layer, buildingTransform.localScale.z)) //x or z?
-                    {
-                        kambiumList.Add(new Tower.Cambium(point2,
+                    kambiumList.Add(new Tower.Cambium(point2,
                                     normal2,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
 
-                        numberOfCambiums++;
-                    }
 
                 }
                 else //B - F
                 {
                     Vector3 point1 = positions[1] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]);
                     Vector3 normal1 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]);
-                    if (Check_Direction(point1, normal1, tower.Layer, buildingTransform.localScale.x)) //x or z?
-                    {
-                        kambiumList.Add(new Tower.Cambium(point1,
+                    kambiumList.Add(new Tower.Cambium(point1,
                                     normal1,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
 
-                        numberOfCambiums++;
-                    }
 
                     Vector3 point2 = positions[2] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]);
                     Vector3 normal2 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]);
-                    if (Check_Direction(point2, normal2, tower.Layer, buildingTransform.localScale.x)) //x or z?
-                    {
-                        kambiumList.Add(new Tower.Cambium(point2,
+                    kambiumList.Add(new Tower.Cambium(point2,
                                     normal2,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
 
-                        numberOfCambiums++;
-                    }
+                   
                 }
 
                 //Die generation überschreiben, set die generation for this branch
@@ -228,8 +211,8 @@ public class ProceduralKabiumGeneratorFelix
                 towerAndBranchDyingGeneration[tower] = thisTowersBranchGenerations; //write back
 
                 //Neue Branch
-                towerAndCambiumAmount[tower] += numberOfCambiums - 1;
-                towerAndBranches[tower] += numberOfCambiums - 1; //-1,0 or 1 more branch
+                towerAndCambiumAmount[tower]++;
+                towerAndBranches[tower]++;
 
                 Dictionary<int, int> newBranchDyingGeneration = new Dictionary<int, int>();
                 towerAndBranchDyingGeneration[tower].Add(newBranchID, 0);
