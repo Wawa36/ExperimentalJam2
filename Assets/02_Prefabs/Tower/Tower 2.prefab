@@ -132,7 +132,7 @@ MonoBehaviour:
     input: 2
     min: 0
     max: 4
-    multiplier: 30
+    multiplier: 50
     invert: 0
   generation_amount:
     input: 0
