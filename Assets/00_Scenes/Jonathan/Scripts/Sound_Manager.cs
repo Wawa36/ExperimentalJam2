@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-namespace Settings
+namespace Settings_Management
 {
     public class Sound_Manager : Singleton<Sound_Manager>
     {
@@ -35,7 +35,7 @@ namespace Settings
             {
                 var clip = Get_Clip(ID);
 
-                at_source.volume = clip.volume * Settings.Volume;
+                at_source.volume = clip.volume * Game_Settings.Volume;
                 at_source.clip = clip.clip;
                 at_source.Play();
             }

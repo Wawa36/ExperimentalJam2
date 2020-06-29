@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using Settings_Management;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Settings
+namespace Settings_Management
 {
     public class Volume_Apply : MonoBehaviour
     {
@@ -11,7 +12,7 @@ namespace Settings
         private void Awake()
         {
             foreach (var c in sources)
-                c.volume *= Settings.Volume;
+                c.volume *= Game_Settings.Volume;
         }
     }
 }

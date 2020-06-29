@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Settings
+namespace Settings_Management
 {
-    public static class Settings
+    public static class Game_Settings
     {
         // default values
         static float default_sensitivity_X = 1f;
         static float default_sensitivity_Y = 1f;
 
         static float default_volume = 1;
+
+        static int default_quality = 5;
 
         // properties
         public static float Sensitivity_X
@@ -52,6 +54,19 @@ namespace Settings
             }
         }
 
+        public static int Quality
+        {
+            get
+            {
+                Create_Default(); return PlayerPrefs.GetInt("Settings_Qualiy");
+            }
+
+            set
+            {
+                PlayerPrefs.SetInt("Settings_Qualiy", value);
+            }
+        }
+
         // set default values
         static void Create_Default()
         {
@@ -66,6 +81,10 @@ namespace Settings
             // volume
             if (!PlayerPrefs.HasKey("Settings_Volume"))
                 PlayerPrefs.SetFloat("Settings_Volume", default_volume);
+
+            // quality
+            if (!PlayerPrefs.HasKey("Settings_Qualiy"))
+                PlayerPrefs.SetInt("Settings_Qualiy", default_quality);
         }
     }
 }
