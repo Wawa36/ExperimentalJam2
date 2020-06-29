@@ -105,6 +105,16 @@ public class LaunchArc : MonoBehaviour
             direction = Vector3.up;
 
         }
+        if (normal == Vector3.zero)
+        {
+            normal = Vector3.up;
+            up = playerScript.transform.forward;
+        }
+        if (Mathf.Approximately(normal.x, 0) && Mathf.Approximately(normal.y, 1) && Mathf.Approximately(normal.z, 0))
+        {
+            up = playerScript.transform.forward;
+        }
+
 
         target.transform.position = Center;
         squareTransform.rotation = Quaternion.LookRotation(normal, up);
