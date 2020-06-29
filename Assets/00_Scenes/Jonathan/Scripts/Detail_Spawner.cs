@@ -29,6 +29,7 @@ namespace Tower_Management.Details
             StartCoroutine(Spawn_Loop());
             tracker = GameObject.FindGameObjectWithTag("Details Tracker").transform;
         }
+
         IEnumerator Spawn_Loop()
         {
             while (true)
@@ -47,7 +48,7 @@ namespace Tower_Management.Details
 
         float Calculate_Rate()
         {
-            var player_vel_raw = PlayerMovement.Instance.velocity * player_speed_multiplier * Time.deltaTime;
+            var player_vel_raw = PlayerMovement.Instance.velocity * player_speed_multiplier / Time.deltaTime;
             player_vel_raw.y = 0;
 
             var player_vel = player_vel_raw.magnitude;

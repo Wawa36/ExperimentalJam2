@@ -128,11 +128,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
-        type: 3}
-      propertyPath: teleportAnim
-      value: 
-      objectReference: {fileID: 1668739638}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -433,12 +428,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d80349e98e67f044481382e163b27beb, type: 3}
---- !u!95 &1668739638 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 930129720, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-    type: 3}
-  m_PrefabInstance: {fileID: 5524188675653524730}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2887997505867888384
 PrefabInstance:
   m_ObjectHideFlags: 0
