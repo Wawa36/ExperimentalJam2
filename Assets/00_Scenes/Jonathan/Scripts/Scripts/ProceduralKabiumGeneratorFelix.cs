@@ -182,7 +182,6 @@ public class ProceduralKabiumGeneratorFelix
                                     5,
                                     newBranchID)); //neuer ID
 
-                    Debug.Log("point 1 "+ point1 + " point 2 "+ point2);
 
                 }
                 else //B - F
@@ -204,7 +203,6 @@ public class ProceduralKabiumGeneratorFelix
                                     5,
                                     newBranchID)); //neuer ID
 
-                    Debug.Log("point 1 " + point1 + " point 2 " + point2);
                 }
 
                 //Die generation überschreiben, set die generation for this branch
@@ -226,32 +224,29 @@ public class ProceduralKabiumGeneratorFelix
                 if (HasStillSteps(at_building)) //fullfill steps
                 {
                     //which way?
-                    Vector3 point = Vector3.zero;
-                    float localScaleForCheck = 1;
-                    Debug.Log("forward product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized));
-                    Debug.Log("right product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized));
-                    Debug.Log("up product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized));
+                    Vector3 point;
+                    float localScaleForCheck;
                     if (Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) * 100) / 100 == -1) //parallel zum forward vector: z 
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.z / 2);
                         localScaleForCheck = buildingTransform.localScale.z; 
-                        Debug.Log("Z"); 
+                        //Debug.Log("Z"); 
                     }
                     else if(Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) * 100) / 100 == -1) //parallel zum right vector: x
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.x / 2);
                         localScaleForCheck = buildingTransform.localScale.x;
-                        Debug.Log("X");
+                        //Debug.Log("X");
                     }
                     else if(Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) * 100) / 100 == -1) //parallel zum up vector: y
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2);
                         localScaleForCheck = buildingTransform.localScale.y;
-                        Debug.Log("Y");
+                        //Debug.Log("Y");
                     }
                     else
                     {
-                        Debug.Log("doing else than X Y Z");
+                        throw new System.Exception("no collinear vector... doesn't know from where to grow exactly...");
                     }
 
                     Vector3 normal = at_building.Cambium.normal;

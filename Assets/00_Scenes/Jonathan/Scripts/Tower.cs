@@ -36,14 +36,15 @@ namespace Tower_Management
         [SerializeField] Material default_material;
         [SerializeField] Material highlight_material;
         [SerializeField] int _building_generation = 0;
+        [SerializeField] bool can_finish;
         [SerializeField] bool finished_growing;
 
         // stored growth data
         Tower_Input_Mapper mapper;
         List<IGrowingBlock> active_blocks = new List<IGrowingBlock>();
         List<IGrowingBlock> inactive_blocks = new List<IGrowingBlock>();
-        [SerializeField] List<GameObject> merged_chunks = new List<GameObject>();
-        [SerializeField] List<GameObject> deep_merged_chunk = new List<GameObject>();
+        List<GameObject> merged_chunks = new List<GameObject>();
+        List<GameObject> deep_merged_chunk = new List<GameObject>();
 
         Dictionary<Building, float> building_delays = new Dictionary<Building, float>();
 
@@ -108,7 +109,7 @@ namespace Tower_Management
         public void Update_Growth()
         {
             // call growth updates on blocks
-            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Growth_Speed == 0 ? 0.1f : Growth_Speed); }
+            for (int i = 0; i < active_blocks.Count; i++) { active_blocks[i].On_Update_Growth(Growth_Speed == 0 ? 0.2f : Growth_Speed); }
 
             // count delays
             List<Building> finished_buildings = new List<Building>();
@@ -121,7 +122,8 @@ namespace Tower_Management
 
                     if (building_delays[c] >= Delay)
                     {
-                        Create_Building(Calculate_Cambiums(c));
+                        if (!can_finish)
+                            Create_Building(Calculate_Cambiums(c));
                         finished_buildings.Add(c);
 
                         if (c.Renderer)
@@ -139,7 +141,7 @@ namespace Tower_Management
             }
 
             // finish
-            if (active_blocks.Count == 0 && building_delays.Count == 0 && Growth_Speed == 0)
+            if (active_blocks.Count == 0 && building_delays.Count == 0 && can_finish)
                 Finish_Building_Growth();
         }
 
@@ -237,7 +239,8 @@ namespace Tower_Management
                 value = _growth_speed_over_lifetime.Evaluate(_building_generation);
             else
             {
-                value = 0;
+                can_finish = true;
+               value = _growth_speed_over_lifetime.Evaluate(_growth_speed_over_lifetime.keys[_growth_speed_over_lifetime.keys.Length - 1].time);
             }
 
             return value;

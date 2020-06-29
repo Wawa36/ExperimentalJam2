@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: arc Preview
+  m_Name: arc Preview 2
   m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: feac8e14a7d054e4a83ff96c0b535ae3, type: 3}
+        m_Texture: {fileID: 2800000, guid: d4bf75f6ec51af24286698a53b18167a, type: 3}
         m_Scale: {x: 1, y: 0}
         m_Offset: {x: 1, y: 0}
     - _BumpMap:
