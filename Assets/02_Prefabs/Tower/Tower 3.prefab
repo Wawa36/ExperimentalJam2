@@ -132,27 +132,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grow_speed:
-    input: 3
+    input: 0
     min: -30
-    max: 45
+    max: 25
     multiplier: 10
     invert: 0
   split_chance:
-    input: 3
+    input: 2
     min: 0
-    max: 45
+    max: 4
     multiplier: 15
     invert: 0
   generation_amount:
     input: 0
-    min: -30
-    max: 25
-    multiplier: 100
-    invert: 0
-  change_direction_chance:
-    input: 0
     min: 0
-    max: 40
+    max: 50
+    multiplier: 100
+    invert: 1
+  change_direction_chance:
+    input: 2
+    min: 0
+    max: 4
     multiplier: 8
     invert: 1
   width:

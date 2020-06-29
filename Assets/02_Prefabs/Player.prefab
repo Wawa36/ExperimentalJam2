@@ -151,8 +151,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 571140740}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 35.73258, y: 35.73258, z: 35.73258}
+  m_LocalPosition: {x: 0, y: 0, z: -0.16931991}
+  m_LocalScale: {x: 41.297558, y: 41.297558, z: 41.297554}
   m_Children:
   - {fileID: 20239218}
   m_Father: {fileID: 2061875758}
@@ -457,8 +457,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061875757}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.022698052}
-  m_LocalScale: {x: 0.027985677, y: 0.027985677, z: 0.02798568}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0388}
+  m_LocalScale: {x: 0.024214506, y: 0.024214506, z: 0.02421451}
   m_Children:
   - {fileID: 571140741}
   m_Father: {fileID: 2159766802134245297}
@@ -752,7 +752,6 @@ MonoBehaviour:
     m_Bits: 1
   cameraRigTransform: {fileID: 152923204344402230}
   launchArc: {fileID: 815907264}
-  teleportAnim: {fileID: 0}
   gravity: -39.24
   movespeed: 10
   rotationSpeed: 50
@@ -2978,17 +2977,17 @@ PrefabInstance:
     - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8274008616707609571, guid: 3842f31a261b0254b80b339dc1a8aa56,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 201975278542583475, guid: 3842f31a261b0254b80b339dc1a8aa56, type: 3}
