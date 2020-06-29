@@ -554,25 +554,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1783267489, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: distance
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: min_rate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
-      propertyPath: spawn_rate
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: player_speed_multiplier
-      value: 50
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
