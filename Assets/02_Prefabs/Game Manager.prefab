@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 930129718}
   m_Layer: 0
   m_Name: PostProcessingVolume
-  m_TagString: Untagged
+  m_TagString: postProcess
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

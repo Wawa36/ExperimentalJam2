@@ -15,6 +15,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     Rigidbody orbRigid;
     SphereArtifact orbScript;
     GameObject activeOrb;
+    Animator teleportAnim;
     [HideInInspector] public int currentOrbIndex;
     #endregion
 
@@ -24,8 +25,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] LayerMask mask;
     [SerializeField] Transform cameraRigTransform;
     [SerializeField] LaunchArc launchArc;
-    [SerializeField] Animator teleportAnim;
-
+    
 
     [Header("Movement Parameter")]
     [SerializeField] float gravity;
@@ -45,6 +45,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         orbRigid = activeOrb.GetComponent<Rigidbody>();
         orbScript = activeOrb.GetComponent<SphereArtifact>();
         carryingTheOrb = true;
+        teleportAnim = GameObject.FindGameObjectWithTag("postProcess").GetComponent<Animator>();
     }
 
     private void Update()
