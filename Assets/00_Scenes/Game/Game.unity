@@ -297,6 +297,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.69803923
       objectReference: {fileID: 0}
+    - target: {fileID: 2760890, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 277416287, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: buttons.Array.size
       value: 3
@@ -337,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.69803923
       objectReference: {fileID: 0}
+    - target: {fileID: 636973661, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 687179849, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: m_Colors.m_PressedColor.r
       value: 0.5764706
@@ -360,6 +368,10 @@ PrefabInstance:
     - target: {fileID: 687179849, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: m_Colors.m_SelectedColor.b
       value: 0.69803923
+      objectReference: {fileID: 0}
+    - target: {fileID: 687179849, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2887997506702327395, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
         type: 3}

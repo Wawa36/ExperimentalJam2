@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Settings_Management;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,8 +31,8 @@ public class CameraRig : MonoBehaviour
     /// </summary>
     void FirstPersonRig()
     {
-        float MouseAxisX = Input.GetAxis("Mouse X")*turnSpeed*Time.deltaTime;
-        float MouseAxisY = Input.GetAxis("Mouse Y")*upDownTurnSpeed*Time.deltaTime;
+        float MouseAxisX = Input.GetAxis("Mouse X")*turnSpeed*Time.deltaTime * Game_Settings.Sensitivity_X;
+        float MouseAxisY = Input.GetAxis("Mouse Y")*upDownTurnSpeed*Time.deltaTime * Game_Settings.Sensitivity_Y;
 
         xRotation -= MouseAxisY;
         xRotation = Mathf.Clamp(xRotation, -76, 90);

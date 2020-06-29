@@ -134,7 +134,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2202972994a341d4f80e22410381eb1a, type: 2}
     - target: {fileID: 815907265, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: m_Parameters.textureMode
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 815907265, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: m_Parameters.colorGradient.key2.a
