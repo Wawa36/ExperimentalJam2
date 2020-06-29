@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Tower_Management.Details
@@ -22,27 +23,26 @@ namespace Tower_Management.Details
         [SerializeField] List<Detail> spawned_details = new List<Detail>();
         [SerializeField] List<GameObject> merged_chunks = new List<GameObject>();
         [SerializeField] Transform tracker;
+        [SerializeField] float counter;
+
         public float new_rate;
 
         void Start()
         {
-            StartCoroutine(Spawn_Loop());
             tracker = GameObject.FindGameObjectWithTag("Details Tracker").transform;
         }
 
-        IEnumerator Spawn_Loop()
+        void Update()
         {
-            while (true)
+            if (counter < Calculate_Rate())
             {
-                float counter = 0;
-                while (counter < Calculate_Rate())
-                {
-                    yield return new WaitForEndOfFrame();
-                    new_rate = Calculate_Rate();
-                    counter += Time.deltaTime;
-                }
-
+                new_rate = Calculate_Rate();
+                counter += Time.deltaTime;
+            }
+            else if (Time.timeScale == 1)
+            {
                 Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
+                counter = 0;
             }
         }
 

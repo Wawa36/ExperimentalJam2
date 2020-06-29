@@ -50,18 +50,24 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void Update()
     {
-        Gravity();
-       // Throw();
-        
-        Jump();
+        if (Time.timeScale != 0)
+        {
+            Gravity();
+            // Throw();
 
-        Move();
-        Teleport();
-        SwapOrbs();
+            Jump();
+
+            Move();
+            Teleport();
+            SwapOrbs();
+        }
     }
     private void LateUpdate()
     {
-        Throw ();
+        if (Time.timeScale != 0)
+        {
+            Throw();
+        }
     }
     /// <summary>
     /// wandelt den input in die bewegung des players um

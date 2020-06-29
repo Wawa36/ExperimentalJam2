@@ -1,15 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Settings_Management;
-using UnityEngine.Video;
 
-public class Main_Menu : MonoBehaviour
+public class UI_Controller : Singleton<UI_Controller>
 {
     [Header("Panel")]
-    [SerializeField] GameObject main_panel;
+    [SerializeField] GameObject menu_panel;
     [SerializeField] GameObject settings_panel;
-    [SerializeField] GameObject credits_panel;
 
     [Header("Buttons")]
     [SerializeField] Button[] buttons;
@@ -20,18 +18,26 @@ public class Main_Menu : MonoBehaviour
     [SerializeField] Slider sensitivity_x_slider;
     [SerializeField] Slider sensitivity_y_slider;
 
-    public int button_index;
+    bool is_paused;
+    public int button_index = 0;
     public bool controller_input_trigger = true;
 
     void Start()
     {
         Assign_Settings_Elements();
-        Set_Panel(0);
     }
 
-    // controller input
     private void Update()
     {
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (is_paused)
+                Continue();
+            else
+                Open_Menu();
+        }
+
+
         // select button
         if (Input.GetAxis("Menu Selection") != 0)
         {
@@ -60,37 +66,43 @@ public class Main_Menu : MonoBehaviour
             controller_input_trigger = true;
 
         // click
-        if (Input.GetButtonDown("Menu Click"))
+        if (Input.GetButtonDown("Menu Click") && is_paused)
             buttons[button_index].onClick.Invoke();
 
-        if (Input.GetButtonDown("Menu Abort"))
-            Set_Panel(0);
+        if (Input.GetButtonDown("Menu Abort") && is_paused)
+            Set_Panel(1);
     }
 
     // button interaction
-    public void Start_Game()
+    public void Open_Menu() 
     {
-        SceneManager.LoadScene("Game");        
-    }
-
-    public void Open_Main() 
-    {
-        Set_Panel(0);
-    }
-
-    public void Open_Settings() 
-    {
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Set_Panel(1);
+
+        is_paused = true;
     }
 
-    public void Open_Credits() 
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+        Set_Panel(0);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        is_paused = false;
+    }
+
+    public void Open_Settings()
     {
         Set_Panel(2);
     }
 
-    public void Quit()
+    public void Go_Main_Menu()
     {
-        Application.Quit();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Main Menu");
     }
 
     // panel management
@@ -98,25 +110,22 @@ public class Main_Menu : MonoBehaviour
     {
         switch (index)
         {
-            // main
+            // nothing
             case 0:
-                main_panel.SetActive(true);
+                menu_panel.SetActive(false);
                 settings_panel.SetActive(false);
-                credits_panel.SetActive(false);
+                break;
+            // menu
+            case 1:
+                menu_panel.SetActive(true);
+                settings_panel.SetActive(false);
                 button_index = 0;
                 buttons[button_index].Select();
                 break;
             // settings
-            case 1:
-                main_panel.SetActive(false);
-                settings_panel.SetActive(true);
-                credits_panel.SetActive(false);
-                break;
-            // credits
             case 2:
-                main_panel.SetActive(false);
-                settings_panel.SetActive(false);
-                credits_panel.SetActive(true);
+                menu_panel.SetActive(false);
+                settings_panel.SetActive(true);
                 break;
         }
     }
@@ -124,10 +133,10 @@ public class Main_Menu : MonoBehaviour
     // settings management
     void Assign_Settings_Elements()
     {
-        quaility_slider.SetValueWithoutNotify (Game_Settings.Quality);
-        volume_slider.SetValueWithoutNotify (Game_Settings.Volume);
-        sensitivity_x_slider.SetValueWithoutNotify (Game_Settings.Sensitivity_X);
-        sensitivity_y_slider.SetValueWithoutNotify (Game_Settings.Sensitivity_Y);
+        quaility_slider.SetValueWithoutNotify(Game_Settings.Quality);
+        volume_slider.SetValueWithoutNotify(Game_Settings.Volume);
+        sensitivity_x_slider.SetValueWithoutNotify(Game_Settings.Sensitivity_X);
+        sensitivity_y_slider.SetValueWithoutNotify(Game_Settings.Sensitivity_Y);
 
         QualitySettings.SetQualityLevel(Game_Settings.Quality);
     }

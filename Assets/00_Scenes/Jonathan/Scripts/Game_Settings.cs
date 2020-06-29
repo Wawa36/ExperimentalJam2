@@ -7,8 +7,8 @@ namespace Settings_Management
     public static class Game_Settings
     {
         // default values
-        static float default_sensitivity_X = 3.5f;
-        static float default_sensitivity_Y = 3.5f;
+        static float default_sensitivity_X = 1f;
+        static float default_sensitivity_Y = 1f;
 
         static float default_volume = 1;
 
@@ -24,7 +24,7 @@ namespace Settings_Management
 
             set
             {
-                PlayerPrefs.SetFloat("Settings_Sensitivity_X", value);
+                PlayerPrefs.SetFloat("Settings_Sensitivity_X", Mathf.Clamp(value, 0.1f, 2f));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Settings_Management
 
             set
             {
-                PlayerPrefs.SetFloat("Settings_Sensitivity_Y", value);
+                PlayerPrefs.SetFloat("Settings_Sensitivity_Y", Mathf.Clamp(value, 0.1f, 2f));
             }
         }
 
@@ -50,7 +50,7 @@ namespace Settings_Management
 
             set
             {
-                PlayerPrefs.SetFloat("Settings_Volume", value);
+                PlayerPrefs.SetFloat("Settings_Volume", Mathf.Clamp(value, 0f, 1));
             }
         }
 
