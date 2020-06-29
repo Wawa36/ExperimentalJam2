@@ -92,6 +92,16 @@ MonoBehaviour:
     mask:
       serializedVersion: 2
       m_Bits: 57344
+  - prefab: {fileID: 4396286275594596690, guid: 8fe41900ba5d04d409a0ea183601d13e,
+      type: 3}
+    mask:
+      serializedVersion: 2
+      m_Bits: 57344
+  - prefab: {fileID: 4396286275594596690, guid: 228029be1efe74c4aabc9c4a8458a02b,
+      type: 3}
+    mask:
+      serializedVersion: 2
+      m_Bits: 57344
   spawn_rate: 2
   distance: 10
   chunk_rate: 20
@@ -320,6 +330,7 @@ MonoBehaviour:
   orbEnergy: 0
   carryingTheOrb: 0
   notAiming: 0
+  currentOrbIndex: 0
   orbs:
   - {fileID: 815907258}
   - {fileID: 4052186782227101131}
