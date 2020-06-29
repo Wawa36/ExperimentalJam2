@@ -65,6 +65,7 @@ public class ProceduralKabiumGeneratorFelix
     static Dictionary<Tower, int> towerAndBranches = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerAndCambiumAmount = new Dictionary<Tower, int>();
     static Dictionary<Tower, Dictionary<int, int>> towerAndBranchDyingGeneration = new Dictionary<Tower, Dictionary<int, int>>();
+    static Dictionary<Tower, int> towerAndSplitChance = new Dictionary<Tower, int>();
 
     private static int CambiumGenerations(Building at_building, int generations = 0)
     {
@@ -101,6 +102,11 @@ public class ProceduralKabiumGeneratorFelix
             towerAndCambiumAmount.Add(tower, 1);
         }
 
+        if (!towerAndSplitChance.ContainsKey(tower))
+        {
+            towerAndSplitChance.Add(tower, 0);
+        }
+
         if (!towerAndBranchDyingGeneration.ContainsKey(tower))
         {
             Dictionary<int, int> branchDyingGeneration = new Dictionary<int, int>();
@@ -126,6 +132,13 @@ public class ProceduralKabiumGeneratorFelix
         }*/
 
         splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 2, 1000); // kann nicht 0 sein
+        //splitAfterGenerations += Random.Range(-2, 0);
+        //splitAfterGenerations = Mathf.Clamp(splitAfterGenerations, 2, 1000); // kann nicht 0 sein
+        if(towerAndSplitChance[tower] == 0)
+        {
+            towerAndSplitChance[tower] = splitAfterGenerations;
+        }
+        Debug.Log("split after : " + towerAndSplitChance[tower]);
 
         //Prepare other Variables ------------------------------------------------
 
@@ -157,6 +170,7 @@ public class ProceduralKabiumGeneratorFelix
 
         Dictionary<int, int> thisTowersBranchGenerations = towerAndBranchDyingGeneration[tower];
         int cambiumGeneration = CambiumGenerations(at_building);
+        Debug.Log(" generation " + cambiumGeneration);
 
         if (cambiumGeneration != thisTowersBranchGenerations[at_building.Cambium.branch_ID])
         {
@@ -215,6 +229,13 @@ public class ProceduralKabiumGeneratorFelix
 
                 Dictionary<int, int> newBranchDyingGeneration = new Dictionary<int, int>();
                 towerAndBranchDyingGeneration[tower].Add(newBranchID, 0);
+
+                //change the split chance ---
+                splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 2, 1000); // kann nicht 0 sein
+                splitAfterGenerations += Random.Range(0, 5);
+                splitAfterGenerations = Mathf.Clamp(splitAfterGenerations, 2, 1000); // kann nicht 0 sein
+                towerAndSplitChance[tower] = splitAfterGenerations;
+                //---
 
                 return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
             }

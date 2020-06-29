@@ -160,8 +160,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   contrast:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 18
     min: -100
     max: 100
   colorFilter:
@@ -200,6 +200,7 @@ MonoBehaviour:
   - {fileID: 7868266672539130532}
   - {fileID: 8472379534179790658}
   - {fileID: -3119379173916799101}
+  - {fileID: -3056950382336007186}
 --- !u!114 &6366466143548751265
 MonoBehaviour:
   m_ObjectHideFlags: 3
