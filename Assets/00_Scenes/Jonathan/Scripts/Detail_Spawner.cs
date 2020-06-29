@@ -10,6 +10,7 @@ namespace Tower_Management.Details
         [SerializeField] Detail_Prefab[] prefabs;
         [SerializeField] float spawn_rate;
         [SerializeField] float distance;
+        [SerializeField] int Accuracy = 50;
         [SerializeField] [Range(5, 100)]int chunk_rate;
         [SerializeField] [Range(1000, 1000000)] int max_chunk_vert_size;
         [SerializeField] Material chunk_material;
@@ -41,7 +42,7 @@ namespace Tower_Management.Details
         {
             int counter = 0;
 
-            while (counter < 50)
+            while (counter < Accuracy)
             {
                 var ray = new Ray(transform.position, (transform.position + Random.onUnitSphere) - transform.position);
                 var hit = new RaycastHit();
