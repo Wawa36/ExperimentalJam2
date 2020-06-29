@@ -92,12 +92,12 @@ MonoBehaviour:
     mask:
       serializedVersion: 2
       m_Bits: 57344
-  - prefab: {fileID: 4302450319022462698, guid: 3ec292ae8aa71574b88a0e9ef43e9fd4,
+  - prefab: {fileID: 4396286275594596690, guid: 8fe41900ba5d04d409a0ea183601d13e,
       type: 3}
     mask:
       serializedVersion: 2
       m_Bits: 57344
-  - prefab: {fileID: 3585052221182620541, guid: 9a9639ab2a8a1ab46a3c758cbcb01105,
+  - prefab: {fileID: 4396286275594596690, guid: 228029be1efe74c4aabc9c4a8458a02b,
       type: 3}
     mask:
       serializedVersion: 2
