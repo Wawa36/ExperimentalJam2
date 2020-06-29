@@ -29,28 +29,32 @@ namespace Tower_Management.Details
             StartCoroutine(Spawn_Loop());
             tracker = GameObject.FindGameObjectWithTag("Details Tracker").transform;
         }
-
         IEnumerator Spawn_Loop()
         {
             while (true)
             {
-                var player_vel = PlayerMovement.Instance.velocity.magnitude;
-                print(player_vel);
-                var rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
-
                 float counter = 0;
-                while (counter < rate)
+                while (counter < Calculate_Rate())
                 {
                     yield return new WaitForEndOfFrame();
-                    new_rate = rate;
+                    new_rate = Calculate_Rate();
                     counter += Time.deltaTime;
-
-                    player_vel = PlayerMovement.Instance.velocity.magnitude * player_speed_multiplier;
-                    rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
                 }
 
                 Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
             }
+        }
+
+        float Calculate_Rate()
+        {
+            var player_vel_raw = PlayerMovement.Instance.velocity * player_speed_multiplier * Time.deltaTime;
+            player_vel_raw.y = 0;
+
+            var player_vel = player_vel_raw.magnitude;
+
+            var rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
+
+            return rate;
         }
 
         void Search_Point(Detail_Prefab prefab)

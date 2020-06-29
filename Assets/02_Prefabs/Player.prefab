@@ -323,7 +323,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 57344
   spawn_rate: 5
-  player_speed_multiplier: 35
+  player_speed_multiplier: 500
   distance: 2
   Accuracy: 50
   chunk_rate: 20
