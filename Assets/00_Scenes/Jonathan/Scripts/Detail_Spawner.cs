@@ -9,6 +9,7 @@ namespace Tower_Management.Details
         [Header("Settings")]
         [SerializeField] Detail_Prefab[] prefabs;
         [SerializeField] float spawn_rate;
+        [SerializeField] float player_speed_multiplier;
         [SerializeField] float distance;
         [SerializeField] int Accuracy = 50;
         [SerializeField] [Range(5, 100)]int chunk_rate;
@@ -21,6 +22,7 @@ namespace Tower_Management.Details
         [SerializeField] List<Detail> spawned_details = new List<Detail>();
         [SerializeField] List<GameObject> merged_chunks = new List<GameObject>();
         [SerializeField] Transform tracker;
+        public float new_rate;
 
         void Start()
         {
@@ -32,7 +34,19 @@ namespace Tower_Management.Details
         {
             while (true)
             {
-                yield return new WaitForSeconds(spawn_rate);
+                var player_vel = PlayerMovement.Instance.velocity.magnitude;
+                var rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
+
+                float counter = 0;
+                while (counter < rate)
+                {
+                    yield return new WaitForEndOfFrame();
+                    new_rate = rate;
+                    counter += Time.deltaTime;
+
+                    player_vel = PlayerMovement.Instance.velocity.magnitude * player_speed_multiplier;
+                    rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
+                }
 
                 Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
             }
