@@ -163,6 +163,7 @@ public class ProceduralKabiumGeneratorFelix
             if (cambiumGeneration % splitAfterGenerations == 0 && cambiumGeneration != 0) // Do Split
             {
                 int newBranchID = towerAndBranches[tower]; //das was drin steht erhöt
+                int numberOfCambiums = 0;
                 if (Random.value > 0.5) //L - R
                 {
                     Vector3 point1 = positions[0] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]);
@@ -175,6 +176,8 @@ public class ProceduralKabiumGeneratorFelix
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
 
+                        numberOfCambiums++;
+
                     }
 
                     Vector3 point2 = positions[3] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]);
@@ -186,6 +189,8 @@ public class ProceduralKabiumGeneratorFelix
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
+
+                        numberOfCambiums++;
                     }
 
                 }
@@ -200,6 +205,8 @@ public class ProceduralKabiumGeneratorFelix
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
+
+                        numberOfCambiums++;
                     }
 
                     Vector3 point2 = positions[2] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]);
@@ -211,6 +218,8 @@ public class ProceduralKabiumGeneratorFelix
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
+
+                        numberOfCambiums++;
                     }
                 }
 
@@ -219,8 +228,8 @@ public class ProceduralKabiumGeneratorFelix
                 towerAndBranchDyingGeneration[tower] = thisTowersBranchGenerations; //write back
 
                 //Neue Branch
-                towerAndCambiumAmount[tower]++;
-                towerAndBranches[tower]++;
+                towerAndCambiumAmount[tower] += numberOfCambiums - 1;
+                towerAndBranches[tower] += numberOfCambiums - 1; //-1,0 or 1 more branch
 
                 Dictionary<int, int> newBranchDyingGeneration = new Dictionary<int, int>();
                 towerAndBranchDyingGeneration[tower].Add(newBranchID, 0);
@@ -266,6 +275,10 @@ public class ProceduralKabiumGeneratorFelix
                                                         at_building.Cambium.branch_ID);
 
                         kambiumList.Add(newCambium);
+                    }
+                    else //wenn es nicht wächst
+                    {
+                        towerAndCambiumAmount[tower]--;
                     }
 
                     return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
