@@ -231,19 +231,19 @@ public class ProceduralKabiumGeneratorFelix
                     Debug.Log("forward product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized));
                     Debug.Log("right product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized));
                     Debug.Log("up product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized));
-                    if (Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) == -1) //parallel zum forward vector: z 
+                    if (Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) * 100) / 100 == -1) //parallel zum forward vector: z 
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.z / 2);
-                        localScaleForCheck = buildingTransform.localScale.z;
-                        Debug.Log("Z");
+                        localScaleForCheck = buildingTransform.localScale.z; 
+                        Debug.Log("Z"); 
                     }
-                    else if(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) == -1) //parallel zum right vector: x
+                    else if(Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) * 100) / 100 == -1) //parallel zum right vector: x
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.x / 2);
                         localScaleForCheck = buildingTransform.localScale.x;
                         Debug.Log("X");
                     }
-                    else if(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) == -1) //parallel zum up vector: y
+                    else if(Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) * 100) / 100 == 1 || Mathf.Round(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) * 100) / 100 == -1) //parallel zum up vector: y
                     {
                         point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2);
                         localScaleForCheck = buildingTransform.localScale.y;
