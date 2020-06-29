@@ -1,0 +1,27 @@
+fileFormatVersion: 2
+guid: fa88b1fd27a8e944db3bd9c6b84d6980
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HTWBerlin
+  fontNames:
+  - HTWBerlin
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6121bac38cef2324c85cbc9fc5ba4b22, type: 3}
+  - {fileID: 12800000, guid: 060e2a689a6467544a81b8e93ad4a7fd, type: 3}
+  - {fileID: 12800000, guid: e07b183b04ecdaf41b086185b8c6ad4f, type: 3}
+  - {fileID: 12800000, guid: 51c01e2cf7e0d4e49b353a7673fcdaa8, type: 3}
+  - {fileID: 12800000, guid: e88ca74fb1309174e9a77cc7c67b342e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
