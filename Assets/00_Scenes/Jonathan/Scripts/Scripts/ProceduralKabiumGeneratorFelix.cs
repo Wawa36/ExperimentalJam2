@@ -126,6 +126,9 @@ public class ProceduralKabiumGeneratorFelix
         }*/
 
         splitAfterGenerations = Mathf.Clamp(tower.Mapper.Split_Chance, 2, 1000); // kann nicht 0 sein
+      //  splitAfterGenerations += Random.Range(-2, 2);
+      //  splitAfterGenerations = Mathf.Clamp(splitAfterGenerations, 2, 1000); // kann nicht 0 sein
+        Debug.Log("split after : " + splitAfterGenerations);
 
         //Prepare other Variables ------------------------------------------------
 
