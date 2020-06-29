@@ -7,8 +7,8 @@ namespace Settings_Management
     public static class Game_Settings
     {
         // default values
-        static float default_sensitivity_X = 1f;
-        static float default_sensitivity_Y = 1f;
+        static float default_sensitivity_X = 3.5f;
+        static float default_sensitivity_Y = 3.5f;
 
         static float default_volume = 1;
 
