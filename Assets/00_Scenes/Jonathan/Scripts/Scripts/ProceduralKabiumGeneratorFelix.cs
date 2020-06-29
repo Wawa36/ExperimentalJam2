@@ -247,6 +247,10 @@ public class ProceduralKabiumGeneratorFelix
                         localScaleForCheck = buildingTransform.localScale.y;
                         Debug.Log("Y");
                     }
+                    else
+                    {
+                        Debug.Log("doing else than X Y Z");
+                    }
 
                     Vector3 normal = at_building.Cambium.normal;
                     if (Check_Direction(point, normal, tower.Layer, localScaleForCheck)) 
@@ -277,9 +281,14 @@ public class ProceduralKabiumGeneratorFelix
                         if (Random.value > 0.25) //ADDED 23.06.2020 first go up, so if klein, obwol steps geht er nicht so weit aus einander
                         {
                             //back right
-                            kambiumList.Add(new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2), buildingTransform.up, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
-                            hasStartedOne = true;
-                            countNewCambiums++;
+                            Vector3 point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2);
+                            Vector3 normal = buildingTransform.up;
+                            if (Check_Direction(point, normal, tower.Layer, buildingTransform.localScale.y))
+                            {
+                                kambiumList.Add(new Tower.Cambium(point, normal, tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)], tower.Steps, at_building.Cambium.branch_ID));
+                                hasStartedOne = true;
+                                countNewCambiums++;
+                            }
                         }
 
                         if (Random.value > 0.25)
