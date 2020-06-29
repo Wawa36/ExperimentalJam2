@@ -26,6 +26,8 @@ namespace Tower_Management.Details
         {
             StartCoroutine(Spawn_Loop());
             tracker = GameObject.FindGameObjectWithTag("Details Tracker").transform;
+
+            var t = new Vector2(0, 0);
         }
 
         IEnumerator Spawn_Loop()

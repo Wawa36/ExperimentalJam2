@@ -13,6 +13,33 @@ MonoBehaviour:
   m_Name: Sound Clips
   m_EditorClassIdentifier: 
   clips:
-  - ID: Test
+  - ID: Walk
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Jump
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Hit 1
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Charge Orb
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Finish Charge Orb
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Orb Hit
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Orb Throw
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Orb Call Back
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Orb Swich
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
     volume: 0.5
+  - ID: Teleport
+    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
