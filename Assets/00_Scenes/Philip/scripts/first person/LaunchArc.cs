@@ -47,7 +47,7 @@ public class LaunchArc : MonoBehaviour
                 if (rayCastResolution <= i)
                 {
                     rayCastResolution += 1;
-                    if (Physics.CapsuleCast(previousDrawpoint,drawpoint,0.15f,drawpoint-previousDrawpoint,out hit, Vector3.Distance(drawpoint, previousDrawpoint),mask))
+                    if (Physics.SphereCast(previousDrawpoint,0.3f,drawpoint-previousDrawpoint,out hit, Vector3.Distance(drawpoint, previousDrawpoint)+.5f,mask))
                     {
                         
                         endVector = hit.point;
