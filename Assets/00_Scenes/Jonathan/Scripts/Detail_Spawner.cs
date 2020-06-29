@@ -35,6 +35,7 @@ namespace Tower_Management.Details
             while (true)
             {
                 var player_vel = PlayerMovement.Instance.velocity.magnitude;
+                print(player_vel);
                 var rate = (spawn_rate / (player_vel == 0 ? 1f : player_vel));
 
                 float counter = 0;
