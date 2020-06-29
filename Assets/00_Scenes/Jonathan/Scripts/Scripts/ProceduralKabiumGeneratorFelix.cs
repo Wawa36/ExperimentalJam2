@@ -24,6 +24,16 @@ public class ProceduralKabiumGeneratorFelix
 
     }
 
+    static bool Check_Direction(Vector3 point, Vector3 direction, LayerMask layer, float distance)
+    {
+        var ray = new Ray(point, direction);
+        var hit = new RaycastHit();
+
+        bool is_free = !Physics.Raycast(ray, out hit, distance, layer, QueryTriggerInteraction.Ignore);
+
+        return is_free;
+    }
+
 
     static Dictionary<Tower, int> towerAndNeighbours = new Dictionary<Tower, int>();
     static Dictionary<Tower, int> towerTurnNumber = new Dictionary<Tower, int>();
@@ -155,32 +165,53 @@ public class ProceduralKabiumGeneratorFelix
                 int newBranchID = towerAndBranches[tower]; //das was drin steht erhöt
                 if (Random.value > 0.5) //L - R
                 {
-                    kambiumList.Add(new Tower.Cambium(positions[0] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]),
-                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]),
+                    Vector3 point1 = positions[0] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]);
+                    Vector3 normal1 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[0]);
+                    if (Check_Direction(point1, normal1, tower.Layer, buildingTransform.localScale.z)) //x or z?
+                    {
+                        kambiumList.Add(new Tower.Cambium(point1,
+                                    normal1,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
 
-                    kambiumList.Add(new Tower.Cambium(positions[3] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]),
-                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]),
+                    }
+
+                    Vector3 point2 = positions[3] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]);
+                    Vector3 normal2 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[3]);
+                    if (Check_Direction(point2, normal2, tower.Layer, buildingTransform.localScale.z)) //x or z?
+                    {
+                        kambiumList.Add(new Tower.Cambium(point2,
+                                    normal2,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
+                    }
 
                 }
                 else //B - F
                 {
-                    kambiumList.Add(new Tower.Cambium(positions[1] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]),
-                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]),
+                    Vector3 point1 = positions[1] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]);
+                    Vector3 normal1 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[1]);
+                    if (Check_Direction(point1, normal1, tower.Layer, buildingTransform.localScale.x)) //x or z?
+                    {
+                        kambiumList.Add(new Tower.Cambium(point1,
+                                    normal1,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     at_building.Cambium.branch_ID)); //behalt den selben ID
+                    }
 
-                    kambiumList.Add(new Tower.Cambium(positions[2] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]),
-                                    ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]),
+                    Vector3 point2 = positions[2] + ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]);
+                    Vector3 normal2 = ((buildingTransform.position + new Vector3(0, buildingTransform.localScale.y / 2, 0)) - positions[2]);
+                    if (Check_Direction(point2, normal2, tower.Layer, buildingTransform.localScale.x)) //x or z?
+                    {
+                        kambiumList.Add(new Tower.Cambium(point2,
+                                    normal2,
                                     tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                     5,
                                     newBranchID)); //neuer ID
+                    }
                 }
 
                 //Die generation überschreiben, set die generation for this branch
@@ -201,13 +232,41 @@ public class ProceduralKabiumGeneratorFelix
                
                 if (HasStillSteps(at_building)) //fullfill steps
                 {
-                    Tower.Cambium newCambium = new Tower.Cambium(buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2),
-                                                        //Quaternion.Euler(0, Random.Range(0, 4) * 90, 0) * at_building.Cambium.normal,
-                                                        at_building.Cambium.normal,
+                    //which way?
+                    Vector3 point = Vector3.zero;
+                    float localScaleForCheck = 1;
+                    Debug.Log("forward product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized));
+                    Debug.Log("right product " + Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized));
+                    if (Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.forward.normalized) == -1) //parallel zum forward vector: z 
+                    {
+                        point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.z / 2);
+                        localScaleForCheck = buildingTransform.localScale.z;
+                        Debug.Log("Z");
+                    }
+                    else if(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.right.normalized) == -1) //parallel zum right vector: x
+                    {
+                        point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.x / 2);
+                        localScaleForCheck = buildingTransform.localScale.x;
+                        Debug.Log("X");
+                    }
+                    else if(Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) == 1 || Vector3.Dot(at_building.Cambium.normal.normalized, buildingTransform.up.normalized) == -1) //parallel zum up vector: y
+                    {
+                        point = buildingTransform.position + (at_building.Cambium.normal.normalized * buildingTransform.localScale.y / 2);
+                        localScaleForCheck = buildingTransform.localScale.y;
+                        Debug.Log("Y");
+                    }
+
+                    Vector3 normal = at_building.Cambium.normal;
+                    if (Check_Direction(point, normal, tower.Layer, localScaleForCheck)) 
+                    {
+                        Tower.Cambium newCambium = new Tower.Cambium(point,
+                                                        normal,
                                                         tower.Building_Prefabs[Random.Range(0, tower.Building_Prefabs.Count)],
                                                         at_building.Cambium.steps,
                                                         at_building.Cambium.branch_ID);
-                    kambiumList.Add(newCambium);
+
+                        kambiumList.Add(newCambium);
+                    }
 
                     return new Tower.Cambiums_At_Active(at_building, kambiumList.ToArray());
                 }
