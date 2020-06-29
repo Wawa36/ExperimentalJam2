@@ -39,7 +39,7 @@ namespace Tower_Management.Details
                 new_rate = Calculate_Rate();
                 counter += Time.deltaTime;
             }
-            else
+            else if (Time.timeScale == 1)
             {
                 Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
                 counter = 0;

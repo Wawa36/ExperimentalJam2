@@ -9,6 +9,9 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] GameObject menu_panel;
     [SerializeField] GameObject settings_panel;
 
+    [Header("Buttons")]
+    [SerializeField] Button[] buttons;
+
     [Header("Settings Elements")]
     [SerializeField] Slider quaility_slider;
     [SerializeField] Slider volume_slider;
@@ -16,6 +19,8 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] Slider sensitivity_y_slider;
 
     bool is_paused;
+    public int button_index = 0;
+    public bool controller_input_trigger = true;
 
     void Start()
     {
@@ -24,13 +29,48 @@ public class UI_Controller : Singleton<UI_Controller>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause"))
         {
             if (is_paused)
                 Continue();
             else
                 Open_Menu();
         }
+
+
+        // select button
+        if (Input.GetAxis("Menu Selection") != 0)
+        {
+            if (controller_input_trigger)
+            {
+                if (Input.GetAxis("Menu Selection") < 0)
+                {
+                    button_index++;
+
+                    if (button_index == buttons.Length)
+                        button_index = 0;
+                }
+                else if (Input.GetAxis("Menu Selection") > 0)
+                {
+                    button_index--;
+
+                    if (button_index == -1)
+                        button_index = buttons.Length - 1;
+                }
+
+                buttons[button_index].Select();
+                controller_input_trigger = false;
+            }
+        }
+        else
+            controller_input_trigger = true;
+
+        // click
+        if (Input.GetButtonDown("Menu Click") && is_paused)
+            buttons[button_index].onClick.Invoke();
+
+        if (Input.GetButtonDown("Menu Abort") && is_paused)
+            Set_Panel(1);
     }
 
     // button interaction
@@ -79,6 +119,8 @@ public class UI_Controller : Singleton<UI_Controller>
             case 1:
                 menu_panel.SetActive(true);
                 settings_panel.SetActive(false);
+                button_index = 0;
+                buttons[button_index].Select();
                 break;
             // settings
             case 2:

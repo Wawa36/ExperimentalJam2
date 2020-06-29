@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Settings_Management;
+using UnityEngine.Video;
 
 public class Main_Menu : MonoBehaviour
 {
@@ -10,15 +11,60 @@ public class Main_Menu : MonoBehaviour
     [SerializeField] GameObject settings_panel;
     [SerializeField] GameObject credits_panel;
 
+    [Header("Buttons")]
+    [SerializeField] Button[] buttons;
+
     [Header("Settings Elements")]
     [SerializeField] Slider quaility_slider;
     [SerializeField] Slider volume_slider;
     [SerializeField] Slider sensitivity_x_slider;
     [SerializeField] Slider sensitivity_y_slider;
 
+    public int button_index;
+    public bool controller_input_trigger = true;
+
     void Start()
     {
         Assign_Settings_Elements();
+        Set_Panel(0);
+    }
+
+    // controller input
+    private void Update()
+    {
+        // select button
+        if (Input.GetAxis("Menu Selection") != 0)
+        {
+            if (controller_input_trigger)
+            {
+                if (Input.GetAxis("Menu Selection") < 0)
+                {
+                    button_index++;
+
+                    if (button_index == buttons.Length)
+                        button_index = 0;
+                }
+                else if (Input.GetAxis("Menu Selection") > 0)
+                {
+                    button_index--;
+
+                    if (button_index == -1)
+                        button_index = buttons.Length - 1;
+                }
+
+                buttons[button_index].Select();
+                controller_input_trigger = false;
+            }
+        }
+        else
+            controller_input_trigger = true;
+
+        // click
+        if (Input.GetButtonDown("Menu Click"))
+            buttons[button_index].onClick.Invoke();
+
+        if (Input.GetButtonDown("Menu Abort"))
+            Set_Panel(0);
     }
 
     // button interaction
@@ -57,6 +103,8 @@ public class Main_Menu : MonoBehaviour
                 main_panel.SetActive(true);
                 settings_panel.SetActive(false);
                 credits_panel.SetActive(false);
+                button_index = 0;
+                buttons[button_index].Select();
                 break;
             // settings
             case 1:
