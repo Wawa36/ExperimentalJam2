@@ -110,7 +110,7 @@ public class LaunchArc : MonoBehaviour
             normal = Vector3.up;
             up = playerScript.transform.forward;
         }
-        if (Mathf.Approximately(normal.x, 0) && Mathf.Approximately(normal.y, 1) && Mathf.Approximately(normal.z, 0))
+        else if (Mathf.Approximately(normal.x, 0) && Mathf.Approximately(normal.y, 1) && Mathf.Approximately(normal.z, 0))
         {
             up = playerScript.transform.forward;
         }
@@ -118,7 +118,7 @@ public class LaunchArc : MonoBehaviour
 
         target.transform.position = Center;
         squareTransform.rotation = Quaternion.LookRotation(normal, up);
-        zylinderTransform.rotation = Quaternion.LookRotation(direction,up);
+        zylinderTransform.rotation = Quaternion.LookRotation(direction);
     }
 
 
