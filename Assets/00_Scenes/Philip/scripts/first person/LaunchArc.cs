@@ -46,14 +46,14 @@ public class LaunchArc : MonoBehaviour
 
                 if (rayCastResolution <= i)
                 {
-                    rayCastResolution += 1;
-                    if (Physics.SphereCast(previousDrawpoint,0.3f,drawpoint-previousDrawpoint,out hit, Vector3.Distance(drawpoint, previousDrawpoint)+.5f,mask))
+                    rayCastResolution += 6;
+                    if (Physics.SphereCast(previousDrawpoint,0.4f,drawpoint-previousDrawpoint,out hit, Vector3.Distance(drawpoint, previousDrawpoint)+.8f,mask))
                     {
-                        
                         endVector = hit.point;
                         drawpoint = hit.point;
                         endNormal = hit.normal;
                     }
+                    previousDrawpoint = drawpoint;
                 }
             }
             else
@@ -65,7 +65,7 @@ public class LaunchArc : MonoBehaviour
             {
                 ChangeTarget(endVector, Tower.Calculate_Grow_Direction(playerScript.transform.forward, endNormal), endNormal, Vector3.up);
             }
-            previousDrawpoint = drawpoint;
+            
             lineRenderer.SetPosition(i, drawpoint);
         }
     }
@@ -118,7 +118,7 @@ public class LaunchArc : MonoBehaviour
 
 
         target.transform.position = Center;
-        squareTransform.rotation = Quaternion.LookRotation(normal, up);
+        target.transform.rotation = Quaternion.LookRotation(normal, up);
         zylinderTransform.rotation = Quaternion.LookRotation(direction);
     }
 
