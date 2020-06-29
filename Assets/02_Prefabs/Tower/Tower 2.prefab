@@ -131,14 +131,14 @@ MonoBehaviour:
   split_chance:
     input: 2
     min: 0
-    max: 4
-    multiplier: 50
-    invert: 0
+    max: 1.5
+    multiplier: 30
+    invert: 1
   generation_amount:
     input: 0
     min: 0
     max: 50
-    multiplier: 10
+    multiplier: 15
     invert: 1
   change_direction_chance:
     input: 1
