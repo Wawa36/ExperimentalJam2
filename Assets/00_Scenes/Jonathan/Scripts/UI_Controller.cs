@@ -37,9 +37,8 @@ public class UI_Controller : Singleton<UI_Controller>
                 Open_Menu();
         }
 
-
         // select button
-        if (Input.GetAxis("Menu Selection") != 0)
+        if (Input.GetAxis("Menu Selection") != 0 && is_paused)
         {
             if (controller_input_trigger)
             {
