@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1933950088}
   m_Father: {fileID: 5524188677027856980}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &930129720
 Animator:
@@ -189,7 +189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5524188677027856980}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5524188676072986672
 GameObject:
@@ -220,7 +220,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5524188677027856980}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!108 &5524188676072986673
 Light:
@@ -358,9 +358,61 @@ Transform:
   m_Children:
   - {fileID: 5524188676521825353}
   - {fileID: 8596619523906485729}
+  - {fileID: 3795021866192920159}
   - {fileID: 5524188676072986678}
   - {fileID: 5524188675880641392}
   - {fileID: 930129719}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8579233733540713257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3795021866192920159}
+  - component: {fileID: 8576433394891811524}
+  m_Layer: 0
+  m_Name: Cloud Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3795021866192920159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579233733540713257}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.4878497, y: -3.436531, z: -30.531816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5524188677027856980}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8576433394891811524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8579233733540713257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4065880662e8a044fae85d23e16d9c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs: []
+  spawn_rate: 5
+  fade_start_distance: 10
+  max_speed: 5
+  min_speed: 10
+  start_tracker: {fileID: 0}
+  spawn_field_size: 0
+  spawned_clouds: []
