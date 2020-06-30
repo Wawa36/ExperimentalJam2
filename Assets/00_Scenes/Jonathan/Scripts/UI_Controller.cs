@@ -16,6 +16,7 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] Slider sensitivity_y_slider;
 
     bool is_paused;
+    bool is_settings;
 
     void Start()
     {
@@ -31,6 +32,12 @@ public class UI_Controller : Singleton<UI_Controller>
             else
                 Open_Menu();
         }
+
+        if (Input.GetButtonDown("Anti Stuck") && is_settings)
+        {
+            Continue();
+            GetComponent<Anti_Stuck>().Set_Free();
+        }
     }
 
     // button interaction
@@ -42,6 +49,7 @@ public class UI_Controller : Singleton<UI_Controller>
         Set_Panel(1);
 
         is_paused = true;
+        is_settings = false;
         GetComponent<UI_Controller_Input>().Is_Active = true;
     }
 
@@ -59,6 +67,7 @@ public class UI_Controller : Singleton<UI_Controller>
     public void Open_Settings()
     {
         Set_Panel(2);
+        is_settings = true;
     }
 
     public void Go_Main_Menu()

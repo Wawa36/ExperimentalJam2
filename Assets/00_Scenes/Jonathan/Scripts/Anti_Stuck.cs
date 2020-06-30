@@ -8,26 +8,23 @@ public class Anti_Stuck : MonoBehaviour
     [SerializeField] float length;
     [SerializeField] LayerMask mask;
 
-    GameObject player;
-
-    void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
     public void Set_Free() 
     {
-        var ray = new Ray(player.transform.position + player.transform.forward * length, -player.transform.forward);
+        var ray = new Ray(PlayerMovement.Instance.transform.position + PlayerMovement.Instance.transform.forward * length, -PlayerMovement.Instance.transform.forward);
         var hit = new RaycastHit();
 
-        Physics.Raycast(ray, out hit , length, mask, QueryTriggerInteraction.Ignore);
+        Physics.Raycast(ray, out hit, length, mask, QueryTriggerInteraction.Ignore);
+
+        Debug.DrawRay(ray.origin, ray.direction, Color.green, length);
 
         if (hit.collider)
+        {
             Teleport(hit.point);
+        }
     }
 
     void Teleport(Vector3 to_point) 
     {
-        player.GetComponent<PlayerMovement>().StartCoroutine("Teleporting");
+        PlayerMovement.Instance.StartCoroutine(PlayerMovement.Instance.Teleporting(PlayerMovement.Instance.transform.position, to_point));
     }
 }
