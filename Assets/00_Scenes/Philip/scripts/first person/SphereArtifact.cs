@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Settings_Management;
+using System.Collections;
 using System.Collections.Generic;
 using Tower_Management;
 using UnityEngine;
@@ -9,8 +10,9 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
+    [SerializeField] Orb_Animation orbAnim;
     [SerializeField] float collectingDistance;
-
+    
 
     [HideInInspector] public new SphereCollider collider;
     [SerializeField] PlayerMovement playerScript;
@@ -36,6 +38,7 @@ public class SphereArtifact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible=false;
         Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(1 , 0,1));
@@ -49,6 +52,7 @@ public class SphereArtifact : MonoBehaviour
     private void Update()
     {
         ManageParticles();
+        orbAnim.Speed = playerScript.orbEnergy;
     }
 
     /// <summary>
@@ -157,7 +161,7 @@ public class SphereArtifact : MonoBehaviour
             StartCoroutine(beeingStuck());
             rigid.useGravity = false;
             //hier kommt der fall hin das die Kugel den boden trifft
-            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.1f, Quaternion.identity),collision.contacts[0].normal);
+            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.3f, Quaternion.identity),collision.contacts[0].normal);
         }
     }
 

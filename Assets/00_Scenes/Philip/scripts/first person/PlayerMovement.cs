@@ -208,6 +208,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             if (Input.GetButtonDown("Fire3"))
             {
+                orbScript.circle.gameObject.SetActive(false);
                 orbs[currentOrbIndex].SetActive(false);
                 launchArc.lineRenderer.enabled = false;
 
@@ -221,9 +222,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
+                
             }
             if (Input.GetButtonDown("Fire4"))
             {
+                orbScript.circle.gameObject.SetActive(false);
                 orbs[currentOrbIndex].SetActive(false);
                 launchArc.lineRenderer.enabled = false;
                 currentOrbIndex -= 1;
