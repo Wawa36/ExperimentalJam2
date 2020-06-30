@@ -1635,7 +1635,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323711, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: mask.m_Bits
-      value: 40960
+      value: 57344
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323711, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
@@ -1702,6 +1702,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 7233627664445031643}
+    - target: {fileID: 4189201633741323711, guid: 717a8f1937cffc940b204c4dabbaa337,
+        type: 3}
+      propertyPath: rayCastResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 717a8f1937cffc940b204c4dabbaa337,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2222,7 +2227,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323711, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: mask.m_Bits
-      value: 40960
+      value: 57344
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323711, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
@@ -2289,6 +2294,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 7233627664445031643}
+    - target: {fileID: 4189201633741323711, guid: 2492dfd3bc48875478e93a9c77a85580,
+        type: 3}
+      propertyPath: rayCastResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: 2492dfd3bc48875478e93a9c77a85580,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2969,7 +2979,7 @@ PrefabInstance:
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: mask.m_Bits
-      value: 40960
+      value: 57344
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
@@ -3036,6 +3046,11 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 7233627664445031643}
+    - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
+        type: 3}
+      propertyPath: rayCastResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_LocalPosition.x
