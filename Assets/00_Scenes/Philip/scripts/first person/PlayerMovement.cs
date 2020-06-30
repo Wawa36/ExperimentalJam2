@@ -171,7 +171,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
+            orbScript.colided = true;
             StartCoroutine(Teleporting(transform.position));
+
         }
     }
     IEnumerator Teleporting(Vector3 startPosition)
