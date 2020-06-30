@@ -18,7 +18,7 @@ public class Orb_Animation : MonoBehaviour
     [SerializeField] float charge_add_speed;
 
     List<Moving_Part> moving_parts = new List<Moving_Part>();
-    float current_speed;
+    public float current_speed;
 
     void Start()
     {
@@ -94,7 +94,7 @@ public class Orb_Animation : MonoBehaviour
     }
 
     // public interface
-    public float Speed { set { current_speed = default_speed + charge_add_speed * Mathf.InverseLerp (value, 0, 25); } }
+    public float Speed { set { current_speed = default_speed + charge_add_speed * Mathf.InverseLerp (0, 25, value); } }
 
     struct Moving_Part 
     {
