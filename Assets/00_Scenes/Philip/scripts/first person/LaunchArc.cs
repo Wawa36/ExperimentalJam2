@@ -63,7 +63,7 @@ public class LaunchArc : MonoBehaviour
             }
             if (i == resolution - 1)
             {
-                ChangeTarget(endVector, Tower.Calculate_Grow_Direction(Camera.main.transform.forward, endNormal), endNormal, Vector3.up);
+                ChangeTarget(endVector, Tower.Calculate_Grow_Direction(playerScript.transform.forward, endNormal), endNormal, Vector3.up);
             }
         }
 
