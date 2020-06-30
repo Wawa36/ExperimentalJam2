@@ -10,11 +10,12 @@ public class LaunchArc : MonoBehaviour
     [SerializeField] Transform squareTransform;
     [SerializeField] Transform zylinderTransform;
 
+
     [SerializeField] float maxPathTime;
     [SerializeField] LayerMask mask;
     [HideInInspector] public LineRenderer lineRenderer;
     public GameObject target;
-    int rayCastResolution;
+    [SerializeField] int rayCastResolution;
 
     private void Start()
     {
@@ -29,43 +30,50 @@ public class LaunchArc : MonoBehaviour
         int resolution = 100;
         Vector3 previousDrawpoint = transform.position;
         Vector3 drawpoint;
+        Vector3[] drawpoints = new Vector3[resolution];
         Vector3 endNormal=Vector3.zero;
         rayCastResolution = 0;
         Vector3 endVector=Vector3.zero;
-       //ColorChange();
+        Vector3 calculatedGravity=Physics.gravity;
+        float endTime=maxPathTime;
+        //ColorChange();
         for (int i =0; i<resolution; i++)
         {
-            
-
             if (endVector== Vector3.zero )
             {
                 float simulationTime = i / (float)resolution * maxPathTime;
                 Vector3 displacement = Force * simulationTime + Physics.gravity * simulationTime * simulationTime / 2f;
                 drawpoint = transform.position + displacement;
+                drawpoints[i] = drawpoint;
                 RaycastHit hit;
 
-                if (rayCastResolution <= i)
+                if (i >= rayCastResolution)
                 {
                     rayCastResolution += 6;
-                    if (Physics.SphereCast(previousDrawpoint,0.4f,drawpoint-previousDrawpoint,out hit, Vector3.Distance(drawpoint, previousDrawpoint)+.8f,mask))
+                    if (Physics.SphereCast(previousDrawpoint, 0.3f, drawpoint - previousDrawpoint, out hit, Vector3.Distance(drawpoint, previousDrawpoint) + .01f, mask))
                     {
                         endVector = hit.point;
                         drawpoint = hit.point;
                         endNormal = hit.normal;
+                        endTime = simulationTime;
+                        calculatedGravity = 2 * (-Force * endTime + (drawpoint - transform.position)) / (endTime * endTime);
                     }
                     previousDrawpoint = drawpoint;
                 }
             }
-            else
-            {
-                drawpoint = endVector;
-
-            }
             if (i == resolution - 1)
             {
-                ChangeTarget(endVector, Tower.Calculate_Grow_Direction(playerScript.transform.forward, endNormal), endNormal, Vector3.up);
+                ChangeTarget(endVector, Tower.Calculate_Grow_Direction(Camera.main.transform.forward, endNormal), endNormal, Vector3.up);
             }
+        }
+
+        for (int i = 0; i < resolution; i++)
+        {
             
+            float simulationTime = i / (float)resolution * maxPathTime;
+            simulationTime = Mathf.Clamp(simulationTime, 0, endTime);
+            Vector3 displacement = Force * simulationTime + calculatedGravity * simulationTime * simulationTime / 2f;
+            drawpoint = transform.position + displacement;
             lineRenderer.SetPosition(i, drawpoint);
         }
     }

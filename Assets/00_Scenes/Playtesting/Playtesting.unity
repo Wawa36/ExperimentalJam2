@@ -132,13 +132,21 @@ PrefabInstance:
       propertyPath: mask.m_Bits
       value: 57344
       objectReference: {fileID: 0}
+    - target: {fileID: 815907264, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: calculateGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 815907264, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: rayCastResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 815907265, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: m_Positions.Array.size
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 815907266, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 815907266, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
       propertyPath: m_Interpolate
@@ -214,10 +222,15 @@ PrefabInstance:
       propertyPath: mask.m_Bits
       value: 57344
       objectReference: {fileID: 0}
+    - target: {fileID: 4052186782227101105, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: rayCastResolution
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4052186782227101107, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4052186782227101107, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -227,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 4052186782834138188, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4052186782834138188, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -238,6 +251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: mask.m_Bits
       value: 57344
+      objectReference: {fileID: 0}
+    - target: {fileID: 4052186782834138190, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: rayCastResolution
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4052186782834138191, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
