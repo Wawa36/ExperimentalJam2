@@ -144,8 +144,8 @@ MonoBehaviour:
     invert: 0
   generation_amount:
     input: 0
-    min: 0
-    max: 45
+    min: -10
+    max: 40
     multiplier: 200
     invert: 1
   change_direction_chance:
