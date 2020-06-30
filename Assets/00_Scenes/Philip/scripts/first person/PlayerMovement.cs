@@ -172,21 +172,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (Input.GetButtonDown("Fire2") && !carryingTheOrb && controller.isGrounded)
         {
             orbScript.colided = true;
-            StartCoroutine(Teleporting(transform.position));
+            StartCoroutine(Teleporting(transform.position, orbScript.transform.position + Vector3.up));
 
         }
     }
-    IEnumerator Teleporting(Vector3 startPosition)
+    public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition)
     {
         orbEnergy = 0;
         controller.enabled = false;
         teleportAnim.SetTrigger("teleport");
         for (float f=0;f<=.5;f+=Time.deltaTime) 
         {
-            transform.position = Vector3.Lerp(startPosition, orbScript.transform.position + Vector3.up , 2*f);
+            transform.position = Vector3.Lerp(startPosition, endPosition  , 2*f);
             yield return new WaitForEndOfFrame();
         }
-        transform.position = orbScript.transform.position + Vector3.up ;
+        transform.position = endPosition ;
         controller.enabled = true;
         orbScript.GetCollected();
     }
