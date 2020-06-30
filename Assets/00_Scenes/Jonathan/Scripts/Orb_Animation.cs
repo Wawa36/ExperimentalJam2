@@ -14,9 +14,11 @@ public class Orb_Animation : MonoBehaviour
     [SerializeField] float pulse_strength;
 
     [Header("Parameter")]
-    [SerializeField] float speed;
+    [SerializeField] float default_speed;
+    [SerializeField] float charge_add_speed;
 
     List<Moving_Part> moving_parts = new List<Moving_Part>();
+    float current_speed;
 
     void Start()
     {
@@ -31,6 +33,8 @@ public class Orb_Animation : MonoBehaviour
 
             moving_parts.Add(new_part);
         }
+
+        current_speed = default_speed;
     }
 
     // Update is called once per frame
@@ -49,14 +53,14 @@ public class Orb_Animation : MonoBehaviour
 
     Moving_Part Rotate_Random(Moving_Part part)
     {
-        part.instance.transform.RotateAround(part.instance.transform.position, part.axis, part.speed * speed * Time.deltaTime);
+        part.instance.transform.RotateAround(part.instance.transform.position, part.axis, part.speed * current_speed * Time.deltaTime);
 
         return part;
     }
 
     Moving_Part Rotate_Y(Moving_Part part)
     {
-        part.instance.transform.RotateAround(part.instance.transform.position, Vector3.up, part.speed * speed * Time.deltaTime);
+        part.instance.transform.RotateAround(part.instance.transform.position, Vector3.up, part.speed * current_speed * Time.deltaTime);
 
         return part;
     }
@@ -68,7 +72,7 @@ public class Orb_Animation : MonoBehaviour
         {
             if (part.instance.transform.localScale.x < 1f + pulse_strength)
             {
-                var add_size = new Vector3(part.speed * speed * Time.deltaTime, part.speed * speed * Time.deltaTime, part.speed * speed * Time.deltaTime);
+                var add_size = new Vector3(part.speed * current_speed * Time.deltaTime, part.speed * current_speed * Time.deltaTime, part.speed * current_speed * Time.deltaTime);
 
                 part.instance.transform.localScale += add_size;
             }
@@ -80,7 +84,7 @@ public class Orb_Animation : MonoBehaviour
         {
             if (part.instance.transform.localScale.x > 1f - pulse_strength)
             {
-                var add_size = new Vector3(part.speed * speed * Time.deltaTime, part.speed * speed * Time.deltaTime, part.speed * speed * Time.deltaTime);
+                var add_size = new Vector3(part.speed * current_speed * Time.deltaTime, part.speed * current_speed * Time.deltaTime, part.speed * current_speed * Time.deltaTime);
                 part.instance.transform.localScale -= add_size;
             }
             else
@@ -88,7 +92,9 @@ public class Orb_Animation : MonoBehaviour
         }
         return part;
     }
- 
+
+    // public interface
+    public float Speed { set { current_speed = default_speed + charge_add_speed * Mathf.InverseLerp (value, 0, 25); } }
 
     struct Moving_Part 
     {
