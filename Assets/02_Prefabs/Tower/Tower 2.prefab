@@ -107,9 +107,8 @@ MonoBehaviour:
   default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
   highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   _building_generation: 0
+  can_finish: 0
   finished_growing: 0
-  merged_chunks: []
-  deep_merged_chunk: []
 --- !u!114 &9185885427241888973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,19 +123,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grow_speed:
     input: 0
-    min: -5
-    max: 25
+    min: -3
+    max: 30
     multiplier: 4
     invert: 0
   split_chance:
     input: 2
     min: 0
-    max: 1.5
-    multiplier: 30
+    max: 2.5
+    multiplier: 40
     invert: 1
   generation_amount:
     input: 0
-    min: 0
+    min: 1
     max: 50
     multiplier: 15
     invert: 1
@@ -148,7 +147,7 @@ MonoBehaviour:
     invert: 0
   width:
     input: 2
-    min: 0
-    max: 4
-    multiplier: 40
+    min: -0.3
+    max: 3
+    multiplier: 25
     invert: 0

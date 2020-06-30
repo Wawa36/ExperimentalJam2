@@ -146,7 +146,7 @@ MonoBehaviour:
     input: 0
     min: -15
     max: 40
-    multiplier: 200
+    multiplier: 185
     invert: 1
   change_direction_chance:
     input: 2

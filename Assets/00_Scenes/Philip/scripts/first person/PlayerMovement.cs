@@ -247,7 +247,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") &&controller.isGrounded)
+        if (Input.GetButtonDown("Jump") && IsOnTheGround())
         {
             velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
         }

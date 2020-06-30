@@ -786,7 +786,7 @@ MonoBehaviour:
   - {fileID: 4052186782834138164}
   mask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 57344
   cameraRigTransform: {fileID: 152923204344402230}
   launchArc: {fileID: 815907264}
   gravity: -39.24
