@@ -9,9 +9,6 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] GameObject menu_panel;
     [SerializeField] GameObject settings_panel;
 
-    [Header("Buttons")]
-    [SerializeField] Button[] buttons;
-
     [Header("Settings Elements")]
     [SerializeField] Slider quaility_slider;
     [SerializeField] Slider volume_slider;
@@ -19,8 +16,6 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] Slider sensitivity_y_slider;
 
     bool is_paused;
-    public int button_index = 0;
-    public bool controller_input_trigger = true;
 
     void Start()
     {
@@ -36,40 +31,6 @@ public class UI_Controller : Singleton<UI_Controller>
             else
                 Open_Menu();
         }
-
-        // select button
-        if (Input.GetAxis("Menu Selection") != 0 && is_paused)
-        {
-            if (controller_input_trigger)
-            {
-                if (Input.GetAxis("Menu Selection") < 0)
-                {
-                    button_index++;
-
-                    if (button_index == buttons.Length)
-                        button_index = 0;
-                }
-                else if (Input.GetAxis("Menu Selection") > 0)
-                {
-                    button_index--;
-
-                    if (button_index == -1)
-                        button_index = buttons.Length - 1;
-                }
-
-                buttons[button_index].Select();
-                controller_input_trigger = false;
-            }
-        }
-        else
-            controller_input_trigger = true;
-
-        // click
-        if (Input.GetButtonDown("Menu Click") && is_paused)
-            buttons[button_index].onClick.Invoke();
-
-        if (Input.GetButtonDown("Menu Abort") && is_paused)
-            Set_Panel(1);
     }
 
     // button interaction
@@ -81,6 +42,7 @@ public class UI_Controller : Singleton<UI_Controller>
         Set_Panel(1);
 
         is_paused = true;
+        GetComponent<UI_Controller_Input>().Is_Active = true;
     }
 
     public void Continue()
@@ -91,6 +53,7 @@ public class UI_Controller : Singleton<UI_Controller>
         Cursor.visible = false;
 
         is_paused = false;
+        GetComponent<UI_Controller_Input>().Is_Active = false;
     }
 
     public void Open_Settings()
@@ -118,8 +81,6 @@ public class UI_Controller : Singleton<UI_Controller>
             case 1:
                 menu_panel.SetActive(true);
                 settings_panel.SetActive(false);
-                button_index = 0;
-                buttons[button_index].Select();
                 break;
             // settings
             case 2:
