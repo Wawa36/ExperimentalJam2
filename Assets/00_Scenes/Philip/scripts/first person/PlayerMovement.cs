@@ -262,7 +262,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         if(IsOnTheGround()&& velocity.y<0)
         {
-            velocity.y = -2f;
+            velocity.y = -5f;
            
         }
 
