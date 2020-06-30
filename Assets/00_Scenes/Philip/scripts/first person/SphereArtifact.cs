@@ -10,6 +10,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform playerTransform;
     [SerializeField] Transform cameraTransform;
     [SerializeField] Transform targetPosition;
+    [SerializeField] Orb_Animation orbAnim;
     [SerializeField] float collectingDistance;
     
 
@@ -51,6 +52,7 @@ public class SphereArtifact : MonoBehaviour
     private void Update()
     {
         ManageParticles();
+        orbAnim.Speed = playerScript.orbEnergy;
     }
 
     /// <summary>
