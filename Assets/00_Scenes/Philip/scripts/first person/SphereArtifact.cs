@@ -41,7 +41,7 @@ public class SphereArtifact : MonoBehaviour
         
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible=false;
-        Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(1 , 0,1));
+        Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(.9f , 0.1f, 1));
         targetPosition.position = cameraPosition;
         transform.localPosition = Vector3.zero;
         playerScript = PlayerMovement.Instance;
