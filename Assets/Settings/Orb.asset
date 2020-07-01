@@ -23,10 +23,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
     volume: 1
   - ID: Charge Orb
-    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    clip: {fileID: 8300000, guid: f7634989fe5810b4c9e602fe954d3dbc, type: 3}
     volume: 1
-  - ID: Finish Charge Orb
-    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+  - ID: Pling
+    clip: {fileID: 8300000, guid: 51296eb1d47e89847b1a8d1dcfccdb9d, type: 3}
     volume: 1
   - ID: Orb Hit
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
@@ -35,11 +35,14 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
     volume: 1
   - ID: Orb Call Back
-    clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    clip: {fileID: 8300000, guid: 9d5dc24214cda5d418abba6aa0a2d32f, type: 3}
     volume: 1
   - ID: Orb Swich
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
     volume: 0.5
   - ID: Teleport
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
+    volume: 1
+  - ID: Charge Orb Loop
+    clip: {fileID: 8300000, guid: a234acb84816f2e4a865c2f48d59ed74, type: 3}
     volume: 1
