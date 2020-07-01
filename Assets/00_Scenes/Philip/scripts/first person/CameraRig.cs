@@ -14,18 +14,24 @@ public class CameraRig : MonoBehaviour
     [SerializeField] float turnSpeed;
     [SerializeField] float upDownTurnSpeed;
     float xRotation;
+    bool alreadyLanded;
 
     #endregion
-    private void Start()
-    {
-        xRotation = 90;
-    }
-
     // Update is called once per frame
     void Update()
     {
-        FirstPersonRig();
-        transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, 0, 0);
+        if (alreadyLanded)
+        {
+            FirstPersonRig();
+            transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, 0, 0);
+        }
+        else
+        {
+            if (PlayerMovement.Instance.IsOnTheGround())
+            {
+                alreadyLanded = true;
+            }
+        }
     }
 
 

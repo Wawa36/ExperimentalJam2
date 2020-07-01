@@ -35,7 +35,7 @@ MonoBehaviour:
     loop: 0
   - ID: Orb Hit
     clip: {fileID: 8300000, guid: de4cfc18c908a754daaf20d365b3f6b7, type: 3}
-    volume: 1
+    volume: 0.8
     loop: 0
   - ID: Orb Throw
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
@@ -55,16 +55,16 @@ MonoBehaviour:
     loop: 0
   - ID: Charge Orb Loop
     clip: {fileID: 8300000, guid: a234acb84816f2e4a865c2f48d59ed74, type: 3}
-    volume: 1
+    volume: 0.8
     loop: 0
   - ID: Walk Sand
     clip: {fileID: 8300000, guid: e701773e22cd4054e96541829ed9c8d3, type: 3}
     volume: 1
-    loop: 1
+    loop: 0
   - ID: Stone Walking
     clip: {fileID: 8300000, guid: 5f6e186b6d8dd7b4db38a022b1d6a732, type: 3}
     volume: 1
-    loop: 1
+    loop: 0
   - ID: Sand Landing
     clip: {fileID: 8300000, guid: 471fd79737eca7348a66276e88da7280, type: 3}
     volume: 1

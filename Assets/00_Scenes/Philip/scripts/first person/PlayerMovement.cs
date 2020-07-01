@@ -22,6 +22,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     AudioSource orbAudio2;
     AudioSource playerAudio;
     RaycastHit groundHit;
+    Vector3 LastGroundedPlace;
 
     [HideInInspector] public int currentOrbIndex;
     #endregion
@@ -72,6 +73,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             Teleport();
             SwapOrbs();
             RunningSound();
+            SaveGroundedPosition();
         }
     }
     private void LateUpdate()
@@ -81,21 +83,51 @@ public class PlayerMovement : Singleton<PlayerMovement>
             Throw();
         }
     }
+    void SaveGroundedPosition()
+    {
+        if (controller.isGrounded)
+        {
+            LastGroundedPlace = transform.position;
+        }
+
+
+    }
+
     void RunningSound()
     {
-        if(new Vector3(velocity.x, 0, velocity.z).magnitude > 0.1f )
+        if(new Vector3(velocity.x, 0, velocity.z).magnitude > .1f )
         {
              if(IsOnTheGround())
              {
                 if (groundHit.transform.tag == "Ground")
                 {
-                    Sound_Manager.Instance.Play_At("Walk Sand", playerAudio);
+                    if (playerAudio.clip == Sound_Manager.Instance.Get_Clip("Walk Sand").clip)
+                    {
+                        playerAudio.UnPause();
+                    }
+                    else
+                    {
+                        Sound_Manager.Instance.Play_At("Walk Sand", playerAudio);
+                    }
+                    
                 }
                 else if(groundHit.collider.tag == "Building")
                 {
-                    Sound_Manager.Instance.Play_At("Stone Walking", playerAudio);
+
+                    if (playerAudio.clip == Sound_Manager.Instance.Get_Clip("Stone Walking").clip)
+                    {
+                        playerAudio.UnPause();
+                    }
+                    else
+                    {
+                        Sound_Manager.Instance.Play_At("Stone Walking", playerAudio);
+                    }
                 }
              }
+        }
+        else if(playerAudio.clip==Sound_Manager.Instance.Get_Clip("Walk Sand").clip || playerAudio.clip == Sound_Manager.Instance.Get_Clip("Stone Walking").clip)
+        {
+            playerAudio.Pause();
         }
     }
     /// <summary>
@@ -129,18 +161,17 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
-            Sound_Manager.Instance.Play_At("Charge Orb", orbAudio1, false);
-            orbAudio2.clip = Sound_Manager.Instance.Get_Clip("Charge Orb Loop").clip;
-            orbAudio2.PlayScheduled(2.6);
-
             orbEnergy = 0;
         }
         if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
         {
             if (Input.GetButton("Fire2"))
             {
+
+
                 orbAudio1.Stop();
                 orbAudio2.Stop();
+                orbAudio2.clip = null;
                 notAiming = true;
                 orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
@@ -151,11 +182,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             else
             {
+
+                
+                
                 if (orbEnergy < throwingForce)
                 {
                     orbEnergy += Time.deltaTime * orbEnergyIncrease;
                     //Orb -lädt auf sound 
-                   
+                    Sound_Manager.Instance.Play_At("Charge Orb", orbAudio1, false);
+                    if (orbAudio2.clip == null)
+                    {
+                        orbAudio2.clip = Sound_Manager.Instance.Get_Clip("Charge Orb Loop").clip;
+                        orbAudio2.PlayScheduled(2.6);
+                    }
                 }
                 else
                 {
@@ -172,6 +211,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             orbAudio1.Stop();
             orbAudio2.Stop();
+            orbAudio2.clip = null;
             orbScript.colided = false;
             orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
@@ -225,9 +265,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
         orbScript.GetCollected();
     }
 
-    bool IsOnTheGround()
+    public bool IsOnTheGround()
     {
-        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,2f, mask,0))
+        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,1f, mask,0))
         {
             return true;
         }
@@ -299,15 +339,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 if (groundHit.transform.tag == "Ground")
                 {
-                    Sound_Manager.Instance.Play_At("Sand Landing", playerAudio);
+                    Sound_Manager.Instance.Play_At("Sand Landing", playerAudio,true);
                 }
                 else if(groundHit.collider.tag == "Building")
                 {
-                    Sound_Manager.Instance.Play_At("Stone Landing", playerAudio);
+                    Sound_Manager.Instance.Play_At("Stone Landing", playerAudio,true);
                 }
-
-                velocity.y = -5f;
             }
+            velocity.y = -2f;
+
         }
 
     }
