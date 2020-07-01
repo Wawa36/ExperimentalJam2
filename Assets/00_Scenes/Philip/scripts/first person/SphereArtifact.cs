@@ -24,7 +24,8 @@ public class SphereArtifact : MonoBehaviour
     public ParticleSystem circle;
     public TrailRenderer trail;
 
-    
+    [HideInInspector] public AudioSource audio1;
+    AudioSource audio2;
     int zoomCount=15;
     int CircleCount=1;
 
@@ -38,7 +39,6 @@ public class SphereArtifact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible=false;
         Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(.95f , 0.1f, 1));
@@ -47,6 +47,9 @@ public class SphereArtifact : MonoBehaviour
         playerScript = PlayerMovement.Instance;
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<SphereCollider>();
+        audio1 = GetComponents<AudioSource>()[0];
+        audio2 = GetComponents<AudioSource>()[1];
+        circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume;
     }
 
     private void Update()
@@ -126,7 +129,7 @@ public class SphereArtifact : MonoBehaviour
     }
     public IEnumerator FlyTime()
     {
-
+        Sound_Manager.Instance.Play_At("Orb Throw", audio1, true);
         while (true)
         {
             timer += Time.deltaTime;
@@ -137,6 +140,7 @@ public class SphereArtifact : MonoBehaviour
 
     public IEnumerator FlyToPlayer()
     {
+        Sound_Manager.Instance.Play_At("Orb Call Back", audio1, true);
         while (!playerScript.carryingTheOrb)
         {
             playerScript.orbEnergy = 0;
