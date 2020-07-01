@@ -12,6 +12,7 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Transform targetPosition;
     [SerializeField] Orb_Animation orbAnim;
     [SerializeField] float collectingDistance;
+
     
 
     [HideInInspector] public new SphereCollider collider;
@@ -26,6 +27,7 @@ public class SphereArtifact : MonoBehaviour
 
     [HideInInspector] public AudioSource audio1;
     AudioSource audio2;
+    AudioSource audio3;
     int zoomCount=15;
     int CircleCount=1;
 
@@ -49,6 +51,7 @@ public class SphereArtifact : MonoBehaviour
         collider = GetComponent<SphereCollider>();
         audio1 = GetComponents<AudioSource>()[0];
         audio2 = GetComponents<AudioSource>()[1];
+        audio3 = GetComponents<AudioSource>()[2];
         circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume;
     }
 
@@ -157,6 +160,10 @@ public class SphereArtifact : MonoBehaviour
         if (!colided)
         {
             Sound_Manager.Instance.Play_At("Orb Hit", audio1, true);
+            if (PlayerMovement.Instance.currentOrbIndex == 1)
+            {
+                Sound_Manager.Instance.Play_At("Orb Hit Tower", audio3, false);
+            }
             colided = true;
             rigid.velocity = Vector3.zero;
             transform.position = collision.GetContact(0).point;
@@ -164,6 +171,7 @@ public class SphereArtifact : MonoBehaviour
             rigid.useGravity = false;
             //hier kommt der fall hin das die Kugel den boden trifft
             calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.3f, Quaternion.identity),collision.contacts[0].normal);
+           
         }
     }
 
