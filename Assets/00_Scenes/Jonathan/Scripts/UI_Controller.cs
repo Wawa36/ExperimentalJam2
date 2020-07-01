@@ -16,6 +16,10 @@ public class UI_Controller : Singleton<UI_Controller>
     [SerializeField] Slider sensitivity_x_slider;
     [SerializeField] Slider sensitivity_y_slider;
 
+    [Header("Controlls")]
+    [SerializeField] GameObject gamepad_controlls;
+    [SerializeField] GameObject keyboard_controlls;
+
     bool is_paused;
     bool is_settings;
 
@@ -79,6 +83,10 @@ public class UI_Controller : Singleton<UI_Controller>
     public void Open_Controls ()
     {
         Set_Panel(3);
+
+        print(Input.GetJoystickNames().Length);
+        keyboard_controlls.SetActive(Input.GetJoystickNames().Length == 0);
+        gamepad_controlls.SetActive(Input.GetJoystickNames().Length != 0);
     }
 
     public void Go_Main_Menu()

@@ -18,6 +18,10 @@ public class Main_Menu : MonoBehaviour
     [SerializeField] Slider sensitivity_x_slider;
     [SerializeField] Slider sensitivity_y_slider;
 
+    [Header("Controlls")]
+    [SerializeField] GameObject gamepad_controlls;
+    [SerializeField] GameObject keyboard_controlls;
+
     void Start()
     {
         Set_Panel(0);
@@ -43,6 +47,9 @@ public class Main_Menu : MonoBehaviour
     public void Open_Controls() 
     {
         Set_Panel(3);
+        print(Input.GetJoystickNames().Length);
+        keyboard_controlls.SetActive(Input.GetJoystickNames().Length == 0);
+        gamepad_controlls.SetActive(Input.GetJoystickNames().Length != 0);
     }
 
     public void Open_Credits() 
