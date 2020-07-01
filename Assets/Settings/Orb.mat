@@ -72,7 +72,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_C5449F17: {r: 1, g: 1, b: 1, a: 0}
+    - Color_C5449F17: {r: 1, g: 0.93724364, b: 0.759434, a: 0}
     - Color_EA1B02AB: {r: 0, g: 0, b: 0, a: 1}
     - Vector2_54156A24: {r: 0, g: 0.3, b: 0, a: 0}
     - Vector3_2EAECD78: {r: 2.0360417, g: 1.8171167, b: 5.365863, a: 0}
