@@ -60,7 +60,7 @@ MonoBehaviour:
   - ID: Walk Sand
     clip: {fileID: 8300000, guid: e701773e22cd4054e96541829ed9c8d3, type: 3}
     volume: 1
-    loop: 0
+    loop: 1
   - ID: Stone Walking
     clip: {fileID: 8300000, guid: 5f6e186b6d8dd7b4db38a022b1d6a732, type: 3}
     volume: 1
