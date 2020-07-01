@@ -158,7 +158,7 @@ public class SphereArtifact : MonoBehaviour
     {
         if (!colided)
         {
-            
+            Sound_Manager.Instance.Play_At("Orb Hit", audio1, true);
             colided = true;
             rigid.velocity = Vector3.zero;
             transform.position = collision.GetContact(0).point;
