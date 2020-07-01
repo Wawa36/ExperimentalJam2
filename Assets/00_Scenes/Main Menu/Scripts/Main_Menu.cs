@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using Settings_Management;
 using UnityEngine.Video;
 
-public class Main_Menu : MonoBehaviour
+public class Main_Menu : Singleton<Main_Menu>
 {
     [Header("Panel")]
     [SerializeField] GameObject main_panel;
