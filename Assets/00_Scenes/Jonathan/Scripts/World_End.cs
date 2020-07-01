@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Player;
 using UnityEngine;
 
 public class World_End : MonoBehaviour
