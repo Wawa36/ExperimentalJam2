@@ -162,7 +162,7 @@ public class SphereArtifact : MonoBehaviour
             Sound_Manager.Instance.Play_At("Orb Hit", audio1, true);
             if (PlayerMovement.Instance.currentOrbIndex == 1)
             {
-                Sound_Manager.Instance.Play_At("Orb Hit Tower", audio3, false);
+                Sound_Manager.Instance.Play_At("Orb Hit Tower", audio3, true);
             }
             colided = true;
             rigid.velocity = Vector3.zero;
@@ -170,7 +170,7 @@ public class SphereArtifact : MonoBehaviour
             StartCoroutine(beeingStuck());
             rigid.useGravity = false;
             //hier kommt der fall hin das die Kugel den boden trifft
-            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.3f, Quaternion.identity),collision.contacts[0].normal);
+            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.8f, Quaternion.identity),collision.contacts[0].normal);
            
         }
     }
