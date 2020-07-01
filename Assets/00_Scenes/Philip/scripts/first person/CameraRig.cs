@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraRig : MonoBehaviour
+public class CameraRig : Singleton<CameraRig>
 {
 
 
@@ -14,7 +14,7 @@ public class CameraRig : MonoBehaviour
     [SerializeField] float turnSpeed;
     [SerializeField] float upDownTurnSpeed;
     float xRotation;
-    bool alreadyLanded;
+    public bool alreadyLanded;
 
     #endregion
     // Update is called once per frame

@@ -64,7 +64,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void Update()
     {
-        if (Time.timeScale != 0)
+        if (Time.timeScale != 0 && CameraRig.Instance.alreadyLanded)
         {
             orbAudio1.UnPause();
             orbAudio2.UnPause();
@@ -79,7 +79,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             RunningSound();
             SaveGroundedPosition();
         }
-        else
+        else if(CameraRig.Instance.alreadyLanded)
         {
             playerAudio.Pause();
             orbAudio1.Pause();
