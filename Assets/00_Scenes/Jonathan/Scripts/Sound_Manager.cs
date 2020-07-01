@@ -31,7 +31,7 @@ namespace Settings_Management
         /// </summary>
         public void Play_At(string ID, AudioSource at_source, bool override_playing = false) 
         {
-            if (override_playing && !at_source.isPlaying || !override_playing)
+            if (!override_playing && !at_source.isPlaying || override_playing)
             {
                 var clip = Get_Clip(ID);
 
