@@ -210,14 +210,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         }
     }
-    public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition)
+    public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition,float time=.5f)
     {
         orbEnergy = 0;
         controller.enabled = false;
         teleportAnim.SetTrigger("teleport");
-        for (float f=0;f<=.5;f+=Time.deltaTime) 
+        for (float f=0;f<=time;f+=Time.deltaTime) 
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition  , 2*f);
+            transform.position = Vector3.Lerp(startPosition, endPosition  , 1/time*f);
             yield return new WaitForEndOfFrame();
         }
         transform.position = endPosition ;
