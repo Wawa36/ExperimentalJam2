@@ -45,7 +45,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
 
 
-    private void Start()
+    private void Awake()
     {
         controller = GetComponent<CharacterController>();
         activeOrb = orbs[0];

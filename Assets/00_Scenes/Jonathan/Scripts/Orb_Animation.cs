@@ -18,7 +18,8 @@ public class Orb_Animation : MonoBehaviour
     [SerializeField] float charge_add_speed;
 
     List<Moving_Part> moving_parts = new List<Moving_Part>();
-    public float current_speed;
+    float current_speed;
+    float target_speed;
 
     void Start()
     {
@@ -40,6 +41,8 @@ public class Orb_Animation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        current_speed = Mathf.Lerp(current_speed, target_speed, 9 * Time.deltaTime);
+
         for (int i = 0; i < moving_parts.Count; i++)
         {
             if (animation == animation_type.RotateRandom)
@@ -94,7 +97,7 @@ public class Orb_Animation : MonoBehaviour
     }
 
     // public interface
-    public float Speed { set { current_speed = default_speed + charge_add_speed * Mathf.InverseLerp (0, 25, value); } }
+    public float Speed { set { target_speed = default_speed + charge_add_speed * Mathf.InverseLerp (0, 25, value); } }
 
     struct Moving_Part 
     {

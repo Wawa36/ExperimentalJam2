@@ -9,6 +9,7 @@ public class Main_Menu : MonoBehaviour
     [Header("Panel")]
     [SerializeField] GameObject main_panel;
     [SerializeField] GameObject settings_panel;
+    [SerializeField] GameObject controls_panel;
     [SerializeField] GameObject credits_panel;
 
     [Header("Settings Elements")]
@@ -20,6 +21,7 @@ public class Main_Menu : MonoBehaviour
     void Start()
     {
         Set_Panel(0);
+        Assign_Settings_Elements();
     }
 
     // button interaction
@@ -36,6 +38,11 @@ public class Main_Menu : MonoBehaviour
     public void Open_Settings() 
     {
         Set_Panel(1);
+    }
+
+    public void Open_Controls() 
+    {
+        Set_Panel(3);
     }
 
     public void Open_Credits() 
@@ -58,18 +65,27 @@ public class Main_Menu : MonoBehaviour
                 main_panel.SetActive(true);
                 settings_panel.SetActive(false);
                 credits_panel.SetActive(false);
+                controls_panel.SetActive(false);
                 break;
             // settings
             case 1:
                 main_panel.SetActive(false);
                 settings_panel.SetActive(true);
                 credits_panel.SetActive(false);
+                controls_panel.SetActive(false);
                 break;
             // credits
             case 2:
                 main_panel.SetActive(false);
                 settings_panel.SetActive(false);
                 credits_panel.SetActive(true);
+                controls_panel.SetActive(false);
+                break;
+            case 3:
+                main_panel.SetActive(false);
+                settings_panel.SetActive(false);
+                credits_panel.SetActive(false);
+                controls_panel.SetActive(true);
                 break;
         }
     }

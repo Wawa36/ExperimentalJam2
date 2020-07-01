@@ -133,7 +133,7 @@ public class UI_Controller_Input : MonoBehaviour
         }
     }
 
-    public bool Is_Active { get { return _is_active; } set { _is_active = value; } }
+    public bool Is_Active { get { return _is_active; } set { buttons[0].Select();  _is_active = value; } }
 
     [System.Serializable]
     struct UI_Slider

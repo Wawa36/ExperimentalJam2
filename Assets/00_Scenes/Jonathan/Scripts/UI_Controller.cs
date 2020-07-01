@@ -45,12 +45,17 @@ public class UI_Controller : Singleton<UI_Controller>
     public void Open_Menu() 
     {
         Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Set_Panel(1);
 
+        if (Input.GetJoystickNames().Length == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
+        Set_Panel(1);
         is_paused = true;
         is_settings = false;
+     
         GetComponent<UI_Controller_Input>().Is_Active = true;
     }
 
@@ -133,5 +138,6 @@ public class UI_Controller : Singleton<UI_Controller>
         Game_Settings.Sensitivity_Y = sensitivity_y_slider.value;
 
         QualitySettings.SetQualityLevel(Game_Settings.Quality);
+        
     }
 }
