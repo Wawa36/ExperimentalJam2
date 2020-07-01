@@ -30,11 +30,11 @@ namespace Tower_Management
         [SerializeField] bool start_steps_zero = false;
         [SerializeField] int chunk_size;
         [SerializeField] int deep_chunk_size = 10;
+        [SerializeField] Material[] materials;
+        [SerializeField] Material growth_material;
 
         [Header("Debugging")]
         [SerializeField] Player_Inputs inputs;
-        [SerializeField] Material default_material;
-        [SerializeField] Material highlight_material;
         [SerializeField] int _building_generation = 0;
         [SerializeField] bool can_finish;
         [SerializeField] bool finished_growing;
@@ -60,10 +60,20 @@ namespace Tower_Management
 
         public void Initialize(Player_Inputs inputs)
         {
+            // save input for debbuging purpose
             this.inputs = inputs;
+
+            // initialize mapper with inputs
             mapper.Initialize(inputs);
+
+            // assign growth parameter
             Assign_Input_To_Growth_Parameter();
+
+            // spawn first building(s)
             Spawn_First_Building();
+
+            // choose random materials
+            materials = new Material[] { materials[Random.Range(0, materials.Length)] };
         }
 
         // change growth parameter
@@ -127,7 +137,7 @@ namespace Tower_Management
                         finished_buildings.Add(c);
 
                         if (c.Renderer)
-                            c.Renderer.sharedMaterial = default_material;
+                            c.Renderer.sharedMaterial = materials[0];
                     }
                 }
             }
@@ -173,7 +183,7 @@ namespace Tower_Management
                     created_buildings.Add(new_building.GetComponent<Building>());
 
                     // highlight color
-                    new_building.GetComponent<Building> ().Renderer.material = highlight_material;
+                    new_building.GetComponent<Building> ().Renderer.material = growth_material;
 
                     // add to active blocks
                     active_blocks.Add(new_building.GetComponent<IGrowingBlock>());
@@ -281,7 +291,7 @@ namespace Tower_Management
             new_chunk.isStatic = true;
             new_chunk.AddComponent<MeshFilter>();
             new_chunk.AddComponent<MeshRenderer>();
-            new_chunk.GetComponent<MeshRenderer>().material = default_material;
+            new_chunk.GetComponent<MeshRenderer>().material = materials[0];
 
             // add building meshes
             for (int i = 0; i < (merge_all ? inactive_blocks.Count : chunk_size); i++)
@@ -324,7 +334,7 @@ namespace Tower_Management
             new_chunk.isStatic = true;
             new_chunk.AddComponent<MeshFilter>();
             new_chunk.AddComponent<MeshRenderer>();
-            new_chunk.GetComponent<MeshRenderer>().material = default_material;
+            new_chunk.GetComponent<MeshRenderer>().material = materials[0];
 
             // add building meshes
             for (int i = 0; i < merged_chunks.Count; i++)
