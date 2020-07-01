@@ -43,7 +43,7 @@ MonoBehaviour:
     loop: 0
   - ID: Orb Call Back
     clip: {fileID: 8300000, guid: 9d5dc24214cda5d418abba6aa0a2d32f, type: 3}
-    volume: 0.453
+    volume: 0.648
     loop: 0
   - ID: Orb Swich
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
