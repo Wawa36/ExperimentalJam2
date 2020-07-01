@@ -21,6 +21,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public AudioSource orbAudio1;
     public AudioSource orbAudio2;
     AudioSource playerAudio;
+    AudioSource TeleAudio;
     RaycastHit groundHit;
     public Vector3 LastGroundedPlace;
 
@@ -58,6 +59,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         playerAudio = audioSources[0];
         orbAudio1 = audioSources[1];
         orbAudio2 = audioSources[2];
+        TeleAudio = audioSources[3];
     }
 
     private void Update()
@@ -267,6 +269,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             teleportAnim.Play("teleport_anim", 0, f / time);
             transform.position = Vector3.Lerp(startPosition, endPosition  , 1/time*f);
+            if (f >= time - .5f)
+            {
+                Sound_Manager.Instance.Play_At("Teleport", TeleAudio, false);
+            }
             yield return new WaitForEndOfFrame();
         }
         transform.position = endPosition ;
