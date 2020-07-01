@@ -78,7 +78,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Orb Hit Tower
-    clip: {fileID: 8300000, guid: 738b9efb9844e4d488b61ed566cf521b, type: 3}
+    clip: {fileID: 8300000, guid: 4fa8584587d8eec419d1a8ceadac3a77, type: 3}
     volume: 1
     loop: 0
   - ID: Orb Hit Alone
