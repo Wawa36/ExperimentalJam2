@@ -981,6 +981,7 @@ MonoBehaviour:
   playerTransform: {fileID: 152923204717291918}
   turnSpeed: 400
   upDownTurnSpeed: 150
+  alreadyLanded: 0
 --- !u!95 &1258037180062439212
 Animator:
   serializedVersion: 3
@@ -1413,7 +1414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c428c5bc2e68ac47a6e18e8c9435676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target_position: {x: 0, y: 0, z: 0}
+  target_position: {x: 0, y: 1, z: 0}
   speed: 2.5
 --- !u!82 &1674087563281499255
 AudioSource:
