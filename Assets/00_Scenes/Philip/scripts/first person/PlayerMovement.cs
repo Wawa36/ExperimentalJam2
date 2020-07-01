@@ -285,7 +285,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     public bool IsOnTheGround()
     {
-        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,1f, mask,0))
+        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-Vector3.up,out groundHit,transform.rotation,1f, mask,0))
         {
             return true;
         }

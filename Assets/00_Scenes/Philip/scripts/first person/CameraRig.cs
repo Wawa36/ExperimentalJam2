@@ -30,6 +30,7 @@ public class CameraRig : Singleton<CameraRig>
             if (PlayerMovement.Instance.IsOnTheGround())
             {
                 alreadyLanded = true;
+                UI_Controller.Instance.Open_Controls();
             }
         }
     }
