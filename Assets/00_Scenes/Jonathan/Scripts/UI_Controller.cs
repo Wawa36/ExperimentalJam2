@@ -84,9 +84,15 @@ public class UI_Controller : Singleton<UI_Controller>
     {
         Set_Panel(3);
 
-        print(Input.GetJoystickNames().Length);
         keyboard_controlls.SetActive(Input.GetJoystickNames().Length == 0);
         gamepad_controlls.SetActive(Input.GetJoystickNames().Length != 0);
+
+        if (Input.GetJoystickNames().Length == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
     }
 
     public void Go_Main_Menu()
