@@ -66,6 +66,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         if (Time.timeScale != 0)
         {
+            orbAudio1.UnPause();
+            orbAudio2.UnPause();
             Gravity();
             // Throw();
 
@@ -179,8 +181,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             if (Input.GetButton("Fire2"))
             {
-
-
+                orbAudio1.Stop();
+                orbAudio2.Stop();
                 orbAudio2.clip = null;
                 notAiming = true;
                 orbScript.circle.gameObject.SetActive(false);
@@ -205,6 +207,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 }
                 else
                 {
+                    
                     orbScript.circle.gameObject.SetActive(true);
                     //Orb voll aufgeladen sound
                 }
