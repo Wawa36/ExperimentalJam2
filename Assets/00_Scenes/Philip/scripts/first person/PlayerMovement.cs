@@ -18,11 +18,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     GameObject activeOrb;
     Animator teleportAnim;
     AudioSource[] audioSources;
-    AudioSource orbAudio1;
-    AudioSource orbAudio2;
+    public AudioSource orbAudio1;
+    public AudioSource orbAudio2;
     AudioSource playerAudio;
     RaycastHit groundHit;
-    Vector3 LastGroundedPlace;
+    public Vector3 LastGroundedPlace;
 
     [HideInInspector] public int currentOrbIndex;
     #endregion
@@ -124,6 +124,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     }
                 }
              }
+            else if (playerAudio.clip == Sound_Manager.Instance.Get_Clip("Walk Sand").clip || playerAudio.clip == Sound_Manager.Instance.Get_Clip("Stone Walking").clip)
+            {
+                playerAudio.Pause();
+            }
         }
         else if(playerAudio.clip==Sound_Manager.Instance.Get_Clip("Walk Sand").clip || playerAudio.clip == Sound_Manager.Instance.Get_Clip("Stone Walking").clip)
         {
@@ -169,8 +173,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
 
 
-                orbAudio1.Stop();
-                orbAudio2.Stop();
                 orbAudio2.clip = null;
                 notAiming = true;
                 orbScript.circle.gameObject.SetActive(false);
