@@ -26,7 +26,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Charge Orb
-    clip: {fileID: 8300000, guid: f7634989fe5810b4c9e602fe954d3dbc, type: 3}
+    clip: {fileID: 8300000, guid: b1fba7e235a59774581e04cee7a25f17, type: 3}
     volume: 1
     loop: 0
   - ID: Pling
@@ -34,7 +34,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Orb Hit
-    clip: {fileID: 8300000, guid: de4cfc18c908a754daaf20d365b3f6b7, type: 3}
+    clip: {fileID: 8300000, guid: 3328603c598f7f144a42612c1c8fe944, type: 3}
     volume: 0.8
     loop: 0
   - ID: Orb Throw
@@ -43,7 +43,7 @@ MonoBehaviour:
     loop: 0
   - ID: Orb Call Back
     clip: {fileID: 8300000, guid: 9d5dc24214cda5d418abba6aa0a2d32f, type: 3}
-    volume: 0.453
+    volume: 0.648
     loop: 0
   - ID: Orb Swich
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
@@ -54,7 +54,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Charge Orb Loop
-    clip: {fileID: 8300000, guid: a234acb84816f2e4a865c2f48d59ed74, type: 3}
+    clip: {fileID: 8300000, guid: c1685ea04e6fb8c4285377ce1e970699, type: 3}
     volume: 0.8
     loop: 0
   - ID: Walk Sand
@@ -71,5 +71,17 @@ MonoBehaviour:
     loop: 0
   - ID: Stone Landing
     clip: {fileID: 8300000, guid: a4e2816b24fb8674a9a756cb48b05191, type: 3}
+    volume: 1
+    loop: 0
+  - ID: Teleport
+    clip: {fileID: 8300000, guid: 289b03fc8da218f45a192021ce5fb6ca, type: 3}
+    volume: 1
+    loop: 0
+  - ID: Orb Hit Tower
+    clip: {fileID: 8300000, guid: 738b9efb9844e4d488b61ed566cf521b, type: 3}
+    volume: 1
+    loop: 0
+  - ID: Orb Hit Alone
+    clip: {fileID: 8300000, guid: 3328603c598f7f144a42612c1c8fe944, type: 3}
     volume: 1
     loop: 0
