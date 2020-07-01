@@ -99,6 +99,8 @@ public class SphereArtifact : MonoBehaviour
     public void GetCollected()
     {
         trail.time = 0;
+        trail.startWidth = 0;
+        trail.endWidth = 0;
         collider.enabled = true;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
@@ -120,9 +122,6 @@ public class SphereArtifact : MonoBehaviour
         {
             
             rigid.velocity = Vector3.zero;
-            if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
-            {
-            }
             yield return new WaitForEndOfFrame();
         }
     }
@@ -143,7 +142,7 @@ public class SphereArtifact : MonoBehaviour
         while (!playerScript.carryingTheOrb)
         {
             playerScript.orbEnergy = 0;
-            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 5*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 7*Time.deltaTime);
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*3)
             {
                 audio2.Stop();

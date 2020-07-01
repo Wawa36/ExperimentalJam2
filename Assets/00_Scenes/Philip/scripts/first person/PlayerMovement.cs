@@ -75,6 +75,12 @@ public class PlayerMovement : Singleton<PlayerMovement>
             RunningSound();
             SaveGroundedPosition();
         }
+        else
+        {
+            playerAudio.Pause();
+            orbAudio1.Pause();
+            orbAudio2.Pause();
+        }
     }
     private void LateUpdate()
     {
@@ -184,9 +190,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
             else
             {
-
-                
-                
                 if (orbEnergy < throwingForce)
                 {
                     orbEnergy += Time.deltaTime * orbEnergyIncrease;
@@ -195,7 +198,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     if (orbAudio2.clip == null)
                     {
                         orbAudio2.clip = Sound_Manager.Instance.Get_Clip("Charge Orb Loop").clip;
-                        orbAudio2.PlayScheduled(2.6);
+                        orbAudio2.PlayScheduled(AudioSettings.dspTime+2.6);
                     }
                 }
                 else
@@ -216,7 +219,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbAudio2.clip = null;
             orbScript.colided = false;
             orbScript.circle.gameObject.SetActive(false);
-            lookDirection = transform.forward;
+            lookDirection = transform.forward; 
+            orbScript.trail.startWidth = 0.1f;
+            orbScript.trail.endWidth = 0.1f;
             orbScript.trail.time = 4;
             launchArc.lineRenderer.enabled = false;
             launchArc.target.SetActive(false);
@@ -231,6 +236,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         
         if (!notAiming&& !carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
+            orbScript.trail.startWidth = 0.1f;
+            orbScript.trail.endWidth = 0.1f;
             orbScript.trail.time = 1;
             notAiming = true;
             orbScript.collider.enabled = false;
