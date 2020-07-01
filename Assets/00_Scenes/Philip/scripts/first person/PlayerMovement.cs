@@ -21,6 +21,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     AudioSource orbAudio1;
     AudioSource orbAudio2;
     AudioSource playerAudio;
+    RaycastHit groundHit;
 
     [HideInInspector] public int currentOrbIndex;
     #endregion
@@ -70,6 +71,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             Move();
             Teleport();
             SwapOrbs();
+            RunningSound();
         }
     }
     private void LateUpdate()
@@ -77,6 +79,23 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (Time.timeScale != 0)
         {
             Throw();
+        }
+    }
+    void RunningSound()
+    {
+        if(new Vector3(velocity.x, 0, velocity.z).magnitude >= 0 )
+        {
+             if(IsOnTheGround())
+             {
+                if (groundHit.transform.tag == "Ground")
+                {
+                    Sound_Manager.Instance.Play_At("Walk Sand", playerAudio);
+                }
+                else if(groundHit.collider.tag == "Building")
+                {
+                    Sound_Manager.Instance.Play_At("Stone Walking", playerAudio);
+                }
+             }
         }
     }
     /// <summary>
@@ -191,14 +210,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         }
     }
-    public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition)
+    public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition,float time=.5f)
     {
         orbEnergy = 0;
         controller.enabled = false;
         teleportAnim.SetTrigger("teleport");
-        for (float f=0;f<=.5;f+=Time.deltaTime) 
+        for (float f=0;f<=time;f+=Time.deltaTime) 
         {
-            transform.position = Vector3.Lerp(startPosition, endPosition  , 2*f);
+            transform.position = Vector3.Lerp(startPosition, endPosition  , 1/time*f);
             yield return new WaitForEndOfFrame();
         }
         transform.position = endPosition ;
@@ -208,7 +227,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     bool IsOnTheGround()
     {
-        if (Physics.CheckBox(transform.position -transform.up,new Vector3(.5f,.2f,.5f),transform.rotation, mask,0))
+        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,1f, mask,0))
         {
             return true;
         }
@@ -276,8 +295,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         if(IsOnTheGround()&& velocity.y<0)
         {
-            velocity.y = -5f;
-           
+            if (velocity.y <= -10f)
+            {
+                if (groundHit.transform.tag == "Ground")
+                {
+                    Sound_Manager.Instance.Play_At("Sand Landing", playerAudio);
+                }
+                else if(groundHit.collider.tag == "Building")
+                {
+                    Sound_Manager.Instance.Play_At("Stone Landing", playerAudio);
+                }
+
+                velocity.y = -5f;
+            }
         }
 
     }

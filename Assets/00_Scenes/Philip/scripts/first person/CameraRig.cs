@@ -16,7 +16,10 @@ public class CameraRig : MonoBehaviour
     float xRotation;
 
     #endregion
-
+    private void Start()
+    {
+        xRotation = 90;
+    }
 
     // Update is called once per frame
     void Update()

@@ -44,6 +44,7 @@ MonoBehaviour:
   - ID: Orb Call Back
     clip: {fileID: 8300000, guid: 9d5dc24214cda5d418abba6aa0a2d32f, type: 3}
     volume: 0.453
+    loop: 0
   - ID: Orb Swich
     clip: {fileID: 8300000, guid: 12e7b040fcbc51744b7e958ae574609d, type: 3}
     volume: 0.5
@@ -59,11 +60,11 @@ MonoBehaviour:
   - ID: Walk Sand
     clip: {fileID: 8300000, guid: e701773e22cd4054e96541829ed9c8d3, type: 3}
     volume: 1
-    loop: 0
+    loop: 1
   - ID: Stone Walking
     clip: {fileID: 8300000, guid: 5f6e186b6d8dd7b4db38a022b1d6a732, type: 3}
     volume: 1
-    loop: 0
+    loop: 1
   - ID: Sand Landing
     clip: {fileID: 8300000, guid: 471fd79737eca7348a66276e88da7280, type: 3}
     volume: 1
