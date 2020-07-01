@@ -269,7 +269,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             teleportAnim.Play("teleport_anim", 0, f / time);
             transform.position = Vector3.Lerp(startPosition, endPosition  , 1/time*f);
-            if (f >= time - .5f)
+            if (f >= time - .3f)
             {
                 Sound_Manager.Instance.Play_At("Teleport", TeleAudio, false);
             }
