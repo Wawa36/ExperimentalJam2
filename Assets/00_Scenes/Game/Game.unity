@@ -1204,7 +1204,7 @@ PrefabInstance:
     - target: {fileID: 555765754146677196, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: charge_add_speed
-      value: 65
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 606894558762005415, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -1784,7 +1784,7 @@ PrefabInstance:
     - target: {fileID: 5127571275595537921, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: charge_add_speed
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5127571275595537921, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -1919,7 +1919,7 @@ PrefabInstance:
     - target: {fileID: 5971231569223541805, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: charge_add_speed
-      value: 85
+      value: 95
       objectReference: {fileID: 0}
     - target: {fileID: 5994744391986175655, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
