@@ -520,7 +520,7 @@ MonoBehaviour:
   distance: 3.5
   Accuracy: 50
   chunk_rate: 20
-  max_chunk_vert_size: 237358
+  max_chunk_vert_size: 20000
   chunk_material: {fileID: 2100000, guid: 8d974f20ea5078d48bf2f4d9b9ee85ab, type: 2}
   draw_ray: 1
   growing_details: []
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target_position: {x: 0, y: 0, z: 0}
-  speed: 0.001
+  speed: 2.5
 --- !u!82 &4462389166656517407
 AudioSource:
   m_ObjectHideFlags: 0

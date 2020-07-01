@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -508,16 +508,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5524188676072986673, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-        type: 3}
-      propertyPath: m_Shadows.m_Bias
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5524188676072986673, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-        type: 3}
-      propertyPath: m_Shadows.m_NormalBias
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5524188677027856980, guid: f7b73b4265ede494ab52fdff5b0ef68e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -587,6 +577,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: max_chunk_vert_size
+      value: 20000
+      objectReference: {fileID: 0}
     - target: {fileID: 152923204717291917, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_Name
@@ -649,22 +643,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
---- !u!1 &1832647399 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5524188676072986672, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1142577877}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1832647402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832647399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UsePipelineSettings: 1
