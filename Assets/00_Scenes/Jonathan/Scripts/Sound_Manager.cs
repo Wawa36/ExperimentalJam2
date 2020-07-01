@@ -35,8 +35,9 @@ namespace Settings_Management
             {
                 var clip = Get_Clip(ID);
 
-                at_source.volume = clip.volume * Game_Settings.Volume;
                 at_source.clip = clip.clip;
+                at_source.volume = clip.volume * Game_Settings.Volume;
+                at_source.loop = clip.loop;
                 at_source.Play();
             }
         } 
@@ -47,6 +48,7 @@ namespace Settings_Management
             public string ID;
             public AudioClip clip;
             [Range(0, 1)] public float volume;
+            public bool loop;
         }
     }
 }
