@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1284,6 +1284,7 @@ GameObject:
   - component: {fileID: 506898696}
   - component: {fileID: 506898700}
   - component: {fileID: 506898701}
+  - component: {fileID: 506898702}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1426,6 +1427,31 @@ MonoBehaviour:
   - slider: {fileID: 1905810989}
     step_size: 0.1
   _is_active: 1
+--- !u!114 &506898702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506898695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f44b9429d1e88754abed3bc73c7739a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level:
+  - use_pp: 0
+    cloud_rate: 0.1
+  - use_pp: 1
+    cloud_rate: 0.2
+  - use_pp: 1
+    cloud_rate: 0.3
+  - use_pp: 1
+    cloud_rate: 0.4
+  - use_pp: 1
+    cloud_rate: 0.5
+  - use_pp: 1
+    cloud_rate: 0.5
 --- !u!1 &548251817
 GameObject:
   m_ObjectHideFlags: 0

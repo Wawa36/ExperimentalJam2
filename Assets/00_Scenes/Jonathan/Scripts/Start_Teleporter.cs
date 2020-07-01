@@ -7,7 +7,6 @@ public class Start_Teleporter : MonoBehaviour
 {
     [SerializeField] Vector3 target_position;
     [SerializeField] float speed;
-    Animator anim;
    
     // Start is called before the first frame update
     void Start()

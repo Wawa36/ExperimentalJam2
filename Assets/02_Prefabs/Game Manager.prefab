@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2486050686319267537}
-  - component: {fileID: 4649060661756726252}
+  - component: {fileID: 2059632967}
   m_Layer: 0
   m_Name: Quality Controller
   m_TagString: Untagged
@@ -148,7 +148,7 @@ Transform:
   m_Father: {fileID: 5524188677027856980}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4649060661756726252
+--- !u!114 &2059632967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -160,6 +160,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44b9429d1e88754abed3bc73c7739a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level:
+  - use_pp: 0
+    cloud_rate: 0.1
+  - use_pp: 1
+    cloud_rate: 0.2
+  - use_pp: 1
+    cloud_rate: 0.3
+  - use_pp: 1
+    cloud_rate: 0.4
+  - use_pp: 1
+    cloud_rate: 0.5
+  - use_pp: 1
+    cloud_rate: 0.5
 --- !u!1 &2979763749501739879
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +257,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5524188676072986678}
   - component: {fileID: 5524188676072986673}
+  - component: {fileID: 1832647402}
   m_Layer: 0
   m_Name: 'Directional Light '
   m_TagString: Untagged
@@ -287,8 +301,8 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.85
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 2
+    m_NormalBias: 0
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -326,6 +340,19 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1832647402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524188676072986672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UsePipelineSettings: 1
 --- !u!1 &5524188676521825355
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +449,7 @@ GameObject:
   - component: {fileID: 894530137}
   m_Layer: 0
   m_Name: Cloud Manager
-  m_TagString: Untagged
+  m_TagString: Cloud Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

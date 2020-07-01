@@ -137,7 +137,6 @@ public class UI_Controller : Singleton<UI_Controller>
         Game_Settings.Sensitivity_X = sensitivity_x_slider.value;
         Game_Settings.Sensitivity_Y = sensitivity_y_slider.value;
 
-        QualitySettings.SetQualityLevel(Game_Settings.Quality);
-        
+        Quality_Controller.Instance.Set_Level(Game_Settings.Quality);
     }
 }

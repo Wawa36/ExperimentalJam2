@@ -98,7 +98,7 @@ public class Main_Menu : MonoBehaviour
         sensitivity_x_slider.SetValueWithoutNotify (Game_Settings.Sensitivity_X);
         sensitivity_y_slider.SetValueWithoutNotify (Game_Settings.Sensitivity_Y);
 
-        QualitySettings.SetQualityLevel(Game_Settings.Quality);
+        Quality_Controller.Instance.Set_Level(Game_Settings.Quality);
     }
 
     public void Override_Settings()

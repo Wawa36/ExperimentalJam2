@@ -8,6 +8,7 @@ TagManager:
   - Building
   - Details Tracker
   - postProcess
+  - Cloud Manager
   layers:
   - Default
   - TransparentFX
