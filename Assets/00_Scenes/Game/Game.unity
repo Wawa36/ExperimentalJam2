@@ -21,8 +21,8 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
-  m_AmbientEquatorColor: {r: 0.8679245, g: 0.77490324, b: 0.741011, a: 1}
-  m_AmbientGroundColor: {r: 0.764151, g: 0.5354291, b: 0.43614277, a: 1}
+  m_AmbientEquatorColor: {r: 0.8773585, g: 0.8564074, b: 0.84011215, a: 1}
+  m_AmbientGroundColor: {r: 0.8018868, g: 0.59385014, b: 0.6032211, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -349,6 +349,36 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2340034923940282556, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034924758678158, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034924889729239, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034925041637375, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034925161902076, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034925183176964, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2340034925517569038, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_Name
@@ -407,6 +437,16 @@ PrefabInstance:
     - target: {fileID: 2340034925517569039, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034925824188533, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2340034925885880092, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
