@@ -143,10 +143,10 @@ public class SphereArtifact : MonoBehaviour
         while (!playerScript.carryingTheOrb)
         {
             playerScript.orbEnergy = 0;
-            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 16*Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, targetPosition.position, 5*Time.deltaTime);
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*3)
             {
-                
+                audio2.Stop();
                 GetCollected();
             }
             yield return new WaitForEndOfFrame();
