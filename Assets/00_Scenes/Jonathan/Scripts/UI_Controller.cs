@@ -138,5 +138,6 @@ public class UI_Controller : Singleton<UI_Controller>
         Game_Settings.Sensitivity_Y = sensitivity_y_slider.value;
 
         QualitySettings.SetQualityLevel(Game_Settings.Quality);
+        
     }
 }
