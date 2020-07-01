@@ -34,7 +34,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Orb Hit
-    clip: {fileID: 8300000, guid: 3cd76e43386586f46940ea4514861f29, type: 3}
+    clip: {fileID: 8300000, guid: 3328603c598f7f144a42612c1c8fe944, type: 3}
     volume: 0.8
     loop: 0
   - ID: Orb Throw
@@ -77,11 +77,11 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 289b03fc8da218f45a192021ce5fb6ca, type: 3}
     volume: 1
     loop: 0
-  - ID: Orb Aufprahl Turm
+  - ID: Orb Hit Tower
     clip: {fileID: 8300000, guid: 738b9efb9844e4d488b61ed566cf521b, type: 3}
     volume: 1
     loop: 0
-  - ID: Orb Aufprahl Alleine
-    clip: {fileID: 8300000, guid: 3cd76e43386586f46940ea4514861f29, type: 3}
+  - ID: Orb Hit Alone
+    clip: {fileID: 8300000, guid: 3328603c598f7f144a42612c1c8fe944, type: 3}
     volume: 1
     loop: 0
