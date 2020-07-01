@@ -96,6 +96,11 @@ MonoBehaviour:
   start_steps_zero: 1
   chunk_size: 50
   deep_chunk_size: 10
+  materials:
+  - {fileID: 2100000, guid: ebdee174da482774b99837c662c78b06, type: 2}
+  - {fileID: 2100000, guid: 3fd3f2c2da424b948a9d08f287f50644, type: 2}
+  - {fileID: 2100000, guid: a67180f6d9df88b4aa19a74a398882ef, type: 2}
+  growth_material: {fileID: 2100000, guid: 255acae3ccf10e1448815521c9f41a27, type: 2}
   inputs:
     player_dir: {x: 0, y: 1, z: 0}
     hit_normal: {x: 0, y: 0, z: 0}
@@ -104,8 +109,6 @@ MonoBehaviour:
     throw_time: 1
     player_speed: 50
     ground_tag: none
-  default_material: {fileID: 2100000, guid: baa22a70418f8bb4a8578115bd1ab022, type: 2}
-  highlight_material: {fileID: 2100000, guid: 8f77e8c3248d6ff498b38e2cd8859c0b, type: 2}
   _building_generation: 0
   can_finish: 0
   finished_growing: 0
