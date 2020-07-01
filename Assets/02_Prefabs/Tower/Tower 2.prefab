@@ -97,7 +97,6 @@ MonoBehaviour:
   chunk_size: 50
   deep_chunk_size: 10
   materials:
-  - {fileID: 2100000, guid: ebdee174da482774b99837c662c78b06, type: 2}
   - {fileID: 2100000, guid: 3fd3f2c2da424b948a9d08f287f50644, type: 2}
   - {fileID: 2100000, guid: a67180f6d9df88b4aa19a74a398882ef, type: 2}
   - {fileID: 2100000, guid: bb5642f1e0e18b94ea86f2530db5dc43, type: 2}

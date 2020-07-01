@@ -187,25 +187,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &144784712 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5524188677027856983, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1142577877}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &144784713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144784712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb2b2d00b80684d4b8c31c158bdbbbe6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  at_y_position: -50
 --- !u!114 &178639145 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1345230924921571714, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
@@ -729,11 +710,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5524188676072986673, guid: f7b73b4265ede494ab52fdff5b0ef68e,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 5524188677027856980, guid: f7b73b4265ede494ab52fdff5b0ef68e,
         type: 3}
       propertyPath: m_LocalPosition.x
