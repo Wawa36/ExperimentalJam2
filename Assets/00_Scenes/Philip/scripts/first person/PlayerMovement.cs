@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Settings_Management;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -16,6 +17,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     SphereArtifact orbScript;
     GameObject activeOrb;
     Animator teleportAnim;
+    AudioSource[] audioSources;
+    AudioSource orbAudio1;
+    AudioSource orbAudio2;
+    AudioSource playerAudio;
+
     [HideInInspector] public int currentOrbIndex;
     #endregion
 
@@ -46,6 +52,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
         orbScript = activeOrb.GetComponent<SphereArtifact>();
         carryingTheOrb = true;
         teleportAnim = GameObject.FindGameObjectWithTag("postProcess").GetComponent<Animator>();
+        audioSources = GetComponents<AudioSource>();
+        playerAudio = audioSources[0];
+        orbAudio1 = audioSources[1];
+        orbAudio2 = audioSources[2];
     }
 
     private void Update()
@@ -100,7 +110,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (notAiming && Input.GetButtonDown("Fire1"))
         {
             notAiming = false;
-            
+            Sound_Manager.Instance.Play_At("Charge Orb", orbAudio1, false);
+            orbAudio2.clip = Sound_Manager.Instance.Get_Clip("Charge Orb Loop").clip;
+            orbAudio2.PlayScheduled(2.6);
 
             orbEnergy = 0;
         }
@@ -108,6 +120,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             if (Input.GetButton("Fire2"))
             {
+                orbAudio1.Stop();
+                orbAudio2.Stop();
                 notAiming = true;
                 orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
@@ -122,7 +136,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 {
                     orbEnergy += Time.deltaTime * orbEnergyIncrease;
                     //Orb -lädt auf sound 
-
+                   
                 }
                 else
                 {
@@ -137,7 +151,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
         if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
-
+            orbAudio1.Stop();
+            orbAudio2.Stop();
             orbScript.colided = false;
             orbScript.circle.gameObject.SetActive(false);
             lookDirection = transform.forward;
@@ -199,7 +214,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
         else
         return false;
-
     }
 
     void SwapOrbs()
