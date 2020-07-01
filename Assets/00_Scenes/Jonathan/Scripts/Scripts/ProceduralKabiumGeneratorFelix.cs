@@ -137,7 +137,7 @@ public class ProceduralKabiumGeneratorFelix
         {
             thisTowersBranchSplitChance[at_building.Cambium.branch_ID] = splitAfterGenerations;
         }
-        Debug.Log("split after : " + thisTowersBranchSplitChance[at_building.Cambium.branch_ID]);
+        //Debug.Log("split after : " + thisTowersBranchSplitChance[at_building.Cambium.branch_ID]);
 
         //Prepare other Variables ------------------------------------------------
 
@@ -171,7 +171,7 @@ public class ProceduralKabiumGeneratorFelix
 
         Dictionary<int, int> thisTowersBranchGenerations = towerAndBranchDyingGeneration[tower];
         int cambiumGeneration = CambiumGenerations(at_building);
-        Debug.Log(" generation " + cambiumGeneration);
+        //Debug.Log(" generation " + cambiumGeneration);
 
         if (cambiumGeneration != thisTowersBranchGenerations[at_building.Cambium.branch_ID])
         {
@@ -289,7 +289,7 @@ public class ProceduralKabiumGeneratorFelix
                     }
                     else //wenn es nicht wächst
                     {
-                        Debug.Log("Does not wachsen weiter...");
+                        //Debug.Log("Does not wachsen weiter...");
                         towerAndCambiumAmount[tower]--;
                     }
 
