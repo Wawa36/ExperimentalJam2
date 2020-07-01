@@ -74,7 +74,7 @@ MonoBehaviour:
     volume: 1
     loop: 0
   - ID: Teleport
-    clip: {fileID: 8300000, guid: 289b03fc8da218f45a192021ce5fb6ca, type: 3}
+    clip: {fileID: 8300000, guid: 655ce122335076e49b91241f5c08276e, type: 3}
     volume: 1
     loop: 0
   - ID: Orb Hit Tower
