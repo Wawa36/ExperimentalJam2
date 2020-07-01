@@ -214,9 +214,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         orbEnergy = 0;
         controller.enabled = false;
-        teleportAnim.SetTrigger("teleport");
         for (float f=0;f<=time;f+=Time.deltaTime) 
         {
+            teleportAnim.Play("teleport_anim", 0, f / time);
             transform.position = Vector3.Lerp(startPosition, endPosition  , 1/time*f);
             yield return new WaitForEndOfFrame();
         }
