@@ -8,6 +8,7 @@ public class UI_Controller : Singleton<UI_Controller>
     [Header("Panel")]
     [SerializeField] GameObject menu_panel;
     [SerializeField] GameObject settings_panel;
+    [SerializeField] GameObject controls_panel;
 
     [Header("Settings Elements")]
     [SerializeField] Slider quaility_slider;
@@ -70,6 +71,11 @@ public class UI_Controller : Singleton<UI_Controller>
         is_settings = true;
     }
 
+    public void Open_Controls ()
+    {
+        Set_Panel(3);
+    }
+
     public void Go_Main_Menu()
     {
         Time.timeScale = 1f;
@@ -85,16 +91,25 @@ public class UI_Controller : Singleton<UI_Controller>
             case 0:
                 menu_panel.SetActive(false);
                 settings_panel.SetActive(false);
+                controls_panel.SetActive(false);
                 break;
             // menu
             case 1:
                 menu_panel.SetActive(true);
                 settings_panel.SetActive(false);
+                controls_panel.SetActive(false);
                 break;
             // settings
             case 2:
                 menu_panel.SetActive(false);
                 settings_panel.SetActive(true);
+                controls_panel.SetActive(false);
+                break;
+            // controls
+            case 3:
+                menu_panel.SetActive(false);
+                settings_panel.SetActive(false);
+                controls_panel.SetActive(true);
                 break;
         }
     }
