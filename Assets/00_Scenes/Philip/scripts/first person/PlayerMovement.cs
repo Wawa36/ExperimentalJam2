@@ -83,7 +83,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     void RunningSound()
     {
-        if(new Vector3(velocity.x, 0, velocity.z).magnitude >= 0 )
+        if(new Vector3(velocity.x, 0, velocity.z).magnitude > 0.1f )
         {
              if(IsOnTheGround())
              {
@@ -227,7 +227,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     bool IsOnTheGround()
     {
-        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,1f, mask,0))
+        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,2f, mask,0))
         {
             return true;
         }

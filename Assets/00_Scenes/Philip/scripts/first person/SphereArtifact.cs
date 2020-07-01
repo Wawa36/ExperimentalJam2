@@ -122,7 +122,6 @@ public class SphereArtifact : MonoBehaviour
             rigid.velocity = Vector3.zero;
             if (Vector3.Distance(playerTransform.position, transform.position) < collectingDistance*2)
             {
-//GetCollected();
             }
             yield return new WaitForEndOfFrame();
         }
@@ -140,7 +139,7 @@ public class SphereArtifact : MonoBehaviour
 
     public IEnumerator FlyToPlayer()
     {
-        Sound_Manager.Instance.Play_At("Orb Call Back", audio1, true);
+        Sound_Manager.Instance.Play_At("Orb Call Back", audio2, true);
         while (!playerScript.carryingTheOrb)
         {
             playerScript.orbEnergy = 0;
