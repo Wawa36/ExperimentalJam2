@@ -12,10 +12,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [HideInInspector] public Vector3 lookDirection;
     [HideInInspector] public float orbEnergy=0;
     [HideInInspector] public bool carryingTheOrb;
-    [HideInInspector] public bool notAiming;
+    [HideInInspector] public bool dontAim;
     Rigidbody orbRigid;
     SphereArtifact orbScript;
-    GameObject activeOrb;
+    public GameObject activeOrb;
     Animator teleportAnim;
     AudioSource[] audioSources;
     public AudioSource orbAudio1;
@@ -53,7 +53,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         activeOrb = orbs[0];
         orbRigid = activeOrb.GetComponent<Rigidbody>();
         orbScript = activeOrb.GetComponent<SphereArtifact>();
-        carryingTheOrb = true;
+        carryingTheOrb = false;
         teleportAnim = GameObject.FindGameObjectWithTag("postProcess").GetComponent<Animator>();
         audioSources = GetComponents<AudioSource>();
         playerAudio = audioSources[0];
@@ -88,7 +88,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     private void LateUpdate()
     {
-        if (Time.timeScale != 0)
+        if (Time.timeScale != 0 && CameraRig.Instance.alreadyLanded)
         {
             Throw();
         }
@@ -172,19 +172,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
     /// </summary>
     void Throw()
     {
-        if (notAiming && Input.GetButtonDown("Fire1"))
+        if (dontAim && Input.GetButtonDown("Fire1"))
         {
-            notAiming = false;
+            dontAim = false;
             orbEnergy = 0;
         }
-        if (!notAiming && carryingTheOrb && Input.GetButton("Fire1"))
+        if (!dontAim && carryingTheOrb && Input.GetButton("Fire1"))
         {
             if (Input.GetButton("Fire2"))
             {
                 orbAudio1.Stop();
                 orbAudio2.Stop();
                 orbAudio2.clip = null;
-                notAiming = true;
+                dontAim = true;
                 orbScript.circle.gameObject.SetActive(false);
                 orbScript.GetCollected();
                 launchArc.lineRenderer.enabled = false;
@@ -217,7 +217,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
-        if (!notAiming && carryingTheOrb && Input.GetButtonUp("Fire1"))
+        if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1"))
         {
             orbAudio1.Stop();
             orbAudio2.Stop();
@@ -239,12 +239,12 @@ public class PlayerMovement : Singleton<PlayerMovement>
             activeOrb.transform.parent = null;
         }
         
-        if (!notAiming&& !carryingTheOrb&& Input.GetButtonDown("Fire1"))
+        if (!dontAim&& !carryingTheOrb&& Input.GetButtonDown("Fire1"))
         {
             orbScript.trail.startWidth = 0.1f;
             orbScript.trail.endWidth = 0.1f;
             orbScript.trail.time = 1;
-            notAiming = true;
+            dontAim = true;
             orbScript.collider.enabled = false;
             orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
@@ -280,12 +280,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
         transform.position = endPosition ;
         controller.enabled = true;
-        orbScript.GetCollected();
+        if (CameraRig.Instance.alreadyLanded)
+        {
+            orbScript.GetCollected();
+        }
     }
 
     public bool IsOnTheGround()
     {
-        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-transform.up,out groundHit,transform.rotation,1f, mask,0))
+        if (Physics.BoxCast(transform.position,new Vector3(.5f,.2f,.5f),-Vector3.up,out groundHit,transform.rotation,1f, mask,0))
         {
             return true;
         }

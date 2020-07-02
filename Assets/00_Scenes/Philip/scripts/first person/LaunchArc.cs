@@ -22,8 +22,6 @@ public class LaunchArc : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         lineRenderer = GetComponent<LineRenderer>();
         target.SetActive(false);
-
-
     }
     public void DrawPath(Vector3 Force)
     {
