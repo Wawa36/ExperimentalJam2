@@ -451,12 +451,9 @@ PrefabInstance:
       propertyPath: buttons.Array.data[3]
       value: 
       objectReference: {fileID: 659624787}
-    - target: {fileID: 1691563922, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1691563922, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 2887997505192032261, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2887997506702327395, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
