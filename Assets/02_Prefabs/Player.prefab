@@ -690,7 +690,6 @@ MonoBehaviour:
   playerTransform: {fileID: 152923204717291918}
   turnSpeed: 400
   upDownTurnSpeed: 150
-  alreadyLanded: 0
 --- !u!95 &1258037180062439212
 Animator:
   serializedVersion: 3
@@ -810,6 +809,14 @@ MonoBehaviour:
   allowedToThrow: 1
   allowedToTeleport: 1
   allowedToSwapOrbs: 1
+  allowedToMoveCamera: 1
+  didTheFirstThrow: 0
+  didTheFirstMoveX: 0
+  didTheFirstMoveZ: 0
+  didTheFirstCameraMove: 0
+  didTheFirstCallBack: 0
+  didTheFirstTeleport: 0
+  didTheFirstOrbSwap: 0
 --- !u!143 &735142247
 CharacterController:
   m_ObjectHideFlags: 0
@@ -824,8 +831,8 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.1
+  m_StepOffset: 0.5
+  m_SkinWidth: 0.05
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &8976948461170947845
