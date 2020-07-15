@@ -13,6 +13,9 @@ public class SphereArtifact : MonoBehaviour
     [SerializeField] Orb_Animation orbAnim;
     [SerializeField] float collectingDistance;
 
+    
+
+    SphereCollider sphereCollider;
     [HideInInspector] public Vector3 endTargetPosition;
     [SerializeField] PlayerMovement playerScript;
     [SerializeField] MeshRenderer meshR;
@@ -46,10 +49,12 @@ public class SphereArtifact : MonoBehaviour
         transform.localPosition = Vector3.zero;
         playerScript = PlayerMovement.Instance;
         rigid = GetComponent<Rigidbody>();
+        sphereCollider = GetComponent<SphereCollider>();
         audio1 = GetComponents<AudioSource>()[0];
         audio2 = GetComponents<AudioSource>()[1];
         audio3 = GetComponents<AudioSource>()[2];
         circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume;
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     private void Update()
@@ -101,6 +106,7 @@ public class SphereArtifact : MonoBehaviour
         trail.time = 0;
         trail.startWidth = 0;
         trail.endWidth = 0;
+        sphereCollider.enabled = false;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
         playerScript.carryingTheOrb = true;
@@ -117,6 +123,7 @@ public class SphereArtifact : MonoBehaviour
         //sound aufschlag vom Orb;
         trail.time = 0;
         StopCoroutine("Flytime");
+        sphereCollider.enabled = true;
         while (true) 
         {
             

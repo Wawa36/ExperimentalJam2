@@ -24,6 +24,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     AudioSource TeleAudio;
     RaycastHit groundHit;
     public Vector3 LastGroundedPlace;
+    Vector3 calculatedForce;
+    [HideInInspector] public float endtime;
 
     [HideInInspector] public int currentOrbIndex;
     #endregion
@@ -43,8 +45,14 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float jumpHeight;
     [SerializeField] float orbEnergyIncrease;
     public float throwingForce;
-    Vector3 calculatedForce;
-    [HideInInspector] public float endtime;
+
+    [Header("Bools for tutorial")]
+    public bool allowedToJump;
+    public bool allowedToRun;
+    public bool allowedToCallBackOrb;
+    public bool allowedToThrow;
+    public bool allowedToTeleport;
+    public bool allowedToSwapOrbs;
     #endregion
 
 
@@ -72,12 +80,22 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbAudio2.UnPause();
             Gravity();
             // Throw();
-
-            Jump();
-
-            Move();
-            Teleport();
-            SwapOrbs();
+            if (allowedToJump)
+            {
+                Jump();
+            }
+            if (allowedToRun)
+            {
+                Move();
+            }
+            if (allowedToTeleport)
+            {
+                Teleport();
+            }
+            if (allowedToSwapOrbs)
+            {
+                SwapOrbs();
+            }
             RunningSound();
             SaveGroundedPosition();
         }
@@ -179,7 +197,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             dontAim = false;
             orbEnergy = 0;
         }
-        if (!dontAim && carryingTheOrb && Input.GetButton("Fire1"))
+        if (!dontAim && carryingTheOrb && Input.GetButton("Fire1")&&allowedToThrow)
         {
             if (Input.GetButton("Fire2"))
             {
@@ -219,7 +237,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 calculatedForce= launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
-        if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1"))
+        if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1")&&allowedToThrow)
         {
             orbAudio1.Stop();
             orbAudio2.Stop();
@@ -241,7 +259,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             activeOrb.transform.parent = null;
         }
         
-        if (!dontAim&& !carryingTheOrb&& Input.GetButtonDown("Fire1"))
+        if (!dontAim&& !carryingTheOrb&& Input.GetButtonDown("Fire1") && allowedToCallBackOrb)
         {
             orbScript.trail.startWidth = 0.1f;
             orbScript.trail.endWidth = 0.1f;
