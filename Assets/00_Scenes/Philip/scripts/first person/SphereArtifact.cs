@@ -151,7 +151,7 @@ public class SphereArtifact : MonoBehaviour
         StartCoroutine(beeingStuck());
         rigid.useGravity = false;
         //hier kommt der fall hin das die Kugel den boden trifft
-        calculateAlleParameter(Instantiate(TowerPrefab, hit.point - Vector3.up * .8f, Quaternion.identity), hit.normal);
+        calculateAlleParameter(Instantiate(TowerPrefab, hit.point - Vector3.up * .1f, Quaternion.identity), hit.normal);
 
 
     }

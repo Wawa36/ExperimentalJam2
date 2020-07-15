@@ -53,6 +53,16 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public bool allowedToThrow;
     public bool allowedToTeleport;
     public bool allowedToSwapOrbs;
+    public bool allowedToMoveCamera;
+
+    [Header("first use of mechanics")]
+    public bool didTheFirstThrow;
+    public bool didTheFirstMoveX;
+    public bool didTheFirstMoveZ;
+    public bool didTheFirstCameraMove;
+    public bool didTheFirstCallBack;
+    public bool didTheFirstTeleport;
+    public bool didTheFirstOrbSwap;
     #endregion
 
 
@@ -74,7 +84,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void Update()
     {
-        if (Time.timeScale != 0 && CameraRig.Instance.alreadyLanded)
+        if (Time.timeScale != 0)
         {
             orbAudio1.UnPause();
             orbAudio2.UnPause();
@@ -99,7 +109,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             RunningSound();
             SaveGroundedPosition();
         }
-        else if(CameraRig.Instance.alreadyLanded)
+        else 
         {
             playerAudio.Pause();
             orbAudio1.Pause();
@@ -108,7 +118,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     private void LateUpdate()
     {
-        if (Time.timeScale != 0 && CameraRig.Instance.alreadyLanded)
+        if (Time.timeScale != 0)
         {
             Throw();
         }
@@ -183,8 +193,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 velocity.y = (transform.position.y - previousPosition.y) / Time.deltaTime;
             }
+            if (velocity.x > 0.2f || velocity.x < -.2f)
+            {
+                didTheFirstMoveX = true;
+            }
+            if (velocity.z > 0.2f || velocity.z < -.2f)
+            {
+                didTheFirstMoveZ = true;
+            }
         }
-        
 
     }
     /// <summary>
@@ -237,7 +254,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 calculatedForce= launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
-        if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1")&&allowedToThrow)
+        if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1") && allowedToThrow)
         {
             orbAudio1.Stop();
             orbAudio2.Stop();
@@ -257,6 +274,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.StartCoroutine(orbScript.FlyTime(launchArc.hit,endtime));
             orbRigid.velocity= calculatedForce;
             activeOrb.transform.parent = null;
+            didTheFirstThrow = true;
         }
         
         if (!dontAim&& !carryingTheOrb&& Input.GetButtonDown("Fire1") && allowedToCallBackOrb)
@@ -267,6 +285,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             dontAim = true;
             orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
+            didTheFirstCallBack = true;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
         }
 
@@ -299,10 +318,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
         transform.position = endPosition ;
         controller.enabled = true;
-        if (CameraRig.Instance.alreadyLanded)
+        if (allowedToTeleport)
         {
             orbScript.GetCollected();
+            didTheFirstTeleport = true;
         }
+
+        
     }
 
     public bool IsOnTheGround()
@@ -335,6 +357,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
+                didTheFirstOrbSwap = true;
                 
             }
             if (Input.GetButtonDown("Fire4"))
@@ -352,6 +375,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
                 orbRigid = activeOrb.GetComponent<Rigidbody>();
                 orbScript = activeOrb.GetComponent<SphereArtifact>();
                 launchArc = activeOrb.GetComponent<LaunchArc>();
+                didTheFirstOrbSwap = true;
                 
             }
         }

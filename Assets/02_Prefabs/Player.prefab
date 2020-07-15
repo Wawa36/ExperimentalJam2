@@ -806,6 +806,7 @@ MonoBehaviour:
   throwingForce: 25
   allowedToJump: 1
   allowedToRun: 1
+  allowedToCallBackOrb: 1
   allowedToThrow: 1
   allowedToTeleport: 1
   allowedToSwapOrbs: 1
