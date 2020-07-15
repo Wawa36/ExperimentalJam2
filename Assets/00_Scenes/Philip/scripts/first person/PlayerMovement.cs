@@ -43,6 +43,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [SerializeField] float jumpHeight;
     [SerializeField] float orbEnergyIncrease;
     public float throwingForce;
+    Vector3 calculatedForce;
+    [HideInInspector] public float endtime;
     #endregion
 
 
@@ -214,7 +216,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
                 launchArc.lineRenderer.enabled = true;
                 launchArc.target.SetActive(true);
-                launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
+                calculatedForce= launchArc.DrawPath(cameraRigTransform.forward * throwingForce + cameraRigTransform.up * throwingForce / 4);
             }
         }
         if (!dontAim && carryingTheOrb && Input.GetButtonUp("Fire1"))
@@ -234,8 +236,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbRigid.isKinematic = false;
             orbRigid.useGravity = true;
             orbScript.timer = 0;
-            orbScript.StartCoroutine(orbScript.FlyTime());
-            orbRigid.velocity= cameraRigTransform.forward  * throwingForce + cameraRigTransform.up * throwingForce / 4;
+            orbScript.StartCoroutine(orbScript.FlyTime(launchArc.hit,endtime));
+            orbRigid.velocity= calculatedForce;
             activeOrb.transform.parent = null;
         }
         
@@ -245,7 +247,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.trail.endWidth = 0.1f;
             orbScript.trail.time = 1;
             dontAim = true;
-            orbScript.collider.enabled = false;
             orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());

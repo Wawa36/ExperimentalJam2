@@ -781,7 +781,8 @@ MonoBehaviour:
   lookDirection: {x: 0, y: 0, z: 0}
   orbEnergy: 0
   carryingTheOrb: 0
-  notAiming: 0
+  dontAim: 0
+  activeOrb: {fileID: 0}
   orbAudio1: {fileID: 0}
   orbAudio2: {fileID: 0}
   LastGroundedPlace: {x: 0, y: 0, z: 0}
