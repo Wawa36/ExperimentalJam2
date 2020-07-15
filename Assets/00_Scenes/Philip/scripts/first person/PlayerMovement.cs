@@ -247,7 +247,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.trail.endWidth = 0.1f;
             orbScript.trail.time = 1;
             dontAim = true;
-            orbScript.sphereCollider.enabled = false;
             orbRigid.velocity = Vector3.zero;
             orbRigid.useGravity = false;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
