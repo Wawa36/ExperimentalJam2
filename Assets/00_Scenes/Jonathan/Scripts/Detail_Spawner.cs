@@ -13,11 +13,12 @@ namespace Tower_Management.Details
         [SerializeField] float player_speed_multiplier;
         [SerializeField] float distance;
         [SerializeField] int Accuracy = 50;
-        [SerializeField] [Range(5, 100)]int chunk_rate;
+        [SerializeField] [Range(5, 100)] int chunk_rate;
         [SerializeField] [Range(1000, 1000000)] int max_chunk_vert_size;
         [SerializeField] Material chunk_material;
 
         [Header("Debugging")]
+        [SerializeField] bool is_active;
         [SerializeField] bool draw_ray;
         [SerializeField] List<GameObject> growing_details = new List<GameObject>();
         [SerializeField] List<Detail> spawned_details = new List<Detail>();
@@ -34,15 +35,18 @@ namespace Tower_Management.Details
 
         void Update()
         {
-            if (counter < Calculate_Rate())
+            if (is_active)
             {
-                new_rate = Calculate_Rate();
-                counter += Time.deltaTime;
-            }
-            else if (Time.timeScale == 1)
-            {
-                Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
-                counter = 0;
+                if (counter < Calculate_Rate())
+                {
+                    new_rate = Calculate_Rate();
+                    counter += Time.deltaTime;
+                }
+                else if (Time.timeScale == 1)
+                {
+                    Search_Point(prefabs[Random.Range(0, prefabs.Length)]);
+                    counter = 0;
+                }
             }
         }
 
@@ -177,10 +181,20 @@ namespace Tower_Management.Details
             spawned_details.Clear();
         }
 
-        public void Detail_Finished_Growing(Detail detail) 
+        public void Detail_Finished_Growing(Detail detail)
         {
             growing_details.Remove(detail.gameObject);
             spawned_details.Add(detail);
+        }
+
+        public void Activate()
+        {
+            is_active = true;
+        }
+
+        public void Deactivate()
+        {
+            is_active = false;
         }
 
         [System.Serializable]
