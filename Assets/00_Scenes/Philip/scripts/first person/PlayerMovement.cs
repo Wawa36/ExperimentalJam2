@@ -193,11 +193,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
             {
                 velocity.y = (transform.position.y - previousPosition.y) / Time.deltaTime;
             }
-            if (velocity.x > 0.2f || velocity.x < -.2f)
+            if (velocity.x > 0 || velocity.x < -0)
             {
                 didTheFirstMoveX = true;
             }
-            if (velocity.z > 0.2f || velocity.z < -.2f)
+            if (velocity.z > 0 || velocity.z < 0)
             {
                 didTheFirstMoveZ = true;
             }

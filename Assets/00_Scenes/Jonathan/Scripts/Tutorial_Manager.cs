@@ -29,10 +29,6 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
 
     void Update()
     {
-        print(pm.didTheFirstCameraMove);
-        print(pm.didTheFirstMoveX);
-        print(pm.didTheFirstMoveZ);
-
         if (step_changed)
         {
             if (current_step == 0)
