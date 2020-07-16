@@ -4756,7 +4756,7 @@ MonoBehaviour:
   steps:
   - name: Walk
     panel: {fileID: 889079151}
-    popup_delay: 3
+    popup_delay: 4
     disappear_delay: 1
     allow_movement: 1
     allow_take_orb: 0
@@ -4769,8 +4769,8 @@ MonoBehaviour:
     popup_delay: 0
     disappear_delay: 0
     allow_movement: 1
-    allow_take_orb: 1
-    allow_throw_charge: 1
+    allow_take_orb: 0
+    allow_throw_charge: 0
     allow_teleport: 0
     allow_switch: 0
     spawn_details: 0
@@ -4780,7 +4780,7 @@ MonoBehaviour:
     disappear_delay: 0.2
     allow_movement: 1
     allow_take_orb: 1
-    allow_throw_charge: 1
+    allow_throw_charge: 0
     allow_teleport: 0
     allow_switch: 0
     spawn_details: 0
