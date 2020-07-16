@@ -572,8 +572,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Use Right Mouse Button to teleport to the Orb\nor \nUse Left Mouse Button
-    to recall it"
+  m_Text: Use Right Mouse Button to teleport to the Orb
 --- !u!1 &248747810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2208,7 +2207,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use WASD and Space to walk
+  m_Text: Use WASD, Space and Mouse to move
 --- !u!1 &1024045992
 GameObject:
   m_ObjectHideFlags: 0
@@ -4242,7 +4241,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Use Left Mouse Button to  take the Orb
+  m_Text: Use Left Mouse Button to collect the Orb
 --- !u!1 &1627169521
 GameObject:
   m_ObjectHideFlags: 0
@@ -4757,6 +4756,8 @@ MonoBehaviour:
   steps:
   - name: Walk
     panel: {fileID: 889079151}
+    popup_delay: 3
+    disappear_delay: 1
     allow_movement: 1
     allow_take_orb: 0
     allow_throw_charge: 0
@@ -4765,22 +4766,18 @@ MonoBehaviour:
     spawn_details: 0
   - name: Search Orb
     panel: {fileID: 1085330930}
+    popup_delay: 0
+    disappear_delay: 0
     allow_movement: 1
-    allow_take_orb: 0
-    allow_throw_charge: 0
+    allow_take_orb: 1
+    allow_throw_charge: 1
     allow_teleport: 0
     allow_switch: 0
     spawn_details: 0
   - name: Take Orb
     panel: {fileID: 1946020244}
-    allow_movement: 1
-    allow_take_orb: 1
-    allow_throw_charge: 0
-    allow_teleport: 0
-    allow_switch: 0
-    spawn_details: 0
-  - name: Load and Throw
-    panel: {fileID: 1405215637}
+    popup_delay: 0
+    disappear_delay: 0.2
     allow_movement: 1
     allow_take_orb: 1
     allow_throw_charge: 1
@@ -4789,14 +4786,28 @@ MonoBehaviour:
     spawn_details: 0
   - name: Load and Throw
     panel: {fileID: 1528436395}
+    popup_delay: 1
+    disappear_delay: 1
+    allow_movement: 1
+    allow_take_orb: 1
+    allow_throw_charge: 1
+    allow_teleport: 0
+    allow_switch: 0
+    spawn_details: 0
+  - name: Teleport
+    panel: {fileID: 1998820867}
+    popup_delay: 0.5
+    disappear_delay: 0.5
     allow_movement: 1
     allow_take_orb: 1
     allow_throw_charge: 1
     allow_teleport: 1
     allow_switch: 0
     spawn_details: 0
-  - name: Teleport
+  - name: Switch Orb
     panel: {fileID: 1405215637}
+    popup_delay: 0.5
+    disappear_delay: 0.5
     allow_movement: 1
     allow_take_orb: 1
     allow_throw_charge: 1
@@ -4805,13 +4816,14 @@ MonoBehaviour:
     spawn_details: 0
   - name: Finished
     panel: {fileID: 1375075444}
+    popup_delay: 0
+    disappear_delay: 0
     allow_movement: 1
     allow_take_orb: 1
     allow_throw_charge: 1
     allow_teleport: 1
     allow_switch: 1
     spawn_details: 1
-  delay: 2
 --- !u!1 &1924428771
 GameObject:
   m_ObjectHideFlags: 0

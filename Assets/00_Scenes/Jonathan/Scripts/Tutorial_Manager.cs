@@ -29,11 +29,15 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
 
     void Update()
     {
+        print(pm.didTheFirstCameraMove);
+        print(pm.didTheFirstMoveX);
+        print(pm.didTheFirstMoveZ);
+
         if (step_changed)
         {
             if (current_step == 0)
             {
-                if (pm.didTheFirstMoveX && pm.didTheFirstCameraMove && pm.didTheFirstMoveZ)
+                if (pm.didTheFirstMoveX && pm.didTheFirstCameraMove || pm.didTheFirstCameraMove && pm.didTheFirstMoveZ)
                     Step_Completed();
             }
             else if (current_step == 1)

@@ -331,6 +331,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 129570724, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Text
+      value: Use Right Mouse Button to teleport to the Orb
+      objectReference: {fileID: 0}
+    - target: {fileID: 968300828, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Text
+      value: Use WASD, Space and Mouse to move
+      objectReference: {fileID: 0}
+    - target: {fileID: 1596110550, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: m_Text
+      value: Use Left Mouse Button to collect the Orb
+      objectReference: {fileID: 0}
     - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: steps.Array.data[5].name
       value: Switch Orb
