@@ -331,97 +331,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 129570724, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: m_Text
-      value: Use Right Mouse Button to teleport to the Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 968300828, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: m_Text
-      value: Use WASD, Space and Mouse to move
-      objectReference: {fileID: 0}
-    - target: {fileID: 1596110550, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: m_Text
-      value: Use Left Mouse Button to collect the Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[5].name
-      value: Switch Orb
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[3].panel
-      value: 
-      objectReference: {fileID: 1528436395}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[4].name
-      value: Teleport
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[4].panel
-      value: 
-      objectReference: {fileID: 1998820867}
     - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: steps.Array.data[1].allow_take_orb
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[1].allow_throw_charge
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[2].allow_throw_charge
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[0].delay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[3].delay
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[4].delay
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[5].delay
-      value: 2
+      propertyPath: steps.Array.data[1].allow_throw_charge
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+      propertyPath: steps.Array.data[2].allow_throw_charge
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
       propertyPath: steps.Array.data[0].popup_delay
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[0].disappear_delay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[2].disappear_delay
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[3].popup_delay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[3].disappear_delay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[4].popup_delay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[4].disappear_delay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[5].disappear_delay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1889191144, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
-      propertyPath: steps.Array.data[5].popup_delay
-      value: 0.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2887997506702327395, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
         type: 3}
@@ -1174,12 +1098,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1697540970}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1528436395 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1528436395, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 277416284}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1696681429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1832,6 +1750,54 @@ PrefabInstance:
       propertyPath: m_SkinWidth
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 1697540976, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: target_position.z
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1697540976, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: target_position.y
+      value: 5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204554566497, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204554566497, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 152923204554566497, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: orbs.Array.data[0]
@@ -1895,7 +1861,7 @@ PrefabInstance:
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 152923204717291918, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
@@ -2964,10 +2930,4 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 152923204344402230, guid: 25ce2d070296ed24eb22e9ba151dbef5,
     type: 3}
   m_PrefabInstance: {fileID: 1697540970}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1998820867 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1998820867, guid: e319a40aa7c7cdc4c96a032fc07c7cbb,
-    type: 3}
-  m_PrefabInstance: {fileID: 277416284}
   m_PrefabAsset: {fileID: 0}
