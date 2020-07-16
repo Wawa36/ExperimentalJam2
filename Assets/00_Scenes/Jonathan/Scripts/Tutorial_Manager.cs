@@ -82,11 +82,11 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
     IEnumerator Step_Delay() 
     {
         if (current_step >= 0)
-            yield return new WaitForSeconds(steps[current_step].disappear_delay);
+            yield return new WaitForSecondsRealtime(steps[current_step].disappear_delay);
 
         Reset_Step(current_step);
         
-        yield return new WaitForSeconds(steps[current_step + 1].popup_delay);
+        yield return new WaitForSecondsRealtime(steps[current_step + 1].popup_delay);
 
         current_step++;
         Set_Step(current_step);
@@ -106,7 +106,7 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
             else
                 Detail_Spawner.Instance.Deactivate();
 
-            PlayerMovement.Instance.allowedToCallBackOrb = steps[index].allow_throw_charge;
+            PlayerMovement.Instance.allowedToCallBackOrb = steps[index].allow_take_orb;
             PlayerMovement.Instance.allowedToJump = steps[index].allow_movement;
             PlayerMovement.Instance.allowedToMoveCamera = steps[index].allow_movement;
             PlayerMovement.Instance.allowedToRun = steps[index].allow_movement;
