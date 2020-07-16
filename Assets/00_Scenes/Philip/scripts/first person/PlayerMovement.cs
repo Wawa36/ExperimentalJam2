@@ -63,6 +63,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public bool didTheFirstCallBack;
     public bool didTheFirstTeleport;
     public bool didTheFirstOrbSwap;
+    public bool didTheFirstLanding;
     #endregion
 
 
@@ -323,7 +324,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbScript.GetCollected();
             didTheFirstTeleport = true;
         }
-
+        didTheFirstLanding = true;
         
     }
 
