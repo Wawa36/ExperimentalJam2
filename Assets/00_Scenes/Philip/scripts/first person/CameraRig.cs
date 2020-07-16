@@ -14,25 +14,17 @@ public class CameraRig : Singleton<CameraRig>
     [SerializeField] float turnSpeed;
     [SerializeField] float upDownTurnSpeed;
     float xRotation;
-    public bool alreadyLanded;
 
     #endregion
     // Update is called once per frame
     void Update()
     {
-        if (alreadyLanded)
+        if (PlayerMovement.Instance.allowedToMoveCamera)
         {
             FirstPersonRig();
             transform.localRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, 0, 0);
         }
-        else
-        {
-            if (PlayerMovement.Instance.IsOnTheGround())
-            {
-                alreadyLanded = true;
-                UI_Controller.Instance.Open_Controls();
-            }
-        }
+        
     }
 
 
@@ -49,6 +41,11 @@ public class CameraRig : Singleton<CameraRig>
 
         playerTransform.Rotate(playerTransform.up*MouseAxisX);
         transform.localRotation = Quaternion.Euler(xRotation,0,0);
+        if (MouseAxisX >= 0.2f || MouseAxisX < -0.2f || MouseAxisY >= 0.2f || MouseAxisY < -0.2f)
+        {
+            PlayerMovement.Instance.didTheFirstCameraMove=true;
+        }
+
     }
 
 }

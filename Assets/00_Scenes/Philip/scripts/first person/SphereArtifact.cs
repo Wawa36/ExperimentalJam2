@@ -15,7 +15,8 @@ public class SphereArtifact : MonoBehaviour
 
     
 
-    [HideInInspector] public new SphereCollider collider;
+    SphereCollider sphereCollider;
+    [HideInInspector] public Vector3 endTargetPosition;
     [SerializeField] PlayerMovement playerScript;
     [SerializeField] MeshRenderer meshR;
 
@@ -48,11 +49,12 @@ public class SphereArtifact : MonoBehaviour
         transform.localPosition = Vector3.zero;
         playerScript = PlayerMovement.Instance;
         rigid = GetComponent<Rigidbody>();
-        collider = GetComponent<SphereCollider>();
+        sphereCollider = GetComponent<SphereCollider>();
         audio1 = GetComponents<AudioSource>()[0];
         audio2 = GetComponents<AudioSource>()[1];
         audio3 = GetComponents<AudioSource>()[2];
         circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume;
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     private void Update()
@@ -104,7 +106,7 @@ public class SphereArtifact : MonoBehaviour
         trail.time = 0;
         trail.startWidth = 0;
         trail.endWidth = 0;
-        collider.enabled = true;
+        sphereCollider.enabled = false;
         transform.parent = targetPosition;
         transform.localPosition = Vector3.zero;
         playerScript.carryingTheOrb = true;
@@ -121,6 +123,7 @@ public class SphereArtifact : MonoBehaviour
         //sound aufschlag vom Orb;
         trail.time = 0;
         StopCoroutine("Flytime");
+        sphereCollider.enabled = true;
         while (true) 
         {
             
@@ -128,14 +131,28 @@ public class SphereArtifact : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
-    public IEnumerator FlyTime()
+    public IEnumerator FlyTime(RaycastHit hit,float endtime)
     {
         Sound_Manager.Instance.Play_At("Orb Throw", audio1, true);
-        while (true)
+        while (timer<endtime)
         {
             timer += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+
+        Sound_Manager.Instance.Play_At("Orb Hit", audio1, true);
+        if (PlayerMovement.Instance.currentOrbIndex == 1)
+        {
+            Sound_Manager.Instance.Play_At("Orb Hit Tower", audio3, true);
+        }
+        colided = true;
+        rigid.velocity = Vector3.zero;
+        transform.position = hit.point;
+        StartCoroutine(beeingStuck());
+        rigid.useGravity = false;
+        //hier kommt der fall hin das die Kugel den boden trifft
+        calculateAlleParameter(Instantiate(TowerPrefab, hit.point - Vector3.up * .1f, Quaternion.identity), hit.normal);
+
 
     }
 
@@ -159,18 +176,6 @@ public class SphereArtifact : MonoBehaviour
     {
         if (!colided)
         {
-            Sound_Manager.Instance.Play_At("Orb Hit", audio1, true);
-            if (PlayerMovement.Instance.currentOrbIndex == 1)
-            {
-                Sound_Manager.Instance.Play_At("Orb Hit Tower", audio3, true);
-            }
-            colided = true;
-            rigid.velocity = Vector3.zero;
-            transform.position = collision.GetContact(0).point;
-            StartCoroutine(beeingStuck());
-            rigid.useGravity = false;
-            //hier kommt der fall hin das die Kugel den boden trifft
-            calculateAlleParameter( Instantiate(TowerPrefab, collision.GetContact(0).point - Vector3.up*.8f, Quaternion.identity),collision.contacts[0].normal);
            
         }
     }
