@@ -8,6 +8,7 @@ using UnityEngine.Rendering;
 public class Tutorial_Manager : Singleton<Tutorial_Manager>
 {
     [SerializeField] Step[] steps;
+    [SerializeField] float delay = 2;
     int current_step = -1;
 
     public void Step_Completed()
@@ -17,6 +18,13 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
 
     void Next_Step() 
     {
+        StartCoroutine(Step_Delay());
+    }
+
+    IEnumerator Step_Delay() 
+    {
+        yield return new WaitForSeconds(delay);
+
         Reset_Step(current_step);
         current_step++;
         Set_Step(current_step);
@@ -51,6 +59,7 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
         public bool allow_take_orb;
         public bool allow_throw_charge;
         public bool allow_teleport;
+        public bool allow_switch;
         public bool spawn_details;
     }
 }
