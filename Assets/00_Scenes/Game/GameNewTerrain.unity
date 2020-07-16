@@ -1041,7 +1041,7 @@ PrefabInstance:
     - target: {fileID: 3440540482631713064, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3440540482766984910, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
@@ -1056,7 +1056,7 @@ PrefabInstance:
     - target: {fileID: 3440540482766984910, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.36
+      value: -2.09
       objectReference: {fileID: 0}
     - target: {fileID: 3440540482766984910, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
@@ -1076,17 +1076,17 @@ PrefabInstance:
     - target: {fileID: 3440540483487795520, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.7
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 3440540483487795520, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.01
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 3440540483487795520, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.33
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: 3440540483487795520, guid: 7a2d9eadb9bf01d4b9c99b7b9b0e0de4,
         type: 3}
@@ -2172,12 +2172,12 @@ PrefabInstance:
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.63
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.08
+      value: 0.112
       objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323712, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
