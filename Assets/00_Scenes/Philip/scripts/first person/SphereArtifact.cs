@@ -46,7 +46,7 @@ public class SphereArtifact : MonoBehaviour
         Cursor.visible=false;
         Vector3 cameraPosition = Camera.main.ViewportToWorldPoint(new Vector3(.95f , 0.1f, 1));
         targetPosition.position = cameraPosition;
-        transform.localPosition = Vector3.zero;
+        //transform.localPosition = Vector3.zero;
         playerScript = PlayerMovement.Instance;
         rigid = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
