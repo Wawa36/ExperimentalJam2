@@ -10,7 +10,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     [HideInInspector] public CharacterController controller;
     [HideInInspector] public Vector3 velocity;
     [HideInInspector] public Vector3 lookDirection;
-    [HideInInspector] public float orbEnergy=0;
+    public float orbEnergy=25;
     [HideInInspector] public bool carryingTheOrb;
     [HideInInspector] public bool dontAim;
     Rigidbody orbRigid;
@@ -213,7 +213,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (dontAim && Input.GetButtonDown("Fire1"))
         {
             dontAim = false;
-            orbEnergy = 0;
         }
         if (!dontAim && carryingTheOrb && Input.GetButton("Fire1")&&allowedToThrow)
         {
@@ -288,6 +287,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
             orbRigid.useGravity = false;
             didTheFirstCallBack = true;
             orbScript.StartCoroutine(orbScript.FlyToPlayer());
+
+            orbEnergy = 0;
         }
 
     }
@@ -305,7 +306,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
     public IEnumerator Teleporting(Vector3 startPosition, Vector3 endPosition,float time=.5f)
     {
-        orbEnergy = 0;
+        
         controller.enabled = false;
         for (float f=0;f<=time;f+=Time.deltaTime) 
         {
@@ -321,6 +322,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         controller.enabled = true;
         if (allowedToTeleport)
         {
+            orbEnergy = 0;
             orbScript.GetCollected();
             didTheFirstTeleport = true;
         }

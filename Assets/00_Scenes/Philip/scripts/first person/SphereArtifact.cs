@@ -59,7 +59,10 @@ public class SphereArtifact : MonoBehaviour
 
     private void Update()
     {
-        ManageParticles();
+        if (PlayerMovement.Instance.carryingTheOrb)
+        {
+            ManageParticles();
+        }
         orbAnim.Speed = playerScript.orbEnergy;
     }
 
@@ -71,8 +74,6 @@ public class SphereArtifact : MonoBehaviour
         particleTimer += Time.deltaTime;
         if (particleTimer >= .2f)
         {
-
-            
             zoomCount = Mathf.RoundToInt(Mathf.Lerp(.25f, 8, playerScript.orbEnergy / playerScript.throwingForce) * 4);
 
             if (playerScript.orbEnergy != 0)
