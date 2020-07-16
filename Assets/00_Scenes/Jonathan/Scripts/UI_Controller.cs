@@ -61,6 +61,8 @@ public class UI_Controller : Singleton<UI_Controller>
         is_settings = false;
      
         GetComponent<UI_Controller_Input>().Is_Active = true;
+
+        Tutorial_Manager.Instance.Set_Visibility(false);
     }
 
     public void Continue()
@@ -72,6 +74,8 @@ public class UI_Controller : Singleton<UI_Controller>
 
         is_paused = false;
         GetComponent<UI_Controller_Input>().Is_Active = false;
+
+        Tutorial_Manager.Instance.Set_Visibility(true);
     }
 
     public void Open_Settings()

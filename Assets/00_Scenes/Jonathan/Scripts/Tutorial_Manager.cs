@@ -8,7 +8,8 @@ using UnityEngine.Rendering;
 public class Tutorial_Manager : Singleton<Tutorial_Manager>
 {
     [SerializeField] Step[] steps;
-    
+    [SerializeField] GameObject panel;
+
     int current_step = -1;
     PlayerMovement pm;
     bool step_changed;
@@ -23,7 +24,7 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
         PlayerMovement.Instance.allowedToTeleport = false;
         PlayerMovement.Instance.allowedToThrow = false;
         pm = PlayerMovement.Instance;
-
+        
         Step_Completed();
     }
 
@@ -70,6 +71,11 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
         step_changed = false;
     }
 
+    public void Set_Visibility(bool is_visible) 
+    {
+        panel.SetActive(is_visible);
+    }
+
     void Next_Step() 
     {
         StartCoroutine(Step_Delay());
@@ -94,7 +100,12 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
     {
         if (index < steps.Length)
         {
-            steps[index].panel.SetActive(true);
+            if (Input.GetJoystickNames().Length == 0)
+            {
+                steps[index].keyboard_panel.SetActive(true);
+            }
+            else
+                steps[index].controller_panel.SetActive(true);
 
             // details
             if (steps[index].spawn_details)
@@ -115,14 +126,18 @@ public class Tutorial_Manager : Singleton<Tutorial_Manager>
     void Reset_Step(int index) 
     {
         if (index >= 0)
-            steps[index].panel.SetActive(false);
+        {
+            steps[index].keyboard_panel.SetActive(false);
+            steps[index].controller_panel.SetActive(false);
+        }
     }
 
     [System.Serializable]
     struct Step 
     {
         public string name;
-        public GameObject panel;
+        public GameObject keyboard_panel;
+        public GameObject controller_panel;
         public float popup_delay;
         public float disappear_delay;
         public bool allow_movement;
