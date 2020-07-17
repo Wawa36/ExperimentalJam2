@@ -53,7 +53,7 @@ public class SphereArtifact : MonoBehaviour
         audio1 = GetComponents<AudioSource>()[0];
         audio2 = GetComponents<AudioSource>()[1];
         audio3 = GetComponents<AudioSource>()[2];
-        circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume;
+        circle.GetComponent<AudioSource>().volume *= Sound_Manager.Instance.Get_Clip("Pling").volume * Game_Settings.Volume;
         sphereCollider = GetComponent<SphereCollider>();
     }
 
