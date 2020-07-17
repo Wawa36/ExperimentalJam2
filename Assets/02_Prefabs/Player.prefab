@@ -779,7 +779,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
   lookDirection: {x: 0, y: 0, z: 0}
-  orbEnergy: 0
+  orbEnergy: 25
   carryingTheOrb: 0
   dontAim: 0
   activeOrb: {fileID: 0}
@@ -803,13 +803,13 @@ MonoBehaviour:
   jumpHeight: 6
   orbEnergyIncrease: 10
   throwingForce: 25
-  allowedToJump: 1
-  allowedToRun: 1
-  allowedToCallBackOrb: 1
-  allowedToThrow: 1
-  allowedToTeleport: 1
-  allowedToSwapOrbs: 1
-  allowedToMoveCamera: 1
+  allowedToJump: 0
+  allowedToRun: 0
+  allowedToCallBackOrb: 0
+  allowedToThrow: 0
+  allowedToTeleport: 0
+  allowedToSwapOrbs: 0
+  allowedToMoveCamera: 0
   didTheFirstThrow: 0
   didTheFirstMoveX: 0
   didTheFirstMoveZ: 0
@@ -817,6 +817,7 @@ MonoBehaviour:
   didTheFirstCallBack: 0
   didTheFirstTeleport: 0
   didTheFirstOrbSwap: 0
+  didTheFirstLanding: 0
 --- !u!143 &735142247
 CharacterController:
   m_ObjectHideFlags: 0
