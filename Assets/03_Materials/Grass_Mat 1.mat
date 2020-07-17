@@ -30,5 +30,5 @@ Material:
     - Vector1_7DDF1734: 0.06
     - Vector1_ED158294: 1
     m_Colors:
-    - Color_C07D8ED3: {r: 0.8117647, g: 0.7660516, b: 0.4392157, a: 1}
+    - Color_C07D8ED3: {r: 0.8117647, g: 0.7647059, b: 0.4392157, a: 1}
     - Vector2_3D193BBC: {r: 1, g: 0, b: 0.5, a: 0}

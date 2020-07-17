@@ -350,6 +350,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e319a40aa7c7cdc4c96a032fc07c7cbb, type: 3}
+--- !u!4 &461841919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 152923204554566497, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1697540970}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &625412378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -709,6 +715,27 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1697540970}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1217636323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 152923204344402229, guid: 25ce2d070296ed24eb22e9ba151dbef5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1697540970}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1217636324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1217636323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce852c02c307dad49b3cf318522de5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rig: {fileID: 461841919}
+  rot_speed: 9
+  move_speed: 9
 --- !u!1001 &1371749522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -957,6 +984,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: chunk_materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: chunk_materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8d974f20ea5078d48bf2f4d9b9ee85ab, type: 2}
+    - target: {fileID: 1783267490, guid: 25ce2d070296ed24eb22e9ba151dbef5, type: 3}
+      propertyPath: chunk_materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1db32b7e9531d5d4f8299f956cd47cf9, type: 2}
     - target: {fileID: 152923204717291907, guid: 25ce2d070296ed24eb22e9ba151dbef5,
         type: 3}
       propertyPath: orbs.Array.data[0]

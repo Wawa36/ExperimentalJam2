@@ -15,7 +15,7 @@ namespace Tower_Management.Details
         [SerializeField] int Accuracy = 50;
         [SerializeField] [Range(5, 100)] int chunk_rate;
         [SerializeField] [Range(1000, 1000000)] int max_chunk_vert_size;
-        [SerializeField] Material chunk_material;
+        [SerializeField] Material[] chunk_materials;
 
         [Header("Debugging")]
         [SerializeField] bool is_active;
@@ -121,7 +121,7 @@ namespace Tower_Management.Details
                 // add components
                 new_chunk.AddComponent<MeshFilter>();
                 new_chunk.AddComponent<MeshRenderer>();
-                new_chunk.GetComponent<MeshRenderer>().material = chunk_material;
+                new_chunk.GetComponent<MeshRenderer>().materials = chunk_materials;
 
                 // create mesh
                 new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
@@ -160,7 +160,7 @@ namespace Tower_Management.Details
                     // add components
                     new_chunk.AddComponent<MeshFilter>();
                     new_chunk.AddComponent<MeshRenderer>();
-                    new_chunk.GetComponent<MeshRenderer>().material = chunk_material;
+                    new_chunk.GetComponent<MeshRenderer>().materials = chunk_materials;
 
                     // create mesh
                     new_chunk.GetComponent<MeshFilter>().mesh = new Mesh();
