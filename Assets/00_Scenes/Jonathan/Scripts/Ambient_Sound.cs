@@ -1,6 +1,4 @@
 ﻿using Settings_Management;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ambient_Sound : MonoBehaviour
@@ -25,6 +23,6 @@ public class Ambient_Sound : MonoBehaviour
 
         float volume = Mathf.InverseLerp(start_height, max_height, player_y_pos);
         value = Mathf.InverseLerp(start_height, max_height, player_y_pos);
-        source.volume = volume * Sound_Manager.Instance.Get_Clip("Wind Atmo").volume;
+        source.volume = volume * Sound_Manager.Instance.Get_Clip("Wind Atmo").volume * Game_Settings.Volume;
     }
 }
