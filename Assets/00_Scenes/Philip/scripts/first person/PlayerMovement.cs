@@ -89,6 +89,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             orbAudio1.UnPause();
             orbAudio2.UnPause();
+            orbAudio1.volume = Game_Settings.Volume;
+            orbAudio2.volume = Game_Settings.Volume;
             Gravity();
             // Throw();
             if (allowedToJump)
@@ -239,7 +241,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
                     if (orbAudio2.clip == null)
                     {
                         orbAudio2.clip = Sound_Manager.Instance.Get_Clip("Charge Orb Loop").clip;
+                        
                         orbAudio2.PlayScheduled(AudioSettings.dspTime+2.6);
+                       
                     }
                 }
                 else

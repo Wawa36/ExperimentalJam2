@@ -2132,18 +2132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 546204522}
     m_Modifications:
-    - target: {fileID: 1696681432, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1696681432, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1696681432, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
-      propertyPath: Loop
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4189201633741323711, guid: d5b1acb7801de9c48bcdb305a3c20fc8,
         type: 3}
       propertyPath: playerScript
@@ -2244,10 +2232,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orb
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4853050576458763650, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
-    - {fileID: 9084531696975366532, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
-    - {fileID: 4922945551809199536, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5b1acb7801de9c48bcdb305a3c20fc8, type: 3}
 --- !u!1 &1696681430 stripped
 GameObject:
