@@ -657,7 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 152923204554566497}
   rot_speed: 17
-  move_speed: 9
+  move_speed: 17
 --- !u!1 &152923204554566511
 GameObject:
   m_ObjectHideFlags: 0
